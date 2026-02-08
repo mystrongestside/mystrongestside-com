@@ -372,6 +372,53 @@
       font-size: 0.92rem;
       line-height: 1.35;
     }
+
+    /* myss: quote-after-video */
+    .value_quote{
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      max-width: min(360px, calc(100% - 28px));
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(15, 23, 42, 0.10);
+      box-shadow: 0 10px 25px rgba(2, 6, 23, 0.10);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 520ms ease, transform 520ms ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .value_quote.is_visible{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .value_quote__text{
+      margin: 0;
+      color: var(--myss_blue_dark);
+      line-height: 1.35;
+      font-size: 0.98rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
+    @media (max-width: 560px){
+      .value_quote{
+        left: 10px;
+        right: 10px;
+        top: 10px;
+        max-width: none;
+        padding: 10px 12px;
+        border-radius: 14px;
+      }
+      .value_quote__text{
+        font-size: 0.95rem;
+      }
+    }
   </style>
 </head>
 
@@ -396,6 +443,13 @@
           Nettleseren din støtter ikke videoavspilling.
         </video>
       </div>
+
+      <!-- myss: quote-after-video -->
+      <aside id="value_quote" class="value_quote" aria-live="polite">
+        <p class="value_quote__text">
+          Beinpress har ofte stor overføringsverdi til å reise seg fra stol og gå i trapp. Når styrke i bein og hofter vedlikeholdes, kan det støtte tryggere aktivitet i hverdagen og være en del av et fallforebyggende helhetsbilde.
+        </p>
+      </aside>
 
       <div class="content">
         <p class="note">
@@ -599,6 +653,13 @@
       const btnSound = document.getElementById("btn_play_sound");
       const btnMuted = document.getElementById("btn_play_muted");
       const mutedBadge = document.getElementById("muted_badge");
+      const valueQuote = document.getElementById("value_quote");
+
+      // myss: quote-after-video
+      function showValueQuote(){
+        if (!valueQuote) return;
+        valueQuote.classList.add("is_visible");
+      }
 
       function showGate() { gate.style.display = "flex"; }
       function hideGate() { gate.style.display = "none"; }
@@ -650,6 +711,17 @@
       document.addEventListener("visibilitychange", function () {
         if (document.visibilityState === "visible" && v.paused) {
           tryAutoplayWithLowSound();
+        }
+      });
+
+      v.addEventListener("ended", function () {
+        showValueQuote();
+      });
+
+      v.addEventListener("timeupdate", function () {
+        if (!valueQuote) return;
+        if (v.duration && v.currentTime >= v.duration - 0.15) {
+          showValueQuote();
         }
       });
 
