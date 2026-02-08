@@ -98,6 +98,131 @@
       font-size: 0.95rem;
     }
 
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(242,140,40,0.12);
+      color: #7a3e00;
+      border: 1px solid rgba(242,140,40,0.22);
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    .hr{
+      height:1px;
+      background: rgba(15, 23, 42, 0.08);
+      margin: 14px 0;
+    }
+
+    .guide_title{
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: var(--myss_blue_dark);
+      letter-spacing: -0.01em;
+    }
+
+    .steps{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--text);
+      line-height: 1.45;
+      font-size: 1.02rem;
+    }
+
+    .steps li{ margin: 6px 0; }
+
+    .micro{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    details{
+      margin-top: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(47,127,191,0.18);
+      background: rgba(47,127,191,0.06);
+      overflow: hidden;
+    }
+
+    summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 12px;
+      font-weight: 700;
+      color: var(--myss_blue_dark);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      user-select: none;
+    }
+
+    summary::-webkit-details-marker{ display:none; }
+
+    .chev{
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      opacity: 0.9;
+      transform: rotate(0deg);
+      transition: transform 160ms ease;
+    }
+
+    details[open] .chev{
+      transform: rotate(180deg);
+    }
+
+    .details_body{
+      padding: 0 12px 12px;
+      color: var(--text);
+      line-height: 1.45;
+      font-size: 1.02rem;
+    }
+
+    .details_body p{
+      margin: 10px 0 0;
+    }
+
+    .details_body ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .figure{
+      margin: 12px 0 0;
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      overflow:hidden;
+    }
+
+    .figure img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    .figure figcaption{
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.35;
+      background: rgba(15, 23, 42, 0.02);
+    }
+
+    .sources{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
     .gate{
       position: fixed;
       inset: 0;
@@ -159,19 +284,6 @@
       color: var(--myss_blue_dark);
       border: 1px solid rgba(47,127,191,0.20);
     }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(242,140,40,0.12);
-      color: #7a3e00;
-      border: 1px solid rgba(242,140,40,0.22);
-      font-size: 0.92rem;
-      margin-top: 10px;
-    }
   </style>
 </head>
 
@@ -182,7 +294,7 @@
       <p class="sub">Kort grunnveiledning som starter automatisk.</p>
     </header>
 
-    <section class="card" aria-label="Benpress grunnveiledning">
+    <section class="card" aria-label="Beinpress grunnveiledning">
       <div class="video_shell">
         <video
           id="guide_video"
@@ -192,7 +304,6 @@
           controls
           aria-label="Grunnveiledning i beinpress"
         >
-          <!-- Bytt filnavn til din 20 sek video -->
           <source src="/assets/video/MY_BEINPRESS.mp4" type="video/mp4" />
           Nettleseren din støtter ikke videoavspilling.
         </video>
@@ -203,12 +314,85 @@
           💡 Denne videoen gir deg en enkel grunnstilling i beinpress.
           Har du CP, smerter eller andre funksjonsvariasjoner, kan du trenge litt ekstra tilpasning.
         </p>
+
         <p class="hint">
           Ingen trykk nødvendig for å få hjelp første gang.
         </p>
+
         <div id="muted_badge" class="badge" style="display:none" aria-live="polite">
           Lyd kan være dempet av nettleseren. Trykk på høyttaler i videoen om du vil ha lyd.
         </div>
+
+        <div class="hr" role="separator" aria-hidden="true"></div>
+
+        <p class="guide_title">Beinpress – grunnveiledning</p>
+
+        <ol class="steps">
+          <li>Sitt godt med ryggen støttet mot ryggplaten.</li>
+          <li>Plasser føttene skulderbredt på platen, med hele foten i kontakt.</li>
+          <li>Knærne følger samme retning som tærne.</li>
+          <li>Start med rolig og kontrollert bøy i hofte og knær til omtrent 90 grader i knærne, eller så dypt du kan uten at korsryggen slipper ryggplaten.</li>
+          <li>Press platen fra deg ved å strekke knær og hofter samtidig.</li>
+          <li>Unngå å låse knærne helt ut i topposisjon. Ikke bruk sprett i bunn.</li>
+          <li>Velg en belastning som lar deg utføre 6 til 12 kontrollerte repetisjoner. De siste repetisjonene skal kjennes tydelig krevende uten at teknikken bryter sammen.</li>
+        </ol>
+
+        <p class="micro">
+          Øvelsen trener hovedsakelig lårmuskulatur og setemuskulatur, og gir effektiv styrketrening med lav belastning på rygg.
+        </p>
+
+        <details>
+          <summary>
+            Vil du vite mer?
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"></path>
+            </svg>
+          </summary>
+
+          <div class="details_body">
+            <p><strong>Fotplassering</strong></p>
+            <ul>
+              <li>Høyere fotplassering gir ofte relativt mer belastning på setemuskulatur.</li>
+              <li>Lavere fotplassering gir ofte mer arbeid for fremside lår.</li>
+              <li>Hold knærne i samme retning som tærne og hele foten i kontakt med platen.</li>
+            </ul>
+
+            <p><strong>Bevegelsesutslag</strong></p>
+            <p>
+              Større bevegelsesutslag kan gi god muskelaktivering, men prioriter alltid kontroll og at korsryggen har stabil kontakt med ryggplaten.
+            </p>
+
+            <p><strong>Aktive muskler</strong></p>
+            <ul>
+              <li><strong>Primært</strong> Quadriceps femoris, gluteus maximus.</li>
+              <li><strong>Støtte</strong> Hamstrings, adduktorer, gastrocnemius og soleus.</li>
+              <li><strong>Lav indirekte belastning</strong> Ryggstrekkerne, fordi overkroppen er støttet.</li>
+            </ul>
+
+            <figure class="figure" aria-label="Illustrasjon av aktive muskler i sittende beinpress">
+              <!-- Legg illustrasjonen her:
+                   1) Lag en mappe /assets/img/ om du ikke har den
+                   2) Legg inn bildet med navnet beinpress-muskler.png
+                   3) Bildet kan være den du nettopp lagde -->
+              <img src="/assets/img/beinpress-muskler.png" alt="Illustrasjon som viser aktive muskler i sittende beinpress, med primære og sekundære muskelgrupper markert." loading="lazy" />
+              <figcaption>
+                Illustrasjonen viser typisk muskelbruk i sittende beinpress. Variasjoner i fotplassering og dybde kan endre vektleggingen noe.
+              </figcaption>
+            </figure>
+
+            <p><strong>Kilder</strong></p>
+            <ul class="sources">
+              <li>Schoenfeld BJ et al. (2017). Dose response relationship between weekly resistance training volume and increases in muscle mass. <em>Journal of Sports Sciences</em>.</li>
+              <li>Schoenfeld BJ et al. (2021). Resistance training range of motion and skeletal muscle hypertrophy: A systematic review and meta analysis. <em>Scandinavian Journal of Medicine and Science in Sports</em>.</li>
+              <li>Grgic J et al. (flere arbeider). Repetition tempo og hypertrofi: systematiske oversikter og meta analyser i treningslitteraturen.</li>
+              <li>Escamilla RF et al. (biomekanisk litteratur). Patellofemorale belastninger i lukkede kjedeøvelser brukt i klinisk og treningsfaglig sammenheng.</li>
+            </ul>
+
+            <p class="micro">
+              Kildene over er brukt som evidensgrunnlag på tvers av styrketrening generelt. For beinpress spesifikt finnes det også EMG og biomekaniske enkeltstudier som støtter mønsteret for quadriceps og setemuskulatur ved varierende dybde og fotplassering.
+            </p>
+          </div>
+        </details>
       </div>
     </section>
   </main>
@@ -234,13 +418,8 @@
       const btnMuted = document.getElementById("btn_play_muted");
       const mutedBadge = document.getElementById("muted_badge");
 
-      function showGate() {
-        gate.style.display = "flex";
-      }
-
-      function hideGate() {
-        gate.style.display = "none";
-      }
+      function showGate() { gate.style.display = "flex"; }
+      function hideGate() { gate.style.display = "none"; }
 
       async function tryAutoplayWithLowSound() {
         try {
