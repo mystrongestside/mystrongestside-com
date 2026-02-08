@@ -311,6 +311,67 @@
       color: var(--myss_blue_dark);
       border: 1px solid rgba(47,127,191,0.20);
     }
+
+    /* myss: help-cta */
+    .help_cta{
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(242,140,40,0.10);
+      border: 1px solid rgba(242,140,40,0.22);
+    }
+    .help_cta__title{
+      margin: 0 0 6px;
+      font-weight: 800;
+      color: var(--myss_blue_dark);
+      font-size: 1.02rem;
+      letter-spacing: -0.01em;
+    }
+    .help_cta__text{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.35;
+    }
+    .help_form{
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .help_row{
+      display: grid;
+      gap: 6px;
+    }
+    .help_label{
+      font-weight: 700;
+      color: var(--myss_blue_dark);
+      font-size: 0.96rem;
+    }
+    .help_select{
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background: #fff;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .price_box{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(47,127,191,0.08);
+      border: 1px solid rgba(47,127,191,0.20);
+      color: var(--text);
+      line-height: 1.35;
+      font-size: 0.98rem;
+    }
+    .help_small{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
   </style>
 </head>
 
@@ -463,9 +524,60 @@
             </ul>
           </div>
         </details>
+
+        <div class="help_cta" aria-label="Trenger du mer hjelp">
+          <p class="help_cta__title">Trenger du mer hjelp?</p>
+          <p class="help_cta__text">
+            Få hjelp med teknikk, trygg gjennomføring eller tilpasning. Velg senter og hvem du ønsker kontakt med, så ser du pris før du går videre.
+          </p>
+          <button id="btn_help_open" class="btn btn_primary" type="button">Få hjelp og priser</button>
+        </div>
       </div>
     </section>
   </main>
+
+  <div id="help_gate" class="gate" role="dialog" aria-modal="true" aria-label="Mer hjelp og priser">
+    <div class="gate_card">
+      <p class="gate_title">Mer hjelp og priser</p>
+      <p class="gate_text">
+        Velg senter og hvem du ønsker kontakt med. Du får prisoversikt før du går videre.
+      </p>
+
+      <div class="help_form">
+        <div class="help_row">
+          <div class="help_label">Hvilket senter er du på?</div>
+          <select id="help_center" class="help_select" aria-label="Velg senter">
+            <option value="">Velg senter</option>
+            <option value="Fantoft">Trene Sammen Fantoft</option>
+            <option value="Energisenteret">Energisenteret</option>
+          </select>
+        </div>
+
+        <div class="help_row">
+          <div class="help_label">Hvem ønsker du kontakt med?</div>
+          <select id="help_role" class="help_select" aria-label="Velg fagperson">
+            <option value="">Velg</option>
+            <option value="pt">PT, teknikk og oppfølging</option>
+            <option value="physio">Fysioterapeut, smerter og opptrening</option>
+            <option value="ot">Ergoterapeut, tilpasning og hjelpemidler</option>
+          </select>
+        </div>
+
+        <div id="help_price" class="price_box" aria-live="polite">
+          Velg senter og fagperson for å se pris.
+        </div>
+
+        <p class="help_small">
+          Dette er veiledning. Ved akutte smerter eller skade bør du kontakte helsepersonell.
+        </p>
+      </div>
+
+      <div class="btnrow" style="margin-top:12px">
+        <button id="btn_help_book" class="btn btn_primary" type="button" disabled>Gå til booking</button>
+        <button id="btn_help_close" class="btn btn_secondary" type="button">Lukk</button>
+      </div>
+    </div>
+  </div>
 
   <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-label="Start video">
     <div class="gate_card">
@@ -539,6 +651,80 @@
         if (document.visibilityState === "visible" && v.paused) {
           tryAutoplayWithLowSound();
         }
+      });
+
+      // myss: help-gate
+      const helpGate = document.getElementById("help_gate");
+      const btnHelpOpen = document.getElementById("btn_help_open");
+      const btnHelpClose = document.getElementById("btn_help_close");
+      const btnHelpBook = document.getElementById("btn_help_book");
+      const helpCenter = document.getElementById("help_center");
+      const helpRole = document.getElementById("help_role");
+      const helpPrice = document.getElementById("help_price");
+
+      // Fyll inn priser her
+      const PRICES = {
+        "Fantoft": {
+          pt: "Pris: kr ...",
+          physio: "Pris: kr ...",
+          ot: "Pris: kr ..."
+        },
+        "Energisenteret": {
+          pt: "Pris: kr ...",
+          physio: "Pris: kr ...",
+          ot: "Pris: kr ..."
+        }
+      };
+
+      // Fyll inn bookinglenker her
+      const BOOKING_URL = {
+        "Fantoft": {
+          pt: "/kontakt.html?valg=pt&senter=Fantoft",
+          physio: "/kontakt.html?valg=fysioterapeut&senter=Fantoft",
+          ot: "/kontakt.html?valg=ergoterapeut&senter=Fantoft"
+        },
+        "Energisenteret": {
+          pt: "/kontakt.html?valg=pt&senter=Energisenteret",
+          physio: "/kontakt.html?valg=fysioterapeut&senter=Energisenteret",
+          ot: "/kontakt.html?valg=ergoterapeut&senter=Energisenteret"
+        }
+      };
+
+      function showHelp(){ if (helpGate) helpGate.style.display = "flex"; }
+      function hideHelp(){ if (helpGate) helpGate.style.display = "none"; }
+
+      function updateHelp(){
+        if (!helpCenter || !helpRole || !helpPrice || !btnHelpBook) return;
+
+        const c = helpCenter.value;
+        const r = helpRole.value;
+
+        if (c && r && PRICES[c] && PRICES[c][r]) {
+          helpPrice.textContent = PRICES[c][r];
+          btnHelpBook.disabled = false;
+        } else {
+          helpPrice.textContent = "Velg senter og fagperson for å se pris.";
+          btnHelpBook.disabled = true;
+        }
+      }
+
+      if (btnHelpOpen) btnHelpOpen.addEventListener("click", function(){
+        showHelp();
+        updateHelp();
+      });
+
+      if (btnHelpClose) btnHelpClose.addEventListener("click", function(){
+        hideHelp();
+      });
+
+      if (helpCenter) helpCenter.addEventListener("change", updateHelp);
+      if (helpRole) helpRole.addEventListener("change", updateHelp);
+
+      if (btnHelpBook) btnHelpBook.addEventListener("click", function(){
+        const c = helpCenter ? helpCenter.value : "";
+        const r = helpRole ? helpRole.value : "";
+        const url = (c && r && BOOKING_URL[c] && BOOKING_URL[c][r]) ? BOOKING_URL[c][r] : "";
+        if (url) window.location.href = url;
       });
 
       tryAutoplayWithLowSound();
