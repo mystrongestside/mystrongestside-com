@@ -312,114 +312,6 @@
       border: 1px solid rgba(47,127,191,0.20);
     }
 
-    /* myss: help-cta */
-    .help_cta{
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(242,140,40,0.10);
-      border: 1px solid rgba(242,140,40,0.22);
-    }
-    .help_cta__title{
-      margin: 0 0 6px;
-      font-weight: 800;
-      color: var(--myss_blue_dark);
-      font-size: 1.02rem;
-      letter-spacing: -0.01em;
-    }
-    .help_cta__text{
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.35;
-    }
-    .help_form{
-      display: grid;
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .help_row{
-      display: grid;
-      gap: 6px;
-    }
-    .help_label{
-      font-weight: 700;
-      color: var(--myss_blue_dark);
-      font-size: 0.96rem;
-    }
-    .help_select{
-      width: 100%;
-      padding: 11px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(15, 23, 42, 0.12);
-      background: #fff;
-      font-size: 1rem;
-      color: var(--text);
-    }
-    .price_box{
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(47,127,191,0.08);
-      border: 1px solid rgba(47,127,191,0.20);
-      color: var(--text);
-      line-height: 1.35;
-      font-size: 0.98rem;
-    }
-    .help_small{
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.35;
-    }
-
-    /* myss: quote-after-video */
-    .value_quote{
-      position: absolute;
-      left: 14px;
-      top: 14px;
-      max-width: min(360px, calc(100% - 28px));
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(15, 23, 42, 0.10);
-      box-shadow: 0 10px 25px rgba(2, 6, 23, 0.10);
-      backdrop-filter: blur(6px);
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 520ms ease, transform 520ms ease;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .value_quote.is_visible{
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .value_quote__text{
-      margin: 0;
-      color: var(--myss_blue_dark);
-      line-height: 1.35;
-      font-size: 0.98rem;
-      font-weight: 650;
-      letter-spacing: -0.01em;
-    }
-
-    @media (max-width: 560px){
-      .value_quote{
-        left: 10px;
-        right: 10px;
-        top: 10px;
-        max-width: none;
-        padding: 10px 12px;
-        border-radius: 14px;
-      }
-      .value_quote__text{
-        font-size: 0.95rem;
-      }
-    }
-
     /* myss: tilrettelegging */
     .adapt{ margin-top:14px; }
     .adapt__bar{
@@ -473,6 +365,35 @@
     @media (min-width: 720px){
       .adapt__grid{ grid-template-columns: 1fr 1fr; }
       .adapt__option--neutral{ grid-column: 1 / -1; }
+    }
+
+    /* myss: quote block */
+    .myss-quote-block{ margin-top:12px; }
+    .value_quote{
+      background: rgba(47,127,191,.08);
+      border-radius: 16px;
+      padding: 14px 14px;
+    }
+    .value_quote__text{
+      margin:0;
+      color: var(--myss_blue_dark);
+      line-height: 1.5;
+      font-weight: 650;
+    }
+
+    /* myss: subtle tilpasninger link */
+    .myss-subtle-link{
+      margin:10px 0 0;
+      text-align:center;
+    }
+    .myss-link{
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 600;
+    }
+    .myss-link:hover{
+      color: var(--myss_blue_dark);
     }
   </style>
 </head>
@@ -568,13 +489,6 @@
       </section>
       <!-- myss: tilrettelegging-end -->
 
-      <!-- myss: quote-after-video -->
-      <aside id="value_quote" class="value_quote" aria-live="polite">
-        <p class="value_quote__text">
-          Beinpress har ofte stor overføringsverdi til å reise seg fra stol og gå i trapp. Når styrke i bein og hofter vedlikeholdes, kan det støtte tryggere aktivitet i hverdagen og være en del av et fallforebyggende helhetsbilde.
-        </p>
-      </aside>
-
       <div class="content">
         <p class="note">
           💡 Denne videoen gir deg en enkel grunnstilling i beinpress.
@@ -582,6 +496,13 @@
 
         <p class="hint">
           Ingen trykk nødvendig for å få hjelp første gang.
+        </p>
+
+        <!-- myss: tilpasninger-lenke -->
+        <p class="myss-subtle-link">
+          <a href="/grunnveiledning/beinpress-tilpasninger.html" class="myss-link">
+            Tilpasninger ved behov
+          </a>
         </p>
 
         <div id="muted_badge" class="badge" style="display:none" aria-live="polite">
@@ -617,6 +538,23 @@
         <p class="micro">
           Øvelsen trener hovedsakelig lårmuskulatur og setemuskulatur. Overkroppen er støttet, men hold stabil ryggkontakt gjennom hele bevegelsen.
         </p>
+
+        <section aria-label="Overføringsverdi i hverdagen">
+          <p class="guide_title">Overføringsverdi i hverdagen</p>
+          <p class="micro">
+            Styrke i bein og hofter kan gjøre det enklere å reise seg, gå i trapper og holde en trygg rytme i hverdagsbevegelser.
+          </p>
+
+          <!-- myss: overforingsverdi-quote-bolk -->
+          <section class="myss-quote-block" aria-label="Overføringsverdi i hverdagen">
+            <!-- myss: quote-after-video -->
+            <aside id="value_quote" class="value_quote" aria-live="polite">
+              <p class="value_quote__text">
+                Beinpress har ofte stor overføringsverdi til å reise seg fra stol og gå i trapp. Når styrke i bein og hofter vedlikeholdes, kan det støtte tryggere aktivitet i hverdagen og være en del av et fallforebyggende helhetsbilde.
+              </p>
+            </aside>
+          </section>
+        </section>
 
         <details>
           <summary>
@@ -703,59 +641,9 @@
           </div>
         </details>
 
-        <div class="help_cta" aria-label="Trenger du mer hjelp">
-          <p class="help_cta__title">Trenger du mer hjelp?</p>
-          <p class="help_cta__text">
-            Få hjelp med teknikk, trygg gjennomføring eller tilpasning. Velg senter og hvem du ønsker kontakt med, så ser du pris før du går videre.
-          </p>
-          <button id="btn_help_open" class="btn btn_primary" type="button">Få hjelp og priser</button>
-        </div>
       </div>
     </section>
   </main>
-
-  <div id="help_gate" class="gate" role="dialog" aria-modal="true" aria-label="Mer hjelp og priser">
-    <div class="gate_card">
-      <p class="gate_title">Mer hjelp</p>
-      <p class="gate_text">
-        Velg senter og hvem du ønsker kontakt med.
-      </p>
-
-      <div class="help_form">
-        <div class="help_row">
-          <div class="help_label">Hvilket senter er du på?</div>
-          <select id="help_center" class="help_select" aria-label="Velg senter">
-            <option value="">Velg senter</option>
-            <option value="Fantoft">Trene Sammen Fantoft</option>
-            <option value="Energisenteret">Sotrasportssenter</option>
-          </select>
-        </div>
-
-        <div class="help_row">
-          <div class="help_label">Hvem ønsker du kontakt med?</div>
-          <select id="help_role" class="help_select" aria-label="Velg fagperson">
-            <option value="">Velg</option>
-            <option value="pt">PT, teknikk og oppfølging</option>
-            <option value="physio">Fysioterapeut, smerter og opptrening</option>
-            <option value="ot">Ergoterapeut, tilpasning og hjelpemidler</option>
-          </select>
-        </div>
-
-        <div id="help_price" class="price_box" aria-live="polite">
-          Velg senter og fagperson.  
-        </div>
-
-        <p class="help_small">
-          Dette er veiledning. Ved akutte smerter eller skade bør du kontakte helsepersonell.
-        </p>
-      </div>
-
-      <div class="btnrow" style="margin-top:12px">
-        <button id="btn_help_book" class="btn btn_primary" type="button" disabled>Gå til booking</button>
-        <button id="btn_help_close" class="btn btn_secondary" type="button">Lukk</button>
-      </div>
-    </div>
-  </div>
 
   <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-label="Start video">
     <div class="gate_card">
@@ -777,13 +665,6 @@
       const btnSound = document.getElementById("btn_play_sound");
       const btnMuted = document.getElementById("btn_play_muted");
       const mutedBadge = document.getElementById("muted_badge");
-      const valueQuote = document.getElementById("value_quote");
-
-      // myss: quote-after-video
-      function showValueQuote(){
-        if (!valueQuote) return;
-        valueQuote.classList.add("is_visible");
-      }
 
       function showGate() { gate.style.display = "flex"; }
       function hideGate() { gate.style.display = "none"; }
@@ -836,91 +717,6 @@
         if (document.visibilityState === "visible" && v.paused) {
           tryAutoplayWithLowSound();
         }
-      });
-
-      v.addEventListener("ended", function () {
-        showValueQuote();
-      });
-
-      v.addEventListener("timeupdate", function () {
-        if (!valueQuote) return;
-        if (v.duration && v.currentTime >= v.duration - 0.15) {
-          showValueQuote();
-        }
-      });
-
-      // myss: help-gate
-      const helpGate = document.getElementById("help_gate");
-      const btnHelpOpen = document.getElementById("btn_help_open");
-      const btnHelpClose = document.getElementById("btn_help_close");
-      const btnHelpBook = document.getElementById("btn_help_book");
-      const helpCenter = document.getElementById("help_center");
-      const helpRole = document.getElementById("help_role");
-      const helpPrice = document.getElementById("help_price");
-
-      // Fyll inn priser her
-      const PRICES = {
-        "Fantoft": {
-          pt: "Pris: kr ...",
-          physio: "Pris: kr ...",
-          ot: "Pris: kr ..."
-        },
-        "Energisenteret": {
-          pt: "Pris: kr ...",
-          physio: "Pris: kr ...",
-          ot: "Pris: kr ..."
-        }
-      };
-
-      // Fyll inn bookinglenker her
-      const BOOKING_URL = {
-        "Fantoft": {
-          pt: "/kontakt.html?valg=pt&senter=Fantoft",
-          physio: "/kontakt.html?valg=fysioterapeut&senter=Fantoft",
-          ot: "/kontakt.html?valg=ergoterapeut&senter=Fantoft"
-        },
-        "Energisenteret": {
-          pt: "/kontakt.html?valg=pt&senter=Energisenteret",
-          physio: "/kontakt.html?valg=fysioterapeut&senter=Energisenteret",
-          ot: "/kontakt.html?valg=ergoterapeut&senter=Energisenteret"
-        }
-      };
-
-      function showHelp(){ if (helpGate) helpGate.style.display = "flex"; }
-      function hideHelp(){ if (helpGate) helpGate.style.display = "none"; }
-
-      function updateHelp(){
-        if (!helpCenter || !helpRole || !helpPrice || !btnHelpBook) return;
-
-        const c = helpCenter.value;
-        const r = helpRole.value;
-
-        if (c && r && PRICES[c] && PRICES[c][r]) {
-          helpPrice.textContent = PRICES[c][r];
-          btnHelpBook.disabled = false;
-        } else {
-          helpPrice.textContent = "Velg senter og fagperson for å se pris.";
-          btnHelpBook.disabled = true;
-        }
-      }
-
-      if (btnHelpOpen) btnHelpOpen.addEventListener("click", function(){
-        showHelp();
-        updateHelp();
-      });
-
-      if (btnHelpClose) btnHelpClose.addEventListener("click", function(){
-        hideHelp();
-      });
-
-      if (helpCenter) helpCenter.addEventListener("change", updateHelp);
-      if (helpRole) helpRole.addEventListener("change", updateHelp);
-
-      if (btnHelpBook) btnHelpBook.addEventListener("click", function(){
-        const c = helpCenter ? helpCenter.value : "";
-        const r = helpRole ? helpRole.value : "";
-        const url = (c && r && BOOKING_URL[c] && BOOKING_URL[c][r]) ? BOOKING_URL[c][r] : "";
-        if (url) window.location.href = url;
       });
 
       tryAutoplayWithLowSound();
