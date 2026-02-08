@@ -373,62 +373,6 @@
       line-height: 1.35;
     }
 
-    /* myss: cp-gate */
-    .cp-gate{ margin-top:14px; }
-    .cp-gate__cta{ display:flex; justify-content:center; }
-    .cp-gate__open{
-      width:100%;
-      max-width:520px;
-      border:0;
-      border-radius:14px;
-      padding:14px 16px;
-      font-weight:700;
-      background: var(--myss_orange);
-      color:#111;
-      cursor:pointer;
-      box-shadow: var(--shadow);
-    }
-    .cp-gate__open:focus{ outline:3px solid rgba(47,127,191,.35); outline-offset:2px; }
-
-    .cp-panel{
-      margin-top:12px;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px;
-    }
-    .cp-panel h2{ margin:0 0 8px; color: var(--myss_blue_dark); }
-    .cp-panel__lead{ margin:0 0 14px; color: var(--muted); }
-
-    .cp-options{
-      display:grid;
-      gap:10px;
-    }
-    .cp-option{
-      text-align:left;
-      border:1px solid rgba(15,23,42,.12);
-      border-radius:14px;
-      padding:12px 12px;
-      background:#fff;
-      cursor:pointer;
-    }
-    .cp-option:hover{ border-color: rgba(47,127,191,.35); }
-    .cp-option__title{ display:block; font-weight:800; color: var(--myss_blue_dark); }
-    .cp-option__desc{ display:block; margin-top:3px; color: var(--muted); font-size:.95rem; }
-
-    .cp-option--neutral{ background: rgba(242,140,40,.08); }
-
-    .cp-panel__privacy{
-      margin:14px 0 0;
-      color: var(--muted);
-      font-size:.9rem;
-    }
-
-    @media (min-width: 720px){
-      .cp-options{ grid-template-columns: 1fr 1fr; }
-      .cp-option--neutral{ grid-column: 1 / -1; }
-    }
-
     /* myss: quote-after-video */
     .value_quote{
       position: absolute;
@@ -475,6 +419,61 @@
         font-size: 0.95rem;
       }
     }
+
+    /* myss: tilrettelegging */
+    .adapt{ margin-top:14px; }
+    .adapt__bar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .adapt__open{
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:800;
+      background: var(--myss_orange);
+      color:#111;
+      cursor:pointer;
+      box-shadow: var(--shadow);
+    }
+    .adapt__hint{ color: var(--muted); font-size:.95rem; }
+
+    .adapt__panel{
+      margin-top:12px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .adapt__lead{ margin:0 0 12px; color: var(--muted); }
+    .adapt__h3{ margin:14px 0 8px; color: var(--myss_blue_dark); font-size:1rem; }
+
+    .adapt__grid{
+      display:grid;
+      gap:10px;
+    }
+    .adapt__option{
+      text-align:left;
+      border:1px solid rgba(15,23,42,.12);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+      cursor:pointer;
+    }
+    .adapt__option:hover{ border-color: rgba(47,127,191,.35); }
+    .adapt__t{ display:block; font-weight:800; color: var(--myss_blue_dark); }
+    .adapt__d{ display:block; margin-top:3px; color: var(--muted); font-size:.95rem; }
+    .adapt__option--neutral{ background: rgba(242,140,40,.08); }
+
+    .adapt__privacy{ margin:14px 0 0; color: var(--muted); font-size:.9rem; }
+
+    @media (min-width: 720px){
+      .adapt__grid{ grid-template-columns: 1fr 1fr; }
+      .adapt__option--neutral{ grid-column: 1 / -1; }
+    }
   </style>
 </head>
 
@@ -500,50 +499,74 @@
         </video>
       </div>
 
-      <!-- myss: cp-gate-start -->
-      <section id="cpGate" class="cp-gate" hidden aria-live="polite">
-        <div class="cp-gate__cta">
-          <button id="cpGateOpen" class="cp-gate__open" type="button">
-            Har du CP eller trenger tilpasninger trykk her
+      <!-- myss: tilrettelegging-start -->
+      <section id="tilrettelegging" class="adapt">
+        <div class="adapt__bar">
+          <button id="adaptOpen" class="adapt__open" type="button" aria-expanded="false" aria-controls="adaptPanel">
+            Se tips for tilrettelegging
           </button>
+          <span class="adapt__hint">Du kan åpne dette når som helst</span>
         </div>
 
-        <div id="cpPanel" class="cp-panel" hidden role="dialog" aria-modal="false" aria-labelledby="cpTitle">
-          <h2 id="cpTitle">Tilpasset veiledning – velg CP-type</h2>
-          <p class="cp-panel__lead">
-            Vi tilpasser veiledningen etter hvordan CP-en din påvirker beina dine.
-            Velg det som passer best.
+        <div id="adaptPanel" class="adapt__panel" hidden>
+          <h2 id="adaptTitle">Tilpasset veiledning</h2>
+          <p class="adapt__lead">
+            Velg det som passer for deg i dag.
           </p>
 
-          <div class="cp-options" role="radiogroup" aria-label="Velg CP-type">
-            <button class="cp-option" type="button" data-cp="right">
-              <span class="cp-option__title">Høyresidig CP</span>
-              <span class="cp-option__desc">Mest påvirkning i høyre bein/side</span>
-            </button>
-
-            <button class="cp-option" type="button" data-cp="left">
-              <span class="cp-option__title">Venstresidig CP</span>
-              <span class="cp-option__desc">Mest påvirkning i venstre bein/side</span>
-            </button>
-
-            <button class="cp-option" type="button" data-cp="bilateral">
-              <span class="cp-option__title">Bilateral CP</span>
-              <span class="cp-option__desc">Begge beina er påvirket</span>
-            </button>
-
-            <button class="cp-option cp-option--neutral" type="button" data-cp="unsure">
-              <span class="cp-option__title">Usikker / annen type</span>
-              <span class="cp-option__desc">Jeg er usikker eller har en annen variant – vis generell CP-veiledning</span>
-            </button>
+          <!-- Variant A: sidevalg -->
+          <div class="adapt__group" aria-label="Sidevalg">
+            <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
+            <div class="adapt__grid" role="group">
+              <button class="adapt__option" type="button" data-route="right">
+                <span class="adapt__t">Mest på høyre side</span>
+                <span class="adapt__d">Vi viser tips for høyre side</span>
+              </button>
+              <button class="adapt__option" type="button" data-route="left">
+                <span class="adapt__t">Mest på venstre side</span>
+                <span class="adapt__d">Vi viser tips for venstre side</span>
+              </button>
+              <button class="adapt__option" type="button" data-route="both">
+                <span class="adapt__t">Begge sider</span>
+                <span class="adapt__d">Vi viser tips for begge</span>
+              </button>
+              <button class="adapt__option adapt__option--neutral" type="button" data-route="general">
+                <span class="adapt__t">Usikker</span>
+                <span class="adapt__d">Vis generell tilrettelegging</span>
+              </button>
+            </div>
           </div>
 
-          <p class="cp-panel__privacy">
+          <!-- Variant B: kroppsdeler -->
+          <div class="adapt__group" aria-label="Kroppsområde">
+            <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
+            <div class="adapt__grid" role="group">
+              <button class="adapt__option" type="button" data-area="heel">
+                <span class="adapt__t">Hæl og fot</span>
+                <span class="adapt__d">Fotplassering og støtte</span>
+              </button>
+              <button class="adapt__option" type="button" data-area="knee">
+                <span class="adapt__t">Kne</span>
+                <span class="adapt__d">Retning, dybde og kontroll</span>
+              </button>
+              <button class="adapt__option" type="button" data-area="hip">
+                <span class="adapt__t">Hofte og sete</span>
+                <span class="adapt__d">Sete, rygg og vinkel</span>
+              </button>
+              <button class="adapt__option adapt__option--neutral" type="button" data-area="general">
+                <span class="adapt__t">Generelt</span>
+                <span class="adapt__d">Enkle råd for de fleste</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="adapt__privacy">
             Valget brukes bare til å tilpasse veiledningen nå.
             Det lagres ikke som helseopplysninger.
           </p>
         </div>
       </section>
-      <!-- myss: cp-gate-end -->
+      <!-- myss: tilrettelegging-end -->
 
       <!-- myss: quote-after-video -->
       <aside id="value_quote" class="value_quote" aria-live="polite">
@@ -900,44 +923,54 @@
         if (url) window.location.href = url;
       });
 
-      // myss: cp-gate
-      const cpGate = document.getElementById("cpGate");
-      const openBtn = document.getElementById("cpGateOpen");
-      const panel = document.getElementById("cpPanel");
-      const optionBtns = document.querySelectorAll(".cp-option");
+      tryAutoplayWithLowSound();
+    })();
+  </script>
+  <script>
+    (function(){
+      const btn = document.getElementById('adaptOpen');
+      const panel = document.getElementById('adaptPanel');
+      if (!btn || !panel) return;
 
-      function showCpGate(){
-        if (!cpGate) return;
-        cpGate.hidden = false;
-        cpGate.style.opacity = 0;
-        cpGate.style.transition = "opacity 320ms ease";
-        requestAnimationFrame(() => { cpGate.style.opacity = 1; });
-      }
+      btn.addEventListener('click', () => {
+        const isOpen = !panel.hidden;
+        panel.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        if (!isOpen) panel.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
 
-      function openPanel(){
-        if (!panel) return;
-        panel.hidden = false;
-        panel.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      // Rutingen kan du velge to måter:
+      // A) egne sider per valg
+      const routes = {
+        right: '/grunnveiledning/beinpress-tilrettelegging-hoyre.html',
+        left: '/grunnveiledning/beinpress-tilrettelegging-venstre.html',
+        both: '/grunnveiledning/beinpress-tilrettelegging-begge.html',
+        general: '/grunnveiledning/beinpress-tilrettelegging-generelt.html'
+      };
 
-      if (v) v.addEventListener("ended", showCpGate);
-      if (openBtn) openBtn.addEventListener("click", openPanel);
-
-      optionBtns.forEach(function(btn){
-        btn.addEventListener("click", function(){
-          const cp = btn.getAttribute("data-cp");
-          const routes = {
-            right: "/grunnveiledning/beinpress-cp-hoyre.html",
-            left: "/grunnveiledning/beinpress-cp-venstre.html",
-            bilateral: "/grunnveiledning/beinpress-cp-bilateral.html",
-            unsure: "/grunnveiledning/beinpress-cp-generell.html"
-          };
-          const url = routes[cp] || routes.unsure;
-          window.location.href = url;
+      document.querySelectorAll('[data-route]').forEach(el => {
+        el.addEventListener('click', () => {
+          const key = el.getAttribute('data-route');
+          location.href = routes[key] || routes.general;
         });
       });
 
-      tryAutoplayWithLowSound();
+      // B) samme side, men med parameter for å vise riktig seksjon
+      // Hvis du heller vil bruke én side, bytt koden over til dette:
+      // document.querySelectorAll('[data-route]').forEach(el => {
+      //   el.addEventListener('click', () => {
+      //     const key = el.getAttribute('data-route') || 'general';
+      //     location.href = '/grunnveiledning/beinpress-tilrettelegging.html?side=' + encodeURIComponent(key);
+      //   });
+      // });
+
+      // Kroppsområde: samme side med parameter
+      document.querySelectorAll('[data-area]').forEach(el => {
+        el.addEventListener('click', () => {
+          const area = el.getAttribute('data-area') || 'general';
+          location.href = '/grunnveiledning/beinpress-tilrettelegging.html?area=' + encodeURIComponent(area);
+        });
+      });
     })();
   </script>
 </body>
