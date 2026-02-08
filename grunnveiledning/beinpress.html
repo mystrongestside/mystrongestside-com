@@ -312,61 +312,6 @@
       border: 1px solid rgba(47,127,191,0.20);
     }
 
-    /* myss: tilrettelegging */
-    .adapt{ margin-top:14px; }
-    .adapt__bar{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .adapt__open{
-      border:0;
-      border-radius:14px;
-      padding:12px 14px;
-      font-weight:800;
-      background: var(--myss_orange);
-      color:#111;
-      cursor:pointer;
-      box-shadow: var(--shadow);
-    }
-    .adapt__hint{ color: var(--muted); font-size:.95rem; }
-
-    .adapt__panel{
-      margin-top:12px;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px;
-    }
-    .adapt__lead{ margin:0 0 12px; color: var(--muted); }
-    .adapt__h3{ margin:14px 0 8px; color: var(--myss_blue_dark); font-size:1rem; }
-
-    .adapt__grid{
-      display:grid;
-      gap:10px;
-    }
-    .adapt__option{
-      text-align:left;
-      border:1px solid rgba(15,23,42,.12);
-      border-radius:14px;
-      padding:12px;
-      background:#fff;
-      cursor:pointer;
-    }
-    .adapt__option:hover{ border-color: rgba(47,127,191,.35); }
-    .adapt__t{ display:block; font-weight:800; color: var(--myss_blue_dark); }
-    .adapt__d{ display:block; margin-top:3px; color: var(--muted); font-size:.95rem; }
-    .adapt__option--neutral{ background: rgba(242,140,40,.08); }
-
-    .adapt__privacy{ margin:14px 0 0; color: var(--muted); font-size:.9rem; }
-
-    @media (min-width: 720px){
-      .adapt__grid{ grid-template-columns: 1fr 1fr; }
-      .adapt__option--neutral{ grid-column: 1 / -1; }
-    }
-
     /* myss: quote block */
     .myss-quote-block{ margin-top:12px; }
     .value_quote{
@@ -419,75 +364,6 @@
           Nettleseren din støtter ikke videoavspilling.
         </video>
       </div>
-
-      <!-- myss: tilrettelegging-start -->
-      <section id="tilrettelegging" class="adapt">
-        <div class="adapt__bar">
-          <button id="adaptOpen" class="adapt__open" type="button" aria-expanded="false" aria-controls="adaptPanel">
-            Se tips for tilrettelegging
-          </button>
-          <span class="adapt__hint">Du kan åpne dette når som helst</span>
-        </div>
-
-        <div id="adaptPanel" class="adapt__panel" hidden>
-          <h2 id="adaptTitle">Tilpasset veiledning</h2>
-          <p class="adapt__lead">
-            Velg det som passer for deg i dag.
-          </p>
-
-          <!-- Variant A: sidevalg -->
-          <div class="adapt__group" aria-label="Sidevalg">
-            <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
-            <div class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-route="right">
-                <span class="adapt__t">Mest på høyre side</span>
-                <span class="adapt__d">Vi viser tips for høyre side</span>
-              </button>
-              <button class="adapt__option" type="button" data-route="left">
-                <span class="adapt__t">Mest på venstre side</span>
-                <span class="adapt__d">Vi viser tips for venstre side</span>
-              </button>
-              <button class="adapt__option" type="button" data-route="both">
-                <span class="adapt__t">Begge sider</span>
-                <span class="adapt__d">Vi viser tips for begge</span>
-              </button>
-              <button class="adapt__option adapt__option--neutral" type="button" data-route="general">
-                <span class="adapt__t">Usikker</span>
-                <span class="adapt__d">Vis generell tilrettelegging</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Variant B: kroppsdeler -->
-          <div class="adapt__group" aria-label="Kroppsområde">
-            <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
-            <div class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-area="heel">
-                <span class="adapt__t">Hæl og fot</span>
-                <span class="adapt__d">Fotplassering og støtte</span>
-              </button>
-              <button class="adapt__option" type="button" data-area="knee">
-                <span class="adapt__t">Kne</span>
-                <span class="adapt__d">Retning, dybde og kontroll</span>
-              </button>
-              <button class="adapt__option" type="button" data-area="hip">
-                <span class="adapt__t">Hofte og sete</span>
-                <span class="adapt__d">Sete, rygg og vinkel</span>
-              </button>
-              <button class="adapt__option adapt__option--neutral" type="button" data-area="general">
-                <span class="adapt__t">Generelt</span>
-                <span class="adapt__d">Enkle råd for de fleste</span>
-              </button>
-            </div>
-          </div>
-
-          <p class="adapt__privacy">
-            Valget brukes bare til å tilpasse veiledningen nå.
-            Det lagres ikke som helseopplysninger.
-          </p>
-        </div>
-      </section>
-      <!-- myss: tilrettelegging-end -->
 
       <div class="content">
         <p class="note">
@@ -720,53 +596,6 @@
       });
 
       tryAutoplayWithLowSound();
-    })();
-  </script>
-  <script>
-    (function(){
-      const btn = document.getElementById('adaptOpen');
-      const panel = document.getElementById('adaptPanel');
-      if (!btn || !panel) return;
-
-      btn.addEventListener('click', () => {
-        const isOpen = !panel.hidden;
-        panel.hidden = isOpen;
-        btn.setAttribute('aria-expanded', String(!isOpen));
-        if (!isOpen) panel.scrollIntoView({ behavior:'smooth', block:'start' });
-      });
-
-      // Rutingen kan du velge to måter:
-      // A) egne sider per valg
-      const routes = {
-        right: '/grunnveiledning/beinpress-tilrettelegging-hoyre.html',
-        left: '/grunnveiledning/beinpress-tilrettelegging-venstre.html',
-        both: '/grunnveiledning/beinpress-tilrettelegging-begge.html',
-        general: '/grunnveiledning/beinpress-tilrettelegging-generelt.html'
-      };
-
-      document.querySelectorAll('[data-route]').forEach(el => {
-        el.addEventListener('click', () => {
-          const key = el.getAttribute('data-route');
-          location.href = routes[key] || routes.general;
-        });
-      });
-
-      // B) samme side, men med parameter for å vise riktig seksjon
-      // Hvis du heller vil bruke én side, bytt koden over til dette:
-      // document.querySelectorAll('[data-route]').forEach(el => {
-      //   el.addEventListener('click', () => {
-      //     const key = el.getAttribute('data-route') || 'general';
-      //     location.href = '/grunnveiledning/beinpress-tilrettelegging.html?side=' + encodeURIComponent(key);
-      //   });
-      // });
-
-      // Kroppsområde: samme side med parameter
-      document.querySelectorAll('[data-area]').forEach(el => {
-        el.addEventListener('click', () => {
-          const area = el.getAttribute('data-area') || 'general';
-          location.href = '/grunnveiledning/beinpress-tilrettelegging.html?area=' + encodeURIComponent(area);
-        });
-      });
     })();
   </script>
 </body>
