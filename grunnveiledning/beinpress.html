@@ -373,6 +373,62 @@
       line-height: 1.35;
     }
 
+    /* myss: cp-gate */
+    .cp-gate{ margin-top:14px; }
+    .cp-gate__cta{ display:flex; justify-content:center; }
+    .cp-gate__open{
+      width:100%;
+      max-width:520px;
+      border:0;
+      border-radius:14px;
+      padding:14px 16px;
+      font-weight:700;
+      background: var(--myss_orange);
+      color:#111;
+      cursor:pointer;
+      box-shadow: var(--shadow);
+    }
+    .cp-gate__open:focus{ outline:3px solid rgba(47,127,191,.35); outline-offset:2px; }
+
+    .cp-panel{
+      margin-top:12px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .cp-panel h2{ margin:0 0 8px; color: var(--myss_blue_dark); }
+    .cp-panel__lead{ margin:0 0 14px; color: var(--muted); }
+
+    .cp-options{
+      display:grid;
+      gap:10px;
+    }
+    .cp-option{
+      text-align:left;
+      border:1px solid rgba(15,23,42,.12);
+      border-radius:14px;
+      padding:12px 12px;
+      background:#fff;
+      cursor:pointer;
+    }
+    .cp-option:hover{ border-color: rgba(47,127,191,.35); }
+    .cp-option__title{ display:block; font-weight:800; color: var(--myss_blue_dark); }
+    .cp-option__desc{ display:block; margin-top:3px; color: var(--muted); font-size:.95rem; }
+
+    .cp-option--neutral{ background: rgba(242,140,40,.08); }
+
+    .cp-panel__privacy{
+      margin:14px 0 0;
+      color: var(--muted);
+      font-size:.9rem;
+    }
+
+    @media (min-width: 720px){
+      .cp-options{ grid-template-columns: 1fr 1fr; }
+      .cp-option--neutral{ grid-column: 1 / -1; }
+    }
+
     /* myss: quote-after-video */
     .value_quote{
       position: absolute;
@@ -432,7 +488,7 @@
     <section class="card" aria-label="Beinpress grunnveiledning">
       <div class="video_shell">
         <video
-          id="guide_video"
+          id="introVideo"
           playsinline
           preload="auto"
           autoplay
@@ -443,6 +499,51 @@
           Nettleseren din støtter ikke videoavspilling.
         </video>
       </div>
+
+      <!-- myss: cp-gate-start -->
+      <section id="cpGate" class="cp-gate" hidden aria-live="polite">
+        <div class="cp-gate__cta">
+          <button id="cpGateOpen" class="cp-gate__open" type="button">
+            Har du CP eller trenger tilpasninger trykk her
+          </button>
+        </div>
+
+        <div id="cpPanel" class="cp-panel" hidden role="dialog" aria-modal="false" aria-labelledby="cpTitle">
+          <h2 id="cpTitle">Tilpasset veiledning – velg CP-type</h2>
+          <p class="cp-panel__lead">
+            Vi tilpasser veiledningen etter hvordan CP-en din påvirker beina dine.
+            Velg det som passer best.
+          </p>
+
+          <div class="cp-options" role="radiogroup" aria-label="Velg CP-type">
+            <button class="cp-option" type="button" data-cp="right">
+              <span class="cp-option__title">Høyresidig CP</span>
+              <span class="cp-option__desc">Mest påvirkning i høyre bein/side</span>
+            </button>
+
+            <button class="cp-option" type="button" data-cp="left">
+              <span class="cp-option__title">Venstresidig CP</span>
+              <span class="cp-option__desc">Mest påvirkning i venstre bein/side</span>
+            </button>
+
+            <button class="cp-option" type="button" data-cp="bilateral">
+              <span class="cp-option__title">Bilateral CP</span>
+              <span class="cp-option__desc">Begge beina er påvirket</span>
+            </button>
+
+            <button class="cp-option cp-option--neutral" type="button" data-cp="unsure">
+              <span class="cp-option__title">Usikker / annen type</span>
+              <span class="cp-option__desc">Jeg er usikker eller har en annen variant – vis generell CP-veiledning</span>
+            </button>
+          </div>
+
+          <p class="cp-panel__privacy">
+            Valget brukes bare til å tilpasse veiledningen nå.
+            Det lagres ikke som helseopplysninger.
+          </p>
+        </div>
+      </section>
+      <!-- myss: cp-gate-end -->
 
       <!-- myss: quote-after-video -->
       <aside id="value_quote" class="value_quote" aria-live="polite">
@@ -648,7 +749,7 @@
 
   <script>
     (function () {
-      const v = document.getElementById("guide_video");
+      const v = document.getElementById("introVideo");
       const gate = document.getElementById("autoplay_gate");
       const btnSound = document.getElementById("btn_play_sound");
       const btnMuted = document.getElementById("btn_play_muted");
@@ -797,6 +898,43 @@
         const r = helpRole ? helpRole.value : "";
         const url = (c && r && BOOKING_URL[c] && BOOKING_URL[c][r]) ? BOOKING_URL[c][r] : "";
         if (url) window.location.href = url;
+      });
+
+      // myss: cp-gate
+      const cpGate = document.getElementById("cpGate");
+      const openBtn = document.getElementById("cpGateOpen");
+      const panel = document.getElementById("cpPanel");
+      const optionBtns = document.querySelectorAll(".cp-option");
+
+      function showCpGate(){
+        if (!cpGate) return;
+        cpGate.hidden = false;
+        cpGate.style.opacity = 0;
+        cpGate.style.transition = "opacity 320ms ease";
+        requestAnimationFrame(() => { cpGate.style.opacity = 1; });
+      }
+
+      function openPanel(){
+        if (!panel) return;
+        panel.hidden = false;
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      if (v) v.addEventListener("ended", showCpGate);
+      if (openBtn) openBtn.addEventListener("click", openPanel);
+
+      optionBtns.forEach(function(btn){
+        btn.addEventListener("click", function(){
+          const cp = btn.getAttribute("data-cp");
+          const routes = {
+            right: "/grunnveiledning/beinpress-cp-hoyre.html",
+            left: "/grunnveiledning/beinpress-cp-venstre.html",
+            bilateral: "/grunnveiledning/beinpress-cp-bilateral.html",
+            unsure: "/grunnveiledning/beinpress-cp-generell.html"
+          };
+          const url = routes[cp] || routes.unsure;
+          window.location.href = url;
+        });
       });
 
       tryAutoplayWithLowSound();
