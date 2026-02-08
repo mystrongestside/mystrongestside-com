@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+
+  <title>Benpress – kom i gang</title>
+
+  <style>
+    :root{
+      --myss_blue_dark:#0c2d48;
+      --myss_blue:#2f7fbf;
+      --myss_orange:#f28c28;
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 500px at 20% -10%, rgba(47,127,191,0.18), transparent 55%),
+        radial-gradient(900px 450px at 90% 0%, rgba(242,140,40,0.14), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 18px 14px 28px;
+    }
+
+    .top{
+      padding: 10px 6px 14px;
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: clamp(1.35rem, 4.2vw, 2rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--myss_blue_dark);
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .video_shell{
+      position: relative;
+      background: #0b1220;
+    }
+
+    video{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height: 70vh;
+      background: #0b1220;
+    }
+
+    .content{
+      padding: 14px 16px 18px;
+    }
+
+    .note{
+      margin: 0;
+      font-size: 1.03rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .note strong{
+      color: var(--myss_blue_dark);
+    }
+
+    .hint{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .gate{
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 50;
+    }
+
+    .gate_card{
+      width: min(560px, 100%);
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 16px 16px 14px;
+      border: 1px solid rgba(15, 23, 42, 0.10);
+    }
+
+    .gate_title{
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+      color: var(--myss_blue_dark);
+      letter-spacing: -0.01em;
+    }
+
+    .gate_text{
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 0.98rem;
+    }
+
+    .btnrow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 14px;
+      font-weight: 650;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .btn_primary{
+      background: var(--myss_blue);
+      color: #fff;
+    }
+
+    .btn_secondary{
+      background: rgba(47,127,191,0.10);
+      color: var(--myss_blue_dark);
+      border: 1px solid rgba(47,127,191,0.20);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(242,140,40,0.12);
+      color: #7a3e00;
+      border: 1px solid rgba(242,140,40,0.22);
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>Benpress – kom i gang</h1>
+      <p class="sub">Kort grunnveiledning som starter automatisk.</p>
+    </header>
+
+    <section class="card" aria-label="Benpress grunnveiledning">
+      <div class="video_shell">
+        <video
+          id="guide_video"
+          playsinline
+          preload="auto"
+          autoplay
+          controls
+          aria-label="Grunnveiledning i benpress"
+        >
+          <!-- Bytt filnavn til din 20 sek video -->
+          <source src="benpress_20s.mp4" type="video/mp4" />
+          Nettleseren din støtter ikke videoavspilling.
+        </video>
+      </div>
+
+      <div class="content">
+        <p class="note">
+          💡 Denne videoen gir deg en enkel grunnstilling i benpress.
+          Har du CP, smerter eller andre funksjonsvariasjoner, kan du trenge litt ekstra tilpasning.
+        </p>
+        <p class="hint">
+          Ingen trykk nødvendig for å få hjelp første gang.
+        </p>
+        <div id="muted_badge" class="badge" style="display:none" aria-live="polite">
+          Lyd kan være dempet av nettleseren. Trykk på høyttaler i videoen om du vil ha lyd.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-label="Start video">
+    <div class="gate_card">
+      <p class="gate_title">Start video</p>
+      <p class="gate_text">
+        Noen telefoner blokkerer autoavspilling med lyd. Trykk for å starte med lyd, eller spill av uten lyd.
+      </p>
+      <div class="btnrow">
+        <button id="btn_play_sound" class="btn btn_primary" type="button">Spill av med lyd</button>
+        <button id="btn_play_muted" class="btn btn_secondary" type="button">Spill av uten lyd</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const v = document.getElementById("guide_video");
+      const gate = document.getElementById("autoplay_gate");
+      const btnSound = document.getElementById("btn_play_sound");
+      const btnMuted = document.getElementById("btn_play_muted");
+      const mutedBadge = document.getElementById("muted_badge");
+
+      function showGate() {
+        gate.style.display = "flex";
+      }
+
+      function hideGate() {
+        gate.style.display = "none";
+      }
+
+      async function tryAutoplayWithLowSound() {
+        try {
+          v.muted = false;
+          v.volume = 0.20;
+          await v.play();
+          mutedBadge.style.display = "none";
+        } catch (e) {
+          try {
+            v.muted = true;
+            v.volume = 0.0;
+            await v.play();
+            mutedBadge.style.display = "inline-flex";
+          } catch (e2) {
+            showGate();
+          }
+        }
+      }
+
+      btnSound.addEventListener("click", async function () {
+        hideGate();
+        try {
+          v.muted = false;
+          v.volume = 0.20;
+          await v.play();
+          mutedBadge.style.display = "none";
+        } catch (e) {
+          v.muted = false;
+          v.controls = true;
+          showGate();
+        }
+      });
+
+      btnMuted.addEventListener("click", async function () {
+        hideGate();
+        v.muted = true;
+        v.volume = 0.0;
+        try {
+          await v.play();
+          mutedBadge.style.display = "inline-flex";
+        } catch (e) {
+          showGate();
+        }
+      });
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "visible" && v.paused) {
+          tryAutoplayWithLowSound();
+        }
+      });
+
+      tryAutoplayWithLowSound();
+    })();
+  </script>
+</body>
+</html>
