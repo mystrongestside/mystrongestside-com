@@ -340,6 +340,12 @@
     .myss-link:hover{
       color: var(--myss_blue_dark);
     }
+
+    .myss-more{ margin-top: 14px; }
+    .myss-more > summary{ cursor: pointer; font-weight: 700; }
+    .myss-more__content{ margin-top: 12px; }
+
+    .myss-fallback[hidden]{ display: none; }
   </style>
 </head>
 
@@ -418,46 +424,29 @@
         <section aria-label="Overføringsverdi i hverdagen">
           <p class="guide_title">Overføringsverdi i hverdagen</p>
           <p class="micro">
-            Styrke i bein og hofter kan gjøre det enklere å reise seg, gå i trapper og holde en trygg rytme i hverdagsbevegelser.
+            Beinpress har ofte god overføringsverdi til å reise seg fra stol og gå i trapper. Å vedlikeholde styrke i bein og hofter kan støtte tryggere hverdagsbevegelser over tid.
           </p>
-
-          <!-- myss: overforingsverdi-quote-bolk -->
-          <section class="myss-quote-block" aria-label="Overføringsverdi i hverdagen">
-            <!-- myss: quote-after-video -->
-            <aside id="value_quote" class="value_quote" aria-live="polite">
-              <p class="value_quote__text">
-                Beinpress har ofte stor overføringsverdi til å reise seg fra stol og gå i trapp. Når styrke i bein og hofter vedlikeholdes, kan det støtte tryggere aktivitet i hverdagen og være en del av et fallforebyggende helhetsbilde.
-              </p>
-            </aside>
-          </section>
         </section>
 
-        <details>
-          <summary>
-            Vil du vite mer?
-            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"></path>
-            </svg>
-          </summary>
-
-          <div class="details_body">
-            <p><strong>Fotplassering</strong></p>
+        <!-- myss: les-mer-start -->
+        <details class="myss-more">
+          <summary>Vil du vite mer?</summary>
+          <div class="myss-more__content">
+            <h2>Fotplassering</h2>
             <ul>
               <li>Høyere fotplassering gir ofte relativt mer belastning på setemuskulatur.</li>
               <li>Lavere fotplassering gir ofte mer arbeid for fremside lår.</li>
-              <li>Hold knærne i samme retning som tærne og hele foten i kontakt med platen.</li>
+              <li>Hold hele foten i kontakt med platen og jobb med jevnt trykk, uten at helen løfter seg.</li>
             </ul>
 
-            <p><strong>Bevegelsesutslag</strong></p>
-            <p>
-              Større bevegelsesutslag kan gi god muskelaktivering, men prioriter alltid kontroll og at korsryggen har stabil kontakt med ryggplaten.
-            </p>
+            <h2>Bevegelsesutslag</h2>
+            <p>Større bevegelsesutslag kan gi god muskelaktivering, men prioriter alltid kontroll og at korsryggen har stabil kontakt med ryggplaten.</p>
 
-            <p><strong>Aktive muskler</strong></p>
+            <h2>Aktive muskler</h2>
             <ul>
-              <li><strong>Primært</strong> Quadriceps femoris, gluteus maximus.</li>
-              <li><strong>Støtte</strong> Hamstrings, adduktorer, gastrocnemius og soleus.</li>
-              <li><strong>Lav indirekte belastning</strong> Ryggstrekkerne, fordi overkroppen er støttet.</li>
+              <li>Primært Quadriceps femoris, gluteus maximus.</li>
+              <li>Støtte Hamstrings, adduktorer, gastrocnemius og soleus.</li>
+              <li>Lav indirekte belastning Ryggstrekkerne, fordi overkroppen er støttet.</li>
             </ul>
 
             <figure class="figure" aria-label="Illustrasjon av aktive muskler i sittende beinpress">
@@ -471,30 +460,17 @@
               </figcaption>
             </figure>
 
-            <p><strong>Kilder</strong></p>
-            <ul class="sources">
-              <li>American College of Sports Medicine. (2009). Progression models in resistance training for healthy adults. <em>Medicine &amp; Science in Sports &amp; Exercise</em>.</li>
-              <li>Schoenfeld, B. J., Ogborn, D., &amp; Krieger, J. W. (2017). Dose response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta analysis. <em>Journal of Sports Sciences</em>.</li>
-              <li>Schoenfeld, B. J. et al. (2021). Resistance training range of motion and skeletal muscle hypertrophy: A systematic review and meta analysis. <em>Scandinavian Journal of Medicine &amp; Science in Sports</em>.</li>
+            <h2>Kilder</h2>
+            <ul>
+              <li>American College of Sports Medicine. (2009). Progression models in resistance training for healthy adults. Medicine &amp; Science in Sports &amp; Exercise.</li>
+              <li>Schoenfeld, B. J., Ogborn, D., &amp; Krieger, J. W. (2017). Dose response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta analysis. Journal of Sports Sciences.</li>
+              <li>Schoenfeld, B. J. et al. (2021). Resistance training range of motion and skeletal muscle hypertrophy: A systematic review and meta analysis. Scandinavian Journal of Medicine &amp; Science in Sports.</li>
             </ul>
+            <p>Kildene over er generell styrketreningslitteratur som støtter prinsippene for progresjon, treningsvolum og bevegelsesutslag.</p>
 
-            <p class="micro">
-              Kildene over er generell styrketreningslitteratur som støtter prinsippene for progresjon, treningsvolum og bevegelsesutslag.
-            </p>
-          </div>
-        </details>
-      
+            <h2>Sko og klær</h2>
 
-        <details>
-          <summary>
-            Sko og klær
-            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"></path>
-            </svg>
-          </summary>
-
-          <div class="details_body">
-            <p><strong>Sko</strong></p>
+            <h3>Sko</h3>
             <ul>
               <li>Flate og stabile sko med lite demping gir ofte best stabilitet og kraftoverføring.</li>
               <li>Unngå myke løpesko hvis foten blir urolig eller du mister jevnt trykk i platen.</li>
@@ -502,37 +478,40 @@
               <li>Et lite hælløft kan hjelpe noen med å holde helen i kontakt, men det er ikke nødvendig.</li>
             </ul>
 
-            <p><strong>Klær</strong></p>
+            <h3>Klær</h3>
             <ul>
               <li>Velg klær som gir god bevegelsesfrihet i hofte og knær.</li>
               <li>Unngå plagg som strammer i hofteleddsbøy og gjør det vanskelig å holde stabil ryggkontakt.</li>
               <li>Hvis du sklir i setet, kan det hjelpe med mer friksjon i stoffet og å tørke av sete og ryggstøtte.</li>
             </ul>
 
-            <p><strong>Valgfritt</strong></p>
+            <h2>Valgfritt</h2>
             <ul>
               <li>Belte kan gi bedre kroppskontroll for noen, men er ikke et krav.</li>
               <li>Knevarmere kan gi mer komfort hvis knærne føles stive eller kalde.</li>
             </ul>
           </div>
         </details>
+        <!-- myss: les-mer-slutt -->
 
       </div>
     </section>
   </main>
 
-  <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-label="Start video">
-    <div class="gate_card">
-      <p class="gate_title">Start video</p>
-      <p class="gate_text">
-        Noen telefoner blokkerer autoavspilling med lyd. Trykk for å starte med lyd, eller spill av uten lyd.
-      </p>
-      <div class="btnrow">
-        <button id="btn_play_sound" class="btn btn_primary" type="button">Spill av med lyd</button>
-        <button id="btn_play_muted" class="btn btn_secondary" type="button">Spill av uten lyd</button>
+  <section id="video_fallback" class="myss-fallback" hidden>
+    <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-label="Start video">
+      <div class="gate_card">
+        <p class="gate_title">Start video</p>
+        <p class="gate_text">
+          Noen telefoner blokkerer autoavspilling med lyd. Trykk for å starte med lyd, eller spill av uten lyd.
+        </p>
+        <div class="btnrow">
+          <button id="btn_play_sound" class="btn btn_primary" type="button">Spill av med lyd</button>
+          <button id="btn_play_muted" class="btn btn_secondary" type="button">Spill av uten lyd</button>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <script>
     (function () {
@@ -597,6 +576,29 @@
 
       tryAutoplayWithLowSound();
     })();
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var v = document.querySelector('video');
+      var fb = document.getElementById('video_fallback');
+      if (!v || !fb) return;
+
+      function show() { fb.hidden = false; }
+      function hide() { fb.hidden = true; }
+
+      var p;
+      try { p = v.play(); } catch (e) {}
+
+      if (p && typeof p.then === 'function') {
+        p.then(hide).catch(show);
+      } else {
+        setTimeout(function () {
+          if (v.paused || v.currentTime < 0.1) show();
+        }, 1200);
+      }
+
+      v.addEventListener('play', hide);
+    });
   </script>
 </body>
 </html>
