@@ -106,6 +106,17 @@
     }
 
     .adapt__lead{ margin:0 0 12px; color: var(--muted); }
+    .adapt__controls{ display:flex; gap:8px; flex-wrap:wrap; margin: 0 0 14px; }
+    .adapt__chip{
+      border:1px solid rgba(15,23,42,.18);
+      border-radius:999px;
+      padding:8px 12px;
+      background:#fff;
+      color: var(--myss_blue_dark);
+      font-weight:700;
+      cursor:pointer;
+    }
+    .adapt__chip--ghost{ background: rgba(15,23,42,.04); color: var(--muted); }
     .adapt__h3{ margin:14px 0 8px; color: var(--myss_blue_dark); font-size:1rem; }
 
     .adapt__grid{
@@ -123,11 +134,22 @@
     }
 
     .adapt__option:hover{ border-color: rgba(47,127,191,.35); }
+    .adapt__option[aria-pressed="true"]{
+      border-color: rgba(47,127,191,.75);
+      box-shadow: inset 0 0 0 1px rgba(47,127,191,.45);
+      background: rgba(47,127,191,.08);
+    }
     .adapt__t{ display:block; font-weight:800; color: var(--myss_blue_dark); }
     .adapt__d{ display:block; margin-top:3px; color: var(--muted); font-size:.95rem; }
     .adapt__option--neutral{ background: rgba(242,140,40,.08); }
 
     .adapt__privacy{ margin:14px 0 0; color: var(--muted); font-size:.9rem; }
+
+    .adapt__tips{ margin-top: 14px; display:grid; gap:10px; }
+    .tip{ border:1px solid rgba(15,23,42,.1); border-radius:14px; padding:12px; background:#fff; }
+    .tip h3{ margin: 0 0 8px; color: var(--myss_blue_dark); }
+    .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
+    .tip[hidden]{ display:none; }
 
     @media (min-width: 720px){
       .adapt__grid{ grid-template-columns: 1fr 1fr; }
@@ -151,22 +173,27 @@
             Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå.
           </p>
 
+          <div class="adapt__controls" role="group" aria-label="Filterkontroller">
+            <button id="adaptShowAll" class="adapt__chip" type="button">Vis alt</button>
+            <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill</button>
+          </div>
+
           <div class="adapt__group" aria-label="Sidevalg">
             <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
             <div class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-route="right">
+              <button class="adapt__option" type="button" data-filter-side="right" aria-pressed="false">
                 <span class="adapt__t">Mest på høyre side</span>
                 <span class="adapt__d">Vi viser tips for høyre side</span>
               </button>
-              <button class="adapt__option" type="button" data-route="left">
+              <button class="adapt__option" type="button" data-filter-side="left" aria-pressed="false">
                 <span class="adapt__t">Mest på venstre side</span>
                 <span class="adapt__d">Vi viser tips for venstre side</span>
               </button>
-              <button class="adapt__option" type="button" data-route="both">
+              <button class="adapt__option" type="button" data-filter-side="both" aria-pressed="false">
                 <span class="adapt__t">Begge sider</span>
                 <span class="adapt__d">Vi viser tips for begge</span>
               </button>
-              <button class="adapt__option adapt__option--neutral" type="button" data-route="general">
+              <button class="adapt__option adapt__option--neutral" type="button" data-filter-side="general" aria-pressed="false">
                 <span class="adapt__t">Usikker</span>
                 <span class="adapt__d">Vis generell tilrettelegging</span>
               </button>
@@ -176,19 +203,19 @@
           <div class="adapt__group" aria-label="Kroppsområde">
             <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
             <div class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-area="heel">
+              <button class="adapt__option" type="button" data-filter-area="heel" aria-pressed="false">
                 <span class="adapt__t">Hæl og fot</span>
                 <span class="adapt__d">Fotplassering og støtte</span>
               </button>
-              <button class="adapt__option" type="button" data-area="knee">
+              <button class="adapt__option" type="button" data-filter-area="knee" aria-pressed="false">
                 <span class="adapt__t">Kne</span>
                 <span class="adapt__d">Retning, dybde og kontroll</span>
               </button>
-              <button class="adapt__option" type="button" data-area="hip">
+              <button class="adapt__option" type="button" data-filter-area="hip" aria-pressed="false">
                 <span class="adapt__t">Hofte og sete</span>
                 <span class="adapt__d">Sete, rygg og vinkel</span>
               </button>
-              <button class="adapt__option adapt__option--neutral" type="button" data-area="general">
+              <button class="adapt__option adapt__option--neutral" type="button" data-filter-area="general" aria-pressed="false">
                 <span class="adapt__t">Generelt</span>
                 <span class="adapt__d">Enkle råd for de fleste</span>
               </button>
@@ -199,52 +226,65 @@
             Valget brukes bare til å tilpasse veiledningen nå.
             Det lagres ikke som helseopplysninger.
           </p>
+
+          <section class="adapt__tips" aria-live="polite">
+            <article class="tip" data-side="general" data-area="general">
+              <h3>Trygg og enkel start</h3>
+              <ul>
+                <li>Start med lett belastning og kort bevegelse.</li>
+                <li>Hold rolig tempo og stopp før det blir utrygt.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="right" data-area="general">
+              <h3>Når høyre side jobber mindre</h3>
+              <ul>
+                <li>Reduser belastning og jobb med kontrollert tempo.</li>
+                <li>Plasser foten likt og bruk pause i bunn.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="left" data-area="general">
+              <h3>Når venstre side jobber mindre</h3>
+              <ul>
+                <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
+                <li>Hold knær i samme retning gjennom hele presset.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="both" data-area="general">
+              <h3>Når begge sider er krevende</h3>
+              <ul>
+                <li>Start med kortere utslag og høyere sete om mulig.</li>
+                <li>Prioriter stabilitet før belastning.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="general" data-area="heel">
+              <h3>Ved utfordringer i hæl og fot</h3>
+              <ul>
+                <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
+                <li>Sikre jevnt trykk gjennom hele foten.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="general" data-area="knee">
+              <h3>Ved utfordringer i kne</h3>
+              <ul>
+                <li>La knær følge samme retning som tær gjennom presset.</li>
+                <li>Reduser dybden hvis det gir bedre kontroll.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="general" data-area="hip">
+              <h3>Ved utfordringer i hofte og sete</h3>
+              <ul>
+                <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
+                <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
+              </ul>
+            </article>
+          </section>
         </div>
-      </section>
-
-      <section class="section">
-        <h2>Hvis øvelsen kjennes utrygg</h2>
-        <p>Gå ned i belastning og kort ned bevegelsen til du kjenner mer kontroll.</p>
-        <ul>
-          <li>Bruk roligere tempo, særlig på vei ned.</li>
-          <li>Hold jevn kontakt i rygg og sete mot ryggplaten.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Hvis én side jobber mindre</h2>
-        <p>Prøv å plassere føttene symmetrisk og gi litt ekstra oppmerksomhet til den svakere siden.</p>
-        <ul>
-          <li>Start med lett vekt og kjenn at begge føtter presser jevnt.</li>
-          <li>Stopp et øyeblikk i bunn for å finne balansen.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Hvis knær faller innover eller kjennes ustabile</h2>
-        <p>La knærne følge samme retning som tærne gjennom hele bevegelsen.</p>
-        <ul>
-          <li>Velg en fotplassering som gir god støtte i hofter og ankler.</li>
-          <li>Reduser dybden hvis det gir mer stabil kontroll.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Hvis fotkontakt er vanskelig</h2>
-        <p>Stabil fotkontakt gjør det enklere å få jevnt trykk gjennom hele platen.</p>
-        <ul>
-          <li>Plasser foten litt høyere eller lavere for å finne tryggere støtte.</li>
-          <li>Bruk flate sko eller sokker som gir bedre kontakt.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Hvis du trenger mer stabilitet og kontroll</h2>
-        <p>Gi deg selv tid til å finne rytmen før du øker belastningen.</p>
-        <ul>
-          <li>Hold et rolig tempo og unngå raske stopp.</li>
-          <li>Bruk færre repetisjoner med god kvalitet.</li>
-        </ul>
       </section>
 
       <p class="closing">
@@ -255,26 +295,70 @@
 
   <script>
   (function(){
-    const routes = {
-      right: '/grunnveiledning/beinpress-tilrettelegging-hoyre.html',
-      left: '/grunnveiledning/beinpress-tilrettelegging-venstre.html',
-      both: '/grunnveiledning/beinpress-tilrettelegging-begge.html',
-      general: '/grunnveiledning/beinpress-tilrettelegging-generelt.html'
+    const sideButtons = Array.from(document.querySelectorAll('[data-filter-side]'));
+    const areaButtons = Array.from(document.querySelectorAll('[data-filter-area]'));
+    const tips = Array.from(document.querySelectorAll('.tip'));
+    const showAllBtn = document.getElementById('adaptShowAll');
+    const resetBtn = document.getElementById('adaptReset');
+
+    const state = {
+      side: null,
+      area: null
     };
 
-    document.querySelectorAll('[data-route]').forEach(el => {
-      el.addEventListener('click', () => {
-        const key = el.getAttribute('data-route');
-        location.href = routes[key] || routes.general;
+    function updateButtonState(buttons, activeValue, attr){
+      buttons.forEach((button) => {
+        const isActive = activeValue !== null && button.getAttribute(attr) === activeValue;
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+    }
+
+    function matchesFilter(tag, selected){
+      if (!selected) return true;
+      return tag === selected || tag === 'general';
+    }
+
+    function applyFilters(){
+      updateButtonState(sideButtons, state.side, 'data-filter-side');
+      updateButtonState(areaButtons, state.area, 'data-filter-area');
+
+      tips.forEach((tip) => {
+        const side = tip.getAttribute('data-side') || 'general';
+        const area = tip.getAttribute('data-area') || 'general';
+        const visible = matchesFilter(side, state.side) && matchesFilter(area, state.area);
+        tip.hidden = !visible;
+      });
+    }
+
+    sideButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const value = button.getAttribute('data-filter-side');
+        state.side = state.side === value ? null : value;
+        applyFilters();
       });
     });
 
-    document.querySelectorAll('[data-area]').forEach(el => {
-      el.addEventListener('click', () => {
-        const area = el.getAttribute('data-area') || 'general';
-        location.href = '/grunnveiledning/beinpress-tilrettelegging.html?area=' + encodeURIComponent(area);
+    areaButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const value = button.getAttribute('data-filter-area');
+        state.area = state.area === value ? null : value;
+        applyFilters();
       });
     });
+
+    showAllBtn?.addEventListener('click', () => {
+      state.side = null;
+      state.area = null;
+      applyFilters();
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      state.side = null;
+      state.area = null;
+      applyFilters();
+    });
+
+    applyFilters();
   })();
   </script>
 </body>
