@@ -93,6 +93,46 @@
       color: var(--muted);
       line-height: 1.5;
     }
+
+    /* myss: tilrettelegging innhold (uten banner) */
+    .adapt{ margin-top:14px; }
+
+    .adapt__panel{
+      margin-top:12px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+
+    .adapt__lead{ margin:0 0 12px; color: var(--muted); }
+    .adapt__h3{ margin:14px 0 8px; color: var(--myss_blue_dark); font-size:1rem; }
+
+    .adapt__grid{
+      display:grid;
+      gap:10px;
+    }
+
+    .adapt__option{
+      text-align:left;
+      border:1px solid rgba(15,23,42,.12);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+      cursor:pointer;
+    }
+
+    .adapt__option:hover{ border-color: rgba(47,127,191,.35); }
+    .adapt__t{ display:block; font-weight:800; color: var(--myss_blue_dark); }
+    .adapt__d{ display:block; margin-top:3px; color: var(--muted); font-size:.95rem; }
+    .adapt__option--neutral{ background: rgba(242,140,40,.08); }
+
+    .adapt__privacy{ margin:14px 0 0; color: var(--muted); font-size:.9rem; }
+
+    @media (min-width: 720px){
+      .adapt__grid{ grid-template-columns: 1fr 1fr; }
+      .adapt__option--neutral{ grid-column: 1 / -1; }
+    }
   </style>
 </head>
 <body>
@@ -102,6 +142,65 @@
       <p class="ingress">
         Dette er generelle råd for små justeringer i beinpress. Bruk dem som en rolig sjekkliste og velg det som kjennes trygt og gjennomførbart.
       </p>
+
+      <!-- myss: tilrettelegging-innhold -->
+      <section class="adapt" aria-labelledby="adaptTitle">
+        <div id="adaptPanel" class="adapt__panel">
+          <h2 id="adaptTitle">Tilpasset veiledning</h2>
+          <p class="adapt__lead">
+            Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå.
+          </p>
+
+          <div class="adapt__group" aria-label="Sidevalg">
+            <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
+            <div class="adapt__grid" role="group">
+              <button class="adapt__option" type="button" data-route="right">
+                <span class="adapt__t">Mest på høyre side</span>
+                <span class="adapt__d">Vi viser tips for høyre side</span>
+              </button>
+              <button class="adapt__option" type="button" data-route="left">
+                <span class="adapt__t">Mest på venstre side</span>
+                <span class="adapt__d">Vi viser tips for venstre side</span>
+              </button>
+              <button class="adapt__option" type="button" data-route="both">
+                <span class="adapt__t">Begge sider</span>
+                <span class="adapt__d">Vi viser tips for begge</span>
+              </button>
+              <button class="adapt__option adapt__option--neutral" type="button" data-route="general">
+                <span class="adapt__t">Usikker</span>
+                <span class="adapt__d">Vis generell tilrettelegging</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="adapt__group" aria-label="Kroppsområde">
+            <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
+            <div class="adapt__grid" role="group">
+              <button class="adapt__option" type="button" data-area="heel">
+                <span class="adapt__t">Hæl og fot</span>
+                <span class="adapt__d">Fotplassering og støtte</span>
+              </button>
+              <button class="adapt__option" type="button" data-area="knee">
+                <span class="adapt__t">Kne</span>
+                <span class="adapt__d">Retning, dybde og kontroll</span>
+              </button>
+              <button class="adapt__option" type="button" data-area="hip">
+                <span class="adapt__t">Hofte og sete</span>
+                <span class="adapt__d">Sete, rygg og vinkel</span>
+              </button>
+              <button class="adapt__option adapt__option--neutral" type="button" data-area="general">
+                <span class="adapt__t">Generelt</span>
+                <span class="adapt__d">Enkle råd for de fleste</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="adapt__privacy">
+            Valget brukes bare til å tilpasse veiledningen nå.
+            Det lagres ikke som helseopplysninger.
+          </p>
+        </div>
+      </section>
 
       <section class="section">
         <h2>Hvis øvelsen kjennes utrygg</h2>
@@ -153,5 +252,30 @@
       </p>
     </section>
   </main>
+
+  <script>
+  (function(){
+    const routes = {
+      right: '/grunnveiledning/beinpress-tilrettelegging-hoyre.html',
+      left: '/grunnveiledning/beinpress-tilrettelegging-venstre.html',
+      both: '/grunnveiledning/beinpress-tilrettelegging-begge.html',
+      general: '/grunnveiledning/beinpress-tilrettelegging-generelt.html'
+    };
+
+    document.querySelectorAll('[data-route]').forEach(el => {
+      el.addEventListener('click', () => {
+        const key = el.getAttribute('data-route');
+        location.href = routes[key] || routes.general;
+      });
+    });
+
+    document.querySelectorAll('[data-area]').forEach(el => {
+      el.addEventListener('click', () => {
+        const area = el.getAttribute('data-area') || 'general';
+        location.href = '/grunnveiledning/beinpress-tilrettelegging.html?area=' + encodeURIComponent(area);
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
