@@ -176,17 +176,42 @@
       display:block;
       border-radius:18px;
     }
-    .bodymap__mask{
+    /* myss: grey-out kun etiketter */
+    .bodymap__labelmask{
       position:absolute;
       pointer-events:none;
-      background: rgba(255,255,255,.72);
-      border-radius: 16px;
-      filter: grayscale(1);
-      opacity: .9;
+      border-radius: 14px;
+      background: rgba(255,255,255,.78);
       border: 1px solid rgba(15,23,42,.10);
+      backdrop-filter: blur(1.5px);
+      opacity: .92;
     }
-    .bodymap__mask--shoulder{ left: 6%;  top: 26%; width: 36%; height: 14%; }
-    .bodymap__mask--elbow{    left: 62%; top: 26%; width: 32%; height: 14%; }
+
+    /* Startverdier, finjuster til de treffer de oransje label-boksene */
+    .bodymap__labelmask--shoulder{
+      left: 9%;
+      top: 21%;
+      width: 23%;
+      height: 6%;
+    }
+
+    .bodymap__labelmask--elbow{
+      left: 78%;
+      top: 16%;
+      width: 16%;
+      height: 6%;
+    }
+
+    /* valgfritt: litt mer “disabled” look */
+    .bodymap__labelmask::after{
+      content: "";
+      position:absolute;
+      inset:0;
+      border-radius: 14px;
+      background: linear-gradient(0deg, rgba(0,0,0,.06), rgba(0,0,0,.06));
+      mix-blend-mode: multiply;
+      opacity: .35;
+    }
 
     .adapt__smallhint{
       margin: 8px 0 0;
@@ -278,8 +303,8 @@
                   alt=""
                   loading="lazy"
                 />
-                <span class="bodymap__mask bodymap__mask--shoulder" aria-hidden="true"></span>
-                <span class="bodymap__mask bodymap__mask--elbow" aria-hidden="true"></span>
+                <span class="bodymap__labelmask bodymap__labelmask--shoulder" aria-hidden="true"></span>
+                <span class="bodymap__labelmask bodymap__labelmask--elbow" aria-hidden="true"></span>
               </button>
               <p class="adapt__smallhint">Trykk på etiketten i figuren. Du blir sendt til riktig tips.</p>
             </div>
