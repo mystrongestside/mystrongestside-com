@@ -151,10 +151,60 @@
     .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
     .tip[hidden]{ display:none; }
 
+    /* myss: body map */
+    .bodymap{
+      position: relative;
+      max-width: 560px;
+      margin: 10px auto 0;
+    }
+    .bodymap__img{
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+    }
+    .bodymap__hotspot{
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(47,127,191,.65);
+      background: rgba(242,140,40,.18);
+      border-radius: 999px;
+      padding: 10px 12px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .bodymap__hotspot:hover{ border-color: rgba(47,127,191,.95); }
+    .bodymap__hotspot[aria-pressed="true"]{
+      background: rgba(47,127,191,.14);
+      border-color: rgba(47,127,191,.95);
+    }
+    .bodymap__hotspot--neutral{
+      background: rgba(255,255,255,.72);
+    }
+    .bodymap__label{
+      font-weight: 800;
+      color: var(--myss_blue_dark);
+      white-space: nowrap;
+      font-size: .95rem;
+    }
+    .adapt__smallhint{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: .95rem;
+      text-align: center;
+    }
+
     @media (min-width: 720px){
       .adapt__grid{ grid-template-columns: 1fr 1fr; }
       .adapt__option--neutral{ grid-column: 1 / -1; }
     }
+    @media (max-width: 420px){
+      .bodymap__hotspot{ padding: 8px 10px; }
+      .bodymap__label{ font-size: .9rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -202,24 +252,41 @@
 
           <div class="adapt__group" aria-label="Kroppsområde">
             <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
-            <div class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-filter-area="heel" aria-pressed="false">
-                <span class="adapt__t">Hæl og fot</span>
-                <span class="adapt__d">Fotplassering og støtte</span>
+
+            <div class="bodymap" role="group" aria-label="Velg område på figur">
+              <img
+                class="bodymap__img"
+                src="/assets/img/figur-myss.jpg"
+                alt="Trykk på fot, kne, hofte, grep eller hode for å filtrere tips"
+                loading="lazy"
+              />
+
+              <button class="bodymap__hotspot" type="button" data-filter-area="head" aria-pressed="false" style="--x:50%; --y:13%;">
+                <span class="bodymap__label">Hode</span>
               </button>
-              <button class="adapt__option" type="button" data-filter-area="knee" aria-pressed="false">
-                <span class="adapt__t">Kne</span>
-                <span class="adapt__d">Retning, dybde og kontroll</span>
+
+              <button class="bodymap__hotspot" type="button" data-filter-area="grip" aria-pressed="false" style="--x:18%; --y:54%;">
+                <span class="bodymap__label">Grep</span>
               </button>
-              <button class="adapt__option" type="button" data-filter-area="hip" aria-pressed="false">
-                <span class="adapt__t">Hofte og sete</span>
-                <span class="adapt__d">Sete, rygg og vinkel</span>
+
+              <button class="bodymap__hotspot" type="button" data-filter-area="hip" aria-pressed="false" style="--x:66%; --y:60%;">
+                <span class="bodymap__label">Hofte</span>
               </button>
-              <button class="adapt__option adapt__option--neutral" type="button" data-filter-area="general" aria-pressed="false">
-                <span class="adapt__t">Generelt</span>
-                <span class="adapt__d">Enkle råd for de fleste</span>
+
+              <button class="bodymap__hotspot" type="button" data-filter-area="knee" aria-pressed="false" style="--x:68%; --y:76%;">
+                <span class="bodymap__label">Kne</span>
+              </button>
+
+              <button class="bodymap__hotspot" type="button" data-filter-area="foot" aria-pressed="false" style="--x:50%; --y:96%;">
+                <span class="bodymap__label">Fot</span>
+              </button>
+
+              <button class="bodymap__hotspot bodymap__hotspot--neutral" type="button" data-filter-area="general" aria-pressed="false" style="--x:50%; --y:6%;">
+                <span class="bodymap__label">Vis alt</span>
               </button>
             </div>
+
+            <p class="adapt__smallhint">Trykk på et område for å filtrere tipsene under.</p>
           </div>
 
           <p class="adapt__privacy">
@@ -260,8 +327,8 @@
               </ul>
             </article>
 
-            <article class="tip" data-side="general" data-area="heel">
-              <h3>Ved utfordringer i hæl og fot</h3>
+            <article class="tip" data-side="general" data-area="foot">
+              <h3>Ved utfordringer i fot</h3>
               <ul>
                 <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
                 <li>Sikre jevnt trykk gjennom hele foten.</li>
@@ -281,6 +348,24 @@
               <ul>
                 <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
                 <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="general" data-area="head">
+              <h3>Når det blir mye å holde styr på</h3>
+              <ul>
+                <li>Bruk få, faste steg: sete, fot, pust, press.</li>
+                <li>Ta pause mellom repetisjonene og senk tempo.</li>
+                <li>Bruk en kort huskeregel på skjermen.</li>
+              </ul>
+            </article>
+
+            <article class="tip" data-side="general" data-area="grip">
+              <h3>Når grep og håndkontroll er utfordrende</h3>
+              <ul>
+                <li>Bruk håndtak eller støttepunkt hvis maskinen har det.</li>
+                <li>Prioriter stabil posisjon før belastning.</li>
+                <li>Vurder stropper eller tilpasset grep ved behov.</li>
               </ul>
             </article>
           </section>
@@ -306,11 +391,8 @@
       area: null
     };
 
-    function updateButtonState(buttons, activeValue, attr){
-      buttons.forEach((button) => {
-        const isActive = activeValue !== null && button.getAttribute(attr) === activeValue;
-        button.setAttribute('aria-pressed', String(isActive));
-      });
+    function setPressed(btns, activeBtn){
+      btns.forEach(b => b.setAttribute('aria-pressed', b === activeBtn ? 'true' : 'false'));
     }
 
     function matchesFilter(tag, selected){
@@ -319,8 +401,10 @@
     }
 
     function applyFilters(){
-      updateButtonState(sideButtons, state.side, 'data-filter-side');
-      updateButtonState(areaButtons, state.area, 'data-filter-area');
+      const activeSideBtn = sideButtons.find((button) => button.getAttribute('data-filter-side') === state.side) || null;
+      const activeAreaBtn = areaButtons.find((button) => button.getAttribute('data-filter-area') === state.area) || null;
+      setPressed(sideButtons, activeSideBtn);
+      setPressed(areaButtons, activeAreaBtn);
 
       tips.forEach((tip) => {
         const side = tip.getAttribute('data-side') || 'general';
@@ -341,7 +425,14 @@
     areaButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const value = button.getAttribute('data-filter-area');
+        if (value === 'general'){
+          state.area = null;
+          setPressed(areaButtons, null);
+          applyFilters();
+          return;
+        }
         state.area = state.area === value ? null : value;
+        setPressed(areaButtons, state.area ? button : null);
         applyFilters();
       });
     });
