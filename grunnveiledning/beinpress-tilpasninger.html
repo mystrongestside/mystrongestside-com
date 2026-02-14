@@ -177,31 +177,6 @@
       display:block;
       border-radius:18px;
     }
-    .bodymap__labelmask{
-      position:absolute;
-      pointer-events:none;
-      border-radius: 16px;
-      background: rgba(148,163,184,.55);        /* graa (slate-ish) */
-      border: 2px solid rgba(148,163,184,.75);  /* litt tydelig ramme */
-      opacity: .92;
-      box-shadow: 0 6px 18px rgba(15,23,42,.08);
-    }
-
-    .bodymap__labelmask::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius: 16px;
-      background: rgba(255,255,255,.10);
-    }
-
-    .bodymap__labelmask--shoulder{
-      inset: 14% 56% 73% 6%;
-    }
-
-    .bodymap__labelmask--elbow{
-      inset: 14% 6% 73% 63%;
-    }
 
     .adapt__smallhint{
       margin: 8px 0 0;
@@ -230,6 +205,25 @@
       10%  { background: rgba(242,140,40,.28); box-shadow: 0 0 0 8px rgba(242,140,40,.22); }
       70%  { background: rgba(242,140,40,.22); box-shadow: 0 0 0 8px rgba(242,140,40,.16); }
       100% { background: rgba(242,140,40,.0); box-shadow: 0 0 0 0 rgba(242,140,40,.0); }
+    }
+
+
+    .adapt__relevance{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: .98rem;
+      text-align: center;
+    }
+    .adapt__toast{
+      margin: 10px auto 0;
+      max-width: 560px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(148,163,184,.18);
+      border: 1px solid rgba(148,163,184,.35);
+      color: var(--myss_blue_dark);
+      font-weight: 700;
+      text-align: center;
     }
 
     @media (min-width: 720px){
@@ -294,8 +288,10 @@
                   loading="lazy"
                 />
               </button>
-              <span class="bodymap__labelmask bodymap__labelmask--shoulder" aria-hidden="true"></span>
-              <span class="bodymap__labelmask bodymap__labelmask--elbow" aria-hidden="true"></span>
+              <p class="adapt__relevance" aria-live="polite">
+                Gjelder for beinpress: <strong>Fot</strong>, <strong>Kne</strong>, <strong>Hofte</strong>, <strong>Grep</strong>, <strong>Fokus og kontroll</strong>.
+              </p>
+              <p id="adaptToast" class="adapt__toast" hidden aria-live="polite"></p>
               <p class="adapt__smallhint">Trykk på etiketten i figuren. Du blir sendt til riktig tips.</p>
             </div>
           </div>
@@ -400,6 +396,7 @@
     const btn = document.getElementById('bodymapBtn');
     const img = document.getElementById('bodymapImg');
     const status = document.getElementById('adaptStatus');
+    const toast = document.getElementById('adaptToast');
 
     const state = {
       side: null,
@@ -407,11 +404,15 @@
     };
 
     const points = [
-      { key:'head', x:0.50, y:0.13, target:'#tip-head' },
-      { key:'grip', x:0.18, y:0.55, target:'#tip-grip' },
-      { key:'hip',  x:0.69, y:0.60, target:'#tip-hip'  },
-      { key:'knee', x:0.72, y:0.76, target:'#tip-knee' },
-      { key:'foot', x:0.50, y:0.94, target:'#tip-foot' }
+      { key:'head',     x:0.50, y:0.13, target:'#tip-head', label:'Fokus og kontroll', relevant:true },
+      { key:'grip',     x:0.18, y:0.55, target:'#tip-grip', label:'Grep', relevant:true },
+      { key:'hip',      x:0.69, y:0.60, target:'#tip-hip',  label:'Hofte', relevant:true },
+      { key:'knee',     x:0.72, y:0.76, target:'#tip-knee', label:'Kne', relevant:true },
+      { key:'foot',     x:0.50, y:0.94, target:'#tip-foot', label:'Fot', relevant:true },
+
+      // Irrelevante for beinpress, men klikk kan forekomme
+      { key:'shoulder', x:0.22, y:0.30, target:'#tip-hip',  label:'Skulder', relevant:false },
+      { key:'elbow',    x:0.78, y:0.30, target:'#tip-grip', label:'Albue',   relevant:false }
     ];
     const labels = {
       head: 'Fokus og kontroll',
@@ -420,6 +421,14 @@
       knee: 'Kne',
       foot: 'Fot'
     };
+
+    function showToast(msg){
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.hidden = false;
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => { toast.hidden = true; }, 2600);
+    }
 
     function setPressed(btns, activeBtn){
       btns.forEach(b => b.setAttribute('aria-pressed', b === activeBtn ? 'true' : 'false'));
@@ -507,6 +516,15 @@
       if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
 
       const p = nearestPoint(nx, ny);
+      if (!p.relevant){
+        showToast(p.label + ' er vanligvis ikke relevant for beinpress. Velg fot, kne, hofte, grep eller fokus og kontroll.');
+        // send brukeren til et relevant område uten å filtrere på skuldre/albue
+        applyAreaFilter('general');
+        setStatus(null);
+        scrollToTarget('#tip-foot');
+        return;
+      }
+
       applyAreaFilter(p.key);
       setStatus(p.key);
       scrollToTarget(p.target);
