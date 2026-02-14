@@ -151,7 +151,7 @@
     .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
     .tip[hidden]{ display:none; }
 
-    /* myss: body map */
+    /* myss: bodymap uten ekstra labels */
     .bodymap{
       position: relative;
       max-width: 560px;
@@ -167,27 +167,20 @@
       position: absolute;
       left: var(--x);
       top: var(--y);
+      width: var(--w);
+      height: var(--h);
       transform: translate(-50%, -50%);
-      border: 2px solid rgba(47,127,191,.65);
-      background: rgba(242,140,40,.18);
-      border-radius: 999px;
-      padding: 10px 12px;
+      border-radius: 16px;
+      border: 2px solid transparent;
+      background: transparent;
       cursor: pointer;
-      box-shadow: var(--shadow);
     }
-    .bodymap__hotspot:hover{ border-color: rgba(47,127,191,.95); }
+    .bodymap__hotspot:hover{
+      border-color: rgba(47,127,191,.35);
+    }
     .bodymap__hotspot[aria-pressed="true"]{
-      background: rgba(47,127,191,.14);
-      border-color: rgba(47,127,191,.95);
-    }
-    .bodymap__hotspot--neutral{
-      background: rgba(255,255,255,.72);
-    }
-    .bodymap__label{
-      font-weight: 800;
-      color: var(--myss_blue_dark);
-      white-space: nowrap;
-      font-size: .95rem;
+      border-color: rgba(47,127,191,.85);
+      background: rgba(47,127,191,.10);
     }
     .adapt__smallhint{
       margin: 8px 0 0;
@@ -200,11 +193,6 @@
       .adapt__grid{ grid-template-columns: 1fr 1fr; }
       .adapt__option--neutral{ grid-column: 1 / -1; }
     }
-    @media (max-width: 420px){
-      .bodymap__hotspot{ padding: 8px 10px; }
-      .bodymap__label{ font-size: .9rem; }
-    }
-
   </style>
 </head>
 <body>
@@ -253,40 +241,22 @@
           <div class="adapt__group" aria-label="Kroppsområde">
             <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
 
-            <div class="bodymap" role="group" aria-label="Velg område på figur">
+            <div class="bodymap" role="group" aria-label="Trykk på område i figuren for å filtrere tips">
               <img
                 class="bodymap__img"
                 src="/assets/img/figur-myss.jpg"
-                alt="Trykk på fot, kne, hofte, grep eller hode for å filtrere tips"
+                alt="Velg område i figuren for å filtrere tips"
                 loading="lazy"
               />
 
-              <button class="bodymap__hotspot" type="button" data-filter-area="head" aria-pressed="false" style="--x:50%; --y:13%;">
-                <span class="bodymap__label">Hode</span>
-              </button>
-
-              <button class="bodymap__hotspot" type="button" data-filter-area="grip" aria-pressed="false" style="--x:18%; --y:54%;">
-                <span class="bodymap__label">Grep</span>
-              </button>
-
-              <button class="bodymap__hotspot" type="button" data-filter-area="hip" aria-pressed="false" style="--x:66%; --y:60%;">
-                <span class="bodymap__label">Hofte</span>
-              </button>
-
-              <button class="bodymap__hotspot" type="button" data-filter-area="knee" aria-pressed="false" style="--x:68%; --y:76%;">
-                <span class="bodymap__label">Kne</span>
-              </button>
-
-              <button class="bodymap__hotspot" type="button" data-filter-area="foot" aria-pressed="false" style="--x:50%; --y:96%;">
-                <span class="bodymap__label">Fot</span>
-              </button>
-
-              <button class="bodymap__hotspot bodymap__hotspot--neutral" type="button" data-filter-area="general" aria-pressed="false" style="--x:50%; --y:6%;">
-                <span class="bodymap__label">Vis alt</span>
-              </button>
+              <button class="bodymap__hotspot" type="button" data-filter-area="head" aria-label="Hode" aria-pressed="false" style="--x:50%; --y:12%; --w:26%; --h:12%;"></button>
+              <button class="bodymap__hotspot" type="button" data-filter-area="grip" aria-label="Grep" aria-pressed="false" style="--x:18%; --y:54%; --w:30%; --h:14%;"></button>
+              <button class="bodymap__hotspot" type="button" data-filter-area="hip" aria-label="Hofte" aria-pressed="false" style="--x:70%; --y:60%; --w:30%; --h:14%;"></button>
+              <button class="bodymap__hotspot" type="button" data-filter-area="knee" aria-label="Kne" aria-pressed="false" style="--x:72%; --y:76%; --w:26%; --h:14%;"></button>
+              <button class="bodymap__hotspot" type="button" data-filter-area="foot" aria-label="Fot" aria-pressed="false" style="--x:50%; --y:94%; --w:22%; --h:12%;"></button>
             </div>
 
-            <p class="adapt__smallhint">Trykk på et område for å filtrere tipsene under.</p>
+            <p class="adapt__smallhint">Trykk på etiketten i figuren for å filtrere tipsene under.</p>
           </div>
 
           <p class="adapt__privacy">
@@ -381,7 +351,7 @@
   <script>
   (function(){
     const sideButtons = Array.from(document.querySelectorAll('[data-filter-side]'));
-    const areaButtons = Array.from(document.querySelectorAll('[data-filter-area]'));
+    const areaBtns = Array.from(document.querySelectorAll('[data-filter-area]'));
     const tips = Array.from(document.querySelectorAll('.tip'));
     const showAllBtn = document.getElementById('adaptShowAll');
     const resetBtn = document.getElementById('adaptReset');
@@ -402,9 +372,9 @@
 
     function applyFilters(){
       const activeSideBtn = sideButtons.find((button) => button.getAttribute('data-filter-side') === state.side) || null;
-      const activeAreaBtn = areaButtons.find((button) => button.getAttribute('data-filter-area') === state.area) || null;
+      const activeAreaBtn = areaBtns.find((button) => button.getAttribute('data-filter-area') === state.area) || null;
       setPressed(sideButtons, activeSideBtn);
-      setPressed(areaButtons, activeAreaBtn);
+      setPressed(areaBtns, activeAreaBtn);
 
       tips.forEach((tip) => {
         const side = tip.getAttribute('data-side') || 'general';
@@ -422,17 +392,11 @@
       });
     });
 
-    areaButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const value = button.getAttribute('data-filter-area');
-        if (value === 'general'){
-          state.area = null;
-          setPressed(areaButtons, null);
-          applyFilters();
-          return;
-        }
-        state.area = state.area === value ? null : value;
-        setPressed(areaButtons, state.area ? button : null);
+    areaBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-filter-area');
+        state.area = state.area === val ? null : val;
+        setPressed(areaBtns, state.area ? btn : null);
         applyFilters();
       });
     });
