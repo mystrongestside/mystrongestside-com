@@ -176,41 +176,40 @@
       display:block;
       border-radius:18px;
     }
-    /* myss: grey-out kun etiketter */
+    /* myss: grey-out kun etiketter (graa) */
+    .bodymap__btn{ position: relative; }
+
     .bodymap__labelmask{
       position:absolute;
       pointer-events:none;
-      border-radius: 14px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(15,23,42,.10);
-      backdrop-filter: blur(1.5px);
+      border-radius: 16px;
+      background: rgba(148,163,184,.55);        /* graa (slate-ish) */
+      border: 2px solid rgba(148,163,184,.75);  /* litt tydelig ramme */
       opacity: .92;
+      box-shadow: 0 6px 18px rgba(15,23,42,.08);
     }
 
-    /* Startverdier, finjuster til de treffer de oransje label-boksene */
+    .bodymap__labelmask::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: 16px;
+      background: rgba(255,255,255,.10);
+    }
+
+    /* Justert for å dekke hele etikettboksen inkl ramme (startverdier) */
     .bodymap__labelmask--shoulder{
-      left: 9%;
-      top: 21%;
-      width: 23%;
-      height: 6%;
+      left: 6%;
+      top: 4.5%;
+      width: 46%;
+      height: 16%;
     }
 
     .bodymap__labelmask--elbow{
-      left: 78%;
-      top: 16%;
-      width: 16%;
-      height: 6%;
-    }
-
-    /* valgfritt: litt mer “disabled” look */
-    .bodymap__labelmask::after{
-      content: "";
-      position:absolute;
-      inset:0;
-      border-radius: 14px;
-      background: linear-gradient(0deg, rgba(0,0,0,.06), rgba(0,0,0,.06));
-      mix-blend-mode: multiply;
-      opacity: .35;
+      left: 58%;
+      top: 4.5%;
+      width: 36%;
+      height: 16%;
     }
 
     .adapt__smallhint{
