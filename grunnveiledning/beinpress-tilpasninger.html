@@ -156,6 +156,7 @@
       margin: 10px auto 0;
     }
     .bodymap__btn{
+      position: relative;
       display:block;
       width:100%;
       border:0;
@@ -175,6 +176,18 @@
       display:block;
       border-radius:18px;
     }
+    .bodymap__mask{
+      position:absolute;
+      pointer-events:none;
+      background: rgba(255,255,255,.72);
+      border-radius: 16px;
+      filter: grayscale(1);
+      opacity: .9;
+      border: 1px solid rgba(15,23,42,.10);
+    }
+    .bodymap__mask--shoulder{ left: 6%;  top: 26%; width: 36%; height: 14%; }
+    .bodymap__mask--elbow{    left: 62%; top: 26%; width: 32%; height: 14%; }
+
     .adapt__smallhint{
       margin: 8px 0 0;
       color: var(--muted);
@@ -184,13 +197,24 @@
 
     html{ scroll-behavior:smooth; }
 
+    .adapt__status{
+      margin: 12px 0 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(242,140,40,.14);
+      border: 1px solid rgba(242,140,40,.25);
+      color: var(--myss_blue_dark);
+      font-weight: 800;
+    }
+
     .tip--ping{
-      animation: tipPing 900ms ease;
+      animation: tipPing 2600ms ease;
     }
     @keyframes tipPing{
-      0%{ box-shadow: 0 0 0 0 rgba(47,127,191,.0); }
-      30%{ box-shadow: 0 0 0 6px rgba(47,127,191,.18); }
-      100%{ box-shadow: 0 0 0 0 rgba(47,127,191,.0); }
+      0%   { background: rgba(242,140,40,.0); box-shadow: 0 0 0 0 rgba(242,140,40,.0); }
+      10%  { background: rgba(242,140,40,.28); box-shadow: 0 0 0 8px rgba(242,140,40,.22); }
+      70%  { background: rgba(242,140,40,.22); box-shadow: 0 0 0 8px rgba(242,140,40,.16); }
+      100% { background: rgba(242,140,40,.0); box-shadow: 0 0 0 0 rgba(242,140,40,.0); }
     }
 
     @media (min-width: 720px){
@@ -254,6 +278,8 @@
                   alt=""
                   loading="lazy"
                 />
+                <span class="bodymap__mask bodymap__mask--shoulder" aria-hidden="true"></span>
+                <span class="bodymap__mask bodymap__mask--elbow" aria-hidden="true"></span>
               </button>
               <p class="adapt__smallhint">Trykk på etiketten i figuren. Du blir sendt til riktig tips.</p>
             </div>
@@ -263,6 +289,8 @@
             Valget brukes bare til å tilpasse veiledningen nå.
             Det lagres ikke som helseopplysninger.
           </p>
+
+          <p id="adaptStatus" class="adapt__status" aria-live="polite">Vis alle tips</p>
 
           <section class="adapt__tips" aria-live="polite">
             <article class="tip" data-side="general" data-area="general">
@@ -322,7 +350,7 @@
             </article>
 
             <article id="tip-head" class="tip" data-side="general" data-area="head">
-              <h3>Når det blir mye å holde styr på</h3>
+              <h3>Hode – når det blir mye å holde styr på</h3>
               <ul>
                 <li>Bruk få, faste steg: sete, fot, pust, press.</li>
                 <li>Ta pause mellom repetisjonene og senk tempo.</li>
@@ -331,7 +359,7 @@
             </article>
 
             <article id="tip-grip" class="tip" data-side="general" data-area="grip">
-              <h3>Når grep og håndkontroll er utfordrende</h3>
+              <h3>Grep – når håndkontroll er utfordrende</h3>
               <ul>
                 <li>Bruk håndtak eller støttepunkt hvis maskinen har det.</li>
                 <li>Prioriter stabil posisjon før belastning.</li>
@@ -356,6 +384,7 @@
     const resetBtn = document.getElementById('adaptReset');
     const btn = document.getElementById('bodymapBtn');
     const img = document.getElementById('bodymapImg');
+    const status = document.getElementById('adaptStatus');
 
     const state = {
       side: null,
@@ -369,6 +398,13 @@
       { key:'knee', x:0.72, y:0.76, target:'#tip-knee' },
       { key:'foot', x:0.50, y:0.94, target:'#tip-foot' }
     ];
+    const labels = {
+      head: 'Hode',
+      grip: 'Grep',
+      hip: 'Hofte',
+      knee: 'Kne',
+      foot: 'Fot'
+    };
 
     function setPressed(btns, activeBtn){
       btns.forEach(b => b.setAttribute('aria-pressed', b === activeBtn ? 'true' : 'false'));
@@ -391,11 +427,21 @@
       });
     }
 
+    function applyAreaFilter(area){
+      state.area = area;
+      applyFilters();
+    }
+
+    function setStatus(area){
+      if (!status) return;
+      status.textContent = area ? ('Valgt: ' + (labels[area] || area)) : 'Vis alle tips';
+    }
+
     function ping(el){
       el.classList.remove('tip--ping');
       void el.offsetWidth;
       el.classList.add('tip--ping');
-      setTimeout(() => el.classList.remove('tip--ping'), 950);
+      setTimeout(() => el.classList.remove('tip--ping'), 2800);
     }
 
     function scrollToTarget(selector){
@@ -427,14 +473,14 @@
 
     showAllBtn?.addEventListener('click', () => {
       state.side = null;
-      state.area = null;
-      applyFilters();
+      applyAreaFilter(null);
+      setStatus(null);
     });
 
     resetBtn?.addEventListener('click', () => {
       state.side = null;
-      state.area = null;
-      applyFilters();
+      applyAreaFilter(null);
+      setStatus(null);
     });
 
     btn?.addEventListener('click', (e) => {
@@ -446,12 +492,13 @@
       if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
 
       const p = nearestPoint(nx, ny);
-      state.area = p.key;
-      applyFilters();
+      applyAreaFilter(p.key);
+      setStatus(p.key);
       scrollToTarget(p.target);
     });
 
     applyFilters();
+    setStatus(null);
   })();
   </script>
 </body>
