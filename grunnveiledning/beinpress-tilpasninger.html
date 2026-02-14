@@ -151,42 +151,46 @@
     .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
     .tip[hidden]{ display:none; }
 
-    /* myss: bodymap uten ekstra labels */
     .bodymap{
-      position: relative;
       max-width: 560px;
       margin: 10px auto 0;
     }
+    .bodymap__btn{
+      display:block;
+      width:100%;
+      border:0;
+      padding:0;
+      background:transparent;
+      cursor:pointer;
+      border-radius:18px;
+      box-shadow: var(--shadow);
+    }
+    .bodymap__btn:focus{
+      outline:3px solid rgba(47,127,191,.35);
+      outline-offset:3px;
+    }
     .bodymap__img{
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 18px;
-    }
-    .bodymap__hotspot{
-      position: absolute;
-      left: var(--x);
-      top: var(--y);
-      width: var(--w);
-      height: var(--h);
-      transform: translate(-50%, -50%);
-      border-radius: 16px;
-      border: 2px solid transparent;
-      background: transparent;
-      cursor: pointer;
-    }
-    .bodymap__hotspot:hover{
-      border-color: rgba(47,127,191,.35);
-    }
-    .bodymap__hotspot[aria-pressed="true"]{
-      border-color: rgba(47,127,191,.85);
-      background: rgba(47,127,191,.10);
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:18px;
     }
     .adapt__smallhint{
       margin: 8px 0 0;
       color: var(--muted);
       font-size: .95rem;
       text-align: center;
+    }
+
+    html{ scroll-behavior:smooth; }
+
+    .tip--ping{
+      animation: tipPing 900ms ease;
+    }
+    @keyframes tipPing{
+      0%{ box-shadow: 0 0 0 0 rgba(47,127,191,.0); }
+      30%{ box-shadow: 0 0 0 6px rgba(47,127,191,.18); }
+      100%{ box-shadow: 0 0 0 0 rgba(47,127,191,.0); }
     }
 
     @media (min-width: 720px){
@@ -241,22 +245,18 @@
           <div class="adapt__group" aria-label="Kroppsområde">
             <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
 
-            <div class="bodymap" role="group" aria-label="Trykk på område i figuren for å filtrere tips">
-              <img
-                class="bodymap__img"
-                src="/assets/img/figur-myss.jpg"
-                alt="Velg område i figuren for å filtrere tips"
-                loading="lazy"
-              />
-
-              <button class="bodymap__hotspot" type="button" data-filter-area="head" aria-label="Hode" aria-pressed="false" style="--x:50%; --y:12%; --w:26%; --h:12%;"></button>
-              <button class="bodymap__hotspot" type="button" data-filter-area="grip" aria-label="Grep" aria-pressed="false" style="--x:18%; --y:54%; --w:30%; --h:14%;"></button>
-              <button class="bodymap__hotspot" type="button" data-filter-area="hip" aria-label="Hofte" aria-pressed="false" style="--x:70%; --y:60%; --w:30%; --h:14%;"></button>
-              <button class="bodymap__hotspot" type="button" data-filter-area="knee" aria-label="Kne" aria-pressed="false" style="--x:72%; --y:76%; --w:26%; --h:14%;"></button>
-              <button class="bodymap__hotspot" type="button" data-filter-area="foot" aria-label="Fot" aria-pressed="false" style="--x:50%; --y:94%; --w:22%; --h:12%;"></button>
+            <div class="bodymap" aria-label="Trykk på området i figuren for å få relevante tips">
+              <button id="bodymapBtn" class="bodymap__btn" type="button" aria-label="Trykk på et område i figuren">
+                <img
+                  id="bodymapImg"
+                  class="bodymap__img"
+                  src="/assets/img/figur-myss.jpg"
+                  alt=""
+                  loading="lazy"
+                />
+              </button>
+              <p class="adapt__smallhint">Trykk på etiketten i figuren. Du blir sendt til riktig tips.</p>
             </div>
-
-            <p class="adapt__smallhint">Trykk på etiketten i figuren for å filtrere tipsene under.</p>
           </div>
 
           <p class="adapt__privacy">
@@ -297,7 +297,7 @@
               </ul>
             </article>
 
-            <article class="tip" data-side="general" data-area="foot">
+            <article id="tip-foot" class="tip" data-side="general" data-area="foot">
               <h3>Ved utfordringer i fot</h3>
               <ul>
                 <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
@@ -305,7 +305,7 @@
               </ul>
             </article>
 
-            <article class="tip" data-side="general" data-area="knee">
+            <article id="tip-knee" class="tip" data-side="general" data-area="knee">
               <h3>Ved utfordringer i kne</h3>
               <ul>
                 <li>La knær følge samme retning som tær gjennom presset.</li>
@@ -313,7 +313,7 @@
               </ul>
             </article>
 
-            <article class="tip" data-side="general" data-area="hip">
+            <article id="tip-hip" class="tip" data-side="general" data-area="hip">
               <h3>Ved utfordringer i hofte og sete</h3>
               <ul>
                 <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
@@ -321,7 +321,7 @@
               </ul>
             </article>
 
-            <article class="tip" data-side="general" data-area="head">
+            <article id="tip-head" class="tip" data-side="general" data-area="head">
               <h3>Når det blir mye å holde styr på</h3>
               <ul>
                 <li>Bruk få, faste steg: sete, fot, pust, press.</li>
@@ -330,7 +330,7 @@
               </ul>
             </article>
 
-            <article class="tip" data-side="general" data-area="grip">
+            <article id="tip-grip" class="tip" data-side="general" data-area="grip">
               <h3>Når grep og håndkontroll er utfordrende</h3>
               <ul>
                 <li>Bruk håndtak eller støttepunkt hvis maskinen har det.</li>
@@ -351,15 +351,24 @@
   <script>
   (function(){
     const sideButtons = Array.from(document.querySelectorAll('[data-filter-side]'));
-    const areaBtns = Array.from(document.querySelectorAll('[data-filter-area]'));
     const tips = Array.from(document.querySelectorAll('.tip'));
     const showAllBtn = document.getElementById('adaptShowAll');
     const resetBtn = document.getElementById('adaptReset');
+    const btn = document.getElementById('bodymapBtn');
+    const img = document.getElementById('bodymapImg');
 
     const state = {
       side: null,
       area: null
     };
+
+    const points = [
+      { key:'head', x:0.50, y:0.13, target:'#tip-head' },
+      { key:'grip', x:0.18, y:0.55, target:'#tip-grip' },
+      { key:'hip',  x:0.69, y:0.60, target:'#tip-hip'  },
+      { key:'knee', x:0.72, y:0.76, target:'#tip-knee' },
+      { key:'foot', x:0.50, y:0.94, target:'#tip-foot' }
+    ];
 
     function setPressed(btns, activeBtn){
       btns.forEach(b => b.setAttribute('aria-pressed', b === activeBtn ? 'true' : 'false'));
@@ -372,9 +381,7 @@
 
     function applyFilters(){
       const activeSideBtn = sideButtons.find((button) => button.getAttribute('data-filter-side') === state.side) || null;
-      const activeAreaBtn = areaBtns.find((button) => button.getAttribute('data-filter-area') === state.area) || null;
       setPressed(sideButtons, activeSideBtn);
-      setPressed(areaBtns, activeAreaBtn);
 
       tips.forEach((tip) => {
         const side = tip.getAttribute('data-side') || 'general';
@@ -384,19 +391,36 @@
       });
     }
 
+    function ping(el){
+      el.classList.remove('tip--ping');
+      void el.offsetWidth;
+      el.classList.add('tip--ping');
+      setTimeout(() => el.classList.remove('tip--ping'), 950);
+    }
+
+    function scrollToTarget(selector){
+      const el = document.querySelector(selector);
+      if (!el) return;
+      el.scrollIntoView({ behavior:'smooth', block:'start' });
+      ping(el);
+    }
+
+    function nearestPoint(nx, ny){
+      let best = points[0];
+      let bestD = Infinity;
+      for (const p of points){
+        const dx = nx - p.x;
+        const dy = ny - p.y;
+        const d = dx*dx + dy*dy;
+        if (d < bestD){ bestD = d; best = p; }
+      }
+      return best;
+    }
+
     sideButtons.forEach((button) => {
       button.addEventListener('click', () => {
         const value = button.getAttribute('data-filter-side');
         state.side = state.side === value ? null : value;
-        applyFilters();
-      });
-    });
-
-    areaBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const val = btn.getAttribute('data-filter-area');
-        state.area = state.area === val ? null : val;
-        setPressed(areaBtns, state.area ? btn : null);
         applyFilters();
       });
     });
@@ -411,6 +435,20 @@
       state.side = null;
       state.area = null;
       applyFilters();
+    });
+
+    btn?.addEventListener('click', (e) => {
+      if (!img) return;
+      const rect = img.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width;
+      const ny = (e.clientY - rect.top) / rect.height;
+
+      if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
+
+      const p = nearestPoint(nx, ny);
+      state.area = p.key;
+      applyFilters();
+      scrollToTarget(p.target);
     });
 
     applyFilters();
