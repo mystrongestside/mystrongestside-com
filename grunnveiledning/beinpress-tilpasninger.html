@@ -381,7 +381,7 @@
       <p id="sideSelectedText" class="side-selected__text"></p>
 
       <div class="side-selected__figure">
-        <img id="sideSelectedImg" src="" alt="" loading="lazy" />
+        <img id="sideSelectedImg" src="/assets/img/unilateral.jpg" alt="" loading="lazy" />
       </div>
 
       <button id="changeSide" class="side-selected__change" type="button">Velg på nytt</button>
@@ -390,7 +390,7 @@
 
   <!-- Steg 2 -->
   <section id="step2" class="adapt__group" hidden aria-label="Kroppsområde">
-    <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
+    <h3 class="adapt__h3">Hva er mest utfordrende</h3>
 
     <div class="bodymap" aria-label="Trykk på området i figuren for å få relevante tips">
       <button id="bodymapBtn" class="bodymap__btn" type="button" aria-label="Velg område i figuren">
@@ -483,14 +483,14 @@
   <script>
 (function(){
   const status = document.getElementById('adaptStatus');
-  const step1 = document.getElementById('step1');
-  const step2 = document.getElementById('step2');
 
   const sideChoices = document.getElementById('sideChoices');
   const sideSelected = document.getElementById('sideSelected');
   const sideSelectedText = document.getElementById('sideSelectedText');
   const sideSelectedImg = document.getElementById('sideSelectedImg');
   const changeSide = document.getElementById('changeSide');
+
+  const step2 = document.getElementById('step2');
 
   const showAllBtn = document.getElementById('adaptShowAll');
   const resetBtn = document.getElementById('adaptReset');
@@ -502,6 +502,7 @@
 
   let selectedSide = null;
   let selectedArea = null;
+  let sideTimer = null;
 
   function setStatus(text){
     if (status) status.textContent = text;
@@ -539,30 +540,49 @@
     return 'Valgt: usikker';
   }
 
-  function sideImg(v){
-    if (v === 'right' || v === 'left') return '/assets/img/unilateral.jpg';
-    return '/assets/img/Beinpress_figur.jpg';
+  function clearSideTimer(){
+    if (!sideTimer) return;
+    clearTimeout(sideTimer);
+    sideTimer = null;
+  }
+
+  function showStep2(){
+    if (step2) step2.hidden = false;
+    if (sideSelected) sideSelected.hidden = true;
+    setStatus('Velg område i figuren');
+    if (step2) step2.scrollIntoView({ behavior:'smooth', block:'start' });
   }
 
   function selectSide(v){
+    clearSideTimer();
+
     selectedSide = v;
     selectedArea = null;
 
     if (sideChoices) sideChoices.hidden = true;
-    if (sideSelected) sideSelected.hidden = false;
 
-    if (sideSelectedText) sideSelectedText.textContent = sideText(v);
-    if (sideSelectedImg) sideSelectedImg.src = sideImg(v);
+    if (sideSelected){
+      sideSelected.hidden = false;
+      if (sideSelectedText) sideSelectedText.textContent = sideText(v);
+    }
 
-    if (step2) step2.hidden = false;
+    if (sideSelectedImg){
+      sideSelectedImg.src = '/assets/img/unilateral.jpg';
+    }
+
+    if (step2) step2.hidden = true;
 
     setStatus(sideText(v));
     applyFilter();
 
     if (sideSelected) sideSelected.scrollIntoView({ behavior:'smooth', block:'start' });
+
+    sideTimer = setTimeout(showStep2, 5000);
   }
 
   function resetAll(){
+    clearSideTimer();
+
     selectedSide = null;
     selectedArea = null;
 
@@ -573,7 +593,7 @@
     setStatus('Vis alle tips');
     tips.forEach(t => t.hidden = false);
 
-    if (step1) step1.scrollIntoView({ behavior:'smooth', block:'start' });
+    if (sideChoices) sideChoices.scrollIntoView({ behavior:'smooth', block:'start' });
   }
 
   if (sideChoices){
@@ -588,16 +608,16 @@
     changeSide.addEventListener('click', resetAll);
   }
 
+  if (resetBtn){
+    resetBtn.addEventListener('click', resetAll);
+  }
+
   if (showAllBtn){
     showAllBtn.addEventListener('click', () => {
       selectedArea = null;
       setStatus(selectedSide ? sideText(selectedSide) : 'Vis alle tips');
       applyFilter();
     });
-  }
-
-  if (resetBtn){
-    resetBtn.addEventListener('click', resetAll);
   }
 
   const points = [
@@ -635,6 +655,15 @@
       setStatus('Valgt: ' + p.label);
       applyFilter();
       scrollToSel(p.target);
+    });
+  }
+
+  if (sideSelected){
+    sideSelected.addEventListener('click', (e) => {
+      const isButton = e.target.closest('button');
+      if (isButton) return;
+      clearSideTimer();
+      showStep2();
     });
   }
 })();
