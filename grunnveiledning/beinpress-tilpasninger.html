@@ -230,6 +230,109 @@
       .adapt__grid{ grid-template-columns: 1fr 1fr; }
       .adapt__option--neutral{ grid-column: 1 / -1; }
     }
+  
+.adapt__controls{
+  display:flex;
+  gap:10px;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  margin: 10px 0 6px;
+}
+.adapt__chip{
+  border:1px solid rgba(15,23,42,.12);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:800;
+  cursor:pointer;
+}
+.adapt__chip--ghost{ background:transparent; }
+
+.adapt__status{
+  margin: 12px 0 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(242,140,40,.14);
+  border: 1px solid rgba(242,140,40,.25);
+  color: var(--myss_blue_dark);
+  font-weight: 800;
+}
+
+.side-selected{
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(242,140,40,.35);
+  background: rgba(242,140,40,.10);
+}
+.side-selected__text{
+  margin: 0 0 10px;
+  font-weight: 900;
+  color: var(--myss_blue_dark);
+}
+.side-selected__figure{
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.side-selected__figure img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.side-selected__change{
+  margin-top: 10px;
+  border: 1px solid rgba(15,23,42,.12);
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.bodymap{
+  max-width: 560px;
+  margin: 10px auto 0;
+}
+.bodymap__btn{
+  display:block;
+  width:100%;
+  border:0;
+  padding:0;
+  background:transparent;
+  cursor:pointer;
+  border-radius:18px;
+  box-shadow: var(--shadow);
+}
+.bodymap__btn:focus{
+  outline:3px solid rgba(47,127,191,.35);
+  outline-offset:3px;
+}
+.bodymap__img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:18px;
+}
+.adapt__smallhint{
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: .95rem;
+  text-align: center;
+}
+
+.tip--ping{
+  animation: tipPing 2800ms ease;
+}
+@keyframes tipPing{
+  0%   { background: rgba(242,140,40,.00); box-shadow: 0 0 0 0 rgba(242,140,40,.00); }
+  10%  { background: rgba(242,140,40,.28); box-shadow: 0 0 0 8px rgba(242,140,40,.22); }
+  70%  { background: rgba(242,140,40,.22); box-shadow: 0 0 0 8px rgba(242,140,40,.16); }
+  100% { background: rgba(242,140,40,.00); box-shadow: 0 0 0 0 rgba(242,140,40,.00); }
+}
+
   </style>
 </head>
 <body>
@@ -243,142 +346,132 @@
       <!-- myss: tilrettelegging-innhold -->
       <section class="adapt" aria-labelledby="adaptTitle">
         <div id="adaptPanel" class="adapt__panel">
-          <h2 id="adaptTitle">Tilpasset veiledning</h2>
-          <p class="adapt__lead">
-            Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå.
-          </p>
+  <h2 id="adaptTitle">Tilpasset veiledning</h2>
+  <p class="adapt__lead">Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå.</p>
 
-          <div class="adapt__controls" role="group" aria-label="Filterkontroller">
-            <button id="adaptShowAll" class="adapt__chip" type="button">Vis alt</button>
-            <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill</button>
-          </div>
+  <div class="adapt__controls" role="group" aria-label="Filterkontroller">
+    <button id="adaptShowAll" class="adapt__chip" type="button">Vis alt</button>
+    <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill</button>
+  </div>
 
-          <div class="adapt__group" aria-label="Sidevalg">
-            <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
-            <div class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-filter-side="right" aria-pressed="false">
-                <span class="adapt__t">Mest på høyre side</span>
-                <span class="adapt__d">Vi viser tips for høyre side</span>
-              </button>
-              <button class="adapt__option" type="button" data-filter-side="left" aria-pressed="false">
-                <span class="adapt__t">Mest på venstre side</span>
-                <span class="adapt__d">Vi viser tips for venstre side</span>
-              </button>
-              <button class="adapt__option" type="button" data-filter-side="both" aria-pressed="false">
-                <span class="adapt__t">Begge sider</span>
-                <span class="adapt__d">Vi viser tips for begge</span>
-              </button>
-              <button class="adapt__option adapt__option--neutral" type="button" data-filter-side="general" aria-pressed="false">
-                <span class="adapt__t">Usikker</span>
-                <span class="adapt__d">Vis generell tilrettelegging</span>
-              </button>
-            </div>
-          </div>
+  <p id="adaptStatus" class="adapt__status" aria-live="polite">Vis alle tips</p>
 
-          <div class="adapt__group" aria-label="Kroppsområde">
-            <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
+  <!-- Steg 1 -->
+  <section id="step1" class="adapt__group" aria-label="Sidevalg">
+    <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
 
-            <div class="bodymap" aria-label="Trykk på området i figuren for å få relevante tips">
-              <button id="bodymapBtn" class="bodymap__btn" type="button" aria-label="Trykk på et område i figuren">
-                <img
-                  id="bodymapImg"
-                  class="bodymap__img"
-                  src="/assets/img/figur-myss.jpg"
-                  alt=""
-                  loading="lazy"
-                />
-              </button>
-              <p class="adapt__relevance" aria-live="polite">
-                Gjelder for beinpress: <strong>Fot</strong>, <strong>Kne</strong>, <strong>Hofte</strong>, <strong>Grep</strong>, <strong>Fokus og kontroll</strong>.
-              </p>
-              <p id="adaptToast" class="adapt__toast" hidden aria-live="polite"></p>
-              <p class="adapt__smallhint">Trykk på etiketten i figuren. Du blir sendt til riktig tips.</p>
-            </div>
-          </div>
+    <div id="sideChoices" class="adapt__grid" role="group">
+      <button class="adapt__option" type="button" data-side="right">
+        <span class="adapt__t">Mest på høyre side</span>
+        <span class="adapt__d">Vi viser tips for høyre side</span>
+      </button>
 
-          <p class="adapt__privacy">
-            Valget brukes bare til å tilpasse veiledningen nå.
-            Det lagres ikke som helseopplysninger.
-          </p>
+      <button class="adapt__option" type="button" data-side="left">
+        <span class="adapt__t">Mest på venstre side</span>
+        <span class="adapt__d">Vi viser tips for venstre side</span>
+      </button>
 
-          <p id="adaptStatus" class="adapt__status" aria-live="polite">Vis alle tips</p>
+      <button class="adapt__option adapt__option--neutral" type="button" data-side="general">
+        <span class="adapt__t">Usikker</span>
+        <span class="adapt__d">Vis generell tilrettelegging</span>
+      </button>
+    </div>
 
-          <section class="adapt__tips" aria-live="polite">
-            <article class="tip" data-side="general" data-area="general">
-              <h3>Trygg og enkel start</h3>
-              <ul>
-                <li>Start med lett belastning og kort bevegelse.</li>
-                <li>Hold rolig tempo og stopp før det blir utrygt.</li>
-              </ul>
-            </article>
+    <div id="sideSelected" class="side-selected" hidden aria-live="polite">
+      <p id="sideSelectedText" class="side-selected__text"></p>
 
-            <article class="tip" data-side="right" data-area="general">
-              <h3>Når høyre side jobber mindre</h3>
-              <ul>
-                <li>Reduser belastning og jobb med kontrollert tempo.</li>
-                <li>Plasser foten likt og bruk pause i bunn.</li>
-              </ul>
-            </article>
+      <div class="side-selected__figure">
+        <img id="sideSelectedImg" src="" alt="" loading="lazy" />
+      </div>
 
-            <article class="tip" data-side="left" data-area="general">
-              <h3>Når venstre side jobber mindre</h3>
-              <ul>
-                <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
-                <li>Hold knær i samme retning gjennom hele presset.</li>
-              </ul>
-            </article>
+      <button id="changeSide" class="side-selected__change" type="button">Velg på nytt</button>
+    </div>
+  </section>
 
-            <article class="tip" data-side="both" data-area="general">
-              <h3>Når begge sider er krevende</h3>
-              <ul>
-                <li>Start med kortere utslag og høyere sete om mulig.</li>
-                <li>Prioriter stabilitet før belastning.</li>
-              </ul>
-            </article>
+  <!-- Steg 2 -->
+  <section id="step2" class="adapt__group" hidden aria-label="Kroppsområde">
+    <h3 class="adapt__h3">Hva er mest utfordrende i beinpress</h3>
 
-            <article id="tip-foot" class="tip" data-side="general" data-area="foot">
-              <h3>Ved utfordringer i fot</h3>
-              <ul>
-                <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
-                <li>Sikre jevnt trykk gjennom hele foten.</li>
-              </ul>
-            </article>
+    <div class="bodymap" aria-label="Trykk på området i figuren for å få relevante tips">
+      <button id="bodymapBtn" class="bodymap__btn" type="button" aria-label="Velg område i figuren">
+        <img id="bodymapImg" class="bodymap__img" src="/assets/img/Beinpress_figur.jpg" alt="" loading="lazy" />
+      </button>
+      <p class="adapt__smallhint">Trykk på et område i figuren. Du blir sendt til riktig tips.</p>
+    </div>
+  </section>
 
-            <article id="tip-knee" class="tip" data-side="general" data-area="knee">
-              <h3>Ved utfordringer i kne</h3>
-              <ul>
-                <li>La knær følge samme retning som tær gjennom presset.</li>
-                <li>Reduser dybden hvis det gir bedre kontroll.</li>
-              </ul>
-            </article>
+  <p class="adapt__privacy">
+    Valget brukes bare til å tilpasse veiledningen nå. Det lagres ikke som helseopplysninger.
+  </p>
+</div>
 
-            <article id="tip-hip" class="tip" data-side="general" data-area="hip">
-              <h3>Ved utfordringer i hofte og sete</h3>
-              <ul>
-                <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
-                <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
-              </ul>
-            </article>
+        <section class="adapt__tips" aria-live="polite">
+          <article class="tip" data-side="general" data-area="general">
+            <h3>Trygg og enkel start</h3>
+            <ul>
+              <li>Start med lett belastning og kort bevegelse.</li>
+              <li>Hold rolig tempo og stopp før det blir utrygt.</li>
+            </ul>
+          </article>
 
-            <article id="tip-head" class="tip" data-side="general" data-area="head">
-              <h3>Fokus og kontroll – når det blir mye å holde styr på</h3>
-              <ul>
-                <li>Bruk få, faste steg: sete, fot, pust, press.</li>
-                <li>Ta pause mellom repetisjonene og senk tempo.</li>
-                <li>Bruk en kort huskeregel på skjermen.</li>
-              </ul>
-            </article>
+          <article class="tip" data-side="right" data-area="general">
+            <h3>Når høyre side jobber mindre</h3>
+            <ul>
+              <li>Reduser belastning og jobb med kontrollert tempo.</li>
+              <li>Plasser foten likt og bruk pause i bunn.</li>
+            </ul>
+          </article>
 
-            <article id="tip-grip" class="tip" data-side="general" data-area="grip">
-              <h3>Grep – når håndkontroll er utfordrende</h3>
-              <ul>
-                <li>Bruk håndtak eller støttepunkt hvis maskinen har det.</li>
-                <li>Prioriter stabil posisjon før belastning.</li>
-                <li>Vurder stropper eller tilpasset grep ved behov.</li>
-              </ul>
-            </article>
-          </section>
-        </div>
+          <article class="tip" data-side="left" data-area="general">
+            <h3>Når venstre side jobber mindre</h3>
+            <ul>
+              <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
+              <li>Hold knær i samme retning gjennom hele presset.</li>
+            </ul>
+          </article>
+
+          <article id="tip-foot" class="tip" data-side="general" data-area="foot">
+            <h3>Ved utfordringer i fot</h3>
+            <ul>
+              <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
+              <li>Sikre jevnt trykk gjennom hele foten.</li>
+            </ul>
+          </article>
+
+          <article id="tip-knee" class="tip" data-side="general" data-area="knee">
+            <h3>Ved utfordringer i kne</h3>
+            <ul>
+              <li>La knær følge samme retning som tær gjennom presset.</li>
+              <li>Reduser dybden hvis det gir bedre kontroll.</li>
+            </ul>
+          </article>
+
+          <article id="tip-hip" class="tip" data-side="general" data-area="hip">
+            <h3>Ved utfordringer i hofte og sete</h3>
+            <ul>
+              <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
+              <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
+            </ul>
+          </article>
+
+          <article id="tip-head" class="tip" data-side="general" data-area="head">
+            <h3>Fokus og kontroll – når det blir mye å holde styr på</h3>
+            <ul>
+              <li>Bruk få, faste steg: sete, fot, pust, press.</li>
+              <li>Ta pause mellom repetisjonene og senk tempo.</li>
+              <li>Bruk en kort huskeregel på skjermen.</li>
+            </ul>
+          </article>
+
+          <article id="tip-grip" class="tip" data-side="general" data-area="grip">
+            <h3>Grep – når håndkontroll er utfordrende</h3>
+            <ul>
+              <li>Bruk håndtak eller støttepunkt hvis maskinen har det.</li>
+              <li>Prioriter stabil posisjon før belastning.</li>
+              <li>Vurder stropper eller tilpasset grep ved behov.</li>
+            </ul>
+          </article>
+        </section>
       </section>
 
       <p class="closing">
@@ -388,151 +481,163 @@
   </main>
 
   <script>
-  (function(){
-    const sideButtons = Array.from(document.querySelectorAll('[data-filter-side]'));
-    const tips = Array.from(document.querySelectorAll('.tip'));
-    const showAllBtn = document.getElementById('adaptShowAll');
-    const resetBtn = document.getElementById('adaptReset');
-    const btn = document.getElementById('bodymapBtn');
-    const img = document.getElementById('bodymapImg');
-    const status = document.getElementById('adaptStatus');
-    const toast = document.getElementById('adaptToast');
+(function(){
+  const status = document.getElementById('adaptStatus');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
 
-    const state = {
-      side: null,
-      area: null
-    };
+  const sideChoices = document.getElementById('sideChoices');
+  const sideSelected = document.getElementById('sideSelected');
+  const sideSelectedText = document.getElementById('sideSelectedText');
+  const sideSelectedImg = document.getElementById('sideSelectedImg');
+  const changeSide = document.getElementById('changeSide');
 
-    const points = [
-      { key:'head',     x:0.50, y:0.13, target:'#tip-head', label:'Fokus og kontroll', relevant:true },
-      { key:'grip',     x:0.18, y:0.55, target:'#tip-grip', label:'Grep', relevant:true },
-      { key:'hip',      x:0.69, y:0.60, target:'#tip-hip',  label:'Hofte', relevant:true },
-      { key:'knee',     x:0.72, y:0.76, target:'#tip-knee', label:'Kne', relevant:true },
-      { key:'foot',     x:0.50, y:0.94, target:'#tip-foot', label:'Fot', relevant:true },
+  const showAllBtn = document.getElementById('adaptShowAll');
+  const resetBtn = document.getElementById('adaptReset');
 
-      // Irrelevante for beinpress, men klikk kan forekomme
-      { key:'shoulder', x:0.22, y:0.30, target:'#tip-hip',  label:'Skulder', relevant:false },
-      { key:'elbow',    x:0.78, y:0.30, target:'#tip-grip', label:'Albue',   relevant:false }
-    ];
-    const labels = {
-      head: 'Fokus og kontroll',
-      grip: 'Grep',
-      hip: 'Hofte',
-      knee: 'Kne',
-      foot: 'Fot'
-    };
+  const bodymapBtn = document.getElementById('bodymapBtn');
+  const bodymapImg = document.getElementById('bodymapImg');
 
-    function showToast(msg){
-      if (!toast) return;
-      toast.textContent = msg;
-      toast.hidden = false;
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => { toast.hidden = true; }, 2600);
-    }
+  const tips = Array.from(document.querySelectorAll('.tip'));
 
-    function setPressed(btns, activeBtn){
-      btns.forEach(b => b.setAttribute('aria-pressed', b === activeBtn ? 'true' : 'false'));
-    }
+  let selectedSide = null;
+  let selectedArea = null;
 
-    function matchesFilter(tag, selected){
-      if (!selected) return true;
-      return tag === selected || tag === 'general';
-    }
+  function setStatus(text){
+    if (status) status.textContent = text;
+  }
 
-    function applyFilters(){
-      const activeSideBtn = sideButtons.find((button) => button.getAttribute('data-filter-side') === state.side) || null;
-      setPressed(sideButtons, activeSideBtn);
+  function ping(el){
+    el.classList.remove('tip--ping');
+    void el.offsetWidth;
+    el.classList.add('tip--ping');
+    setTimeout(() => el.classList.remove('tip--ping'), 2800);
+  }
 
-      tips.forEach((tip) => {
-        const side = tip.getAttribute('data-side') || 'general';
-        const area = tip.getAttribute('data-area') || 'general';
-        const visible = matchesFilter(side, state.side) && matchesFilter(area, state.area);
-        tip.hidden = !visible;
-      });
-    }
+  function scrollToSel(sel){
+    const el = document.querySelector(sel);
+    if (!el) return;
+    el.scrollIntoView({ behavior:'smooth', block:'start' });
+    ping(el);
+  }
 
-    function applyAreaFilter(area){
-      state.area = area;
-      applyFilters();
-    }
+  function applyFilter(){
+    tips.forEach(t => {
+      const tSide = t.getAttribute('data-side') || 'general';
+      const tArea = t.getAttribute('data-area') || 'general';
 
-    function setStatus(area){
-      if (!status) return;
-      status.textContent = area ? ('Valgt: ' + (labels[area] || area)) : 'Vis alle tips';
-    }
+      const sideOk = !selectedSide || tSide === selectedSide || tSide === 'general';
+      const areaOk = !selectedArea || tArea === selectedArea || tArea === 'general';
 
-    function ping(el){
-      el.classList.remove('tip--ping');
-      void el.offsetWidth;
-      el.classList.add('tip--ping');
-      setTimeout(() => el.classList.remove('tip--ping'), 2800);
-    }
-
-    function scrollToTarget(selector){
-      const el = document.querySelector(selector);
-      if (!el) return;
-      el.scrollIntoView({ behavior:'smooth', block:'start' });
-      ping(el);
-    }
-
-    function nearestPoint(nx, ny){
-      let best = points[0];
-      let bestD = Infinity;
-      for (const p of points){
-        const dx = nx - p.x;
-        const dy = ny - p.y;
-        const d = dx*dx + dy*dy;
-        if (d < bestD){ bestD = d; best = p; }
-      }
-      return best;
-    }
-
-    sideButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const value = button.getAttribute('data-filter-side');
-        state.side = state.side === value ? null : value;
-        applyFilters();
-      });
+      t.hidden = !(sideOk && areaOk);
     });
+  }
 
-    showAllBtn?.addEventListener('click', () => {
-      state.side = null;
-      applyAreaFilter(null);
-      setStatus(null);
+  function sideText(v){
+    if (v === 'right') return 'Valgt: mest på høyre side';
+    if (v === 'left') return 'Valgt: mest på venstre side';
+    return 'Valgt: usikker';
+  }
+
+  function sideImg(v){
+    if (v === 'right' || v === 'left') return '/assets/img/unilateral.jpg';
+    return '/assets/img/Beinpress_figur.jpg';
+  }
+
+  function selectSide(v){
+    selectedSide = v;
+    selectedArea = null;
+
+    if (sideChoices) sideChoices.hidden = true;
+    if (sideSelected) sideSelected.hidden = false;
+
+    if (sideSelectedText) sideSelectedText.textContent = sideText(v);
+    if (sideSelectedImg) sideSelectedImg.src = sideImg(v);
+
+    if (step2) step2.hidden = false;
+
+    setStatus(sideText(v));
+    applyFilter();
+
+    if (sideSelected) sideSelected.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function resetAll(){
+    selectedSide = null;
+    selectedArea = null;
+
+    if (sideSelected) sideSelected.hidden = true;
+    if (sideChoices) sideChoices.hidden = false;
+    if (step2) step2.hidden = true;
+
+    setStatus('Vis alle tips');
+    tips.forEach(t => t.hidden = false);
+
+    if (step1) step1.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  if (sideChoices){
+    sideChoices.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-side]');
+      if (!btn) return;
+      selectSide(btn.getAttribute('data-side'));
     });
+  }
 
-    resetBtn?.addEventListener('click', () => {
-      state.side = null;
-      applyAreaFilter(null);
-      setStatus(null);
+  if (changeSide){
+    changeSide.addEventListener('click', resetAll);
+  }
+
+  if (showAllBtn){
+    showAllBtn.addEventListener('click', () => {
+      selectedArea = null;
+      setStatus(selectedSide ? sideText(selectedSide) : 'Vis alle tips');
+      applyFilter();
     });
+  }
 
-    btn?.addEventListener('click', (e) => {
-      if (!img) return;
-      const rect = img.getBoundingClientRect();
+  if (resetBtn){
+    resetBtn.addEventListener('click', resetAll);
+  }
+
+  const points = [
+    { key:'head', x:0.50, y:0.13, target:'#tip-head', label:'Fokus og kontroll' },
+    { key:'grip', x:0.18, y:0.55, target:'#tip-grip', label:'Grep' },
+    { key:'hip',  x:0.69, y:0.60, target:'#tip-hip',  label:'Hofte' },
+    { key:'knee', x:0.72, y:0.76, target:'#tip-knee', label:'Kne' },
+    { key:'foot', x:0.50, y:0.94, target:'#tip-foot', label:'Fot' }
+  ];
+
+  function nearestPoint(nx, ny){
+    let best = points[0];
+    let bestD = Infinity;
+    for (const p of points){
+      const dx = nx - p.x;
+      const dy = ny - p.y;
+      const d = dx*dx + dy*dy;
+      if (d < bestD){ bestD = d; best = p; }
+    }
+    return best;
+  }
+
+  if (bodymapBtn && bodymapImg){
+    bodymapBtn.addEventListener('click', (e) => {
+      if (!selectedSide) return;
+
+      const rect = bodymapImg.getBoundingClientRect();
       const nx = (e.clientX - rect.left) / rect.width;
       const ny = (e.clientY - rect.top) / rect.height;
-
       if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
 
       const p = nearestPoint(nx, ny);
-      if (!p.relevant){
-        showToast(p.label + ' er vanligvis ikke relevant for beinpress. Velg fot, kne, hofte, grep eller fokus og kontroll.');
-        // send brukeren til et relevant område uten å filtrere på skuldre/albue
-        applyAreaFilter('general');
-        setStatus(null);
-        scrollToTarget('#tip-foot');
-        return;
-      }
 
-      applyAreaFilter(p.key);
-      setStatus(p.key);
-      scrollToTarget(p.target);
+      selectedArea = p.key;
+      setStatus('Valgt: ' + p.label);
+      applyFilter();
+      scrollToSel(p.target);
     });
-
-    applyFilters();
-    setStatus(null);
-  })();
-  </script>
+  }
+})();
+</script>
 </body>
 </html>
