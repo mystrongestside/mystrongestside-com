@@ -19,6 +19,7 @@
       --radius: 18px;
 
       --orange_rgb: 242 140 40;
+      --yellow_rgb: 255 214 10;
       --focus: rgba(47,127,191,.35);
     }
 
@@ -136,6 +137,42 @@
       text-align:center;
     }
 
+    .choice-badge{
+      margin: 12px 0 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(var(--orange_rgb), .35);
+      background: linear-gradient(
+        90deg,
+        rgba(var(--orange_rgb), .26),
+        rgba(var(--yellow_rgb), .16)
+      );
+      color: var(--myss_blue_dark);
+      font-weight: 950;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .choice-badge.is-show{
+      animation: badgeInOut 4200ms ease forwards;
+    }
+
+    @keyframes badgeInOut{
+      0%   { opacity:0; transform: translateY(6px); }
+      14%  { opacity:1; transform: translateY(0); }
+      74%  { opacity:1; transform: translateY(0); }
+      100% { opacity:0; transform: translateY(-2px); }
+    }
+
+    .fade-text{
+      animation: textIn 260ms ease;
+    }
+
+    @keyframes textIn{
+      0%   { opacity:0; transform: translateY(4px); }
+      100% { opacity:1; transform: translateY(0); }
+    }
+
     .adapt__h3{ margin:14px 0 8px; color: var(--myss_blue_dark); font-size:1rem; }
 
     .adapt__grid{
@@ -177,7 +214,7 @@
 
     .side-selected__text{
       margin: 0 0 10px;
-      font-weight: 900;
+      font-weight: 950;
       color: var(--myss_blue_dark);
     }
 
@@ -207,17 +244,30 @@
     }
 
     .adapt__tips{ margin-top: 14px; display:grid; gap:10px; }
-    .tip{ border:1px solid rgba(15,23,42,.1); border-radius:14px; padding:12px; background:#fff; }
+
+    .tip{
+      border:1px solid rgba(15,23,42,.1);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+    }
+
     .tip h3{ margin: 0 0 8px; color: var(--myss_blue_dark); }
     .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
     .tip[hidden]{ display:none; }
+
+    .tip--selected{
+      border-color: rgba(var(--orange_rgb), .90);
+      box-shadow: 0 0 0 6px rgba(var(--orange_rgb), .18), var(--shadow);
+      background: rgba(var(--orange_rgb), .06);
+    }
 
     .tip--ping{ animation: tipPing 2600ms ease; }
 
     @keyframes tipPing{
       0%   { background: rgba(var(--orange_rgb), .00); box-shadow: 0 0 0 0 rgba(var(--orange_rgb), .00); }
-      10%  { background: rgba(var(--orange_rgb), .28); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .22); }
-      70%  { background: rgba(var(--orange_rgb), .22); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .16); }
+      10%  { background: rgba(var(--orange_rgb), .24); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .20); }
+      70%  { background: rgba(var(--orange_rgb), .18); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .14); }
       100% { background: rgba(var(--orange_rgb), .00); box-shadow: 0 0 0 0 rgba(var(--orange_rgb), .00); }
     }
 
@@ -259,6 +309,8 @@
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior:auto; }
       .tip--ping{ animation:none; }
+      .fade-text{ animation:none; }
+      .choice-badge.is-show{ animation:none; opacity:1; }
     }
   </style>
 </head>
@@ -330,6 +382,8 @@
             Valget brukes bare til å tilpasse veiledningen nå. Det lagres ikke som helseopplysninger.
           </p>
         </div>
+
+        <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
 
         <section id="tipsContainer" class="adapt__tips" aria-live="polite">
           <article class="tip" data-side="general" data-area="general">
@@ -410,6 +464,7 @@
   (function(){
     const status = document.getElementById('adaptStatus');
     const toast = document.getElementById('adaptToast');
+    const badge = document.getElementById('choiceBadge');
 
     const sideChoices = document.getElementById('sideChoices');
     const sideSelected = document.getElementById('sideSelected');
@@ -434,6 +489,7 @@
     let selectedArea = null;
     let sideTimer = null;
     let toastTimer = null;
+    let badgeTimer = null;
 
     const points = [
       { key:'head', x:0.50, y:0.13, target:'#tip-head', label:'Fokus og kontroll' },
@@ -443,16 +499,40 @@
       { key:'foot', x:0.50, y:0.94, target:'#tip-foot', label:'Fot' }
     ];
 
+    function bumpFade(el){
+      if (!el) return;
+      el.classList.remove('fade-text');
+      void el.offsetWidth;
+      el.classList.add('fade-text');
+    }
+
     function setStatus(text){
       if (status) status.textContent = text;
+      bumpFade(status);
     }
 
     function showToast(msg){
       if (!toast) return;
       toast.textContent = msg;
       toast.hidden = false;
+      bumpFade(toast);
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => { toast.hidden = true; }, 2200);
+    }
+
+    function showBadge(text){
+      if (!badge) return;
+      badge.textContent = text;
+      badge.hidden = false;
+
+      badge.classList.remove('is-show');
+      void badge.offsetWidth;
+      badge.classList.add('is-show');
+
+      clearTimeout(badgeTimer);
+      badgeTimer = setTimeout(() => {
+        if (badge) badge.hidden = true;
+      }, 4600);
     }
 
     function ping(el){
@@ -460,6 +540,13 @@
       void el.offsetWidth;
       el.classList.add('tip--ping');
       setTimeout(() => el.classList.remove('tip--ping'), 2600);
+    }
+
+    function markSelectedTip(el){
+      tips.forEach(t => t.classList.remove('tip--selected'));
+      if (!el) return;
+      el.classList.add('tip--selected');
+      bumpFade(el);
     }
 
     function scrollToEl(el){
@@ -471,6 +558,7 @@
       const el = document.querySelector(sel);
       if (!el) return;
       el.scrollIntoView({ behavior:'smooth', block:'start' });
+      markSelectedTip(el);
       ping(el);
     }
 
@@ -487,16 +575,20 @@
     }
 
     function sideLabel(v){
-      if (v === 'right') return 'Mest på høyre side';
-      if (v === 'left') return 'Mest på venstre side';
-      return 'Usikker';
+      if (v === 'right') return 'høyre side';
+      if (v === 'left') return 'venstre side';
+      return 'usikker';
+    }
+
+    function areaLabel(key){
+      const p = points.find(x => x.key === key);
+      return p ? p.label : key;
     }
 
     function statusText(){
       if (!selectedSide) return 'Vis alle tips';
       if (!selectedArea) return 'Valgt: ' + sideLabel(selectedSide) + '. Vent litt, så kommer figur 2';
-      const p = points.find(x => x.key === selectedArea);
-      return 'Valgt: ' + sideLabel(selectedSide) + '. Område: ' + (p ? p.label : selectedArea);
+      return 'Valgt: ' + sideLabel(selectedSide) + '. Område: ' + areaLabel(selectedArea);
     }
 
     function setPressed(list, matchFn){
@@ -550,7 +642,7 @@
 
     function showStep2(){
       if (step2) step2.hidden = false;
-      setStatus(selectedArea ? statusText() : 'Valgt: ' + sideLabel(selectedSide) + '. Velg område i figur 2');
+      setStatus(selectedArea ? statusText() : ('Valgt: ' + sideLabel(selectedSide) + '. Velg område i figur 2'));
       scrollToEl(step2);
     }
 
@@ -568,7 +660,10 @@
 
       if (sideSelected){
         sideSelected.hidden = false;
-        if (sideSelectedText) sideSelectedText.textContent = 'Valgt: ' + sideLabel(v);
+        if (sideSelectedText){
+          sideSelectedText.textContent = 'Du har valgt: ' + sideLabel(v);
+          bumpFade(sideSelectedText);
+        }
       }
 
       if (step2) step2.hidden = true;
@@ -577,6 +672,10 @@
       applyFilter();
 
       setStatus(statusText());
+      showBadge('Du har valgt ' + sideLabel(v));
+
+      const topTip = tipsContainer ? tipsContainer.querySelector('.tip') : null;
+      markSelectedTip(topTip);
 
       scrollToEl(sideSelected);
 
@@ -590,6 +689,8 @@
       applyFilter();
 
       setStatus(statusText());
+      showBadge('Du har valgt ' + sideLabel(selectedSide) + ' → ' + p.label);
+
       scrollToSel(p.target);
     }
 
@@ -602,12 +703,17 @@
       setPressed(sideButtons, () => false);
 
       if (toast) toast.hidden = true;
+      if (badge) badge.hidden = true;
+
       if (sideSelected) sideSelected.hidden = true;
       if (sideChoices) sideChoices.hidden = false;
       if (step2) step2.hidden = true;
 
       restoreTipOrder();
-      tips.forEach(t => t.hidden = false);
+      tips.forEach(t => {
+        t.hidden = false;
+        t.classList.remove('tip--selected');
+      });
 
       setStatus('Vis alle tips');
 
@@ -635,7 +741,15 @@
         selectedArea = null;
         reorderTips();
         applyFilter();
-        setStatus(selectedSide ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område i figur 2') : 'Vis alle tips');
+
+        const msg = selectedSide
+          ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område i figur 2')
+          : 'Vis alle tips';
+
+        setStatus(msg);
+
+        const topTip = tipsContainer ? tipsContainer.querySelector('.tip') : null;
+        markSelectedTip(topTip);
       });
     }
 
