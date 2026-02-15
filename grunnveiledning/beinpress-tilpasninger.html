@@ -254,6 +254,101 @@
 
     .tip h3{ margin: 0 0 8px; color: var(--myss_blue_dark); }
     .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
+
+    .tip p{
+      margin: 0 0 10px;
+      line-height: 1.5;
+    }
+
+    .tip .muted{
+      color: var(--muted);
+    }
+
+    .tip details{
+      margin-top: 10px;
+      border: 1px solid rgba(15,23,42,.10);
+      border-radius: 12px;
+      background: rgba(47,127,191,.03);
+      overflow: hidden;
+    }
+
+    .tip summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 10px 12px;
+      font-weight: 950;
+      color: var(--myss_blue_dark);
+    }
+
+    .tip summary::-webkit-details-marker{ display:none; }
+
+    .tip details[open] .details__content{
+      animation: detailsIn 260ms ease;
+    }
+
+    @keyframes detailsIn{
+      0%   { opacity:0; transform: translateY(4px); }
+      100% { opacity:1; transform: translateY(0); }
+    }
+
+    .details__content{
+      padding: 10px 12px 12px;
+    }
+
+    .details__content h4{
+      margin: 12px 0 6px;
+      color: var(--myss_blue_dark);
+      font-size: .98rem;
+    }
+
+    .details__content ol,
+    .details__content ul{
+      margin: 0 0 10px;
+      padding-left: 18px;
+      line-height: 1.5;
+    }
+
+    .aid-list{
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .aid-item{
+      border:1px solid rgba(15,23,42,.08);
+      border-radius: 12px;
+      padding: 10px;
+      background:#fff;
+    }
+
+    .aid-item strong{
+      display:block;
+      color: var(--myss_blue_dark);
+      margin-bottom: 4px;
+    }
+
+    .tip__linkrow{
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tip__linkpill{
+      display: inline-block;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: #fff;
+      color: var(--myss_blue_dark);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .tip__linkpill:focus-visible{
+      outline: 3px solid rgba(47,127,191,.35);
+      outline-offset: 3px;
+    }
     .tip[hidden]{ display:none; }
 
     .tip--selected{
@@ -445,11 +540,128 @@
 
           <article id="tip-grip" class="tip" data-side="general" data-area="grip">
             <h3>Grep når håndkontroll er utfordrende</h3>
-            <ul>
-              <li>Bruk håndtak eller støttepunkt hvis maskinen har det.</li>
-              <li>Prioriter stabil posisjon før belastning.</li>
-              <li>Vurder stropper eller tilpasset grep ved behov.</li>
-            </ul>
+
+            <p>
+              Et godt grep hjelper deg å sitte stødig i beinpressen.
+              Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt.
+              Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
+            </p>
+
+            <details>
+              <summary>Vis mer forklaring</summary>
+              <div class="details__content">
+                <p>
+                  Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden.
+                  Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
+                </p>
+                <p>
+                  Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet tar mer av vekten.
+                  Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Hjelpemidler til denne øvelsen</summary>
+              <div class="details__content">
+                <h4>1 Hjelpemidler du kan låne i resepsjonen</h4>
+                <p>
+                  På dette treningssenteret finnes det noen ekstra hjelpemidler som kan gjøre øvelsen tryggere og mer komfortabel.
+                </p>
+
+                <h4>Slik bruker du dem</h4>
+                <ol>
+                  <li>Se i oversikten under hvilket hjelpemiddel som kan passe for deg.</li>
+                  <li>Gå til resepsjonen og si nummeret på hjelpemiddelet.</li>
+                  <li>Du låner hjelpemiddelet til økten, og leverer det tilbake i resepsjonen etterpå.</li>
+                </ol>
+
+                <h4>Eksempel på oversikt du kan fylle ut selv</h4>
+                <div class="aid-list">
+                  <div class="aid-item">
+                    <strong>Nummer 01</strong>
+                    <div>Navn: Hælkile til beinpress</div>
+                    <div class="muted">Brukes når: Hælen sklir eller du trenger mer støtte under foten.</div>
+                  </div>
+
+                  <div class="aid-item">
+                    <strong>Nummer 02</strong>
+                    <div>Navn: Grepstropp til håndtak</div>
+                    <div class="muted">Brukes når: Det er vanskelig å holde godt med den ene hånden.</div>
+                  </div>
+
+                  <div class="aid-item">
+                    <strong>Nummer 03</strong>
+                    <div>Navn: Ekstra pute eller kile i setet</div>
+                    <div class="muted">Brukes når: Du sklir, sitter skjevt eller trenger litt høyere sitteflate.</div>
+                  </div>
+                </div>
+
+                <p class="muted">
+                  Du kan utvide listen med flere hjelpemidler, så lenge hvert hjelpemiddel har et tydelig nummer, et enkelt navn og en kort forklaring på når det brukes.
+                </p>
+
+                <h4>2 Hjelpemidler du kan kjøpe selv</h4>
+                <p>
+                  Noen hjelpemidler er vanlige treningsprodukter som du kan kjøpe selv, uten søknad. For eksempel:
+                </p>
+                <ul>
+                  <li>grepstropper og grep hjelpemidler til håndtak</li>
+                  <li>enkle hælkiler og såler til trening</li>
+                  <li>treningshansker</li>
+                  <li>små puter eller kiler for å sitte mer stabilt</li>
+                </ul>
+
+                <p>
+                  Spør i resepsjonen hvis du vil vite hva senteret anbefaler, om noe kan bestilles via senteret, eller hvor du kan kjøpe tilsvarende produkter.
+                </p>
+
+                <p class="muted">
+                  Hvis du senere får nettbutikk eller samarbeidspartner, kan du legge inn en lenke her, for eksempel: Se forslag til hjelpemidler her.
+                </p>
+
+                <h4>3 Individuelle hjelpemidler som er behovsprøvd</h4>
+                <p>
+                  Noen hjelpemidler er personlige og må vurderes av fagpersoner. Det kan for eksempel være:
+                </p>
+                <ul>
+                  <li>ortoser til fot og ankel</li>
+                  <li>spesialsko eller tilpassede fotsenger</li>
+                  <li>tilpassede seter eller sitteinnlegg</li>
+                  <li>rullestol eller andre større hjelpemidler</li>
+                </ul>
+
+                <p>
+                  Disse hjelpemidlene er behovsprøvd. Det betyr at de vurderes og søkes om via kommunen eller spesialisthelsetjenesten.
+                </p>
+
+                <p>
+                  Hvis du tror du trenger denne typen hjelpemiddel, anbefales du å ta kontakt med ergoterapeut eller fysioterapeut i kommunen,
+                  og eventuelt snakke med fastlegen din som kan henvise videre ved behov.
+                </p>
+
+                <p class="muted">
+                  Her kan du legge inn kommunens informasjon, for eksempel: Her er oversikt over hjelpemidler i din kommune, lenke til kommunens side om hjelpemidler.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>For fagpersoner</summary>
+              <div class="details__content">
+                <p>
+                  Hjelpemidler som lånes i resepsjonen er ment som generelle treningshjelpemidler, og erstatter ikke behovsprøvd individuelt utstyr.
+                  Ved tydelig behov for ortoser, tilpasset fotseng eller spesialtilpasning av sete, anbefales ordinær utredning via kommunal ergoterapi eller fysioterapi og eventuelt ortopedisk verksted.
+                </p>
+                <p>
+                  NFC veiledningen kan brukes som supplement til faglig oppfølging, og som konkret støtte for å prøve ut en tryggere utgangsstilling og mer forutsigbar belastning i apparatet.
+                </p>
+              </div>
+            </details>
+
+            <div class="tip__linkrow">
+              <a class="tip__linkpill" href="/veiledere/beinpress-grep.html">For veiledere</a>
+            </div>
           </article>
         </section>
       </section>
