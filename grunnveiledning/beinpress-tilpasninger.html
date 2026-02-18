@@ -231,7 +231,7 @@
       height:auto;
       display:block;
     }
-
+    /* MYSS ADAPT TIPS */
     .side-selected__change{
       margin-top: 10px;
       border: 1px solid rgba(15,23,42,.12);
@@ -243,17 +243,29 @@
       color: var(--myss_blue_dark);
     }
 
-    .adapt__tips{ margin-top: 14px; display:grid; gap:10px; }
-
-    .tip{
-      border:1px solid rgba(15,23,42,.1);
-      border-radius:14px;
-      padding:12px;
-      background:#fff;
+    .adapt__tips{
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
     }
 
-    .tip h3{ margin: 0 0 8px; color: var(--myss_blue_dark); }
-    .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
+    .tip{
+      border: 1px solid rgba(15,23,42,.1);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .tip h3{
+      margin: 0 0 8px;
+      color: var(--myss_blue_dark);
+    }
+
+    .tip ul{
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.5;
+    }
 
     .tip p{
       margin: 0 0 10px;
@@ -280,15 +292,15 @@
       color: var(--myss_blue_dark);
     }
 
-    .tip summary::-webkit-details-marker{ display:none; }
+    .tip summary::-webkit-details-marker{ display: none; }
 
     .tip details[open] .details__content{
       animation: detailsIn 260ms ease;
     }
 
     @keyframes detailsIn{
-      0%   { opacity:0; transform: translateY(4px); }
-      100% { opacity:1; transform: translateY(0); }
+      0%{ opacity: 0; transform: translateY(4px); }
+      100%{ opacity: 1; transform: translateY(0); }
     }
 
     .details__content{
@@ -315,14 +327,14 @@
     }
 
     .aid-item{
-      border:1px solid rgba(15,23,42,.08);
+      border: 1px solid rgba(15,23,42,.08);
       border-radius: 12px;
       padding: 10px;
-      background:#fff;
+      background: #fff;
     }
 
     .aid-item strong{
-      display:block;
+      display: block;
       color: var(--myss_blue_dark);
       margin-bottom: 4px;
     }
@@ -349,7 +361,8 @@
       outline: 3px solid rgba(47,127,191,.35);
       outline-offset: 3px;
     }
-    .tip[hidden]{ display:none; }
+
+    .tip[hidden]{ display: none; }
 
     .tip--selected{
       border-color: rgba(var(--orange_rgb), .90);
@@ -357,13 +370,15 @@
       background: rgba(var(--orange_rgb), .06);
     }
 
-    .tip--ping{ animation: tipPing 2600ms ease; }
+    .tip--ping{
+      animation: tipPing 2600ms ease;
+    }
 
     @keyframes tipPing{
-      0%   { background: rgba(var(--orange_rgb), .00); box-shadow: 0 0 0 0 rgba(var(--orange_rgb), .00); }
-      10%  { background: rgba(var(--orange_rgb), .24); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .20); }
-      70%  { background: rgba(var(--orange_rgb), .18); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .14); }
-      100% { background: rgba(var(--orange_rgb), .00); box-shadow: 0 0 0 0 rgba(var(--orange_rgb), .00); }
+      0%{ background: rgba(var(--orange_rgb), 0); box-shadow: 0 0 0 0 rgba(var(--orange_rgb), 0); }
+      10%{ background: rgba(var(--orange_rgb), .24); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .20); }
+      70%{ background: rgba(var(--orange_rgb), .18); box-shadow: 0 0 0 8px rgba(var(--orange_rgb), .14); }
+      100%{ background: rgba(var(--orange_rgb), 0); box-shadow: 0 0 0 0 rgba(var(--orange_rgb), 0); }
     }
 
     .bodymap{
@@ -372,14 +387,8 @@
     }
 
     .bodymap__btn{
-      display:block;
-      width:100%;
-      border:0;
-      padding:0;
-      background:transparent;
-      cursor:pointer;
-      border-radius:18px;
-      box-shadow: var(--shadow);
+      display: block;
+      width: 100%;
     }
 
     .bodymap__img{
@@ -542,21 +551,23 @@
             <h3>Grep når håndkontroll er utfordrende</h3>
 
             <p>
-              Et godt grep hjelper deg å sitte stødig i beinpressen.
-              Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt.
-              Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
+              Et godt grep hjelper deg å sitte stødig i beinpressen. Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt. Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
             </p>
+
+            <ul>
+              <li>Prioriter stabil posisjon før belastning.</li>
+              <li>Hold så symmetrisk som mulig med begge hender.</li>
+              <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
+            </ul>
 
             <details>
               <summary>Vis mer forklaring</summary>
               <div class="details__content">
                 <p>
-                  Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden.
-                  Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
+                  Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden. Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
                 </p>
                 <p>
-                  Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet tar mer av vekten.
-                  Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
+                  Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet ta mer av vekten. Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
                 </p>
               </div>
             </details>
@@ -566,14 +577,14 @@
               <div class="details__content">
                 <h4>1 Hjelpemidler du kan låne i resepsjonen</h4>
                 <p>
-                  På dette treningssenteret finnes det noen ekstra hjelpemidler som kan gjøre det lettere å holde håndtaket, slik at du sitter mer stabilt og får en roligere gjennomføring.
+                  På dette treningssenteret finnes det noen enkle hjelpemidler som kan gjøre det lettere å holde håndtaket, slik at du sitter mer stabilt og får en roligere gjennomføring.
                 </p>
 
                 <h4>Slik bruker du dem</h4>
                 <ol>
                   <li>Se i oversikten under hvilket hjelpemiddel som kan passe for deg.</li>
                   <li>Gå til resepsjonen og si nummeret på hjelpemiddelet.</li>
-                  <li>Du låner hjelpemiddelet til økten, og leverer det tilbake i resepsjonen etterpå.</li>
+                  <li>Du låner hjelpemiddelet til økten og leverer det tilbake i resepsjonen etterpå.</li>
                 </ol>
 
                 <h4>Eksempel på oversikt du kan fylle ut selv</h4>
@@ -597,53 +608,107 @@
                   </div>
                 </div>
 
-                
+                <p class="muted">
+                  Du kan utvide listen med flere grepshjelpemidler, så lenge hvert hjelpemiddel har et tydelig nummer, et enkelt navn og en kort forklaring på når det brukes.
+                </p>
 
-        <h4>2 Hjelpemidler du kan kjøpe selv</h4>
-<p>
-  Noen grepshjelpemidler er vanlige treningsprodukter som du kan kjøpe selv, uten søknad. For eksempel:
-</p>
-<ul>
-  <li>grepstropper og andre grepshjelpemidler til håndtak</li>
-  <li>grepputer eller antiskliinnlegg for bedre friksjon</li>
-  <li>treningshansker med bedre grep</li>
-  <li>flytende kalk dersom senteret tillater det</li>
-</ul>
-<p>
-  Spør i resepsjonen hvis du vil vite hva senteret anbefaler, om noe kan bestilles via senteret, eller hvor du kan kjøpe tilsvarende produkter.
-</p>
+                <h4>2 Hjelpemidler du kan kjøpe selv</h4>
+                <p>
+                  Noen grepshjelpemidler er vanlige treningsprodukter som du kan kjøpe selv, uten søknad. For eksempel:
+                </p>
+                <ul>
+                  <li>grepstropper og andre grepshjelpemidler til håndtak</li>
+                  <li>grepputer eller antiskliinnlegg for bedre friksjon</li>
+                  <li>treningshansker med bedre grep</li>
+                  <li>flytende kalk dersom senteret tillater det</li>
+                  <li>skumrør eller grepstrekk for tykkere og mer behagelig håndtak</li>
+                </ul>
 
-<h4>3 Individuelle hjelpemidler som er behovsprøvd</h4>
-<p>
-  Noen hjelpemidler er personlige og må vurderes faglig. Det kan for eksempel være:
-</p>
-<ul>
-  <li>håndleddsortose eller annen støtte for håndledd</li>
-  <li>tommelortose ved smerter eller ustabilitet</li>
-  <li>tilpasset gripehjelpemiddel ved redusert fingerfunksjon</li>
-  <li>spesialtilpasset hanske eller grepsløsning etter faglig vurdering</li>
-</ul>
+                <p>
+                  Spør i resepsjonen hvis du vil vite hva senteret anbefaler, om noe kan bestilles via senteret, eller hvor du kan kjøpe tilsvarende produkter.
+                </p>
 
-<p>
-  Disse hjelpemidlene er behovsprøvde. Det betyr at behovet må vurderes, og at det som regel må sendes en søknad til NAV.
-</p>
+                <p class="muted">
+                  Sikkerhet: Bruk hjelpemidler slik at du fortsatt kan slippe raskt. Stopp hvis du får smerter, nummenhet, hudirritasjon eller økt ubehag, og be om hjelp ved behov.
+                </p>
 
-<p>
-  Du kan ta direkte kontakt med et ortopediteknisk verksted hvis du ønsker mer informasjon eller vil bestille time til vurdering.
-  Verkstedet kan veilede om aktuelle løsninger og hva som kreves av dokumentasjon. For ortoser og ortopediske sko skal en
-  sykehuslege eller legespesialist fylle ut søknaden første gang og sende den til et ortopedisk verksted som har rammeavtale med NAV.
-  Ved senere behov fyller verkstedet vanligvis ut søknaden og sender den inn.
-</p>
+                <h4>3 Individuelle hjelpemidler som er behovsprøvd</h4>
+                <p>
+                  Noen hjelpemidler er personlige og må vurderes faglig. Det kan for eksempel være:
+                </p>
+                <ul>
+                  <li>håndleddsortose eller annen støtte for håndledd</li>
+                  <li>tommelortose ved smerter eller ustabilitet</li>
+                  <li>tilpasset gripehjelpemiddel ved redusert fingerfunksjon</li>
+                  <li>spesialtilpasset hanske eller grepsløsning etter faglig vurdering</li>
+                </ul>
 
-<p>
-  Ergoterapeut eller fysioterapeut i kommunen kan også være en god inngang, særlig hvis du trenger funksjonskartlegging, utprøving,
-  eller hjelp til søknad for andre hjelpemidler som går via NAV Hjelpemiddelsentral.
-</p>
+                <p>
+                  Disse hjelpemidlene er behovsprøvde. Det betyr at behovet må vurderes, og at det som regel må sendes en søknad til Nav.
+                </p>
 
-<p class="muted">
-  Her finner du en oversikt over leverandører i Bergen og omegn som er knyttet til ortopediske sko. Mange av disse leverandørene kan også levere andre relevante behovsprøvde hjelpemidler, for eksempel grepshjelpemidler og tilpasninger, avhengig av avtaler og sortiment. Oversikten ligger hos NAV:
-  <a href="https://www.nav.no/ortopediskesko">NAV: ortopediske sko</a>
-</p>
+                <p>
+                  Du kan ta direkte kontakt med et ortopediteknisk verksted hvis du ønsker mer informasjon eller vil bestille time til vurdering. Verkstedet kan veilede om aktuelle løsninger og hva som kreves av dokumentasjon. For ortoser fylles søknad første gang vanligvis ut av sykehuslege eller legespesialist og sendes via ortopediteknisk verksted med rammeavtale med Nav. Ved senere behov kan verkstedet ofte bistå med videre prosess.
+                  <a href="https://www.nav.no/ortoser" target="_blank" rel="noopener">Nav: ortoser</a>
+                </p>
+
+                <p>
+                  Ergoterapeut eller fysioterapeut i kommunen kan også være en god inngang, særlig hvis du trenger funksjonskartlegging, utprøving eller vurdering av andre hjelpemidler som går via Nav Hjelpemiddelsentral.
+                </p>
+
+                <p class="muted">
+                  Oversikt over leverandører i Bergen og omegn for ortopediske sko finner du hos Nav:
+                  <a href="https://www.nav.no/ortopediskesko" target="_blank" rel="noopener">Nav: ortopediske sko</a>
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>For fagpersoner</summary>
+              <div class="details__content">
+                <p>
+                  Hjelpemidler som lånes i resepsjonen er ment som generelle treningshjelpemidler og erstatter ikke behovsprøvd individuelt utstyr. Målet er å gjøre grepet mer stabilt, redusere kompensasjon og bidra til roligere gjennomføring i apparatet.
+                </p>
+
+                <h4>Når du bør vurdere videre utredning</h4>
+                <ul>
+                  <li>ved vedvarende smerter i hånd, tommel eller håndledd</li>
+                  <li>ved tydelig instabilitet, feilbelastning eller økende overaktivitet ved grep</li>
+                  <li>ved hudproblemer, trykkmerker eller risiko for sår</li>
+                  <li>ved stor sideforskjell som gir rotasjon i overkropp og skjev belastning</li>
+                  <li>når enkle tiltak ikke gir tilstrekkelig kontroll eller trygghet</li>
+                </ul>
+
+                <h4>Praktisk tilnærming i økt</h4>
+                <ul>
+                  <li>start med lav belastning og test grep og posisjon før du øker vekten</li>
+                  <li>prioriter symmetrisk støtte og rolig overkropp før fokus på kraft</li>
+                  <li>velg tiltak som gir stabilitet uten å låse hånden unødvendig</li>
+                  <li>vurder stropp, antiskli eller tykkere grep når det gir roligere overkropp og jevnere beinbruk</li>
+                </ul>
+
+                <h4>Samarbeid og videre tiltak</h4>
+                <p>
+                  Ved tydelig behov for ortoser, spesialtilpasning eller vedvarende smerte anbefales utredning via kommunal ergoterapi eller fysioterapi, og eventuelt ortopediteknisk verksted. Ortopediteknisk verksted kan også kontaktes direkte for vurdering og veiledning, spesielt når ortose vurderes.
+                </p>
+
+                <h4>Dokumentasjon som er nyttig</h4>
+                <ul>
+                  <li>hva som ble observert, for eksempel rotasjon, skjev bekkenstilling eller ulikt grep</li>
+                  <li>hvilke tiltak som ble prøvd, og hvilken effekt det hadde på kontroll og trygghet</li>
+                  <li>eventuelle smerter, hudreaksjoner eller tegn på overbelastning</li>
+                </ul>
+
+                <p>
+                  NFC veiledningen kan brukes som supplement til faglig oppfølging og som konkret støtte for å prøve ut tryggere utgangsstilling og mer forutsigbar belastning i apparatet.
+                </p>
+              </div>
+            </details>
+
+            <div class="tip__linkrow">
+              <a class="tip__linkpill" href="/veiledere/beinpress-grep.html">For veiledere</a>
+            </div>
+          </article>
 
     </section>
   </main>
