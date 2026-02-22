@@ -443,6 +443,9 @@
 <style data_myss_hide_tips_v2>
 #tilpasning_tips[hidden]{ display:none !important; }
 </style>
+<style data-myss-hide-tips-v3>
+#myss_tips_wrapper[hidden]{ display:none !important; }
+</style>
 </head>
 
 <body>
@@ -542,6 +545,9 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
             </button>
           </div>
           <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
+<!-- MYSS_TIPS_WRAPPER_START -->
+<section id="myss_tips_wrapper" hidden>
+
           </div>
 
         <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
@@ -793,7 +799,10 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
           </div>
         </section>
 
-  </main>
+  
+</section>
+<!-- MYSS_TIPS_WRAPPER_END -->
+</main>
 
   <script>
   (function(){
@@ -1287,6 +1296,59 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
   window.addEventListener("hashchange", function () {
     if (location.hash) showTips();
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    if (location.hash) showTips();
+    else hideTips();
+  });
+})();
+</script>
+<script data-myss-show-tips-v3>
+(function () {
+  var tips = document.getElementById("myss_tips_wrapper");
+  if (!tips) return;
+
+  function showTips(){ tips.hidden = false; }
+  function hideTips(){ tips.hidden = true; }
+
+  function t(el){ return (el && el.textContent ? el.textContent : "").trim().toLowerCase(); }
+
+  function isNullstill(el){
+    var s = t(el);
+    return s.indexOf("nullstill") !== -1;
+  }
+
+  function isShowAll(el){
+    var s = t(el);
+    return s.indexOf("vis alle tips") !== -1 || s.indexOf("vis alt") !== -1;
+  }
+
+  function isChallenge(el){
+    var s = t(el);
+    var triggers = ["fot", "kne", "hofte", "hofte og sete", "grep", "fokus"];
+    for (var i = 0; i < triggers.length; i++){
+      if (s === triggers[i] || s.indexOf(triggers[i]) !== -1) return true;
+    }
+    return false;
+  }
+
+  function isArea(el){
+    return (el && el.tagName && el.tagName.toLowerCase() === "area");
+  }
+
+  function isHashLink(el){
+    if (!el || !el.getAttribute) return false;
+    var href = el.getAttribute("href") || "";
+    return href.charAt(0) === "#";
+  }
+
+  document.addEventListener("click", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("button,a,area") : null;
+    if (!el) return;
+
+    if (isNullstill(el)) { hideTips(); return; }
+    if (isShowAll(el) || isChallenge(el) || isArea(el) || isHashLink(el)) { showTips(); return; }
+  }, true);
 
   document.addEventListener("DOMContentLoaded", function () {
     if (location.hash) showTips();
