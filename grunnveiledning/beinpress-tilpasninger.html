@@ -425,6 +425,20 @@
     .myss-quick{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
     .myss-quick a{display:inline-block;padding:12px 14px;border-radius:14px;border:1px solid rgba(15,23,42,.12);text-decoration:none;font-weight:950;color:var(--myss_blue_dark);background:#fff}
     .myss-quick a.primary{background:rgba(47,127,191,.08);border-color:rgba(47,127,191,.45)}
+
+    /* MYSS MORETIPS */
+    .moretips{ margin-top: 10px; }
+
+    #moreTipsWrap{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(15,23,42,.08);
+    }
+
+    .tip--primary{
+      border-color: rgba(47,127,191,.55);
+      box-shadow: 0 0 0 6px rgba(47,127,191,.10), var(--shadow);
+    }
 </style>
 </head>
 
@@ -763,6 +777,16 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
           </article>
 
     </section>
+        <section class="moretips" aria-label="Flere tips">
+          <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>
+            Flere tips
+          </button>
+
+          <div id="moreTipsWrap" hidden>
+            <div id="moreTipsContainer" class="adapt__tips"></div>
+          </div>
+        </section>
+
   </main>
 
   <script>
@@ -784,8 +808,14 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
     const bodymapBtn = document.getElementById('bodymapBtn');
     const bodymapImg = document.getElementById('bodymapImg');
 
+    if (showAllBtn) showAllBtn.hidden = true;
+
     const tipsContainer = document.getElementById('tipsContainer');
     const tips = Array.from(document.querySelectorAll('.tip'));
+
+    const toggleMoreTips = document.getElementById('toggleMoreTips');
+    const moreTipsWrap = document.getElementById('moreTipsWrap');
+    const moreTipsContainer = document.getElementById('moreTipsContainer');
     const sideButtons = sideChoices ? Array.from(sideChoices.querySelectorAll('button[data-side]')) : [];
 
     const originalOrder = tips.slice();
@@ -951,6 +981,39 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
         t.hidden = !(sideOk && areaOk);
       });
     }
+    function updatePrimaryAndMore(){
+      if (!tipsContainer || !moreTipsContainer || !toggleMoreTips || !moreTipsWrap) return;
+
+      tips.forEach(t => t.classList.remove('tip--primary'));
+
+      const visible = tips.filter(t => !t.hidden);
+
+      visible.forEach(t => tipsContainer.appendChild(t));
+      moreTipsContainer.innerHTML = '';
+
+      if (visible.length === 0){
+        toggleMoreTips.hidden = true;
+        moreTipsWrap.hidden = true;
+        return;
+      }
+
+      const primary = visible[0];
+      primary.classList.add('tip--primary');
+      tipsContainer.insertBefore(primary, tipsContainer.firstElementChild);
+
+      const rest = visible.slice(1);
+      rest.forEach(t => moreTipsContainer.appendChild(t));
+
+      if (rest.length > 0){
+        toggleMoreTips.hidden = false;
+        moreTipsWrap.hidden = true;
+        toggleMoreTips.textContent = 'Flere tips (' + rest.length + ')';
+      } else {
+        toggleMoreTips.hidden = true;
+        moreTipsWrap.hidden = true;
+      }
+    }
+
 
     function clearSideTimer(){
       if (!sideTimer) return;
@@ -968,6 +1031,8 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
       clearSideTimer();
 
       selectedSide = v;
+      if (showAllBtn) showAllBtn.hidden = false;
+
       selectedArea = null;
       setAreaPressed();
 
@@ -989,7 +1054,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
       reorderTips();
       applyFilter();
-
+      updatePrimaryAndMore();
       setStatus(statusText());
       showBadge('Du har valgt ' + sideLabel(v));
 
@@ -1008,7 +1073,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
       reorderTips();
       applyFilter();
-
+      updatePrimaryAndMore();
       setStatus(statusText());
       showBadge('Du har valgt ' + sideLabel(selectedSide) + ' → ' + p.label);
 
@@ -1020,12 +1085,18 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
       selectedSide = null;
       selectedArea = null;
+
+      if (showAllBtn) showAllBtn.hidden = true;
       setAreaPressed();
 
       setPressed(sideButtons, () => false);
 
       if (toast) toast.hidden = true;
       if (badge) badge.hidden = true;
+
+      if (toggleMoreTips) toggleMoreTips.hidden = true;
+      if (moreTipsWrap) moreTipsWrap.hidden = true;
+      if (moreTipsContainer) moreTipsContainer.innerHTML = '';
 
       if (sideSelected) sideSelected.hidden = true;
       if (sideChoices) sideChoices.hidden = false;
@@ -1064,7 +1135,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
         setAreaPressed();
         reorderTips();
         applyFilter();
-
+        updatePrimaryAndMore();
         const msg = selectedSide
           ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område')
           : 'Vis alle tips';
@@ -1073,6 +1144,14 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
         const topTip = tipsContainer ? tipsContainer.querySelector('.tip') : null;
         markSelectedTip(topTip);
+      });
+    }
+
+    if (toggleMoreTips){
+      toggleMoreTips.addEventListener('click', () => {
+        const isOpen = !moreTipsWrap.hidden;
+        moreTipsWrap.hidden = isOpen;
+        if (!isOpen) scrollToEl(moreTipsWrap);
       });
     }
 
