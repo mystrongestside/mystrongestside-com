@@ -467,8 +467,8 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
           <p class="adapt__lead">Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke som helseopplysninger.</p>
 
           <div class="adapt__controls" role="group" aria-label="Filterkontroller">
-            <button id="adaptShowAll" class="adapt__chip" type="button">Vis alt</button>
-            <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill</button>
+            <button id="adaptShowAll" class="adapt__chip" type="button">Vis alle tips</button>
+            <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill valg</button>
           </div>
 
           <p id="adaptStatus" class="adapt__status" aria-live="polite">Vis alle tips</p>
@@ -501,7 +501,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
                 <img id="sideSelectedImg" src="/assets/img/unilateral.jpg" alt="Unilateral figur" loading="lazy" />
               </div>
 
-              <button id="changeSide" class="side-selected__change" type="button">Velg på nytt</button>
+              <button id="changeSide" class="side-selected__change" type="button">Endre valg</button>
             </div>
           </section>
 
@@ -715,7 +715,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
                 <p>
                   Du kan ta direkte kontakt med et ortopediteknisk verksted hvis du ønsker mer informasjon eller vil bestille time til vurdering. Verkstedet kan veilede om aktuelle løsninger og hva som kreves av dokumentasjon. For ortoser fylles søknad første gang vanligvis ut av sykehuslege eller legespesialist og sendes via ortopediteknisk verksted med rammeavtale med Nav. Ved senere behov kan verkstedet ofte bistå med videre prosess.
-                  <a href="https://www.nav.no/ortoser" target="_blank" rel="noopener">Nav: ortoser</a>
+                  <a href="https://www.nav.no/ortoser" target="_blank" rel="noopener noreferrer">Nav: ortoser</a>
                 </p>
 
                 <p>
@@ -724,7 +724,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
                 <p class="muted">
                   Oversikt over leverandører i Bergen og omegn for ortopediske sko finner du hos Nav:
-                  <a href="https://www.nav.no/ortopediskesko" target="_blank" rel="noopener">Nav: ortopediske sko</a>
+                  <a href="https://www.nav.no/ortopediskesko" target="_blank" rel="noopener noreferrer">Nav: ortopediske sko</a>
                 </p>
               </div>
             </details>
@@ -1192,5 +1192,23 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
   })();
   </script>
+<script data-myss-focus-hash>
+(function () {
+  function focusFromHash() {
+    if (!location.hash) return;
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    try {
+      el.focus({ preventScroll: true });
+    } catch (e) {
+      el.focus();
+    }
+  }
+  window.addEventListener('hashchange', focusFromHash);
+  window.addEventListener('DOMContentLoaded', focusFromHash);
+})();
+</script>
 </body>
 </html>
