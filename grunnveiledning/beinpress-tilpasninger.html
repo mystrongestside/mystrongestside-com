@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
 
-  <title>Tilpasninger ved behov – beinpress</title>
+  <title>Tilpasninger ved behov: beinpress</title>
 
   <style>
     :root{
@@ -416,7 +416,16 @@
       .fade-text{ animation:none; }
       .choice-badge.is-show{ animation:none; opacity:1; }
     }
-  </style>
+  
+
+/* @-- MYSS_STEP2_PATCH_V2 -- */
+.myss-steps{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
+    .myss-step{display:inline-block;padding:10px 12px;border-radius:999px;border:1px solid rgba(15,23,42,.12);text-decoration:none;font-weight:900;color:var(--myss_blue_dark);background:#fff}
+    .myss-step.is-active{background:rgba(47,127,191,.08);border-color:rgba(47,127,191,.45)}
+    .myss-quick{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+    .myss-quick a{display:inline-block;padding:12px 14px;border-radius:14px;border:1px solid rgba(15,23,42,.12);text-decoration:none;font-weight:950;color:var(--myss_blue_dark);background:#fff}
+    .myss-quick a.primary{background:rgba(47,127,191,.08);border-color:rgba(47,127,191,.45)}
+</style>
 </head>
 
 <body>
@@ -426,11 +435,22 @@
       <p class="ingress">
 Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret oppskrift som fungerer i et vanlig treningssenter, også når dagsformen varierer.
       </p>
+      <nav class="myss-steps" aria-label="Steg">
+        <a class="myss-step" href="/grunnveiledning/beinpress.html">Steg 1: kom i gang</a>
+        <a class="myss-step is-active" href="/grunnveiledning/beinpress-tilpasninger.html">Steg 2: tilpasninger</a>
+        <a class="myss-step" href="/veiledere/beinpress-grep.html">For veiledere</a>
+      </nav>
+
+      <div class="myss-quick" aria-label="Snarveier">
+        <a class="primary" href="#adaptPanel">Velg tilpasning</a>
+        <a href="/grunnveiledning/beinpress.html">Tilbake til video</a>
+      </div>
+
 
       <section class="adapt" aria-labelledby="adaptTitle">
         <div id="adaptPanel" class="adapt__panel">
           <h2 id="adaptTitle">Tilpasset veiledning</h2>
-          <p class="adapt__lead">Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke.</p>
+          <p class="adapt__lead">Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke som helseopplysninger.</p>
 
           <div class="adapt__controls" role="group" aria-label="Filterkontroller">
             <button id="adaptShowAll" class="adapt__chip" type="button">Vis alt</button>
@@ -482,7 +502,29 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
             </div>
           </section>
 
-          <p class="adapt__privacy">Valget brukes bare til å tilpasse veiledningen nå. Det lagres ikke som helseopplysninger.</p>
+          <div id="areaChoices" class="adapt__grid" role="group" aria-label="Velg område med knapper" style="margin-top:12px;">
+            <button class="adapt__option" type="button" data-area="foot" aria-pressed="false">
+              <span class="adapt__t">Fot</span>
+              <span class="adapt__d">Støtte og fotplassering</span>
+            </button>
+            <button class="adapt__option" type="button" data-area="knee" aria-pressed="false">
+              <span class="adapt__t">Kne</span>
+              <span class="adapt__d">Retning og dybde</span>
+            </button>
+            <button class="adapt__option" type="button" data-area="hip" aria-pressed="false">
+              <span class="adapt__t">Hofte og sete</span>
+              <span class="adapt__d">Posisjon og stabilitet</span>
+            </button>
+            <button class="adapt__option" type="button" data-area="grip" aria-pressed="false">
+              <span class="adapt__t">Grep</span>
+              <span class="adapt__d">Stødig overkropp</span>
+            </button>
+            <button class="adapt__option" type="button" data-area="head" aria-pressed="false">
+              <span class="adapt__t">Fokus</span>
+              <span class="adapt__d">Enkle steg og kontroll</span>
+            </button>
+          </div>
+          <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
         </div>
 
         <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
@@ -495,6 +537,18 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
               <li>Hold rolig tempo og stopp før det blir utrygt.</li>
             </ul>
           </article>
+
+
+          <article class="tip" data-side="general" data-area="general">
+            <h3>Trygghet ved CP</h3>
+            <ul>
+              <li>Stopp tidlig hvis spastisiteten tar over, eller hvis teknikken begynner å glippe.</li>
+              <li>Ta en planlagt pause, pust rolig i 30 til 60 sekunder, og juster sete eller fot før du fortsetter.</li>
+              <li>Reduser belastning hvis du blir fort sliten eller mister jevnt trykk.</li>
+              <li>Be om hjelp hvis du ikke kommer trygt inn og ut av apparatet, eller hvis du ikke får en stabil startposisjon.</li>
+            </ul>
+          </article>
+
 
           <article class="tip" data-side="right" data-area="general">
             <h3>Når høyre side jobber mindre</h3>
@@ -836,9 +890,22 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
       return p ? p.label : key;
     }
 
+    
+
+    const areaChoices = document.getElementById('areaChoices');
+    const areaButtons = areaChoices ? Array.from(areaChoices.querySelectorAll('button[data-area]')) : [];
+
+    function setAreaPressed(){
+      if (!areaButtons.length) return;
+      areaButtons.forEach(btn => {
+        const on = selectedArea && btn.getAttribute('data-area') === selectedArea;
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
+
     function statusText(){
       if (!selectedSide) return 'Vis alle tips';
-      if (!selectedArea) return 'Valgt: ' + sideLabel(selectedSide) + '. Vent litt, så kommer figur 2';
+      if (!selectedArea) return 'Valgt: ' + sideLabel(selectedSide) + '. Velg område';
       return 'Valgt: ' + sideLabel(selectedSide) + '. Område: ' + areaLabel(selectedArea);
     }
 
@@ -893,7 +960,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
     function showStep2(){
       if (step2) step2.hidden = false;
-      setStatus(selectedArea ? statusText() : ('Valgt: ' + sideLabel(selectedSide) + '. Velg område i figur 2'));
+      setStatus(selectedArea ? statusText() : ('Valgt: ' + sideLabel(selectedSide) + '. Velg område'));
       scrollToEl(step2);
     }
 
@@ -902,6 +969,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
       selectedSide = v;
       selectedArea = null;
+      setAreaPressed();
 
       setPressed(sideButtons, (b) => b.getAttribute('data-side') === v);
 
@@ -930,11 +998,13 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
       scrollToEl(sideSelected);
 
-      sideTimer = setTimeout(showStep2, 5000);
+      sideTimer = setTimeout(showStep2, 650);
     }
 
     function selectAreaByPoint(p){
       selectedArea = p.key;
+
+      setAreaPressed();
 
       reorderTips();
       applyFilter();
@@ -950,6 +1020,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
       selectedSide = null;
       selectedArea = null;
+      setAreaPressed();
 
       setPressed(sideButtons, () => false);
 
@@ -990,11 +1061,12 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
     if (showAllBtn){
       showAllBtn.addEventListener('click', () => {
         selectedArea = null;
+        setAreaPressed();
         reorderTips();
         applyFilter();
 
         const msg = selectedSide
-          ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område i figur 2')
+          ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område')
           : 'Vis alle tips';
 
         setStatus(msg);
@@ -1020,6 +1092,25 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
         selectAreaByPoint(p);
       });
     }
+
+    
+    if (areaChoices){
+      areaChoices.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-area]');
+        if (!btn) return;
+
+        if (!selectedSide){
+          showToast('Velg side først');
+          return;
+        }
+
+        const key = btn.getAttribute('data-area');
+        const p = points.find(x => x.key === key);
+        if (!p) return;
+        selectAreaByPoint(p);
+      });
+    }
+
   })();
   </script>
 </body>
