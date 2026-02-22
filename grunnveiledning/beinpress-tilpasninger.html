@@ -440,15 +440,8 @@
       box-shadow: 0 0 0 6px rgba(47,127,191,.10), var(--shadow);
     }
 </style>
-<style data_myss_hide_tips>
-/* Skjul tips til brukeren har valgt en utfordring */
+<style data_myss_hide_tips_v2>
 #tilpasning_tips[hidden]{ display:none !important; }
-#tilpasning_hint{
-  margin: 14px 0 0 0;
-  padding: 12px 14px;
-  border-radius: 12px;
-  background: rgba(47,127,191,.10);
-}
 </style>
 </head>
 
@@ -549,8 +542,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
             </button>
           </div>
           <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
-          <p id="tilpasning_hint">Velg en utfordring over for å se tilpasninger.</p>
-        </div>
+          </div>
 
         <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
 
@@ -1224,81 +1216,69 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
   window.addEventListener('DOMContentLoaded', focusFromHash);
 })();
 </script>
-<script data_myss_show_tips>
+<script data_myss_show_tips_v2>
 (function () {
   var tips = document.getElementById("tilpasning_tips");
-  var hint = document.getElementById("tilpasning_hint");
   if (!tips) return;
 
-  function showTips() {
-    tips.hidden = false;
-    if (hint) hint.hidden = true;
-  }
+  function showTips() { tips.hidden = false; }
+  function hideTips() { tips.hidden = true; }
 
-  function hideTips() {
-    tips.hidden = true;
-    if (hint) hint.hidden = false;
-  }
-
-  function textOf(el) {
+  function txt(el) {
     return (el && el.textContent ? el.textContent : "").trim().toLowerCase();
   }
 
-  function isResetClick(target) {
-    var btn = target.closest ? target.closest("button,a") : null;
-    if (!btn) return false;
-    var t = textOf(btn);
+  function isNullstill(el) {
+    var t = txt(el);
     return t.indexOf("nullstill") !== -1;
   }
 
-  function isSelectionClick(target) {
-    // Vis når bruker velger side eller utfordring, eller trykker vis alle tips
-    var el = target.closest ? target.closest("button,a,area") : null;
-    if (!el) return false;
+  function isShowAll(el) {
+    var t = txt(el);
+    return t.indexOf("vis alle tips") !== -1 || t.indexOf("vis alt") !== -1;
+  }
 
-    // area i imagemap
-    if (el.tagName && el.tagName.toLowerCase() === "area") return true;
+  function isChallengeChoice(el) {
+    var t = txt(el);
 
-    var t = textOf(el);
-
+    // Kun utfordringsvalg, ikke sidevalg
     var triggers = [
-      "mest på høyre side",
-      "mest på venstre side",
-      "usikker",
       "fot",
       "kne",
       "hofte",
-      "sete",
       "hofte og sete",
       "grep",
-      "fokus",
-      "vis alle tips",
-      "vis alt"
+      "fokus"
     ];
 
     for (var i = 0; i < triggers.length; i++) {
       if (t === triggers[i] || t.indexOf(triggers[i]) !== -1) return true;
     }
-
-    // hashlenker til tips
-    if (el.tagName && el.tagName.toLowerCase() === "a") {
-      var href = el.getAttribute("href") || "";
-      if (href.charAt(0) === "#") return true;
-    }
-
     return false;
   }
 
-  document.addEventListener("click", function (e) {
-    var target = e.target;
-    if (!target) return;
+  function isHashTarget(el) {
+    if (!el || !el.getAttribute) return false;
+    var href = el.getAttribute("href") || "";
+    return href.charAt(0) === "#";
+  }
 
-    if (isResetClick(target)) {
+  document.addEventListener("click", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("button,a,area") : null;
+    if (!el) return;
+
+    if (isNullstill(el)) {
       hideTips();
       return;
     }
 
-    if (isSelectionClick(target)) {
+    // Klikk i figur (area) eller hashlenker skal alltid vise tips før hopp
+    if ((el.tagName || "").toLowerCase() === "area" || isHashTarget(el)) {
+      showTips();
+      return;
+    }
+
+    if (isShowAll(el) || isChallengeChoice(el)) {
       showTips();
       return;
     }
@@ -1310,6 +1290,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
   document.addEventListener("DOMContentLoaded", function () {
     if (location.hash) showTips();
+    else hideTips();
   });
 })();
 </script>
