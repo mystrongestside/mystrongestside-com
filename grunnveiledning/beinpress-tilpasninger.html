@@ -440,12 +440,7 @@
       box-shadow: 0 0 0 6px rgba(47,127,191,.10), var(--shadow);
     }
 </style>
-<style data_myss_hide_tips_v2>
-#tilpasning_tips[hidden]{ display:none !important; }
-</style>
-<style data-myss-hide-tips-v3>
-#myss_tips_wrapper[hidden]{ display:none !important; }
-</style>
+<style data-myss-tipswrap>#tipsWrap[hidden]{display:none !important;}</style>
 </head>
 
 <body>
@@ -545,17 +540,14 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
             </button>
           </div>
           <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
-<!-- MYSS_TIPS_WRAPPER_START -->
-<section id="myss_tips_wrapper" hidden>
-
-          </div>
+</div>
 
         <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
 
-        <section id="tipsContainer" class="adapt__tips" aria-live="polite">
+        <section id="tipsWrap" hidden>
+<section id="tipsContainer" class="adapt__tips" aria-live="polite">
           <article class="tip" data-side="general" data-area="general">
             
-<section id="tilpasning_tips" hidden>
 <h3>Trygg og enkel start</h3>
             <ul>
               <li>Start med lett belastning og kort bevegelse.</li>
@@ -798,10 +790,10 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
             <div id="moreTipsContainer" class="adapt__tips"></div>
           </div>
         </section>
+</section>
+
 
   
-</section>
-<!-- MYSS_TIPS_WRAPPER_END -->
 </main>
 
   <script>
@@ -826,6 +818,8 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
     if (showAllBtn) showAllBtn.hidden = true;
 
     const tipsContainer = document.getElementById('tipsContainer');
+    const tipsWrap = document.getElementById('tipsWrap');
+    if (tipsWrap) tipsWrap.hidden = true;
     const tips = Array.from(document.querySelectorAll('.tip'));
 
     const toggleMoreTips = document.getElementById('toggleMoreTips');
@@ -1082,6 +1076,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
     }
 
     function selectAreaByPoint(p){
+      if (typeof tipsWrap !== 'undefined' && tipsWrap) tipsWrap.hidden = false;
       selectedArea = p.key;
 
       setAreaPressed();
@@ -1096,6 +1091,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
     }
 
     function resetAll(){
+      if (typeof tipsWrap !== 'undefined' && tipsWrap) tipsWrap.hidden = true;
       clearSideTimer();
 
       selectedSide = null;
@@ -1146,6 +1142,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
     if (showAllBtn){
       showAllBtn.addEventListener('click', () => {
+        if (typeof tipsWrap !== 'undefined' && tipsWrap) tipsWrap.hidden = false;
         selectedArea = null;
         setAreaPressed();
         reorderTips();
@@ -1223,137 +1220,6 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
   }
   window.addEventListener('hashchange', focusFromHash);
   window.addEventListener('DOMContentLoaded', focusFromHash);
-})();
-</script>
-<script data_myss_show_tips_v2>
-(function () {
-  var tips = document.getElementById("tilpasning_tips");
-  if (!tips) return;
-
-  function showTips() { tips.hidden = false; }
-  function hideTips() { tips.hidden = true; }
-
-  function txt(el) {
-    return (el && el.textContent ? el.textContent : "").trim().toLowerCase();
-  }
-
-  function isNullstill(el) {
-    var t = txt(el);
-    return t.indexOf("nullstill") !== -1;
-  }
-
-  function isShowAll(el) {
-    var t = txt(el);
-    return t.indexOf("vis alle tips") !== -1 || t.indexOf("vis alt") !== -1;
-  }
-
-  function isChallengeChoice(el) {
-    var t = txt(el);
-
-    // Kun utfordringsvalg, ikke sidevalg
-    var triggers = [
-      "fot",
-      "kne",
-      "hofte",
-      "hofte og sete",
-      "grep",
-      "fokus"
-    ];
-
-    for (var i = 0; i < triggers.length; i++) {
-      if (t === triggers[i] || t.indexOf(triggers[i]) !== -1) return true;
-    }
-    return false;
-  }
-
-  function isHashTarget(el) {
-    if (!el || !el.getAttribute) return false;
-    var href = el.getAttribute("href") || "";
-    return href.charAt(0) === "#";
-  }
-
-  document.addEventListener("click", function (e) {
-    var el = e.target && e.target.closest ? e.target.closest("button,a,area") : null;
-    if (!el) return;
-
-    if (isNullstill(el)) {
-      hideTips();
-      return;
-    }
-
-    // Klikk i figur (area) eller hashlenker skal alltid vise tips før hopp
-    if ((el.tagName || "").toLowerCase() === "area" || isHashTarget(el)) {
-      showTips();
-      return;
-    }
-
-    if (isShowAll(el) || isChallengeChoice(el)) {
-      showTips();
-      return;
-    }
-  }, true);
-
-  window.addEventListener("hashchange", function () {
-    if (location.hash) showTips();
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    if (location.hash) showTips();
-    else hideTips();
-  });
-})();
-</script>
-<script data-myss-show-tips-v3>
-(function () {
-  var tips = document.getElementById("myss_tips_wrapper");
-  if (!tips) return;
-
-  function showTips(){ tips.hidden = false; }
-  function hideTips(){ tips.hidden = true; }
-
-  function t(el){ return (el && el.textContent ? el.textContent : "").trim().toLowerCase(); }
-
-  function isNullstill(el){
-    var s = t(el);
-    return s.indexOf("nullstill") !== -1;
-  }
-
-  function isShowAll(el){
-    var s = t(el);
-    return s.indexOf("vis alle tips") !== -1 || s.indexOf("vis alt") !== -1;
-  }
-
-  function isChallenge(el){
-    var s = t(el);
-    var triggers = ["fot", "kne", "hofte", "hofte og sete", "grep", "fokus"];
-    for (var i = 0; i < triggers.length; i++){
-      if (s === triggers[i] || s.indexOf(triggers[i]) !== -1) return true;
-    }
-    return false;
-  }
-
-  function isArea(el){
-    return (el && el.tagName && el.tagName.toLowerCase() === "area");
-  }
-
-  function isHashLink(el){
-    if (!el || !el.getAttribute) return false;
-    var href = el.getAttribute("href") || "";
-    return href.charAt(0) === "#";
-  }
-
-  document.addEventListener("click", function (e) {
-    var el = e.target && e.target.closest ? e.target.closest("button,a,area") : null;
-    if (!el) return;
-
-    if (isNullstill(el)) { hideTips(); return; }
-    if (isShowAll(el) || isChallenge(el) || isArea(el) || isHashLink(el)) { showTips(); return; }
-  }, true);
-
-  document.addEventListener("DOMContentLoaded", function () {
-    if (location.hash) showTips();
-    else hideTips();
-  });
 })();
 </script>
 </body>
