@@ -439,12 +439,39 @@
       border-color: rgba(47,127,191,.55);
       box-shadow: 0 0 0 6px rgba(47,127,191,.10), var(--shadow);
     }
+
+/* myss-choice */
+details.choice{
+  margin-top:12px;
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:14px;
+  padding:12px;
+  background:var(--card,#fff);
+}
+details.choice summary{ cursor:pointer; font-weight:700; }
+details.choice[open]{ box-shadow: var(--shadow, 0 10px 25px rgba(2,6,23,.08)); }
+details.choice .muted{ color: var(--muted,#475569); }
+details.choice .aid{ margin-top:12px; padding-top:12px; border-top:1px solid rgba(15,23,42,.12); }
+details.choice video{ width:100%; border-radius:14px; display:block; }
+
 </style>
 <style data-myss-tipswrap>#tipsWrap[hidden]{display:none !important;}</style>
 </head>
 
 <body>
   <main class="wrap">
+
+<section class="card" id="fotplassering" aria-label="Fotplassering">
+  <h2>Fotplassering</h2>
+  <p class="muted">Start her før du velger tilpasninger.</p>
+  <ul class="tips">
+    <li>Plasser foten stabilt og så likt som mulig på platen.</li>
+    <li>Hold hælen i kontakt gjennom bevegelsen.</li>
+    <li>Stopp før teknikken glipper, og juster før du fortsetter.</li>
+  </ul>
+</section>
+
+
     <section class="card">
       <h1>Tilpasninger ved behov: beinpress</h1>
       <p class="ingress">
@@ -794,6 +821,46 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
 
   
+
+
+<section class="card" id="fot" aria-label="Fot">
+  <h2>Fot</h2>
+
+  <details class="choice" id="ankelmobilitet">
+    <summary>Ankelmobilitet og forkortet akilles</summary>
+
+    <p class="muted">
+      Forkortet akilles og stiv ankel kan gjøre at hælen vil løfte seg i bunnposisjon.
+      Da mister du stabilitet og kontroll.
+    </p>
+
+    <div class="media">
+      <video controls playsinline preload="metadata">
+        <!-- Bytt filsti når videoen er klar -->
+        <source src="/media/beinpress/ankel-akilles-haelforhoyer.mp4" type="video/mp4">
+      </video>
+
+      <p class="muted" style="margin-top:10px">
+        I filmen ser du: 1) begrenset ankelmobilitet i stående,
+        2) hælen løfter seg i bunnposisjon i beinpress,
+        3) løsning med hælforhøyer og litt mindre dybde.
+      </p>
+    </div>
+
+    <div class="aid">
+      <h3>Hjelpemiddel: hælforhøyer</h3>
+      <p class="muted">
+        Gir litt mindre krav til ankelmobilitet og kan gjøre det lettere å holde hælen nede og sitte stabilt.
+      </p>
+      <ul class="tips">
+        <li>Flytt foten litt høyere på platen for å redusere krav til ankelbøy i bunn.</li>
+        <li>Bruk rolig tempo og stopp før hælen begynner å løfte seg.</li>
+        <li>Hvis du får smerte i akilles eller foran i ankelen, stopp og juster.</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
 </main>
 
   <script>
