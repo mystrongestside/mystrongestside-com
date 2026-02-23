@@ -1,10 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-
   <title>Tilpasninger ved behov: beinpress</title>
 
   <style>
@@ -50,6 +49,7 @@
       box-shadow: var(--shadow);
       padding: 18px;
       border: 1px solid rgba(15, 23, 42, 0.06);
+      margin-bottom: 14px;
     }
 
     h1{
@@ -60,6 +60,14 @@
       letter-spacing: -0.02em;
     }
 
+    h2{
+      margin: 0 0 8px;
+      color: var(--myss_blue_dark);
+      font-size: 1.15rem;
+    }
+
+    .muted{ color: var(--muted); }
+
     .ingress{
       margin: 0 0 18px;
       color: var(--muted);
@@ -67,9 +75,9 @@
       line-height: 1.45;
     }
 
-    .closing{
-      margin-top: 18px;
-      color: var(--muted);
+    .tips{
+      margin: 0;
+      padding-left: 18px;
       line-height: 1.5;
     }
 
@@ -81,6 +89,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding:16px;
+      border: 1px solid rgba(15, 23, 42, 0.06);
     }
 
     .adapt__lead{ margin:0 0 12px; color: var(--muted); }
@@ -202,8 +211,6 @@
 
     .adapt__option--neutral{ background: rgba(var(--orange_rgb), .08); }
 
-    .adapt__privacy{ margin:14px 0 0; color: var(--muted); font-size:.9rem; }
-
     .side-selected{
       margin-top: 12px;
       padding: 12px;
@@ -231,7 +238,7 @@
       height:auto;
       display:block;
     }
-    /* MYSS ADAPT TIPS */
+
     .side-selected__change{
       margin-top: 10px;
       border: 1px solid rgba(15,23,42,.12);
@@ -389,6 +396,10 @@
     .bodymap__btn{
       display: block;
       width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
     }
 
     .bodymap__img{
@@ -396,6 +407,7 @@
       height:auto;
       display:block;
       border-radius:18px;
+      border: 1px solid rgba(15,23,42,.08);
     }
 
     .adapt__smallhint{
@@ -417,18 +429,14 @@
       .choice-badge.is-show{ animation:none; opacity:1; }
     }
 
-
-/* @-- MYSS_STEP2_PATCH_V2 -- */
-.myss-steps{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
+    .myss-steps{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
     .myss-step{display:inline-block;padding:10px 12px;border-radius:999px;border:1px solid rgba(15,23,42,.12);text-decoration:none;font-weight:900;color:var(--myss_blue_dark);background:#fff}
     .myss-step.is-active{background:rgba(47,127,191,.08);border-color:rgba(47,127,191,.45)}
     .myss-quick{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
     .myss-quick a{display:inline-block;padding:12px 14px;border-radius:14px;border:1px solid rgba(15,23,42,.12);text-decoration:none;font-weight:950;color:var(--myss_blue_dark);background:#fff}
     .myss-quick a.primary{background:rgba(47,127,191,.08);border-color:rgba(47,127,191,.45)}
 
-    /* MYSS MORETIPS */
     .moretips{ margin-top: 10px; }
-
     #moreTipsWrap{
       margin-top: 10px;
       padding-top: 10px;
@@ -440,36 +448,31 @@
       box-shadow: 0 0 0 6px rgba(47,127,191,.10), var(--shadow);
     }
 
-/* myss-choice */
-details.choice{
-  margin-top:12px;
-  border:1px solid rgba(15,23,42,.12);
-  border-radius:14px;
-  padding:12px;
-  background:var(--card,#fff);
-}
-details.choice summary{ cursor:pointer; font-weight:700; }
-details.choice[open]{ box-shadow: var(--shadow, 0 10px 25px rgba(2,6,23,.08)); }
-details.choice .muted{ color: var(--muted,#475569); }
-details.choice .aid{ margin-top:12px; padding-top:12px; border-top:1px solid rgba(15,23,42,.12); }
-details.choice video{ width:100%; border-radius:14px; display:block; }
+    details.choice{
+      margin-top:12px;
+      border:1px solid rgba(15,23,42,.12);
+      border-radius:14px;
+      padding:12px;
+      background:var(--card,#fff);
+    }
+    details.choice summary{ cursor:pointer; font-weight:700; }
+    details.choice[open]{ box-shadow: var(--shadow, 0 10px 25px rgba(2,6,23,.08)); }
+    details.choice .muted{ color: var(--muted,#475569); }
+    details.choice .aid{ margin-top:12px; padding-top:12px; border-top:1px solid rgba(15,23,42,.12); }
+    details.choice video{ width:100%; border-radius:14px; display:block; }
 
-</style>
-<style data-myss-tipswrap>#tipsWrap[hidden]{display:none !important;}</style>
-<style data-myss-tipswrap-clean>#tipsWrap[hidden]{display:none !important;}</style>
+    #tipsWrap[hidden]{display:none !important;}
+  </style>
 </head>
 
 <body>
   <main class="wrap">
-
-
-
-
     <section class="card">
       <h1>Tilpasninger ved behov: beinpress</h1>
       <p class="ingress">
-Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret oppskrift som fungerer i et vanlig treningssenter, også når dagsformen varierer.
+        Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret oppskrift som fungerer i et vanlig treningssenter, også når dagsformen varierer.
       </p>
+
       <nav class="myss-steps" aria-label="Steg">
         <a class="myss-step" href="/grunnveiledning/beinpress.html">Steg 1: kom i gang</a>
         <a class="myss-step is-active" href="/grunnveiledning/beinpress-tilpasninger.html">Steg 2: tilpasninger</a>
@@ -481,11 +484,12 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
         <a href="/grunnveiledning/beinpress.html">Tilbake til video</a>
       </div>
 
-
       <section class="adapt" aria-labelledby="adaptTitle">
         <div id="adaptPanel" class="adapt__panel">
           <h2 id="adaptTitle">Tilpasset veiledning</h2>
-          <p class="adapt__lead">Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke som helseopplysninger.</p>
+          <p class="adapt__lead">
+            Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke som helseopplysninger.
+          </p>
 
           <div class="adapt__controls" role="group" aria-label="Filterkontroller">
             <button id="adaptShowAll" class="adapt__chip" type="button">Vis alle tips</button>
@@ -560,1072 +564,211 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
             </button>
           </div>
           <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
-</div>
-
-<p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
-
-<section id="tipsWrap" hidden>
-<section id="tipsContainer" class="adapt__tips" aria-live="polite">
-<article class="tip" data-side="general" data-area="general">
-
-<h3>Trygg og enkel start</h3>
-            <ul>
-              <li>Start med lett belastning og kort bevegelse.</li>
-              <li>Hold rolig tempo og stopp før det blir utrygt.</li>
-            </ul>
-          </article>
-
-<article class="tip" data-side="general" data-area="general">
-            <h3>Trygghet ved CP</h3>
-            <ul>
-              <li>Stopp tidlig hvis spastisiteten tar over, eller hvis teknikken begynner å glippe.</li>
-              <li>Ta en planlagt pause, pust rolig i 30 til 60 sekunder, og juster sete eller fot før du fortsetter.</li>
-              <li>Reduser belastning hvis du blir fort sliten eller mister jevnt trykk.</li>
-              <li>Be om hjelp hvis du ikke kommer trygt inn og ut av apparatet, eller hvis du ikke får en stabil startposisjon.</li>
-            </ul>
-          </article>
-
-<article class="tip" data-side="right" data-area="general">
-            <h3>Når høyre side jobber mindre</h3>
-            <ul>
-              <li>Reduser belastning og jobb med kontrollert tempo.</li>
-              <li>Plasser foten likt og bruk pause i bunn.</li>
-            </ul>
-          </article>
-
-<article class="tip" data-side="left" data-area="general">
-            <h3>Når venstre side jobber mindre</h3>
-            <ul>
-              <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
-              <li>Hold knær i samme retning gjennom hele presset.</li>
-            </ul>
-          </article>
-
-<article id="tip-foot" class="tip" data-side="general" data-area="foot">
-            <h3>Ved utfordringer i fot</h3>
-            <ul>
-              <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
-              <li>Sikre jevnt trykk gjennom hele foten.</li>
-            </ul>
-          </article>
-
-<article id="tip-knee" class="tip" data-side="general" data-area="knee">
-            <h3>Ved utfordringer i kne</h3>
-            <ul>
-              <li>La knær følge samme retning som tær gjennom presset.</li>
-              <li>Reduser dybden hvis det gir bedre kontroll.</li>
-            </ul>
-          </article>
-
-<article id="tip-hip" class="tip" data-side="general" data-area="hip">
-            <h3>Ved utfordringer i hofte og sete</h3>
-            <ul>
-              <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
-              <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
-            </ul>
-          </article>
-
-<article id="tip-head" class="tip" data-side="general" data-area="head">
-            <h3>Fokus og kontroll når det blir mye å holde styr på</h3>
-            <ul>
-              <li>Bruk få, faste steg: sete, fot, pust, press.</li>
-              <li>Ta pause mellom repetisjonene og senk tempo.</li>
-              <li>Bruk en kort huskeregel på skjermen.</li>
-            </ul>
-          </article>
-
-<article id="tip-grip" class="tip" data-side="general" data-area="grip">
-            <h3>Grep når håndkontroll er utfordrende</h3>
-
-            <p>
-              Et godt grep hjelper deg å sitte stødig i beinpressen. Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt. Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
-            </p>
-
-            <ul>
-              <li>Prioriter stabil posisjon før belastning.</li>
-              <li>Hold så symmetrisk som mulig med begge hender.</li>
-              <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
-            </ul>
-
-            <details>
-              <summary>Vis mer forklaring</summary>
-              <div class="details__content">
-                <p>
-                  Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden. Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
-                </p>
-                <p>
-                  Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet ta mer av vekten. Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>Hjelpemidler til grep</summary>
-              <div class="details__content">
-                <h4>1 Hjelpemidler du kan låne i resepsjonen</h4>
-                <p>
-                  På dette treningssenteret finnes det noen enkle hjelpemidler som kan gjøre det lettere å holde håndtaket, slik at du sitter mer stabilt og får en roligere gjennomføring.
-                </p>
-
-                <h4>Slik bruker du dem</h4>
-                <ol>
-                  <li>Se i oversikten under hvilket hjelpemiddel som kan passe for deg.</li>
-                  <li>Gå til resepsjonen og si nummeret på hjelpemiddelet.</li>
-                  <li>Du låner hjelpemiddelet til økten og leverer det tilbake i resepsjonen etterpå.</li>
-                </ol>
-
-                <h4>Eksempel på oversikt du kan fylle ut selv</h4>
-                <div class="aid-list">
-                  <div class="aid-item">
-                    <strong>Nummer 01</strong>
-                    <div>Navn: Grepstropp til håndtak</div>
-                    <div class="muted">Brukes når: Det er vanskelig å holde godt med den ene hånden, eller grepet slipper lett.</div>
-                  </div>
-
-                  <div class="aid-item">
-                    <strong>Nummer 02</strong>
-                    <div>Navn: Antiskli greppute</div>
-                    <div class="muted">Brukes når: Hånden glir på håndtaket, eller du trenger mer friksjon for å holde rolig.</div>
-                  </div>
-
-                  <div class="aid-item">
-                    <strong>Nummer 03</strong>
-                    <div>Navn: Myk grepstøtte til håndtak</div>
-                    <div class="muted">Brukes når: Du har vondt i hånd eller håndledd, eller trenger et tykkere og mer behagelig grep.</div>
-                  </div>
-                </div>
-
-                <p class="muted">
-                  Du kan utvide listen med flere grepshjelpemidler, så lenge hvert hjelpemiddel har et tydelig nummer, et enkelt navn og en kort forklaring på når det brukes.
-                </p>
-
-                <h4>2 Hjelpemidler du kan kjøpe selv</h4>
-                <p>
-                  Noen grepshjelpemidler er vanlige treningsprodukter som du kan kjøpe selv, uten søknad. For eksempel:
-                </p>
-                <ul>
-                  <li>grepstropper og andre grepshjelpemidler til håndtak</li>
-                  <li>grepputer eller antiskliinnlegg for bedre friksjon</li>
-                  <li>treningshansker med bedre grep</li>
-                  <li>flytende kalk dersom senteret tillater det</li>
-                  <li>skumrør eller grepstrekk for tykkere og mer behagelig håndtak</li>
-                </ul>
-
-                <p>
-                  Spør i resepsjonen hvis du vil vite hva senteret anbefaler, om noe kan bestilles via senteret, eller hvor du kan kjøpe tilsvarende produkter.
-                </p>
-
-                <p class="muted">
-                  Sikkerhet: Bruk hjelpemidler slik at du fortsatt kan slippe raskt. Stopp hvis du får smerter, nummenhet, hudirritasjon eller økt ubehag, og be om hjelp ved behov.
-                </p>
-
-                <h4>3 Individuelle hjelpemidler som er behovsprøvd</h4>
-                <p>
-                  Noen hjelpemidler er personlige og må vurderes faglig. Det kan for eksempel være:
-                </p>
-                <ul>
-                  <li>håndleddsortose eller annen støtte for håndledd</li>
-                  <li>tommelortose ved smerter eller ustabilitet</li>
-                  <li>tilpasset gripehjelpemiddel ved redusert fingerfunksjon</li>
-                  <li>spesialtilpasset hanske eller grepsløsning etter faglig vurdering</li>
-                </ul>
-
-                <p>
-                  Disse hjelpemidlene er behovsprøvde. Det betyr at behovet må vurderes, og at det som regel må sendes en søknad til Nav.
-                </p>
-
-                <p>
-                  Du kan ta direkte kontakt med et ortopediteknisk verksted hvis du ønsker mer informasjon eller vil bestille time til vurdering. Verkstedet kan veilede om aktuelle løsninger og hva som kreves av dokumentasjon. For ortoser fylles søknad første gang vanligvis ut av sykehuslege eller legespesialist og sendes via ortopediteknisk verksted med rammeavtale med Nav. Ved senere behov kan verkstedet ofte bistå med videre prosess.
-                  <a href="https://www.nav.no/ortoser" target="_blank" rel="noopener noreferrer">Nav: ortoser</a>
-                </p>
-
-                <p>
-                  Ergoterapeut eller fysioterapeut i kommunen kan også være en god inngang, særlig hvis du trenger funksjonskartlegging, utprøving eller vurdering av andre hjelpemidler som går via Nav Hjelpemiddelsentral.
-                </p>
-
-                <p class="muted">
-                  Oversikt over leverandører i Bergen og omegn for ortopediske sko finner du hos Nav:
-                  <a href="https://www.nav.no/ortopediskesko" target="_blank" rel="noopener noreferrer">Nav: ortopediske sko</a>
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>For fagpersoner</summary>
-              <div class="details__content">
-                <p>
-                  Hjelpemidler som lånes i resepsjonen er ment som generelle treningshjelpemidler og erstatter ikke behovsprøvd individuelt utstyr. Målet er å gjøre grepet mer stabilt, redusere kompensasjon og bidra til roligere gjennomføring i apparatet.
-                </p>
-
-                <h4>Når du bør vurdere videre utredning</h4>
-                <ul>
-                  <li>ved vedvarende smerter i hånd, tommel eller håndledd</li>
-                  <li>ved tydelig instabilitet, feilbelastning eller økende overaktivitet ved grep</li>
-                  <li>ved hudproblemer, trykkmerker eller risiko for sår</li>
-                  <li>ved stor sideforskjell som gir rotasjon i overkropp og skjev belastning</li>
-                  <li>når enkle tiltak ikke gir tilstrekkelig kontroll eller trygghet</li>
-                </ul>
-
-                <h4>Praktisk tilnærming i økt</h4>
-                <ul>
-                  <li>start med lav belastning og test grep og posisjon før du øker vekten</li>
-                  <li>prioriter symmetrisk støtte og rolig overkropp før fokus på kraft</li>
-                  <li>velg tiltak som gir stabilitet uten å låse hånden unødvendig</li>
-                  <li>vurder stropp, antiskli eller tykkere grep når det gir roligere overkropp og jevnere beinbruk</li>
-                </ul>
-
-                <h4>Samarbeid og videre tiltak</h4>
-                <p>
-                  Ved tydelig behov for ortoser, spesialtilpasning eller vedvarende smerte anbefales utredning via kommunal ergoterapi eller fysioterapi, og eventuelt ortopediteknisk verksted. Ortopediteknisk verksted kan også kontaktes direkte for vurdering og veiledning, spesielt når ortose vurderes.
-                </p>
-
-                <h4>Dokumentasjon som er nyttig</h4>
-                <ul>
-                  <li>hva som ble observert, for eksempel rotasjon, skjev bekkenstilling eller ulikt grep</li>
-                  <li>hvilke tiltak som ble prøvd, og hvilken effekt det hadde på kontroll og trygghet</li>
-                  <li>eventuelle smerter, hudreaksjoner eller tegn på overbelastning</li>
-                </ul>
-
-                <p>
-                  NFC veiledningen kan brukes som supplement til faglig oppfølging og som konkret støtte for å prøve ut tryggere utgangsstilling og mer forutsigbar belastning i apparatet.
-                </p>
-              </div>
-            </details>
-
-            <div class="tip__linkrow">
-              <a class="tip__linkpill" href="/veiledere/beinpress-grep.html">For veiledere</a>
-            </div>
-          </article>
-</section>
-
-<section class="card" id="fotplassering" aria-label="Fotplassering">
-  <h2>Fotplassering</h2>
-  <p class="muted">Start her før du velger tilpasninger.</p>
-  <ul class="tips">
-    <li>Plasser foten stabilt og så likt som mulig på platen.</li>
-    <li>Hold hælen i kontakt gjennom bevegelsen.</li>
-    <li>Stopp før teknikken glipper, og juster før du fortsetter.</li>
-  </ul>
-</section>
-
-
-    <section class="card">
-      <h1>Tilpasninger ved behov: beinpress</h1>
-      <p class="ingress">
-Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret oppskrift som fungerer i et vanlig treningssenter, også når dagsformen varierer.
-      </p>
-      <nav class="myss-steps" aria-label="Steg">
-        <a class="myss-step" href="/grunnveiledning/beinpress.html">Steg 1: kom i gang</a>
-        <a class="myss-step is-active" href="/grunnveiledning/beinpress-tilpasninger.html">Steg 2: tilpasninger</a>
-        <a class="myss-step" href="/veiledere/beinpress-grep.html">For veiledere</a>
-      </nav>
-
-      <div class="myss-quick" aria-label="Snarveier">
-        <a class="primary" href="#adaptPanel">Velg tilpasning</a>
-        <a href="/grunnveiledning/beinpress.html">Tilbake til video</a>
-      </div>
-
-
-      <section class="adapt" aria-labelledby="adaptTitle">
-        <div id="adaptPanel" class="adapt__panel">
-          <h2 id="adaptTitle">Tilpasset veiledning</h2>
-          <p class="adapt__lead">Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke som helseopplysninger.</p>
-
-          <div class="adapt__controls" role="group" aria-label="Filterkontroller">
-            <button id="adaptShowAll" class="adapt__chip" type="button">Vis alle tips</button>
-            <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill valg</button>
-          </div>
-
-          <p id="adaptStatus" class="adapt__status" aria-live="polite">Vis alle tips</p>
-          <p id="adaptToast" class="adapt__toast" hidden role="status" aria-live="polite"></p>
-
-          <section id="step1" class="adapt__group" aria-label="Sidevalg">
-            <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
-
-            <div id="sideChoices" class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-side="right" aria-pressed="false">
-                <span class="adapt__t">Mest på høyre side</span>
-                <span class="adapt__d">Vi viser tips for høyre side</span>
-              </button>
-
-              <button class="adapt__option" type="button" data-side="left" aria-pressed="false">
-                <span class="adapt__t">Mest på venstre side</span>
-                <span class="adapt__d">Vi viser tips for venstre side</span>
-              </button>
-
-              <button class="adapt__option adapt__option--neutral" type="button" data-side="general" aria-pressed="false">
-                <span class="adapt__t">Usikker</span>
-                <span class="adapt__d">Vis generell tilrettelegging</span>
-              </button>
-            </div>
-
-            <div id="sideSelected" class="side-selected" hidden aria-live="polite">
-              <p id="sideSelectedText" class="side-selected__text"></p>
-
-              <div class="side-selected__figure">
-                <img id="sideSelectedImg" src="/assets/img/unilateral.jpg" alt="Unilateral figur" loading="lazy" />
-              </div>
-
-              <button id="changeSide" class="side-selected__change" type="button">Endre valg</button>
-            </div>
-          </section>
-
-          <section id="step2" class="adapt__group" hidden aria-label="Kroppsområde">
-            <h3 class="adapt__h3">Hva er mest utfordrende</h3>
-
-            <div class="bodymap" aria-label="Trykk på området i figuren for å få relevante tips">
-              <button id="bodymapBtn" class="bodymap__btn" type="button" aria-label="Velg område i figuren">
-                <img id="bodymapImg" class="bodymap__img" src="/assets/img/Beinpress_figur.jpg" alt="Figur for valg av område" loading="lazy" />
-              </button>
-              <p class="adapt__smallhint">Trykk på et område i figuren. Du blir sendt til riktig tips.</p>
-            </div>
-          </section>
-
-          <div id="areaChoices" class="adapt__grid" role="group" aria-label="Velg område med knapper" style="margin-top:12px;">
-            <button class="adapt__option" type="button" data-area="foot" aria-pressed="false">
-              <span class="adapt__t">Fot</span>
-              <span class="adapt__d">Støtte og fotplassering</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="knee" aria-pressed="false">
-              <span class="adapt__t">Kne</span>
-              <span class="adapt__d">Retning og dybde</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="hip" aria-pressed="false">
-              <span class="adapt__t">Hofte og sete</span>
-              <span class="adapt__d">Posisjon og stabilitet</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="grip" aria-pressed="false">
-              <span class="adapt__t">Grep</span>
-              <span class="adapt__d">Stødig overkropp</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="head" aria-pressed="false">
-              <span class="adapt__t">Fokus</span>
-              <span class="adapt__d">Enkle steg og kontroll</span>
-            </button>
-          </div>
-          <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
-</div>
+        </div>
 
         <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
 
         <section id="tipsWrap" hidden>
-<section id="tipsContainer" class="adapt__tips" aria-live="polite">
-          <article class="tip" data-side="general" data-area="general">
+          <section id="tipsContainer" class="adapt__tips" aria-live="polite">
+            <article class="tip" data-side="general" data-area="general">
+              <h3>Trygg og enkel start</h3>
+              <ul>
+                <li>Start med lett belastning og kort bevegelse.</li>
+                <li>Hold rolig tempo og stopp før det blir utrygt.</li>
+              </ul>
+            </article>
 
-<h3>Trygg og enkel start</h3>
-            <ul>
-              <li>Start med lett belastning og kort bevegelse.</li>
-              <li>Hold rolig tempo og stopp før det blir utrygt.</li>
-            </ul>
-          </article>
+            <article class="tip" data-side="general" data-area="general">
+              <h3>Trygghet ved CP</h3>
+              <ul>
+                <li>Stopp tidlig hvis spastisiteten tar over, eller hvis teknikken begynner å glippe.</li>
+                <li>Ta en planlagt pause, pust rolig i 30 til 60 sekunder, og juster sete eller fot før du fortsetter.</li>
+                <li>Reduser belastning hvis du blir fort sliten eller mister jevnt trykk.</li>
+                <li>Be om hjelp hvis du ikke kommer trygt inn og ut av apparatet, eller hvis du ikke får en stabil startposisjon.</li>
+              </ul>
+            </article>
 
+            <article class="tip" data-side="right" data-area="general">
+              <h3>Når høyre side jobber mindre</h3>
+              <ul>
+                <li>Reduser belastning og jobb med kontrollert tempo.</li>
+                <li>Plasser foten likt og bruk pause i bunn.</li>
+              </ul>
+            </article>
 
-          <article class="tip" data-side="general" data-area="general">
-            <h3>Trygghet ved CP</h3>
-            <ul>
-              <li>Stopp tidlig hvis spastisiteten tar over, eller hvis teknikken begynner å glippe.</li>
-              <li>Ta en planlagt pause, pust rolig i 30 til 60 sekunder, og juster sete eller fot før du fortsetter.</li>
-              <li>Reduser belastning hvis du blir fort sliten eller mister jevnt trykk.</li>
-              <li>Be om hjelp hvis du ikke kommer trygt inn og ut av apparatet, eller hvis du ikke får en stabil startposisjon.</li>
-            </ul>
-          </article>
+            <article class="tip" data-side="left" data-area="general">
+              <h3>Når venstre side jobber mindre</h3>
+              <ul>
+                <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
+                <li>Hold knær i samme retning gjennom hele presset.</li>
+              </ul>
+            </article>
 
+            <article id="tip-foot" class="tip" data-side="general" data-area="foot">
+              <h3>Ved utfordringer i fot</h3>
+              <ul>
+                <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
+                <li>Sikre jevnt trykk gjennom hele foten.</li>
+              </ul>
+            </article>
 
-          <article class="tip" data-side="right" data-area="general">
-            <h3>Når høyre side jobber mindre</h3>
-            <ul>
-              <li>Reduser belastning og jobb med kontrollert tempo.</li>
-              <li>Plasser foten likt og bruk pause i bunn.</li>
-            </ul>
-          </article>
+            <article id="tip-knee" class="tip" data-side="general" data-area="knee">
+              <h3>Ved utfordringer i kne</h3>
+              <ul>
+                <li>La knær følge samme retning som tær gjennom presset.</li>
+                <li>Reduser dybden hvis det gir bedre kontroll.</li>
+              </ul>
+            </article>
 
-          <article class="tip" data-side="left" data-area="general">
-            <h3>Når venstre side jobber mindre</h3>
-            <ul>
-              <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
-              <li>Hold knær i samme retning gjennom hele presset.</li>
-            </ul>
-          </article>
+            <article id="tip-hip" class="tip" data-side="general" data-area="hip">
+              <h3>Ved utfordringer i hofte og sete</h3>
+              <ul>
+                <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
+                <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
+              </ul>
+            </article>
 
-          <article id="tip-foot" class="tip" data-side="general" data-area="foot">
-            <h3>Ved utfordringer i fot</h3>
-            <ul>
-              <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
-              <li>Sikre jevnt trykk gjennom hele foten.</li>
-            </ul>
-          </article>
+            <article id="tip-head" class="tip" data-side="general" data-area="head">
+              <h3>Fokus og kontroll når det blir mye å holde styr på</h3>
+              <ul>
+                <li>Bruk få, faste steg: sete, fot, pust, press.</li>
+                <li>Ta pause mellom repetisjonene og senk tempo.</li>
+                <li>Bruk en kort huskeregel på skjermen.</li>
+              </ul>
+            </article>
 
-          <article id="tip-knee" class="tip" data-side="general" data-area="knee">
-            <h3>Ved utfordringer i kne</h3>
-            <ul>
-              <li>La knær følge samme retning som tær gjennom presset.</li>
-              <li>Reduser dybden hvis det gir bedre kontroll.</li>
-            </ul>
-          </article>
+            <article id="tip-grip" class="tip" data-side="general" data-area="grip">
+              <h3>Grep når håndkontroll er utfordrende</h3>
 
-          <article id="tip-hip" class="tip" data-side="general" data-area="hip">
-            <h3>Ved utfordringer i hofte og sete</h3>
-            <ul>
-              <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
-              <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
-            </ul>
-          </article>
+              <p>
+                Et godt grep hjelper deg å sitte stødig i beinpressen. Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt. Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
+              </p>
 
-          <article id="tip-head" class="tip" data-side="general" data-area="head">
-            <h3>Fokus og kontroll når det blir mye å holde styr på</h3>
-            <ul>
-              <li>Bruk få, faste steg: sete, fot, pust, press.</li>
-              <li>Ta pause mellom repetisjonene og senk tempo.</li>
-              <li>Bruk en kort huskeregel på skjermen.</li>
-            </ul>
-          </article>
+              <ul>
+                <li>Prioriter stabil posisjon før belastning.</li>
+                <li>Hold så symmetrisk som mulig med begge hender.</li>
+                <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
+              </ul>
 
-          <article id="tip-grip" class="tip" data-side="general" data-area="grip">
-            <h3>Grep når håndkontroll er utfordrende</h3>
-
-            <p>
-              Et godt grep hjelper deg å sitte stødig i beinpressen. Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt. Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
-            </p>
-
-            <ul>
-              <li>Prioriter stabil posisjon før belastning.</li>
-              <li>Hold så symmetrisk som mulig med begge hender.</li>
-              <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
-            </ul>
-
-            <details>
-              <summary>Vis mer forklaring</summary>
-              <div class="details__content">
-                <p>
-                  Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden. Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
-                </p>
-                <p>
-                  Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet ta mer av vekten. Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>Hjelpemidler til grep</summary>
-              <div class="details__content">
-                <h4>1 Hjelpemidler du kan låne i resepsjonen</h4>
-                <p>
-                  På dette treningssenteret finnes det noen enkle hjelpemidler som kan gjøre det lettere å holde håndtaket, slik at du sitter mer stabilt og får en roligere gjennomføring.
-                </p>
-
-                <h4>Slik bruker du dem</h4>
-                <ol>
-                  <li>Se i oversikten under hvilket hjelpemiddel som kan passe for deg.</li>
-                  <li>Gå til resepsjonen og si nummeret på hjelpemiddelet.</li>
-                  <li>Du låner hjelpemiddelet til økten og leverer det tilbake i resepsjonen etterpå.</li>
-                </ol>
-
-                <h4>Eksempel på oversikt du kan fylle ut selv</h4>
-                <div class="aid-list">
-                  <div class="aid-item">
-                    <strong>Nummer 01</strong>
-                    <div>Navn: Grepstropp til håndtak</div>
-                    <div class="muted">Brukes når: Det er vanskelig å holde godt med den ene hånden, eller grepet slipper lett.</div>
-                  </div>
-
-                  <div class="aid-item">
-                    <strong>Nummer 02</strong>
-                    <div>Navn: Antiskli greppute</div>
-                    <div class="muted">Brukes når: Hånden glir på håndtaket, eller du trenger mer friksjon for å holde rolig.</div>
-                  </div>
-
-                  <div class="aid-item">
-                    <strong>Nummer 03</strong>
-                    <div>Navn: Myk grepstøtte til håndtak</div>
-                    <div class="muted">Brukes når: Du har vondt i hånd eller håndledd, eller trenger et tykkere og mer behagelig grep.</div>
-                  </div>
+              <details>
+                <summary>Vis mer forklaring</summary>
+                <div class="details__content">
+                  <p>
+                    Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden. Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
+                  </p>
+                  <p>
+                    Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet ta mer av vekten. Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
+                  </p>
                 </div>
+              </details>
 
-                <p class="muted">
-                  Du kan utvide listen med flere grepshjelpemidler, så lenge hvert hjelpemiddel har et tydelig nummer, et enkelt navn og en kort forklaring på når det brukes.
-                </p>
+              <details>
+                <summary>Hjelpemidler til grep</summary>
+                <div class="details__content">
+                  <h4>1 Hjelpemidler du kan låne i resepsjonen</h4>
+                  <p>
+                    På dette treningssenteret finnes det noen enkle hjelpemidler som kan gjøre det lettere å holde håndtaket, slik at du sitter mer stabilt og får en roligere gjennomføring.
+                  </p>
 
-                <h4>2 Hjelpemidler du kan kjøpe selv</h4>
-                <p>
-                  Noen grepshjelpemidler er vanlige treningsprodukter som du kan kjøpe selv, uten søknad. For eksempel:
-                </p>
-                <ul>
-                  <li>grepstropper og andre grepshjelpemidler til håndtak</li>
-                  <li>grepputer eller antiskliinnlegg for bedre friksjon</li>
-                  <li>treningshansker med bedre grep</li>
-                  <li>flytende kalk dersom senteret tillater det</li>
-                  <li>skumrør eller grepstrekk for tykkere og mer behagelig håndtak</li>
-                </ul>
+                  <h4>Slik bruker du dem</h4>
+                  <ol>
+                    <li>Se i oversikten under hvilket hjelpemiddel som kan passe for deg.</li>
+                    <li>Gå til resepsjonen og si nummeret på hjelpemiddelet.</li>
+                    <li>Du låner hjelpemiddelet til økten og leverer det tilbake i resepsjonen etterpå.</li>
+                  </ol>
 
-                <p>
-                  Spør i resepsjonen hvis du vil vite hva senteret anbefaler, om noe kan bestilles via senteret, eller hvor du kan kjøpe tilsvarende produkter.
-                </p>
+                  <h4>Eksempel på oversikt du kan fylle ut selv</h4>
+                  <div class="aid-list">
+                    <div class="aid-item">
+                      <strong>Nummer 01</strong>
+                      <div>Navn: Grepstropp til håndtak</div>
+                      <div class="muted">Brukes når: Det er vanskelig å holde godt med den ene hånden, eller grepet slipper lett.</div>
+                    </div>
 
-                <p class="muted">
-                  Sikkerhet: Bruk hjelpemidler slik at du fortsatt kan slippe raskt. Stopp hvis du får smerter, nummenhet, hudirritasjon eller økt ubehag, og be om hjelp ved behov.
-                </p>
+                    <div class="aid-item">
+                      <strong>Nummer 02</strong>
+                      <div>Navn: Antiskli greppute</div>
+                      <div class="muted">Brukes når: Hånden glir på håndtaket, eller du trenger mer friksjon for å holde rolig.</div>
+                    </div>
 
-                <h4>3 Individuelle hjelpemidler som er behovsprøvd</h4>
-                <p>
-                  Noen hjelpemidler er personlige og må vurderes faglig. Det kan for eksempel være:
-                </p>
-                <ul>
-                  <li>håndleddsortose eller annen støtte for håndledd</li>
-                  <li>tommelortose ved smerter eller ustabilitet</li>
-                  <li>tilpasset gripehjelpemiddel ved redusert fingerfunksjon</li>
-                  <li>spesialtilpasset hanske eller grepsløsning etter faglig vurdering</li>
-                </ul>
-
-                <p>
-                  Disse hjelpemidlene er behovsprøvde. Det betyr at behovet må vurderes, og at det som regel må sendes en søknad til Nav.
-                </p>
-
-                <p>
-                  Du kan ta direkte kontakt med et ortopediteknisk verksted hvis du ønsker mer informasjon eller vil bestille time til vurdering. Verkstedet kan veilede om aktuelle løsninger og hva som kreves av dokumentasjon. For ortoser fylles søknad første gang vanligvis ut av sykehuslege eller legespesialist og sendes via ortopediteknisk verksted med rammeavtale med Nav. Ved senere behov kan verkstedet ofte bistå med videre prosess.
-                  <a href="https://www.nav.no/ortoser" target="_blank" rel="noopener noreferrer">Nav: ortoser</a>
-                </p>
-
-                <p>
-                  Ergoterapeut eller fysioterapeut i kommunen kan også være en god inngang, særlig hvis du trenger funksjonskartlegging, utprøving eller vurdering av andre hjelpemidler som går via Nav Hjelpemiddelsentral.
-                </p>
-
-                <p class="muted">
-                  Oversikt over leverandører i Bergen og omegn for ortopediske sko finner du hos Nav:
-                  <a href="https://www.nav.no/ortopediskesko" target="_blank" rel="noopener noreferrer">Nav: ortopediske sko</a>
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>For fagpersoner</summary>
-              <div class="details__content">
-                <p>
-                  Hjelpemidler som lånes i resepsjonen er ment som generelle treningshjelpemidler og erstatter ikke behovsprøvd individuelt utstyr. Målet er å gjøre grepet mer stabilt, redusere kompensasjon og bidra til roligere gjennomføring i apparatet.
-                </p>
-
-                <h4>Når du bør vurdere videre utredning</h4>
-                <ul>
-                  <li>ved vedvarende smerter i hånd, tommel eller håndledd</li>
-                  <li>ved tydelig instabilitet, feilbelastning eller økende overaktivitet ved grep</li>
-                  <li>ved hudproblemer, trykkmerker eller risiko for sår</li>
-                  <li>ved stor sideforskjell som gir rotasjon i overkropp og skjev belastning</li>
-                  <li>når enkle tiltak ikke gir tilstrekkelig kontroll eller trygghet</li>
-                </ul>
-
-                <h4>Praktisk tilnærming i økt</h4>
-                <ul>
-                  <li>start med lav belastning og test grep og posisjon før du øker vekten</li>
-                  <li>prioriter symmetrisk støtte og rolig overkropp før fokus på kraft</li>
-                  <li>velg tiltak som gir stabilitet uten å låse hånden unødvendig</li>
-                  <li>vurder stropp, antiskli eller tykkere grep når det gir roligere overkropp og jevnere beinbruk</li>
-                </ul>
-
-                <h4>Samarbeid og videre tiltak</h4>
-                <p>
-                  Ved tydelig behov for ortoser, spesialtilpasning eller vedvarende smerte anbefales utredning via kommunal ergoterapi eller fysioterapi, og eventuelt ortopediteknisk verksted. Ortopediteknisk verksted kan også kontaktes direkte for vurdering og veiledning, spesielt når ortose vurderes.
-                </p>
-
-                <h4>Dokumentasjon som er nyttig</h4>
-                <ul>
-                  <li>hva som ble observert, for eksempel rotasjon, skjev bekkenstilling eller ulikt grep</li>
-                  <li>hvilke tiltak som ble prøvd, og hvilken effekt det hadde på kontroll og trygghet</li>
-                  <li>eventuelle smerter, hudreaksjoner eller tegn på overbelastning</li>
-                </ul>
-
-                <p>
-                  NFC veiledningen kan brukes som supplement til faglig oppfølging og som konkret støtte for å prøve ut tryggere utgangsstilling og mer forutsigbar belastning i apparatet.
-                </p>
-              </div>
-            </details>
-
-            <div class="tip__linkrow">
-              <a class="tip__linkpill" href="/veiledere/beinpress-grep.html">For veiledere</a>
-            </div>
-          </article>
-
-          </section>
-    </section>
-        <section class="moretips" aria-label="Flere tips">
-          <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>
-            Flere tips
-          </button>
-
-          <div id="moreTipsWrap" hidden>
-            <div id="moreTipsContainer" class="adapt__tips"></div>
-          </div>
-        </section>
-
-<div id="extraFootPlacement" hidden>
-<section class="card" id="fotplassering" aria-label="Fotplassering">
-  <h2>Fotplassering</h2>
-  <p class="muted">Start her før du velger tilpasninger.</p>
-  <ul class="tips">
-    <li>Plasser foten stabilt og så likt som mulig på platen.</li>
-    <li>Hold hælen i kontakt gjennom bevegelsen.</li>
-    <li>Stopp før teknikken glipper, og juster før du fortsetter.</li>
-  </ul>
-</section>
-</div>
-
-<div id="extraFoot" hidden>
-<section class="card" id="fotplassering" aria-label="Fotplassering">
-  <h2>Fotplassering</h2>
-  <p class="muted">Start her før du velger tilpasninger.</p>
-  <ul class="tips">
-    <li>Plasser foten stabilt og så likt som mulig på platen.</li>
-    <li>Hold hælen i kontakt gjennom bevegelsen.</li>
-    <li>Stopp før teknikken glipper, og juster før du fortsetter.</li>
-  </ul>
-</section>
-
-
-    <section class="card">
-      <h1>Tilpasninger ved behov: beinpress</h1>
-      <p class="ingress">
-Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret oppskrift som fungerer i et vanlig treningssenter, også når dagsformen varierer.
-      </p>
-      <nav class="myss-steps" aria-label="Steg">
-        <a class="myss-step" href="/grunnveiledning/beinpress.html">Steg 1: kom i gang</a>
-        <a class="myss-step is-active" href="/grunnveiledning/beinpress-tilpasninger.html">Steg 2: tilpasninger</a>
-        <a class="myss-step" href="/veiledere/beinpress-grep.html">For veiledere</a>
-      </nav>
-
-      <div class="myss-quick" aria-label="Snarveier">
-        <a class="primary" href="#adaptPanel">Velg tilpasning</a>
-        <a href="/grunnveiledning/beinpress.html">Tilbake til video</a>
-      </div>
-
-
-      <section class="adapt" aria-labelledby="adaptTitle">
-        <div id="adaptPanel" class="adapt__panel">
-          <h2 id="adaptTitle">Tilpasset veiledning</h2>
-          <p class="adapt__lead">Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke som helseopplysninger.</p>
-
-          <div class="adapt__controls" role="group" aria-label="Filterkontroller">
-            <button id="adaptShowAll" class="adapt__chip" type="button">Vis alle tips</button>
-            <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill valg</button>
-          </div>
-
-          <p id="adaptStatus" class="adapt__status" aria-live="polite">Vis alle tips</p>
-          <p id="adaptToast" class="adapt__toast" hidden role="status" aria-live="polite"></p>
-
-          <section id="step1" class="adapt__group" aria-label="Sidevalg">
-            <h3 class="adapt__h3">Hvilken side påvirkes mest</h3>
-
-            <div id="sideChoices" class="adapt__grid" role="group">
-              <button class="adapt__option" type="button" data-side="right" aria-pressed="false">
-                <span class="adapt__t">Mest på høyre side</span>
-                <span class="adapt__d">Vi viser tips for høyre side</span>
-              </button>
-
-              <button class="adapt__option" type="button" data-side="left" aria-pressed="false">
-                <span class="adapt__t">Mest på venstre side</span>
-                <span class="adapt__d">Vi viser tips for venstre side</span>
-              </button>
-
-              <button class="adapt__option adapt__option--neutral" type="button" data-side="general" aria-pressed="false">
-                <span class="adapt__t">Usikker</span>
-                <span class="adapt__d">Vis generell tilrettelegging</span>
-              </button>
-            </div>
-
-            <div id="sideSelected" class="side-selected" hidden aria-live="polite">
-              <p id="sideSelectedText" class="side-selected__text"></p>
-
-              <div class="side-selected__figure">
-                <img id="sideSelectedImg" src="/assets/img/unilateral.jpg" alt="Unilateral figur" loading="lazy" />
-              </div>
-
-              <button id="changeSide" class="side-selected__change" type="button">Endre valg</button>
-            </div>
-          </section>
-
-          <section id="step2" class="adapt__group" hidden aria-label="Kroppsområde">
-            <h3 class="adapt__h3">Hva er mest utfordrende</h3>
-
-            <div class="bodymap" aria-label="Trykk på området i figuren for å få relevante tips">
-              <button id="bodymapBtn" class="bodymap__btn" type="button" aria-label="Velg område i figuren">
-                <img id="bodymapImg" class="bodymap__img" src="/assets/img/Beinpress_figur.jpg" alt="Figur for valg av område" loading="lazy" />
-              </button>
-              <p class="adapt__smallhint">Trykk på et område i figuren. Du blir sendt til riktig tips.</p>
-            </div>
-          </section>
-
-          <div id="areaChoices" class="adapt__grid" role="group" aria-label="Velg område med knapper" style="margin-top:12px;">
-            <button class="adapt__option" type="button" data-area="foot" aria-pressed="false">
-              <span class="adapt__t">Fot</span>
-              <span class="adapt__d">Støtte og fotplassering</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="knee" aria-pressed="false">
-              <span class="adapt__t">Kne</span>
-              <span class="adapt__d">Retning og dybde</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="hip" aria-pressed="false">
-              <span class="adapt__t">Hofte og sete</span>
-              <span class="adapt__d">Posisjon og stabilitet</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="grip" aria-pressed="false">
-              <span class="adapt__t">Grep</span>
-              <span class="adapt__d">Stødig overkropp</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="head" aria-pressed="false">
-              <span class="adapt__t">Fokus</span>
-              <span class="adapt__d">Enkle steg og kontroll</span>
-            </button>
-          </div>
-          <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
-</div>
-
-        <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
-
-        <section id="tipsWrap" hidden>
-<section id="tipsContainer" class="adapt__tips" aria-live="polite">
-          <article class="tip" data-side="general" data-area="general">
-
-<h3>Trygg og enkel start</h3>
-            <ul>
-              <li>Start med lett belastning og kort bevegelse.</li>
-              <li>Hold rolig tempo og stopp før det blir utrygt.</li>
-            </ul>
-          </article>
-
-
-          <article class="tip" data-side="general" data-area="general">
-            <h3>Trygghet ved CP</h3>
-            <ul>
-              <li>Stopp tidlig hvis spastisiteten tar over, eller hvis teknikken begynner å glippe.</li>
-              <li>Ta en planlagt pause, pust rolig i 30 til 60 sekunder, og juster sete eller fot før du fortsetter.</li>
-              <li>Reduser belastning hvis du blir fort sliten eller mister jevnt trykk.</li>
-              <li>Be om hjelp hvis du ikke kommer trygt inn og ut av apparatet, eller hvis du ikke får en stabil startposisjon.</li>
-            </ul>
-          </article>
-
-
-          <article class="tip" data-side="right" data-area="general">
-            <h3>Når høyre side jobber mindre</h3>
-            <ul>
-              <li>Reduser belastning og jobb med kontrollert tempo.</li>
-              <li>Plasser foten likt og bruk pause i bunn.</li>
-            </ul>
-          </article>
-
-          <article class="tip" data-side="left" data-area="general">
-            <h3>Når venstre side jobber mindre</h3>
-            <ul>
-              <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
-              <li>Hold knær i samme retning gjennom hele presset.</li>
-            </ul>
-          </article>
-
-          <article id="tip-foot" class="tip" data-side="general" data-area="foot">
-            <h3>Ved utfordringer i fot</h3>
-            <ul>
-              <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
-              <li>Sikre jevnt trykk gjennom hele foten.</li>
-            </ul>
-          </article>
-
-          <article id="tip-knee" class="tip" data-side="general" data-area="knee">
-            <h3>Ved utfordringer i kne</h3>
-            <ul>
-              <li>La knær følge samme retning som tær gjennom presset.</li>
-              <li>Reduser dybden hvis det gir bedre kontroll.</li>
-            </ul>
-          </article>
-
-          <article id="tip-hip" class="tip" data-side="general" data-area="hip">
-            <h3>Ved utfordringer i hofte og sete</h3>
-            <ul>
-              <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
-              <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
-            </ul>
-          </article>
-
-          <article id="tip-head" class="tip" data-side="general" data-area="head">
-            <h3>Fokus og kontroll når det blir mye å holde styr på</h3>
-            <ul>
-              <li>Bruk få, faste steg: sete, fot, pust, press.</li>
-              <li>Ta pause mellom repetisjonene og senk tempo.</li>
-              <li>Bruk en kort huskeregel på skjermen.</li>
-            </ul>
-          </article>
-
-          <article id="tip-grip" class="tip" data-side="general" data-area="grip">
-            <h3>Grep når håndkontroll er utfordrende</h3>
-
-            <p>
-              Et godt grep hjelper deg å sitte stødig i beinpressen. Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt. Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
-            </p>
-
-            <ul>
-              <li>Prioriter stabil posisjon før belastning.</li>
-              <li>Hold så symmetrisk som mulig med begge hender.</li>
-              <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
-            </ul>
-
-            <details>
-              <summary>Vis mer forklaring</summary>
-              <div class="details__content">
-                <p>
-                  Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden. Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
-                </p>
-                <p>
-                  Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet ta mer av vekten. Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
-                </p>
-              </div>
-            </details>
-
-            <details>
-              <summary>Hjelpemidler til grep</summary>
-              <div class="details__content">
-                <h4>1 Hjelpemidler du kan låne i resepsjonen</h4>
-                <p>
-                  På dette treningssenteret finnes det noen enkle hjelpemidler som kan gjøre det lettere å holde håndtaket, slik at du sitter mer stabilt og får en roligere gjennomføring.
-                </p>
-
-                <h4>Slik bruker du dem</h4>
-                <ol>
-                  <li>Se i oversikten under hvilket hjelpemiddel som kan passe for deg.</li>
-                  <li>Gå til resepsjonen og si nummeret på hjelpemiddelet.</li>
-                  <li>Du låner hjelpemiddelet til økten og leverer det tilbake i resepsjonen etterpå.</li>
-                </ol>
-
-                <h4>Eksempel på oversikt du kan fylle ut selv</h4>
-                <div class="aid-list">
-                  <div class="aid-item">
-                    <strong>Nummer 01</strong>
-                    <div>Navn: Grepstropp til håndtak</div>
-                    <div class="muted">Brukes når: Det er vanskelig å holde godt med den ene hånden, eller grepet slipper lett.</div>
+                    <div class="aid-item">
+                      <strong>Nummer 03</strong>
+                      <div>Navn: Myk grepstøtte til håndtak</div>
+                      <div class="muted">Brukes når: Du har vondt i hånd eller håndledd, eller trenger et tykkere og mer behagelig grep.</div>
+                    </div>
                   </div>
 
-                  <div class="aid-item">
-                    <strong>Nummer 02</strong>
-                    <div>Navn: Antiskli greppute</div>
-                    <div class="muted">Brukes når: Hånden glir på håndtaket, eller du trenger mer friksjon for å holde rolig.</div>
-                  </div>
-
-                  <div class="aid-item">
-                    <strong>Nummer 03</strong>
-                    <div>Navn: Myk grepstøtte til håndtak</div>
-                    <div class="muted">Brukes når: Du har vondt i hånd eller håndledd, eller trenger et tykkere og mer behagelig grep.</div>
-                  </div>
+                  <p class="muted">
+                    Sikkerhet: Bruk hjelpemidler slik at du fortsatt kan slippe raskt. Stopp hvis du får smerter, nummenhet, hudirritasjon eller økt ubehag, og be om hjelp ved behov.
+                  </p>
                 </div>
+              </details>
 
-                <p class="muted">
-                  Du kan utvide listen med flere grepshjelpemidler, så lenge hvert hjelpemiddel har et tydelig nummer, et enkelt navn og en kort forklaring på når det brukes.
-                </p>
-
-                <h4>2 Hjelpemidler du kan kjøpe selv</h4>
-                <p>
-                  Noen grepshjelpemidler er vanlige treningsprodukter som du kan kjøpe selv, uten søknad. For eksempel:
-                </p>
-                <ul>
-                  <li>grepstropper og andre grepshjelpemidler til håndtak</li>
-                  <li>grepputer eller antiskliinnlegg for bedre friksjon</li>
-                  <li>treningshansker med bedre grep</li>
-                  <li>flytende kalk dersom senteret tillater det</li>
-                  <li>skumrør eller grepstrekk for tykkere og mer behagelig håndtak</li>
-                </ul>
-
-                <p>
-                  Spør i resepsjonen hvis du vil vite hva senteret anbefaler, om noe kan bestilles via senteret, eller hvor du kan kjøpe tilsvarende produkter.
-                </p>
-
-                <p class="muted">
-                  Sikkerhet: Bruk hjelpemidler slik at du fortsatt kan slippe raskt. Stopp hvis du får smerter, nummenhet, hudirritasjon eller økt ubehag, og be om hjelp ved behov.
-                </p>
-
-                <h4>3 Individuelle hjelpemidler som er behovsprøvd</h4>
-                <p>
-                  Noen hjelpemidler er personlige og må vurderes faglig. Det kan for eksempel være:
-                </p>
-                <ul>
-                  <li>håndleddsortose eller annen støtte for håndledd</li>
-                  <li>tommelortose ved smerter eller ustabilitet</li>
-                  <li>tilpasset gripehjelpemiddel ved redusert fingerfunksjon</li>
-                  <li>spesialtilpasset hanske eller grepsløsning etter faglig vurdering</li>
-                </ul>
-
-                <p>
-                  Disse hjelpemidlene er behovsprøvde. Det betyr at behovet må vurderes, og at det som regel må sendes en søknad til Nav.
-                </p>
-
-                <p>
-                  Du kan ta direkte kontakt med et ortopediteknisk verksted hvis du ønsker mer informasjon eller vil bestille time til vurdering. Verkstedet kan veilede om aktuelle løsninger og hva som kreves av dokumentasjon. For ortoser fylles søknad første gang vanligvis ut av sykehuslege eller legespesialist og sendes via ortopediteknisk verksted med rammeavtale med Nav. Ved senere behov kan verkstedet ofte bistå med videre prosess.
-                  <a href="https://www.nav.no/ortoser" target="_blank" rel="noopener noreferrer">Nav: ortoser</a>
-                </p>
-
-                <p>
-                  Ergoterapeut eller fysioterapeut i kommunen kan også være en god inngang, særlig hvis du trenger funksjonskartlegging, utprøving eller vurdering av andre hjelpemidler som går via Nav Hjelpemiddelsentral.
-                </p>
-
-                <p class="muted">
-                  Oversikt over leverandører i Bergen og omegn for ortopediske sko finner du hos Nav:
-                  <a href="https://www.nav.no/ortopediskesko" target="_blank" rel="noopener noreferrer">Nav: ortopediske sko</a>
-                </p>
+              <div class="tip__linkrow">
+                <a class="tip__linkpill" href="/veiledere/beinpress-grep.html">For veiledere</a>
               </div>
-            </details>
-
-            <details>
-              <summary>For fagpersoner</summary>
-              <div class="details__content">
-                <p>
-                  Hjelpemidler som lånes i resepsjonen er ment som generelle treningshjelpemidler og erstatter ikke behovsprøvd individuelt utstyr. Målet er å gjøre grepet mer stabilt, redusere kompensasjon og bidra til roligere gjennomføring i apparatet.
-                </p>
-
-                <h4>Når du bør vurdere videre utredning</h4>
-                <ul>
-                  <li>ved vedvarende smerter i hånd, tommel eller håndledd</li>
-                  <li>ved tydelig instabilitet, feilbelastning eller økende overaktivitet ved grep</li>
-                  <li>ved hudproblemer, trykkmerker eller risiko for sår</li>
-                  <li>ved stor sideforskjell som gir rotasjon i overkropp og skjev belastning</li>
-                  <li>når enkle tiltak ikke gir tilstrekkelig kontroll eller trygghet</li>
-                </ul>
-
-                <h4>Praktisk tilnærming i økt</h4>
-                <ul>
-                  <li>start med lav belastning og test grep og posisjon før du øker vekten</li>
-                  <li>prioriter symmetrisk støtte og rolig overkropp før fokus på kraft</li>
-                  <li>velg tiltak som gir stabilitet uten å låse hånden unødvendig</li>
-                  <li>vurder stropp, antiskli eller tykkere grep når det gir roligere overkropp og jevnere beinbruk</li>
-                </ul>
-
-                <h4>Samarbeid og videre tiltak</h4>
-                <p>
-                  Ved tydelig behov for ortoser, spesialtilpasning eller vedvarende smerte anbefales utredning via kommunal ergoterapi eller fysioterapi, og eventuelt ortopediteknisk verksted. Ortopediteknisk verksted kan også kontaktes direkte for vurdering og veiledning, spesielt når ortose vurderes.
-                </p>
-
-                <h4>Dokumentasjon som er nyttig</h4>
-                <ul>
-                  <li>hva som ble observert, for eksempel rotasjon, skjev bekkenstilling eller ulikt grep</li>
-                  <li>hvilke tiltak som ble prøvd, og hvilken effekt det hadde på kontroll og trygghet</li>
-                  <li>eventuelle smerter, hudreaksjoner eller tegn på overbelastning</li>
-                </ul>
-
-                <p>
-                  NFC veiledningen kan brukes som supplement til faglig oppfølging og som konkret støtte for å prøve ut tryggere utgangsstilling og mer forutsigbar belastning i apparatet.
-                </p>
-              </div>
-            </details>
-
-            <div class="tip__linkrow">
-              <a class="tip__linkpill" href="/veiledere/beinpress-grep.html">For veiledere</a>
-            </div>
-          </article>
-
+            </article>
           </section>
+
+          <section class="moretips" aria-label="Flere tips">
+            <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>Flere tips</button>
+            <div id="moreTipsWrap" hidden>
+              <div id="moreTipsContainer" class="adapt__tips"></div>
+            </div>
+          </section>
+        </section>
+      </section>
     </section>
-        <section class="moretips" aria-label="Flere tips">
-          <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>
-            Flere tips
-          </button>
 
-          <div id="moreTipsWrap" hidden>
-            <div id="moreTipsContainer" class="adapt__tips"></div>
+    <div id="extraFootPlacement" hidden>
+      <section class="card" id="fotplassering-card" aria-label="Fotplassering">
+        <h2>Fotplassering</h2>
+        <p class="muted">Start her før du velger tilpasninger.</p>
+        <ul class="tips">
+          <li>Plasser foten stabilt og så likt som mulig på platen.</li>
+          <li>Hold hælen i kontakt gjennom bevegelsen.</li>
+          <li>Stopp før teknikken glipper, og juster før du fortsetter.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div id="extraFoot" hidden>
+      <section class="card" id="fot-card" aria-label="Fot">
+        <h2>Fot</h2>
+
+        <details class="choice" id="ankelmobilitet">
+          <summary>Ankelmobilitet og forkortet akilles</summary>
+
+          <p class="muted">
+            Forkortet akilles og stiv ankel kan gjøre at hælen vil løfte seg i bunnposisjon.
+            Da mister du stabilitet og kontroll.
+          </p>
+
+          <div class="media">
+            <video controls playsinline preload="metadata">
+              <source src="/media/beinpress/ankel-akilles-haelforhoyer.mp4" type="video/mp4">
+            </video>
+
+            <p class="muted" style="margin-top:10px">
+              I filmen ser du: 1) begrenset ankelmobilitet i stående, 2) hælen løfter seg i bunnposisjon i beinpress, 3) løsning med hælforhøyer og litt mindre dybde.
+            </p>
           </div>
-        </section>
-</section>
 
-
-
-
-
-<section class="card" id="fot" aria-label="Fot">
-  <h2>Fot</h2>
-
-  <details class="choice" id="ankelmobilitet">
-    <summary>Ankelmobilitet og forkortet akilles</summary>
-
-    <p class="muted">
-      Forkortet akilles og stiv ankel kan gjøre at hælen vil løfte seg i bunnposisjon.
-      Da mister du stabilitet og kontroll.
-    </p>
-
-    <div class="media">
-      <video controls playsinline preload="metadata">
-        <!-- Bytt filsti når videoen er klar -->
-        <source src="/media/beinpress/ankel-akilles-haelforhoyer.mp4" type="video/mp4">
-      </video>
-
-      <p class="muted" style="margin-top:10px">
-        I filmen ser du: 1) begrenset ankelmobilitet i stående,
-        2) hælen løfter seg i bunnposisjon i beinpress,
-        3) løsning med hælforhøyer og litt mindre dybde.
-      </p>
-    </div>
-
-    <div class="aid">
-      <h3>Hjelpemiddel nummer 04: hælforhøyer</h3>
-      <p class="muted">
-        Gir litt mindre krav til ankelmobilitet og kan gjøre det lettere å holde hælen nede og sitte stabilt.
-      </p>
-      <ul class="tips">
-        <li>Flytt foten litt høyere på platen for å redusere krav til ankelbøy i bunn.</li>
-        <li>Bruk rolig tempo og stopp før hælen begynner å løfte seg.</li>
-        <li>Hvis du får smerte i akilles eller foran i ankelen, stopp og juster.</li>
-      </ul>
-    </div>
-  </details>
-</section>
-</div>
-</section>
-
-
-
-        <section class="moretips" aria-label="Flere tips">
-          <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>
-            Flere tips
-          </button>
-
-          <div id="moreTipsWrap" hidden>
-            <div id="moreTipsContainer" class="adapt__tips"></div>
+          <div class="aid">
+            <h3>Hjelpemiddel nummer 04: hælforhøyer</h3>
+            <p class="muted">
+              Gir litt mindre krav til ankelmobilitet og kan gjøre det lettere å holde hælen nede og sitte stabilt.
+            </p>
+            <ul class="tips">
+              <li>Flytt foten litt høyere på platen for å redusere krav til ankelbøy i bunn.</li>
+              <li>Bruk rolig tempo og stopp før hælen begynner å løfte seg.</li>
+              <li>Hvis du får smerte i akilles eller foran i ankelen, stopp og juster.</li>
+            </ul>
           </div>
-        </section>
-</section>
-
-
-
-
-
-<section class="card" id="fot" aria-label="Fot">
-  <h2>Fot</h2>
-
-  <details class="choice" id="ankelmobilitet">
-    <summary>Ankelmobilitet og forkortet akilles</summary>
-
-    <p class="muted">
-      Forkortet akilles og stiv ankel kan gjøre at hælen vil løfte seg i bunnposisjon.
-      Da mister du stabilitet og kontroll.
-    </p>
-
-    <div class="media">
-      <video controls playsinline preload="metadata">
-        <!-- Bytt filsti når videoen er klar -->
-        <source src="/media/beinpress/ankel-akilles-haelforhoyer.mp4" type="video/mp4">
-      </video>
-
-      <p class="muted" style="margin-top:10px">
-        I filmen ser du: 1) begrenset ankelmobilitet i stående,
-        2) hælen løfter seg i bunnposisjon i beinpress,
-        3) løsning med hælforhøyer og litt mindre dybde.
-      </p>
+        </details>
+      </section>
     </div>
-
-    <div class="aid">
-      <h3>Hjelpemiddel nummer 05: hælforhøyer</h3>
-      <p class="muted">
-        Gir litt mindre krav til ankelmobilitet og kan gjøre det lettere å holde hælen nede og sitte stabilt.
-      </p>
-      <ul class="tips">
-        <li>Flytt foten litt høyere på platen for å redusere krav til ankelbøy i bunn.</li>
-        <li>Bruk rolig tempo og stopp før hælen begynner å løfte seg.</li>
-        <li>Hvis du får smerte i akilles eller foran i ankelen, stopp og juster.</li>
-      </ul>
-    </div>
-  </details>
-</section>
-
-</main>
+  </main>
 
   <script>
   (function(){
@@ -1653,19 +796,12 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
     const extraFootPlacement = document.getElementById('extraFootPlacement');
     const extraFoot = document.getElementById('extraFoot');
 
-    function updateExtras(){
-      const showFoot = selectedArea === 'foot';
-      if (extraFootPlacement) extraFootPlacement.hidden = !showFoot;
-      if (extraFoot) extraFoot.hidden = !showFoot;
-    }
-    if (tipsWrap) tipsWrap.hidden = true;
     const tips = Array.from(document.querySelectorAll('.tip'));
-
     const toggleMoreTips = document.getElementById('toggleMoreTips');
     const moreTipsWrap = document.getElementById('moreTipsWrap');
     const moreTipsContainer = document.getElementById('moreTipsContainer');
-    const sideButtons = sideChoices ? Array.from(sideChoices.querySelectorAll('button[data-side]')) : [];
 
+    const sideButtons = sideChoices ? Array.from(sideChoices.querySelectorAll('button[data-side]')) : [];
     const originalOrder = tips.slice();
 
     let selectedSide = null;
@@ -1681,6 +817,14 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
       { key:'knee', x:0.72, y:0.76, target:'#tip-knee', label:'Kne' },
       { key:'foot', x:0.50, y:0.94, target:'#tip-foot', label:'Fot' }
     ];
+
+    function updateExtras(){
+      const showFoot = selectedArea === 'foot';
+      if (extraFootPlacement) extraFootPlacement.hidden = !showFoot;
+      if (extraFoot) extraFoot.hidden = !showFoot;
+    }
+
+    if (tipsWrap) tipsWrap.hidden = true;
 
     function bumpFade(el){
       if (!el) return;
@@ -1719,6 +863,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
     }
 
     function ping(el){
+      if (!el) return;
       el.classList.remove('tip--ping');
       void el.offsetWidth;
       el.classList.add('tip--ping');
@@ -1767,8 +912,6 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
       const p = points.find(x => x.key === key);
       return p ? p.label : key;
     }
-
-
 
     const areaChoices = document.getElementById('areaChoices');
     const areaButtons = areaChoices ? Array.from(areaChoices.querySelectorAll('button[data-area]')) : [];
@@ -1829,6 +972,7 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
         t.hidden = !(sideOk && areaOk);
       });
     }
+
     function updatePrimaryAndMore(){
       if (!tipsContainer || !moreTipsContainer || !toggleMoreTips || !moreTipsWrap) return;
 
@@ -1861,7 +1005,6 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
         moreTipsWrap.hidden = true;
       }
     }
-
 
     function clearSideTimer(){
       if (!sideTimer) return;
@@ -1986,11 +1129,12 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
       showAllBtn.addEventListener('click', () => {
         if (tipsWrap) tipsWrap.hidden = false;
         selectedArea = null;
-      updateExtras();
+        updateExtras();
         setAreaPressed();
         reorderTips();
         applyFilter();
         updatePrimaryAndMore();
+
         const msg = selectedSide
           ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område')
           : 'Vis alle tips';
@@ -2027,7 +1171,6 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
       });
     }
 
-
     if (areaChoices){
       areaChoices.addEventListener('click', (e) => {
         const btn = e.target.closest('button[data-area]');
@@ -2047,23 +1190,24 @@ Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret opp
 
   })();
   </script>
-<script data-myss-focus-hash>
-(function () {
-  function focusFromHash() {
-    if (!location.hash) return;
-    var id = decodeURIComponent(location.hash.slice(1));
-    var el = document.getElementById(id);
-    if (!el) return;
-    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
-    try {
-      el.focus({ preventScroll: true });
-    } catch (e) {
-      el.focus();
+
+  <script data-myss-focus-hash>
+  (function () {
+    function focusFromHash() {
+      if (!location.hash) return;
+      var id = decodeURIComponent(location.hash.slice(1));
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+      try {
+        el.focus({ preventScroll: true });
+      } catch (e) {
+        el.focus();
+      }
     }
-  }
-  window.addEventListener('hashchange', focusFromHash);
-  window.addEventListener('DOMContentLoaded', focusFromHash);
-})();
-</script>
+    window.addEventListener('hashchange', focusFromHash);
+    window.addEventListener('DOMContentLoaded', focusFromHash);
+  })();
+  </script>
 </body>
 </html>
