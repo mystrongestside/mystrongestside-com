@@ -361,7 +361,39 @@
 
     .contrast-high .uu-btn{ border-width:2px; }
     .motion-reduced *{ scroll-behavior:auto !important; transition:none !important; animation:none !important; }
-  </style>
+
+.warn{
+  display:flex;
+  gap:.6rem;
+  align-items:flex-start;
+  padding:.75rem .85rem;
+  border-radius:14px;
+  border:1px solid rgba(var(--yellow_rgb), .45);
+  background: rgba(var(--yellow_rgb), .10);
+}
+
+.warn__icon{
+  margin-top:.15rem;
+  color: rgb(var(--yellow_rgb));
+  flex:0 0 auto;
+}
+
+.warn__text{
+  color: var(--text);
+}
+
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+</style>
 </head>
 
 <body>
@@ -541,6 +573,17 @@
 
             <details class="choice tip" id="tip-ankelmobilitet" data-side="general" data-area="foot">
               <summary>Hæl løfter seg i bunnposisjon</summary>
+              <p class="warn" role="note">
+                <span class="warn__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+                    <path d="M12 3 1 21h22L12 3z" fill="currentColor"></path>
+                    <path d="M12 9v5" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
+                    <circle cx="12" cy="17" r="1.2" fill="#fff"></circle>
+                  </svg>
+                </span>
+                <span class="warn__text"><span class="sr-only">Advarsel: </span>Stopp dybden hvis hælen løfter seg eller foten vrir. Tren i den banen du klarer med stabil fot.</span>
+              </p>
+
               <div class="inner">
                 <p class="muted">
                   Dette skjer ofte når ankelen er stiv eller leggen og akilles er stram.
