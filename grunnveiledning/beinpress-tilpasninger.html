@@ -917,6 +917,8 @@
   function get(key, fallback){ try { return localStorage.getItem(key) || fallback; } catch(e){ return fallback; } }
   function set(key, value){ try { localStorage.setItem(key, value); } catch(e){} }
   const state = { theme: get("uu_theme","light"), contrast: get("uu_contrast","normal"), motion: get("uu_motion","normal"), font: Number(get("uu_font","1")) };
+  const tips = Array.from(document.querySelectorAll("#tipsWrap .tip"));
+  root.dataset.tipCount = String(tips.length);
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
   function applyThemeVars(){
     if(state.theme === "dark"){
