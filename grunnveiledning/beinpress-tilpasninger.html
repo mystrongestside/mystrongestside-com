@@ -1146,7 +1146,7 @@
 
       tips.forEach(t => t.classList.remove('tip--primary'));
 
-      const visible = tips.filter(t => !t.hidden);
+      const visible = Array.from(tipsContainer.querySelectorAll('.tip')).filter(t => !t.hidden);
 
       visible.forEach(t => tipsContainer.appendChild(t));
       moreTipsContainer.innerHTML = '';
@@ -1238,6 +1238,11 @@
       updatePrimaryAndMore();
       setStatus(statusText());
       showBadge('Du har valgt ' + sideLabel(selectedSide) + ' → ' + p.label);
+
+      if (p.key === 'foot' && extraFoot && !extraFoot.hidden){
+        scrollToEl(extraFoot);
+        return;
+      }
 
       scrollToSel(p.target);
     }
