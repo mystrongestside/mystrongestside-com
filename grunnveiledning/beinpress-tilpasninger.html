@@ -464,29 +464,12 @@
     #tipsWrap[hidden]{display:none !important;}
   </style>
 <style>
-  :root{
-    color-scheme: light;
-    --uu-bg: #f6f9fc;
-    --uu-card: #ffffff;
-    --uu-text: #0f172a;
-    --uu-muted: #475569;
-    --uu-focus: rgba(47,127,191,.35);
-    --uu-font-scale: 1;
-  }
-
-  html{ font-size: calc(16px * var(--uu-font-scale)); }
-
-  body{
-    background: var(--uu-bg);
-    color: var(--uu-text);
-  }
-
   .skip-link{
     position: absolute;
     left: .75rem;
     top: .5rem;
     padding: .6rem .8rem;
-    background: var(--uu-card);
+    background: var(--card);
     border: 2px solid currentColor;
     border-radius: .75rem;
     transform: translateY(-200%);
@@ -495,14 +478,14 @@
   .skip-link:focus{
     transform: translateY(0);
     outline: none;
-    box-shadow: 0 0 0 4px var(--uu-focus);
+    box-shadow: 0 0 0 4px var(--focus);
   }
 
   .uu-bar{
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--uu-card);
+    background: var(--card);
     border-bottom: 1px solid rgba(2,6,23,.10);
   }
   .uu-bar__inner{
@@ -515,7 +498,7 @@
     flex-wrap: wrap;
   }
   .uu-bar__brand{
-    font-weight: 700;
+    font-weight: 800;
     text-decoration: none;
     color: inherit;
     padding: .35rem .5rem;
@@ -523,7 +506,7 @@
   }
   .uu-bar__brand:focus{
     outline: none;
-    box-shadow: 0 0 0 4px var(--uu-focus);
+    box-shadow: 0 0 0 4px var(--focus);
   }
 
   .uu-bar__nav{
@@ -540,7 +523,7 @@
   }
   .uu-bar__link:focus{
     outline: none;
-    box-shadow: 0 0 0 4px var(--uu-focus);
+    box-shadow: 0 0 0 4px var(--focus);
   }
 
   .uu-bar__tools{
@@ -563,25 +546,13 @@
   }
   .uu-btn:focus{
     outline: none;
-    box-shadow: 0 0 0 4px var(--uu-focus);
+    box-shadow: 0 0 0 4px var(--focus);
   }
   .uu-btn[aria-pressed="true"]{ border-color: rgba(2,6,23,.35); }
 
   .uu-zoom .uu-btn:first-child{ font-size: .95em; }
   .uu-zoom .uu-btn:last-child{ font-size: 1.1em; }
 
-  .theme-dark{
-    color-scheme: dark;
-    --uu-bg: #0b1220;
-    --uu-card: #0f1b2e;
-    --uu-text: #f1f5f9;
-    --uu-muted: #cbd5e1;
-    --uu-focus: rgba(255,214,10,.35);
-  }
-
-  .contrast-high{
-    --uu-focus: rgba(255,214,10,.55);
-  }
   .contrast-high .uu-btn{ border-width: 2px; }
 
   .motion-reduced *{
@@ -603,9 +574,9 @@
     <a class="uu-bar__brand" href="/" aria-label="Gå til forsiden">My Strongest Side</a>
 
     <nav class="uu-bar__nav" aria-label="Snarveier">
-      <a href="#tilpasning" class="uu-bar__link">Velg tilpasning</a>
-      <a href="#tips" class="uu-bar__link">Tips</a>
-      <a href="#for-veiledere" class="uu-bar__link">For veiledere</a>
+      <a href="#adaptPanel" class="uu-bar__link">Velg tilpasning</a>
+      <a href="#tipsWrap" class="uu-bar__link">Tips</a>
+      <a href="/veiledere/beinpress-grep.html" class="uu-bar__link">For veiledere</a>
     </nav>
 
     <div class="uu-bar__tools" aria-label="Visning">
@@ -874,17 +845,8 @@
             </article>
           </section>
 
-          <section class="moretips" aria-label="Flere tips">
-            <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>Flere tips</button>
-            <div id="moreTipsWrap" hidden>
-              <div id="moreTipsContainer" class="adapt__tips"></div>
-            </div>
-          </section>
-        </section>
-      </section>
-    </section>
-<!-- BOLK: Fot (ankel og akilles) -->
-<details class="choice" id="ankelmobilitet">
+          <!-- BOLK: Fot (ankel og akilles) -->
+<details class="choice tip" id="tip-ankelmobilitet" data-side="general" data-area="foot" hidden>
   <summary>Hæl løfter seg i bunnposisjon</summary>
   <div class="inner">
     <p class="muted">
@@ -933,516 +895,59 @@
   </div>
 </details>
 <!-- SLUTT BOLK -->
+
+<section class="moretips" aria-label="Flere tips">
+            <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>Flere tips</button>
+            <div id="moreTipsWrap" hidden>
+              <div id="moreTipsContainer" class="adapt__tips"></div>
+            </div>
+          </section>
+        </section>
+      </section>
+    </section>
+
   
 
 
 </main>
 
   <script>
-  (function(){
-    const status = document.getElementById('adaptStatus');
-    const toast = document.getElementById('adaptToast');
-    const badge = document.getElementById('choiceBadge');
-
-    const sideChoices = document.getElementById('sideChoices');
-    const sideSelected = document.getElementById('sideSelected');
-    const sideSelectedText = document.getElementById('sideSelectedText');
-    const changeSide = document.getElementById('changeSide');
-
-    const step2 = document.getElementById('step2');
-
-    const showAllBtn = document.getElementById('adaptShowAll');
-    const resetBtn = document.getElementById('adaptReset');
-
-    const bodymapBtn = document.getElementById('bodymapBtn');
-    const bodymapImg = document.getElementById('bodymapImg');
-
-    if (showAllBtn) showAllBtn.hidden = true;
-
-    const tipsContainer = document.getElementById('tipsContainer');
-    const tipsWrap = document.getElementById('tipsWrap');
-    const extraFootPlacement = document.getElementById('extraFootPlacement');
-    const extraFoot = document.getElementById('extraFoot');
-
-    const tips = Array.from(document.querySelectorAll('.tip'));
-    const toggleMoreTips = document.getElementById('toggleMoreTips');
-    const moreTipsWrap = document.getElementById('moreTipsWrap');
-    const moreTipsContainer = document.getElementById('moreTipsContainer');
-
-    const sideButtons = sideChoices ? Array.from(sideChoices.querySelectorAll('button[data-side]')) : [];
-    const originalOrder = tips.slice();
-
-    let selectedSide = null;
-    let selectedArea = null;
-    let sideTimer = null;
-    let toastTimer = null;
-    let badgeTimer = null;
-
-    const points = [
-      { key:'head', x:0.50, y:0.13, target:'#tip-head', label:'Fokus og kontroll' },
-      { key:'grip', x:0.18, y:0.55, target:'#tip-grip', label:'Grep' },
-      { key:'hip',  x:0.69, y:0.60, target:'#tip-hip',  label:'Hofte og sete' },
-      { key:'knee', x:0.72, y:0.76, target:'#tip-knee', label:'Kne' },
-      { key:'foot', x:0.50, y:0.94, target:'#tip-foot', label:'Fot' }
-    ];
-
-    function updateExtras(){
-      const showFoot = selectedArea === 'foot';
-      if (extraFootPlacement) extraFootPlacement.hidden = !showFoot;
-      if (extraFoot) extraFoot.hidden = !showFoot;
+(function(){
+  const root = document.documentElement;
+  function get(key, fallback){ try { return localStorage.getItem(key) || fallback; } catch(e){ return fallback; } }
+  function set(key, value){ try { localStorage.setItem(key, value); } catch(e){} }
+  const state = { theme: get("uu_theme","light"), contrast: get("uu_contrast","normal"), motion: get("uu_motion","normal"), font: Number(get("uu_font","1")) };
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+  function applyThemeVars(){
+    if(state.theme === "dark"){
+      root.style.setProperty("--bg", "#0b1220"); root.style.setProperty("--card", "#0f1b2e"); root.style.setProperty("--text", "#f1f5f9"); root.style.setProperty("--muted", "#cbd5e1"); root.style.setProperty("--focus", "rgba(255,214,10,.35)"); root.style.colorScheme = "dark";
+    } else {
+      root.style.setProperty("--bg", "#f6f9fc"); root.style.setProperty("--card", "#ffffff"); root.style.setProperty("--text", "#0f172a"); root.style.setProperty("--muted", "#475569"); root.style.setProperty("--focus", "rgba(47,127,191,.35)"); root.style.colorScheme = "light";
     }
-
-    if (tipsWrap) tipsWrap.hidden = true;
-
-    function bumpFade(el){
-      if (!el) return;
-      el.classList.remove('fade-text');
-      void el.offsetWidth;
-      el.classList.add('fade-text');
-    }
-
-    function setStatus(text){
-      if (status) status.textContent = text;
-      bumpFade(status);
-    }
-
-    function showToast(msg){
-      if (!toast) return;
-      toast.textContent = msg;
-      toast.hidden = false;
-      bumpFade(toast);
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => { toast.hidden = true; }, 2200);
-    }
-
-    function showBadge(text){
-      if (!badge) return;
-      badge.textContent = text;
-      badge.hidden = false;
-
-      badge.classList.remove('is-show');
-      void badge.offsetWidth;
-      badge.classList.add('is-show');
-
-      clearTimeout(badgeTimer);
-      badgeTimer = setTimeout(() => {
-        if (badge) badge.hidden = true;
-      }, 4600);
-    }
-
-    function ping(el){
-      if (!el) return;
-      el.classList.remove('tip--ping');
-      void el.offsetWidth;
-      el.classList.add('tip--ping');
-      setTimeout(() => el.classList.remove('tip--ping'), 2600);
-    }
-
-    function markSelectedTip(el){
-      tips.forEach(t => t.classList.remove('tip--selected'));
-      if (!el) return;
-      el.classList.add('tip--selected');
-      bumpFade(el);
-    }
-
-    function scrollToEl(el){
-      if (!el) return;
-      el.scrollIntoView({ behavior:'smooth', block:'start' });
-    }
-
-    function scrollToSel(sel){
-      const el = document.querySelector(sel);
-      if (!el) return;
-      el.scrollIntoView({ behavior:'smooth', block:'start' });
-      markSelectedTip(el);
-      ping(el);
-    }
-
-    function nearestPoint(nx, ny){
-      let best = points[0];
-      let bestD = Infinity;
-      for (const p of points){
-        const dx = nx - p.x;
-        const dy = ny - p.y;
-        const d = dx*dx + dy*dy;
-        if (d < bestD){ bestD = d; best = p; }
-      }
-      return best;
-    }
-
-    function sideLabel(v){
-      if (v === 'right') return 'høyre side';
-      if (v === 'left') return 'venstre side';
-      return 'usikker';
-    }
-
-    function areaLabel(key){
-      const p = points.find(x => x.key === key);
-      return p ? p.label : key;
-    }
-
-    const areaChoices = document.getElementById('areaChoices');
-    const areaButtons = areaChoices ? Array.from(areaChoices.querySelectorAll('button[data-area]')) : [];
-
-    function setAreaPressed(){
-      if (!areaButtons.length) return;
-      areaButtons.forEach(btn => {
-        const on = selectedArea && btn.getAttribute('data-area') === selectedArea;
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-    }
-
-    function statusText(){
-      if (!selectedSide) return 'Vis alle tips';
-      if (!selectedArea) return 'Valgt: ' + sideLabel(selectedSide) + '. Velg område';
-      return 'Valgt: ' + sideLabel(selectedSide) + '. Område: ' + areaLabel(selectedArea);
-    }
-
-    function setPressed(list, matchFn){
-      list.forEach(btn => {
-        const on = matchFn(btn);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-    }
-
-    function restoreTipOrder(){
-      if (!tipsContainer) return;
-      originalOrder.forEach(el => tipsContainer.appendChild(el));
-    }
-
-    function moveTipToTop(el){
-      if (!tipsContainer || !el) return;
-      tipsContainer.insertBefore(el, tipsContainer.firstElementChild);
-    }
-
-    function reorderTips(){
-      restoreTipOrder();
-
-      if (selectedSide){
-        const sideTip = tipsContainer.querySelector('.tip[data-side="' + selectedSide + '"][data-area="general"]');
-        moveTipToTop(sideTip);
-      }
-
-      if (selectedArea){
-        const areaTip = document.getElementById('tip-' + selectedArea) || tipsContainer.querySelector('.tip[data-area="' + selectedArea + '"]');
-        moveTipToTop(areaTip);
-      }
-    }
-
-    function applyFilter(){
-      tips.forEach(t => {
-        const tSide = t.getAttribute('data-side') || 'general';
-        const tArea = t.getAttribute('data-area') || 'general';
-
-        const sideOk = !selectedSide || tSide === selectedSide || tSide === 'general';
-        const areaOk = !selectedArea || tArea === selectedArea || tArea === 'general';
-
-        t.hidden = !(sideOk && areaOk);
-      });
-    }
-
-    function updatePrimaryAndMore(){
-      if (!tipsContainer || !moreTipsContainer || !toggleMoreTips || !moreTipsWrap) return;
-
-      tips.forEach(t => t.classList.remove('tip--primary'));
-
-      const visible = tips.filter(t => !t.hidden);
-
-      visible.forEach(t => tipsContainer.appendChild(t));
-      moreTipsContainer.innerHTML = '';
-
-      if (visible.length === 0){
-        toggleMoreTips.hidden = true;
-        moreTipsWrap.hidden = true;
-        return;
-      }
-
-      const primary = visible[0];
-      primary.classList.add('tip--primary');
-      tipsContainer.insertBefore(primary, tipsContainer.firstElementChild);
-
-      const rest = visible.slice(1);
-      rest.forEach(t => moreTipsContainer.appendChild(t));
-
-      if (rest.length > 0){
-        toggleMoreTips.hidden = false;
-        moreTipsWrap.hidden = true;
-        toggleMoreTips.textContent = 'Flere tips (' + rest.length + ')';
-      } else {
-        toggleMoreTips.hidden = true;
-        moreTipsWrap.hidden = true;
-      }
-    }
-
-    function clearSideTimer(){
-      if (!sideTimer) return;
-      clearTimeout(sideTimer);
-      sideTimer = null;
-    }
-
-    function showStep2(){
-      if (step2) step2.hidden = false;
-      setStatus(selectedArea ? statusText() : ('Valgt: ' + sideLabel(selectedSide) + '. Velg område'));
-      scrollToEl(step2);
-    }
-
-    function selectSide(v){
-      clearSideTimer();
-
-      selectedSide = v;
-      if (showAllBtn) showAllBtn.hidden = false;
-
-      selectedArea = null;
-      updateExtras();
-      setAreaPressed();
-
-      setPressed(sideButtons, (b) => b.getAttribute('data-side') === v);
-
-      if (toast) toast.hidden = true;
-
-      if (sideChoices) sideChoices.hidden = true;
-
-      if (sideSelected){
-        sideSelected.hidden = false;
-        if (sideSelectedText){
-          sideSelectedText.textContent = 'Du har valgt: ' + sideLabel(v);
-          bumpFade(sideSelectedText);
-        }
-      }
-
-      if (step2) step2.hidden = true;
-
-      reorderTips();
-      applyFilter();
-      updatePrimaryAndMore();
-      setStatus(statusText());
-      showBadge('Du har valgt ' + sideLabel(v));
-
-      const topTip = tipsContainer ? tipsContainer.querySelector('.tip') : null;
-      markSelectedTip(topTip);
-
-      scrollToEl(sideSelected);
-
-      sideTimer = setTimeout(showStep2, 650);
-    }
-
-    function selectAreaByPoint(p){
-      if (tipsWrap) tipsWrap.hidden = false;
-      selectedArea = p.key;
-
-      updateExtras();
-      setAreaPressed();
-
-      reorderTips();
-      applyFilter();
-      updatePrimaryAndMore();
-      setStatus(statusText());
-      showBadge('Du har valgt ' + sideLabel(selectedSide) + ' → ' + p.label);
-
-      scrollToSel(p.target);
-    }
-
-    function resetAll(){
-      if (tipsWrap) tipsWrap.hidden = true;
-      clearSideTimer();
-
-      selectedSide = null;
-      selectedArea = null;
-
-      updateExtras();
-      if (showAllBtn) showAllBtn.hidden = true;
-      setAreaPressed();
-
-      setPressed(sideButtons, () => false);
-
-      if (toast) toast.hidden = true;
-      if (badge) badge.hidden = true;
-
-      if (toggleMoreTips) toggleMoreTips.hidden = true;
-      if (moreTipsWrap) moreTipsWrap.hidden = true;
-      if (moreTipsContainer) moreTipsContainer.innerHTML = '';
-
-      if (sideSelected) sideSelected.hidden = true;
-      if (sideChoices) sideChoices.hidden = false;
-      if (step2) step2.hidden = true;
-
-      restoreTipOrder();
-      tips.forEach(t => {
-        t.hidden = false;
-        t.classList.remove('tip--selected');
-      });
-
-      setStatus('Vis alle tips');
-
-      if (sideChoices) scrollToEl(sideChoices);
-    }
-
-    if (sideChoices){
-      sideChoices.addEventListener('click', (e) => {
-        const btn = e.target.closest('button[data-side]');
-        if (!btn) return;
-        selectSide(btn.getAttribute('data-side'));
-      });
-    }
-
-    if (changeSide){
-      changeSide.addEventListener('click', resetAll);
-    }
-
-    if (resetBtn){
-      resetBtn.addEventListener('click', resetAll);
-    }
-
-    if (showAllBtn){
-      showAllBtn.addEventListener('click', () => {
-        if (tipsWrap) tipsWrap.hidden = false;
-        selectedArea = null;
-        updateExtras();
-        setAreaPressed();
-        reorderTips();
-        applyFilter();
-        updatePrimaryAndMore();
-
-        const msg = selectedSide
-          ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område')
-          : 'Vis alle tips';
-
-        setStatus(msg);
-
-        const topTip = tipsContainer ? tipsContainer.querySelector('.tip') : null;
-        markSelectedTip(topTip);
-      });
-    }
-
-    if (toggleMoreTips){
-      toggleMoreTips.addEventListener('click', () => {
-        const isOpen = !moreTipsWrap.hidden;
-        moreTipsWrap.hidden = isOpen;
-        if (!isOpen) scrollToEl(moreTipsWrap);
-      });
-    }
-
-    if (bodymapBtn && bodymapImg){
-      bodymapBtn.addEventListener('click', (e) => {
-        if (!selectedSide){
-          showToast('Velg side først');
-          return;
-        }
-
-        const rect = bodymapImg.getBoundingClientRect();
-        const nx = (e.clientX - rect.left) / rect.width;
-        const ny = (e.clientY - rect.top) / rect.height;
-        if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
-
-        const p = nearestPoint(nx, ny);
-        selectAreaByPoint(p);
-      });
-    }
-
-    if (areaChoices){
-      areaChoices.addEventListener('click', (e) => {
-        const btn = e.target.closest('button[data-area]');
-        if (!btn) return;
-
-        if (!selectedSide){
-          showToast('Velg side først');
-          return;
-        }
-
-        const key = btn.getAttribute('data-area');
-        const p = points.find(x => x.key === key);
-        if (!p) return;
-        selectAreaByPoint(p);
-      });
-    }
-
-  })();
-  </script>
-
-  <script data-myss-focus-hash>
-  (function () {
-    function focusFromHash() {
-      if (!location.hash) return;
-      var id = decodeURIComponent(location.hash.slice(1));
-      var el = document.getElementById(id);
-      if (!el) return;
-      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
-      try {
-        el.focus({ preventScroll: true });
-      } catch (e) {
-        el.focus();
-      }
-    }
-    window.addEventListener('hashchange', focusFromHash);
-    window.addEventListener('DOMContentLoaded', focusFromHash);
-  })();
-  </script>
-<script>
-  (function(){
-    const root = document.documentElement;
-
-    const state = {
-      theme: localStorage.getItem("uu_theme") || "light",
-      contrast: localStorage.getItem("uu_contrast") || "normal",
-      motion: localStorage.getItem("uu_motion") || "normal",
-      font: Number(localStorage.getItem("uu_font") || "1")
-    };
-
-    function apply(){
-      root.classList.toggle("theme-dark", state.theme === "dark");
-      root.classList.toggle("contrast-high", state.contrast === "high");
-      root.classList.toggle("motion-reduced", state.motion === "reduced");
-      root.style.setProperty("--uu-font-scale", String(state.font));
-      updatePressed();
-    }
-
-    function updatePressed(){
-      const themeBtn = document.querySelector("[data-theme-toggle]");
-      const contrastBtn = document.querySelector("[data-contrast-toggle]");
-      const motionBtn = document.querySelector("[data-motion-toggle]");
-      if(themeBtn) themeBtn.setAttribute("aria-pressed", String(state.theme === "dark"));
-      if(contrastBtn) contrastBtn.setAttribute("aria-pressed", String(state.contrast === "high"));
-      if(motionBtn) motionBtn.setAttribute("aria-pressed", String(state.motion === "reduced"));
-    }
-
-    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
-
-    document.addEventListener("click", (e) => {
-      const t = e.target;
-
-      if(t && t.matches("[data-theme-toggle]")){
-        state.theme = (state.theme === "dark") ? "light" : "dark";
-        localStorage.setItem("uu_theme", state.theme);
-        apply();
-      }
-
-      if(t && t.matches("[data-contrast-toggle]")){
-        state.contrast = (state.contrast === "high") ? "normal" : "high";
-        localStorage.setItem("uu_contrast", state.contrast);
-        apply();
-      }
-
-      if(t && t.matches("[data-motion-toggle]")){
-        state.motion = (state.motion === "reduced") ? "normal" : "reduced";
-        localStorage.setItem("uu_motion", state.motion);
-        apply();
-      }
-
-      if(t && t.matches("[data-font-inc]")){
-        state.font = clamp(state.font + 0.05, 0.95, 1.25);
-        localStorage.setItem("uu_font", String(state.font));
-        apply();
-      }
-
-      if(t && t.matches("[data-font-dec]")){
-        state.font = clamp(state.font - 0.05, 0.95, 1.25);
-        localStorage.setItem("uu_font", String(state.font));
-        apply();
-      }
-    });
-
-    apply();
-  })();
+    root.classList.toggle("contrast-high", state.contrast === "high");
+    root.classList.toggle("motion-reduced", state.motion === "reduced");
+    root.style.fontSize = `calc(16px * ${state.font})`;
+  }
+  function updatePressed(){
+    const themeBtn = document.querySelector("[data-theme-toggle]");
+    const contrastBtn = document.querySelector("[data-contrast-toggle]");
+    const motionBtn = document.querySelector("[data-motion-toggle]");
+    if(themeBtn) themeBtn.setAttribute("aria-pressed", String(state.theme === "dark"));
+    if(contrastBtn) contrastBtn.setAttribute("aria-pressed", String(state.contrast === "high"));
+    if(motionBtn) motionBtn.setAttribute("aria-pressed", String(state.motion === "reduced"));
+  }
+  function apply(){ applyThemeVars(); updatePressed(); }
+  document.addEventListener("click", (e) => {
+    const el = (e.target && e.target.closest) ? e.target.closest("[data-theme-toggle],[data-contrast-toggle],[data-motion-toggle],[data-font-inc],[data-font-dec]") : null;
+    if(!el) return;
+    if(el.hasAttribute("data-theme-toggle")){ state.theme = (state.theme === "dark") ? "light" : "dark"; set("uu_theme", state.theme); apply(); return; }
+    if(el.hasAttribute("data-contrast-toggle")){ state.contrast = (state.contrast === "high") ? "normal" : "high"; set("uu_contrast", state.contrast); apply(); return; }
+    if(el.hasAttribute("data-motion-toggle")){ state.motion = (state.motion === "reduced") ? "normal" : "reduced"; set("uu_motion", state.motion); apply(); return; }
+    if(el.hasAttribute("data-font-inc")){ state.font = clamp(state.font + 0.05, 0.95, 1.25); set("uu_font", String(state.font)); apply(); return; }
+    if(el.hasAttribute("data-font-dec")){ state.font = clamp(state.font - 0.05, 0.95, 1.25); set("uu_font", String(state.font)); apply(); return; }
+  });
+  apply();
+})();
 </script>
 
 </body>
