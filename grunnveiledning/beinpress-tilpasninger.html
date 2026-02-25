@@ -333,6 +333,69 @@
 
   /* Utility */
   .hidden{ display:none !important; }
+
+
+/* Mobiltilpasning valgfliser */
+@media (max-width: 640px){
+  .tile-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .tile{
+    width: 100%;
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 14px 14px;
+    border-radius: 16px;
+  }
+
+  .badge{
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display:grid;
+    place-items:center;
+    flex: 0 0 48px;
+  }
+
+  .badge svg,
+  .badge img{
+    width: 28px;
+    height: 28px;
+    display:block;
+  }
+
+  .tile-title{
+    font-size: 16px;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .tile-sub{
+    font-size: 14px;
+    line-height: 1.25;
+    margin: 4px 0 0 0;
+  }
+
+  .chev{
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display:grid;
+    place-items:center;
+    margin-left: auto;
+  }
+
+  .chev svg{
+    width: 18px;
+    height: 18px;
+  }
+}
+
 </style>
 
 <div class="wrap">
