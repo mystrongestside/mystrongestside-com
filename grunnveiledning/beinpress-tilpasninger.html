@@ -1,673 +1,628 @@
-<!-- LIM INN: Premium navigasjon, “dyrt” uttrykk, og seksjoner som føles som egne sider -->
-<!-- Passer inn i /grunnveiledning/beinpress-tilpasninger.html (ingen eksterne avhengigheter) -->
-
-<style>
-    .badge-icon{
-    width:32px;
-    height:32px;
-    display:block;
-  }
-
-  .with-icon{
-    display:flex;
-    align-items:center;
-    gap:.5rem;
-  }
-
-  .inline-icon{
-    width:28px;
-    height:28px;
-    flex:0 0 28px;
-    display:block;
-  }
-
-  :root{
-    --myss_blue_dark:#0c2d48;
-    --myss_blue:#2f7fbf;
-    --bg:#f6f9fc;
-    --card:#ffffff;
-    --text:#0f172a;
-    --muted:#475569;
-
-    /* Premium tokens */
-    --radius: 18px;
-    --radius_sm: 14px;
-    --maxw: 920px;
-
-    --shadow_soft: 0 10px 28px rgba(2, 6, 23, 0.08);
-    --shadow_hover: 0 14px 34px rgba(2, 6, 23, 0.12);
-    --border_soft: 1px solid rgba(15, 23, 42, 0.08);
-
-    --focus: rgba(47,127,191,.35);
-  }
-
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-
-  body{
-    margin:0;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    background: var(--bg);
-    color: var(--text);
-  }
-
-  .wrap{
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 18px 14px 56px;
-  }
-
-  .hero{
-    padding: 18px 2px 12px;
-  }
-  .kicker{
-    color: var(--muted);
-    font-size: 14px;
-    margin: 0 0 6px;
-  }
-  .h1{
-    font-size: 26px;
-    line-height: 1.15;
-    margin: 0 0 10px;
-    letter-spacing: -0.02em;
-    color: var(--myss_blue_dark);
-  }
-  .lead{
-    margin: 0;
-    color: var(--muted);
-    font-size: 16px;
-    line-height: 1.5;
-    max-width: 60ch;
-  }
-
-  /* Premium tiles */
-  .tile-grid{
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 14px;
-  }
-  @media (min-width: 720px){
-    .tile-grid{ grid-template-columns: 1fr 1fr; gap: 14px; }
-  }
-
-  .tile{
-    display:flex;
-    align-items:flex-start;
-    gap: 12px;
-    width: 100%;
-    text-align:left;
-    padding: 14px 14px;
-    border-radius: var(--radius);
-    background: var(--card);
-    border: var(--border_soft);
-    box-shadow: var(--shadow_soft);
-    cursor:pointer;
-    transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
-    color: inherit;
-  }
-  .tile:hover{
-    transform: translateY(-1px);
-    box-shadow: var(--shadow_hover);
-    border-color: rgba(15, 23, 42, 0.12);
-  }
-  .tile:active{ transform: translateY(0px); }
-  .tile:focus-visible{
-    outline: 3px solid var(--focus);
-    outline-offset: 2px;
-  }
-
-  .badge{
-    flex: 0 0 auto;
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    background: rgba(47,127,191,0.10);
-    border: 1px solid rgba(47,127,191,0.18);
-    display:grid;
-    place-items:center;
-  }
-  .tile-title{
-    font-weight: 700;
-    margin: 0;
-    font-size: 16px;
-    letter-spacing: -0.01em;
-  }
-  .tile-sub{
-    margin: 3px 0 0;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  .chev{
-    margin-left:auto;
-    margin-top: 2px;
-    color: rgba(15,23,42,0.35);
-    flex: 0 0 auto;
-  }
-  .chev svg{
-    width: 18px;
-    height: 18px;
-    stroke: rgba(15,23,42,0.40);
-  }
-
-  /* Sections that feel like pages */
-  .section{
-    margin-top: 18px;
-    background: var(--card);
-    border: var(--border_soft);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow_soft);
-    overflow: clip;
-  }
-
-  .topbar{
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    background: rgba(255,255,255,0.82);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(15,23,42,0.06);
-    padding: 10px 12px;
-    display:flex;
-    align-items:center;
-    gap: 10px;
-  }
-  .backbtn{
-    appearance:none;
-    border: 1px solid rgba(15,23,42,0.10);
-    background: rgba(15,23,42,0.02);
-    color: var(--myss_blue_dark);
-    border-radius: 999px;
-    padding: 8px 10px;
-    font-weight: 600;
-    cursor:pointer;
-    transition: background 160ms ease, border-color 160ms ease;
-  }
-  .backbtn:hover{
-    background: rgba(47,127,191,0.06);
-    border-color: rgba(47,127,191,0.18);
-  }
-  .backbtn:focus-visible{
-    outline: 3px solid var(--focus);
-    outline-offset: 2px;
-  }
-  .crumb{
-    font-size: 13px;
-    color: var(--muted);
-    white-space: nowrap;
-    overflow:hidden;
-    text-overflow: ellipsis;
-  }
-
-  .section-body{
-    padding: 14px 14px 16px;
-  }
-
-  .h2{
-    margin: 2px 0 6px;
-    font-size: 20px;
-    letter-spacing: -0.02em;
-    color: var(--myss_blue_dark);
-  }
-  .desc{
-    margin: 0 0 12px;
-    color: var(--muted);
-    line-height: 1.5;
-    font-size: 15px;
-    max-width: 70ch;
-  }
-
-  /* “Gjør dette først” */
-  .do-first{
-    border-radius: var(--radius_sm);
-    border: 1px solid rgba(47,127,191,0.20);
-    background: rgba(47,127,191,0.08);
-    padding: 12px 12px;
-    margin: 10px 0 12px;
-  }
-  .do-first strong{
-    display:block;
-    font-size: 13px;
-    color: var(--myss_blue_dark);
-    margin-bottom: 6px;
-  }
-  .do-first ul{
-    margin: 0;
-    padding-left: 18px;
-    color: var(--myss_blue_dark);
-  }
-  .do-first li{ margin: 6px 0; }
-
-  /* Subtiles inside section */
-  .subgrid{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 8px;
-  }
-  @media (min-width: 720px){
-    .subgrid{ grid-template-columns: 1fr 1fr; }
-  }
-  .subtile{
-    border-radius: var(--radius_sm);
-    border: 1px solid rgba(15,23,42,0.08);
-    background: rgba(255,255,255,1);
-    padding: 12px;
-  }
-  .subtile h3{
-    margin: 0 0 6px;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-    color: var(--myss_blue_dark);
-  }
-  .subtile p{
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.45;
-  }
-
-  /* Utility */
-  .hidden{ display:none !important; }
-
-
-/* Mobil: lesbarhet og store ikoner (mobil er prioritet) */
-@media (max-width: 640px){
-
-  /* Generell lesbarhet */
-  body{ font-size: 18px !important; }
-  .wrap{ padding: 14px 12px 40px !important; }
-  .kicker{ font-size: 14px !important; }
-  .h1{ font-size: 26px !important; line-height: 1.12 !important; }
-  .lead{ font-size: 17px !important; line-height: 1.5 !important; max-width: none !important; }
-
-  /* Fliser: én kolonne, store trykkflater */
-  .tile-grid{
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    margin-top: 12px !important;
-  }
-
-  .tile{
-    align-items: center !important;
-    gap: 14px !important;
-    padding: 16px 16px !important;
-    border-radius: 18px !important;
-  }
-
-  /* Badge: større og mer synlig */
-  .badge{
-    width: 72px !important;
-    height: 72px !important;
-    flex: 0 0 72px !important;
-    border-radius: 18px !important;
-    background: rgba(47,127,191,0.16) !important;
-    border: 1px solid rgba(47,127,191,0.32) !important;
-    box-shadow: 0 10px 22px rgba(2,6,23,.12) !important;
-  }
-
-  /* IMG ikonene: dette er det viktige for deg nå */
-  .badge img,
-  .badge img.badge-icon{
-    width: 48px !important;
-    height: 48px !important;
-    display: block !important;
-  }
-
-  /* Inntil SVG er borte, gjør dem store nok også */
-  .badge svg{
-    width: 46px !important;
-    height: 46px !important;
-    stroke-width: 2.8 !important;
-  }
-
-  /* Tekst i fliser */
-  .tile-title{
-    font-size: 19px !important;
-    line-height: 1.15 !important;
-  }
-  .tile-sub{
-    font-size: 16px !important;
-    line-height: 1.3 !important;
-    margin-top: 6px !important;
-  }
-
-  /* Chevron mindre viktig, men sørg for at den ikke stjeler plass */
-  .chev{
-    width: 38px !important;
-    height: 38px !important;
-    border-radius: 12px !important;
-    margin-left: auto !important;
-  }
-  .chev svg{
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  /* Seksjoner: rubrikker og brødtekst leslig */
-  .section-body{ padding: 16px 16px 18px !important; }
-  .h2{ font-size: 22px !important; line-height: 1.15 !important; }
-  .desc{ font-size: 16px !important; line-height: 1.5 !important; max-width: none !important; }
-
-  .subtile h3{ font-size: 18px !important; line-height: 1.2 !important; }
-  .subtile p{ font-size: 16px !important; line-height: 1.5 !important; }
-
-  /* Inline ikon ved h3 (hælikon) */
-  .inline-icon{
-    width: 32px !important;
-    height: 32px !important;
-    flex: 0 0 32px !important;
-  }
-  .with-icon{ gap: .6rem !important; }
-}
-
-
-/* Ikonregler som alltid gjelder */
-.badge{
-  display:grid;
-  place-items:center;
-}
-
-.badge svg{
-  width: 30px;
-  height: 30px;
-  stroke: var(--myss_blue);
-  stroke-width: 2.6;
-}
-
-.badge img{
-  width: 34px;
-  height: 34px;
-  display:block;
-}
-
-/* Mobil: større badge og større ikoner */
-@media (max-width: 640px){
-  .badge{
-    width: 60px;
-    height: 60px;
-    flex: 0 0 60px;
-    border-radius: 16px;
-    background: rgba(47,127,191,0.14);
-    border: 1px solid rgba(47,127,191,0.28);
-    box-shadow: 0 8px 18px rgba(2,6,23,.10);
-  }
-
-  .badge svg{
-    width: 36px;
-    height: 36px;
-    stroke-width: 2.8;
-  }
-
-  .badge img{
-    width: 40px;
-    height: 40px;
-  }
-}
-
-</style>
-
-<div class="wrap">
-  <header class="hero" id="valg">
-    <p class="kicker">Grunnveiledning</p>
-    <h1 class="h1">Tilpasninger ved behov</h1>
-    <p class="lead">Velg det som passer deg. Du går videre til én tydelig seksjon, med enkel “tilbake til valg”.</p>
-
-    <div class="tile-grid" role="navigation" aria-label="Velg område">
-      <button class="tile" type="button" data-target="#seksjon-fot" aria-controls="seksjon-fot">
-        <span class="badge" aria-hidden="true">
-          <img src="/assets/img/fotikon.png" alt="" class="badge-icon">
-        </span>
-        <span>
-          <p class="tile-title">Fot</p>
-          <p class="tile-sub">Fotplassering, hæl som løfter seg, vridning, trykkfordeling.</p>
-        </span>
-        <span class="chev" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18l6-6-6-6"></path>
-          </svg>
-        </span>
-      </button>
-
-      <button class="tile" type="button" data-target="#seksjon-asymmetri" aria-controls="seksjon-asymmetri">
-        <span class="badge" aria-hidden="true">
-          <!-- Balance icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v18"></path>
-            <path d="M7 7h10"></path>
-            <path d="M6 7l-3 6h6l-3-6z"></path>
-            <path d="M18 7l-3 6h6l-3-6z"></path>
-          </svg>
-        </span>
-        <span>
-          <p class="tile-title">Asymmetri</p>
-          <p class="tile-sub">Når én side jobber mindre, eller du blir skjev i setet.</p>
-        </span>
-        <span class="chev" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18l6-6-6-6"></path>
-          </svg>
-        </span>
-      </button>
-
-      <button class="tile" type="button" data-target="#seksjon-grep" aria-controls="seksjon-grep">
-        <span class="badge" aria-hidden="true">
-          <!-- Hand icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 22v-7"></path>
-            <path d="M11 22v-9"></path>
-            <path d="M15 22v-8"></path>
-            <path d="M19 22v-10"></path>
-            <path d="M5 15c0-2 2-3 4-3h10c2 0 4 1 4 3v1c0 3-2 6-5 6H10c-3 0-5-3-5-6v-1z"></path>
-          </svg>
-        </span>
-        <span>
-          <p class="tile-title">Grep</p>
-          <p class="tile-sub">Lik rekkevidde, unngå at sterk hånd drar deg skjevt.</p>
-        </span>
-        <span class="chev" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18l6-6-6-6"></path>
-          </svg>
-        </span>
-      </button>
-
-      <button class="tile" type="button" data-target="#seksjon-innut" aria-controls="seksjon-innut">
-        <span class="badge" aria-hidden="true">
-          <!-- Arrow in/out icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 17l-5-5 5-5"></path>
-            <path d="M5 12h14"></path>
-            <path d="M14 7l5 5-5 5"></path>
-          </svg>
-        </span>
-        <span>
-          <p class="tile-title">Inn og ut av apparat</p>
-          <p class="tile-sub">Trygg startposisjon, stabil rygg, enkel rutine.</p>
-        </span>
-        <span class="chev" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18l6-6-6-6"></path>
-          </svg>
-        </span>
-      </button>
-    </div>
-  </header>
-
-  <!-- SEKSJON: FOT -->
-  <section class="section hidden" id="seksjon-fot" aria-labelledby="fot-tittel">
-    <div class="topbar">
-      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
-      <div class="crumb">Tilpasninger ved behov · Fot</div>
-    </div>
-    <div class="section-body">
-      <h2 class="h2" id="fot-tittel">Fot</h2>
-      <p class="desc">Hold det enkelt: stabil fotkontakt først. Så justerer du dybde og belastning.</p>
-
-      <div class="do-first" role="note" aria-label="Gjør dette først">
-        <strong>Gjør dette først</strong>
-        <ul>
-          <li>Plasser føttene skulderbredt og prøv å ha kontakt med hele foten.</li>
-          <li>Stopp litt tidligere hvis hælen løfter seg eller foten vrir seg.</li>
-          <li>Reduser belastning og test på nytt med rolig tempo.</li>
-        </ul>
-      </div>
-
-      <div class="subgrid">
-        <div class="subtile">
-          <h3 class="with-icon">
-            <img src="/assets/img/hælikon.png" alt="" class="inline-icon">
-            Hæl løfter seg
-          </h3>
-          <p>Gå litt mindre dypt. Bruk 3 til 5 minutter på å varme opp og mobilisere ankel før du prøver igjen.</p>
-        </div>
-        <div class="subtile">
-          <h3>Vridning eller “tråkker over”</h3>
-          <p>Stopp der du mister stabil fot. Tren i den løftebanen der du holder jevnt trykk og rolig ankel.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEKSJON: ASYMMETRI -->
-  <section class="section hidden" id="seksjon-asymmetri" aria-labelledby="asym-tittel">
-    <div class="topbar">
-      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
-      <div class="crumb">Tilpasninger ved behov · Asymmetri</div>
-    </div>
-    <div class="section-body">
-      <h2 class="h2" id="asym-tittel">Asymmetri</h2>
-      <p class="desc">Målet er en rolig overkropp og jevn kraft. Juster før du øker belastning.</p>
-
-      <div class="do-first" role="note" aria-label="Gjør dette først">
-        <strong>Gjør dette først</strong>
-        <ul>
-          <li>Reduser vekt og senk tempoet.</li>
-          <li>Finn lik seteposisjon og lik fotavstand.</li>
-          <li>Legg inn en kort pause i bunn om du mister kontroll.</li>
-        </ul>
-      </div>
-
-      <div class="subgrid">
-        <div class="subtile">
-          <h3>Én side tar over</h3>
-          <p>Kjør roligere tempo og færre repetisjoner. Stopp mens du fortsatt er stabil.</p>
-        </div>
-        <div class="subtile">
-          <h3>Bekkenet sklir eller du blir skjev</h3>
-          <p>Start på nytt med lavere vekt. Fokuser på ryggkontakt og likt trykk gjennom begge føtter.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEKSJON: GREP -->
-  <section class="section hidden" id="seksjon-grep" aria-labelledby="grep-tittel">
-    <div class="topbar">
-      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
-      <div class="crumb">Tilpasninger ved behov · Grep</div>
-    </div>
-    <div class="section-body">
-      <h2 class="h2" id="grep-tittel">Grep</h2>
-      <p class="desc">Et stabilt grep gjør at du sitter rolig og får mer igjen av beinpressen.</p>
-
-      <div class="do-first" role="note" aria-label="Gjør dette først">
-        <strong>Gjør dette først</strong>
-        <ul>
-          <li>Hold så symmetrisk du kan med begge hender.</li>
-          <li>Unngå at sterk hånd drar deg skjevt.</li>
-          <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
-        </ul>
-      </div>
-
-      <div class="subgrid">
-        <div class="subtile">
-          <h3>Ulik rekkevidde</h3>
-          <p>Flytt grep litt nærmere på den siden som ikke rekker like langt, så overkroppen holder seg rolig.</p>
-        </div>
-        <div class="subtile">
-          <h3>Håndkontroll</h3>
-          <p>Bruk hjelpemiddel for å holde samme grep gjennom settet, heller enn å kompensere med kroppen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEKSJON: INN OG UT -->
-  <section class="section hidden" id="seksjon-innut" aria-labelledby="innut-tittel">
-    <div class="topbar">
-      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
-      <div class="crumb">Tilpasninger ved behov · Inn og ut av apparat</div>
-    </div>
-    <div class="section-body">
-      <h2 class="h2" id="innut-tittel">Inn og ut av apparat</h2>
-      <p class="desc">Trygg startposisjon først, så bevegelse. Det gjør hele settet bedre.</p>
-
-      <div class="do-first" role="note" aria-label="Gjør dette først">
-        <strong>Gjør dette først</strong>
-        <ul>
-          <li>Juster sete så du har stabil ryggkontakt.</li>
-          <li>Test én repetisjon med lav vekt før du starter settet.</li>
-          <li>Be om hjelp hvis du ikke kommer trygt inn eller ut.</li>
-        </ul>
-      </div>
-
-      <div class="subgrid">
-        <div class="subtile">
-          <h3>Stabil startposisjon</h3>
-          <p>Ta et rolig pust, finn grep og fotkontakt, og start først når du kjenner at du sitter likt.</p>
-        </div>
-        <div class="subtile">
-          <h3>Utrygg utgang</h3>
-          <p>Avslutt settet litt før du blir sliten i kontrollen, så du har overskudd til å komme deg ut trygt.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<script>
-  (function(){
-    const tiles = Array.from(document.querySelectorAll('.tile[data-target]'));
-    const sections = Array.from(document.querySelectorAll('.section'));
-    const backBtns = Array.from(document.querySelectorAll('.backbtn[data-back]'));
-
-    function showSection(targetSel){
-      const target = document.querySelector(targetSel);
-      if(!target) return;
-
-      sections.forEach(s => s.classList.add('hidden'));
-      target.classList.remove('hidden');
-
-      // Scroll to section top in a “premium” way
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // Update hash without jump
-      history.replaceState(null, '', targetSel);
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>Tilpasninger ved behov: beinpress</title>
+
+  <style>
+    :root{
+      --myss_blue_dark:#0c2d48;
+      --myss_blue:#2f7fbf;
+      --bg:#f6f9fc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+
+      --radius: 18px;
+      --radius_sm: 14px;
+      --maxw: 920px;
+
+      --shadow_soft: 0 10px 28px rgba(2, 6, 23, 0.08);
+      --shadow_hover: 0 14px 34px rgba(2, 6, 23, 0.12);
+      --border_soft: 1px solid rgba(15, 23, 42, 0.08);
+
+      --focus: rgba(47,127,191,.35);
     }
 
-    function backTo(sel){
-      const el = document.querySelector(sel);
-      sections.forEach(s => s.classList.add('hidden'));
-      if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.replaceState(null, '', sel);
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    html, body{ width:100%; overflow-x:hidden; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
-    tiles.forEach(btn => {
-      btn.addEventListener('click', () => showSection(btn.getAttribute('data-target')));
-    });
+    button{ font: inherit; }
+    button, a{ -webkit-tap-highlight-color: transparent; }
+    .hidden{ display:none !important; }
 
-    backBtns.forEach(btn => {
-      btn.addEventListener('click', () => backTo(btn.getAttribute('data-back')));
-    });
+    .badge-icon{ width:32px; height:32px; display:block; max-width:100%; }
+    .with-icon{ display:flex; align-items:center; gap:.5rem; }
+    .inline-icon{ width:28px; height:28px; flex:0 0 28px; display:block; }
 
-    // If page opens with a hash to a section, show it
-    if(location.hash){
-      const target = document.querySelector(location.hash);
-      if(target && target.classList.contains('section')){
-        showSection(location.hash);
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding-top: 18px;
+      padding-bottom: 56px;
+      padding-left: max(14px, env(safe-area-inset-left));
+      padding-right: max(14px, env(safe-area-inset-right));
+    }
+
+    .hero{ padding: 18px 2px 12px; }
+    .kicker{ color: var(--muted); font-size: 14px; margin: 0 0 6px; }
+    .h1{
+      font-size: 26px;
+      line-height: 1.15;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+      color: var(--myss_blue_dark);
+    }
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 60ch;
+    }
+
+    .tile-grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (min-width: 720px){
+      .tile-grid{ grid-template-columns: 1fr 1fr; gap: 14px; }
+    }
+
+    .tile{
+      display:flex;
+      align-items:flex-start;
+      gap: 12px;
+      width: 100%;
+      text-align:left;
+      padding: 14px 14px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: var(--border_soft);
+      box-shadow: var(--shadow_soft);
+      cursor:pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      color: inherit;
+      touch-action: manipulation;
+    }
+    .tile:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow_hover);
+      border-color: rgba(15, 23, 42, 0.12);
+    }
+    .tile:active{ transform: translateY(0px); }
+    .tile:focus-visible{
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .badge{
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: rgba(47,127,191,0.10);
+      border: 1px solid rgba(47,127,191,0.18);
+      display:grid;
+      place-items:center;
+    }
+    .badge svg{
+      width: 30px;
+      height: 30px;
+      stroke: var(--myss_blue);
+      stroke-width: 2.6;
+    }
+    .badge img{
+      width: 34px;
+      height: 34px;
+      display:block;
+    }
+
+    .tile-title{
+      font-weight: 700;
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .tile-sub{
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .chev{
+      margin-left:auto;
+      margin-top: 2px;
+      color: rgba(15,23,42,0.35);
+      flex: 0 0 auto;
+    }
+    .chev svg{
+      width: 18px;
+      height: 18px;
+      stroke: rgba(15,23,42,0.40);
+    }
+
+    .section{
+      margin-top: 18px;
+      background: var(--card);
+      border: var(--border_soft);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow_soft);
+      overflow: hidden;
+      scroll-margin-top: 70px;
+    }
+
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(15,23,42,0.06);
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .backbtn{
+      appearance:none;
+      border: 1px solid rgba(15,23,42,0.10);
+      background: rgba(15,23,42,0.02);
+      color: var(--myss_blue_dark);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-weight: 600;
+      cursor:pointer;
+      transition: background 160ms ease, border-color 160ms ease;
+      touch-action: manipulation;
+      flex: 0 0 auto;
+    }
+    .backbtn:hover{
+      background: rgba(47,127,191,0.06);
+      border-color: rgba(47,127,191,0.18);
+    }
+    .backbtn:focus-visible{
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .crumb{
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .section-body{ padding: 14px 14px 16px; }
+
+    .h2{
+      margin: 2px 0 6px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: var(--myss_blue_dark);
+    }
+    .desc{
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 15px;
+      max-width: 70ch;
+    }
+
+    .do-first{
+      border-radius: var(--radius_sm);
+      border: 1px solid rgba(47,127,191,0.20);
+      background: rgba(47,127,191,0.08);
+      padding: 12px 12px;
+      margin: 10px 0 12px;
+    }
+    .do-first strong{
+      display:block;
+      font-size: 13px;
+      color: var(--myss_blue_dark);
+      margin-bottom: 6px;
+    }
+    .do-first ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--myss_blue_dark);
+    }
+    .do-first li{ margin: 6px 0; }
+
+    .subgrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    @media (min-width: 720px){
+      .subgrid{ grid-template-columns: 1fr 1fr; }
+    }
+    .subtile{
+      border-radius: var(--radius_sm);
+      border: 1px solid rgba(15,23,42,0.08);
+      background: rgba(255,255,255,1);
+      padding: 12px;
+      min-width: 0;
+    }
+    .subtile h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      color: var(--myss_blue_dark);
+    }
+    .subtile p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    /* Kritisk for å hindre overflow i flisene */
+    .tile > span:nth-of-type(2){ min-width: 0; }
+
+    /* Mobil: lesbarhet og store trykkflater */
+    @media (max-width: 640px){
+      body{ font-size: 18px; }
+      .wrap{
+        padding-top: 14px;
+        padding-bottom: 40px;
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
       }
+
+      .kicker{ font-size: 14px; }
+      .h1{ font-size: 26px; line-height: 1.12; }
+      .lead{ font-size: 17px; line-height: 1.5; max-width: none; }
+
+      .tile-grid{
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .tile{
+        align-items: center;
+        gap: 14px;
+        padding: 16px 16px;
+        border-radius: 18px;
+      }
+
+      .badge{
+        width: 72px;
+        height: 72px;
+        flex: 0 0 72px;
+        border-radius: 18px;
+        background: rgba(47,127,191,0.16);
+        border: 1px solid rgba(47,127,191,0.32);
+        box-shadow: 0 10px 22px rgba(2,6,23,.12);
+      }
+      .badge img,
+      .badge img.badge-icon{
+        width: 48px;
+        height: 48px;
+        display:block;
+      }
+      .badge svg{
+        width: 46px;
+        height: 46px;
+        stroke-width: 2.8;
+      }
+
+      .tile-title{ font-size: 19px; line-height: 1.15; }
+      .tile-sub{ font-size: 16px; line-height: 1.3; margin-top: 6px; }
+
+      .chev{
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        margin-left: auto;
+      }
+      .chev svg{ width: 18px; height: 18px; }
+
+      .section-body{ padding: 16px 16px 18px; }
+      .h2{ font-size: 22px; line-height: 1.15; }
+      .desc{ font-size: 16px; line-height: 1.5; max-width: none; }
+
+      .subtile h3{ font-size: 18px; line-height: 1.2; }
+      .subtile p{ font-size: 16px; line-height: 1.5; }
+
+      .inline-icon{
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
+      }
+      .with-icon{ gap: .6rem; }
     }
-  })();
-</script>
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      .tile{ transition: none; }
+      .tile:hover{ transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="hero" id="valg">
+      <p class="kicker">Grunnveiledning</p>
+      <h1 class="h1">Tilpasninger ved behov</h1>
+      <p class="lead">Velg det som passer deg. Du går videre til én tydelig seksjon, med enkel tilbake til valg.</p>
+
+      <div class="tile-grid" role="navigation" aria-label="Velg område">
+        <button class="tile" type="button" data-target="#seksjon-fot" aria-controls="seksjon-fot">
+          <span class="badge" aria-hidden="true">
+            <img src="/assets/img/fotikon.png" alt="" class="badge-icon">
+          </span>
+          <span>
+            <p class="tile-title">Fot</p>
+            <p class="tile-sub">Fotplassering, hæl som løfter seg, vridning, trykkfordeling.</p>
+          </span>
+          <span class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </span>
+        </button>
+
+        <button class="tile" type="button" data-target="#seksjon-asymmetri" aria-controls="seksjon-asymmetri">
+          <span class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v18"></path>
+              <path d="M7 7h10"></path>
+              <path d="M6 7l-3 6h6l-3-6z"></path>
+              <path d="M18 7l-3 6h6l-3-6z"></path>
+            </svg>
+          </span>
+          <span>
+            <p class="tile-title">Asymmetri</p>
+            <p class="tile-sub">Når én side jobber mindre, eller du blir skjev i setet.</p>
+          </span>
+          <span class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </span>
+        </button>
+
+        <button class="tile" type="button" data-target="#seksjon-grep" aria-controls="seksjon-grep">
+          <span class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 22v-7"></path>
+              <path d="M11 22v-9"></path>
+              <path d="M15 22v-8"></path>
+              <path d="M19 22v-10"></path>
+              <path d="M5 15c0-2 2-3 4-3h10c2 0 4 1 4 3v1c0 3-2 6-5 6H10c-3 0-5-3-5-6v-1z"></path>
+            </svg>
+          </span>
+          <span>
+            <p class="tile-title">Grep</p>
+            <p class="tile-sub">Lik rekkevidde, unngå at sterk hånd drar deg skjevt.</p>
+          </span>
+          <span class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </span>
+        </button>
+
+        <button class="tile" type="button" data-target="#seksjon-innut" aria-controls="seksjon-innut">
+          <span class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 17l-5-5 5-5"></path>
+              <path d="M5 12h14"></path>
+              <path d="M14 7l5 5-5 5"></path>
+            </svg>
+          </span>
+          <span>
+            <p class="tile-title">Inn og ut av apparat</p>
+            <p class="tile-sub">Trygg startposisjon, stabil rygg, enkel rutine.</p>
+          </span>
+          <span class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <section class="section hidden" id="seksjon-fot" aria-labelledby="fot-tittel">
+      <div class="topbar">
+        <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+        <div class="crumb">Tilpasninger ved behov · Fot</div>
+      </div>
+      <div class="section-body">
+        <h2 class="h2" id="fot-tittel">Fot</h2>
+        <p class="desc">Hold det enkelt: stabil fotkontakt først. Så justerer du dybde og belastning.</p>
+
+        <div class="do-first" role="note" aria-label="Gjør dette først">
+          <strong>Gjør dette først</strong>
+          <ul>
+            <li>Plasser føttene skulderbredt og prøv å ha kontakt med hele foten.</li>
+            <li>Stopp litt tidligere hvis hælen løfter seg eller foten vrir seg.</li>
+            <li>Reduser belastning og test på nytt med rolig tempo.</li>
+          </ul>
+        </div>
+
+        <div class="subgrid">
+          <div class="subtile">
+            <h3 class="with-icon">
+              <img src="/assets/img/hælikon.png" alt="" class="inline-icon">
+              Hæl løfter seg
+            </h3>
+            <p>Gå litt mindre dypt. Bruk 3 til 5 minutter på å varme opp og mobilisere ankel før du prøver igjen.</p>
+          </div>
+          <div class="subtile">
+            <h3>Vridning eller tråkker over</h3>
+            <p>Stopp der du mister stabil fot. Tren i den løftebanen der du holder jevnt trykk og rolig ankel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="seksjon-asymmetri" aria-labelledby="asym-tittel">
+      <div class="topbar">
+        <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+        <div class="crumb">Tilpasninger ved behov · Asymmetri</div>
+      </div>
+      <div class="section-body">
+        <h2 class="h2" id="asym-tittel">Asymmetri</h2>
+        <p class="desc">Målet er en rolig overkropp og jevn kraft. Juster før du øker belastning.</p>
+
+        <div class="do-first" role="note" aria-label="Gjør dette først">
+          <strong>Gjør dette først</strong>
+          <ul>
+            <li>Reduser vekt og senk tempoet.</li>
+            <li>Finn lik seteposisjon og lik fotavstand.</li>
+            <li>Legg inn en kort pause i bunn om du mister kontroll.</li>
+          </ul>
+        </div>
+
+        <div class="subgrid">
+          <div class="subtile">
+            <h3>Én side tar over</h3>
+            <p>Kjør roligere tempo og færre repetisjoner. Stopp mens du fortsatt er stabil.</p>
+          </div>
+          <div class="subtile">
+            <h3>Bekkenet sklir eller du blir skjev</h3>
+            <p>Start på nytt med lavere vekt. Fokuser på ryggkontakt og likt trykk gjennom begge føtter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="seksjon-grep" aria-labelledby="grep-tittel">
+      <div class="topbar">
+        <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+        <div class="crumb">Tilpasninger ved behov · Grep</div>
+      </div>
+      <div class="section-body">
+        <h2 class="h2" id="grep-tittel">Grep</h2>
+        <p class="desc">Et stabilt grep gjør at du sitter rolig og får mer igjen av beinpressen.</p>
+
+        <div class="do-first" role="note" aria-label="Gjør dette først">
+          <strong>Gjør dette først</strong>
+          <ul>
+            <li>Hold så symmetrisk du kan med begge hender.</li>
+            <li>Unngå at sterk hånd drar deg skjevt.</li>
+            <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
+          </ul>
+        </div>
+
+        <div class="subgrid">
+          <div class="subtile">
+            <h3>Ulik rekkevidde</h3>
+            <p>Flytt grep litt nærmere på den siden som ikke rekker like langt, så overkroppen holder seg rolig.</p>
+          </div>
+          <div class="subtile">
+            <h3>Håndkontroll</h3>
+            <p>Bruk hjelpemiddel for å holde samme grep gjennom settet, heller enn å kompensere med kroppen.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="seksjon-innut" aria-labelledby="innut-tittel">
+      <div class="topbar">
+        <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+        <div class="crumb">Tilpasninger ved behov · Inn og ut av apparat</div>
+      </div>
+      <div class="section-body">
+        <h2 class="h2" id="innut-tittel">Inn og ut av apparat</h2>
+        <p class="desc">Trygg startposisjon først, så bevegelse. Det gjør hele settet bedre.</p>
+
+        <div class="do-first" role="note" aria-label="Gjør dette først">
+          <strong>Gjør dette først</strong>
+          <ul>
+            <li>Juster sete så du har stabil ryggkontakt.</li>
+            <li>Test én repetisjon med lav vekt før du starter settet.</li>
+            <li>Be om hjelp hvis du ikke kommer trygt inn eller ut.</li>
+          </ul>
+        </div>
+
+        <div class="subgrid">
+          <div class="subtile">
+            <h3>Stabil startposisjon</h3>
+            <p>Ta et rolig pust, finn grep og fotkontakt, og start først når du kjenner at du sitter likt.</p>
+          </div>
+          <div class="subtile">
+            <h3>Utrygg utgang</h3>
+            <p>Avslutt settet litt før du blir sliten i kontrollen, så du har overskudd til å komme deg ut trygt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function(){
+      const tiles = Array.from(document.querySelectorAll('.tile[data-target]'));
+      const sections = Array.from(document.querySelectorAll('.section'));
+      const backBtns = Array.from(document.querySelectorAll('.backbtn[data-back]'));
+      const hero = document.querySelector('.hero');
+
+      function showSection(targetSel){
+        const target = document.querySelector(targetSel);
+        if(!target) return;
+
+        if(hero) hero.classList.add('hidden');
+        sections.forEach(s => s.classList.add('hidden'));
+        target.classList.remove('hidden');
+
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', targetSel);
+      }
+
+      function backTo(sel){
+        if(hero) hero.classList.remove('hidden');
+        sections.forEach(s => s.classList.add('hidden'));
+
+        const el = document.querySelector(sel);
+        if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        history.replaceState(null, '', sel);
+      }
+
+      tiles.forEach(btn => {
+        btn.addEventListener('click', () => showSection(btn.getAttribute('data-target')));
+      });
+
+      backBtns.forEach(btn => {
+        btn.addEventListener('click', () => backTo(btn.getAttribute('data-back')));
+      });
+
+      if(location.hash){
+        const target = document.querySelector(location.hash);
+        if(target && target.classList.contains('section')){
+          showSection(location.hash);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
