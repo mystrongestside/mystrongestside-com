@@ -1,1114 +1,523 @@
-<!DOCTYPE html>
-<html lang="no">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Tilpasninger ved behov: beinpress</title>
+<!-- LIM INN: Premium navigasjon, “dyrt” uttrykk, og seksjoner som føles som egne sider -->
+<!-- Passer inn i /grunnveiledning/beinpress-tilpasninger.html (ingen eksterne avhengigheter) -->
 
-  <style>
-    :root{
-      --myss_blue_dark:#0c2d48;
-      --myss_blue:#2f7fbf;
-      --bg:#f6f9fc;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
-      --radius: 18px;
+<style>
+  :root{
+    --myss_blue_dark:#0c2d48;
+    --myss_blue:#2f7fbf;
+    --bg:#f6f9fc;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#475569;
 
-      --orange_rgb: 242 140 40;
-      --yellow_rgb: 255 214 10;
-      --focus: rgba(47,127,191,.35);
-    }
+    /* Premium tokens */
+    --radius: 18px;
+    --radius_sm: 14px;
+    --maxw: 920px;
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    html{ scroll-behavior:smooth; }
+    --shadow_soft: 0 10px 28px rgba(2, 6, 23, 0.08);
+    --shadow_hover: 0 14px 34px rgba(2, 6, 23, 0.12);
+    --border_soft: 1px solid rgba(15, 23, 42, 0.08);
 
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(1200px 500px at 20% -10%, rgba(47,127,191,0.18), transparent 55%),
-        var(--bg);
-      color:var(--text);
-    }
+    --focus: rgba(47,127,191,.35);
+  }
 
-    button{ font: inherit; min-height:44px; }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    background: var(--bg);
+    color: var(--text);
+  }
 
-    .wrap{
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 18px 14px 28px;
-    }
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 18px 14px 56px;
+  }
 
-    .card{
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
-      border: 1px solid rgba(15, 23, 42, 0.06);
-      margin-bottom: 14px;
-    }
+  .hero{
+    padding: 18px 2px 12px;
+  }
+  .kicker{
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 6px;
+  }
+  .h1{
+    font-size: 26px;
+    line-height: 1.15;
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+    color: var(--myss_blue_dark);
+  }
+  .lead{
+    margin: 0;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 60ch;
+  }
 
-    h1{
-      margin: 0 0 8px;
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      line-height: 1.2;
-      color: var(--myss_blue_dark);
-      letter-spacing: -0.02em;
-    }
+  /* Premium tiles */
+  .tile-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  @media (min-width: 720px){
+    .tile-grid{ grid-template-columns: 1fr 1fr; gap: 14px; }
+  }
 
-    h2{
-      margin: 0 0 8px;
-      color: var(--myss_blue_dark);
-      font-size: 1.15rem;
-    }
+  .tile{
+    display:flex;
+    align-items:flex-start;
+    gap: 12px;
+    width: 100%;
+    text-align:left;
+    padding: 14px 14px;
+    border-radius: var(--radius);
+    background: var(--card);
+    border: var(--border_soft);
+    box-shadow: var(--shadow_soft);
+    cursor:pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    color: inherit;
+  }
+  .tile:hover{
+    transform: translateY(-1px);
+    box-shadow: var(--shadow_hover);
+    border-color: rgba(15, 23, 42, 0.12);
+  }
+  .tile:active{ transform: translateY(0px); }
+  .tile:focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
 
-    .muted{ color: var(--muted); }
+  .badge{
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    background: rgba(47,127,191,0.10);
+    border: 1px solid rgba(47,127,191,0.18);
+    display:grid;
+    place-items:center;
+  }
+  .badge svg{
+    width: 20px;
+    height: 20px;
+    stroke: var(--myss_blue);
+  }
+  .tile-title{
+    font-weight: 700;
+    margin: 0;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .tile-sub{
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .chev{
+    margin-left:auto;
+    margin-top: 2px;
+    color: rgba(15,23,42,0.35);
+    flex: 0 0 auto;
+  }
+  .chev svg{
+    width: 18px;
+    height: 18px;
+    stroke: rgba(15,23,42,0.40);
+  }
 
-    .ingress{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.45;
-    }
+  /* Sections that feel like pages */
+  .section{
+    margin-top: 18px;
+    background: var(--card);
+    border: var(--border_soft);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow_soft);
+    overflow: clip;
+  }
 
-    .tips{
-      margin: 0;
-      padding-left: 18px;
-      line-height: 1.5;
-    }
+  .topbar{
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(15,23,42,0.06);
+    padding: 10px 12px;
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .backbtn{
+    appearance:none;
+    border: 1px solid rgba(15,23,42,0.10);
+    background: rgba(15,23,42,0.02);
+    color: var(--myss_blue_dark);
+    border-radius: 999px;
+    padding: 8px 10px;
+    font-weight: 600;
+    cursor:pointer;
+    transition: background 160ms ease, border-color 160ms ease;
+  }
+  .backbtn:hover{
+    background: rgba(47,127,191,0.06);
+    border-color: rgba(47,127,191,0.18);
+  }
+  .backbtn:focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .crumb{
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
 
-    .adapt{ margin-top:14px; }
+  .section-body{
+    padding: 14px 14px 16px;
+  }
 
-    .adapt__panel{
-      margin-top:12px;
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px;
-      border: 1px solid rgba(15, 23, 42, 0.06);
-    }
+  .h2{
+    margin: 2px 0 6px;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--myss_blue_dark);
+  }
+  .desc{
+    margin: 0 0 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-size: 15px;
+    max-width: 70ch;
+  }
 
-    .adapt__lead{ margin:0 0 12px; color: var(--muted); }
+  /* “Gjør dette først” */
+  .do-first{
+    border-radius: var(--radius_sm);
+    border: 1px solid rgba(47,127,191,0.20);
+    background: rgba(47,127,191,0.08);
+    padding: 12px 12px;
+    margin: 10px 0 12px;
+  }
+  .do-first strong{
+    display:block;
+    font-size: 13px;
+    color: var(--myss_blue_dark);
+    margin-bottom: 6px;
+  }
+  .do-first ul{
+    margin: 0;
+    padding-left: 18px;
+    color: var(--myss_blue_dark);
+  }
+  .do-first li{ margin: 6px 0; }
 
-    .adapt__controls{
-      display:flex;
-      gap:10px;
-      justify-content:flex-start;
-      flex-wrap:wrap;
-      margin: 10px 0 6px;
-    }
+  /* Subtiles inside section */
+  .subgrid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  @media (min-width: 720px){
+    .subgrid{ grid-template-columns: 1fr 1fr; }
+  }
+  .subtile{
+    border-radius: var(--radius_sm);
+    border: 1px solid rgba(15,23,42,0.08);
+    background: rgba(255,255,255,1);
+    padding: 12px;
+  }
+  .subtile h3{
+    margin: 0 0 6px;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: var(--myss_blue_dark);
+  }
+  .subtile p{
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
 
-    .adapt__chip{
-      border:1px solid rgba(15,23,42,.12);
-      background:#fff;
-      border-radius:999px;
-      padding:8px 12px;
-      font-weight:800;
-      cursor:pointer;
-      color: var(--myss_blue_dark);
-    }
-
-    .adapt__chip--ghost{
-      background:transparent;
-      color: var(--muted);
-    }
-
-    .adapt__chip:focus-visible,
-    .adapt__option:focus-visible,
-    .side-selected__change:focus-visible,
-    .bodymap__btn:focus-visible,
-    .uu-btn:focus-visible,
-    .uu-bar__brand:focus-visible,
-    .uu-bar__link:focus-visible{
-      outline:3px solid var(--focus);
-      outline-offset:3px;
-    }
-
-    .adapt__status{
-      margin: 12px 0 8px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(var(--orange_rgb), .14);
-      border: 1px solid rgba(var(--orange_rgb), .25);
-      color: var(--myss_blue_dark);
-      font-weight: 900;
-    }
-
-    .adapt__toast{
-      margin: 10px 0 0;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(148,163,184,.18);
-      border: 1px solid rgba(148,163,184,.35);
-      color: var(--myss_blue_dark);
-      font-weight: 800;
-      text-align:center;
-    }
-
-    .choice-badge{
-      margin: 12px 0 0;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(var(--orange_rgb), .35);
-      background: linear-gradient(90deg, rgba(var(--orange_rgb), .26), rgba(var(--yellow_rgb), .16));
-      color: var(--myss_blue_dark);
-      font-weight: 950;
-      text-align: center;
-      opacity: 0;
-    }
-
-    .choice-badge.is-show{ animation: badgeInOut 3200ms ease forwards; }
-    @keyframes badgeInOut{
-      0%{opacity:0;transform:translateY(6px)}
-      14%{opacity:1;transform:translateY(0)}
-      78%{opacity:1;transform:translateY(0)}
-      100%{opacity:0;transform:translateY(-2px)}
-    }
-
-    .adapt__h3{ margin:14px 0 8px; color: var(--myss_blue_dark); font-size:1rem; }
-
-    .adapt__grid{ display:grid; gap:10px; }
-
-    .adapt__option{
-      text-align:left;
-      border:1px solid rgba(15,23,42,.12);
-      border-radius:14px;
-      padding:12px;
-      background:#fff;
-      cursor:pointer;
-    }
-    .adapt__option:hover{ border-color: rgba(47,127,191,.35); }
-    .adapt__option[aria-pressed="true"]{
-      border-color: rgba(47,127,191,.75);
-      box-shadow: inset 0 0 0 1px rgba(47,127,191,.45);
-      background: rgba(47,127,191,.08);
-    }
-
-    .adapt__t{ display:block; font-weight:900; color: var(--myss_blue_dark); }
-    .adapt__d{ display:block; margin-top:3px; color: var(--muted); font-size:.95rem; }
-
-    .adapt__option--neutral{ background: rgba(var(--orange_rgb), .08); }
-
-    .side-selected{
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(var(--orange_rgb), .35);
-      background: rgba(var(--orange_rgb), .10);
-    }
-    .side-selected__text{ margin: 0 0 10px; font-weight: 950; color: var(--myss_blue_dark); }
-    .side-selected__figure{
-      max-width: 420px;
-      margin: 0 auto;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    .side-selected__figure img{ width:100%; height:auto; display:block; }
-    .side-selected__change{
-      margin-top: 10px;
-      border: 1px solid rgba(15,23,42,.12);
-      background: #fff;
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-weight: 900;
-      cursor: pointer;
-      color: var(--myss_blue_dark);
-    }
-
-    .adapt__tips{ margin-top: 14px; display: grid; gap: 10px; }
-
-    .tip{
-      border: 1px solid rgba(15,23,42,.1);
-      border-radius: 14px;
-      padding: 12px;
-      background: #fff;
-    }
-
-    .tip h3{ margin: 0 0 8px; color: var(--myss_blue_dark); }
-    .tip ul{ margin: 0; padding-left: 18px; line-height: 1.5; }
-    .tip p{ margin: 0 0 10px; line-height: 1.5; }
-
-    .tip details{
-      margin-top: 10px;
-      border: 1px solid rgba(15,23,42,.10);
-      border-radius: 12px;
-      background: rgba(47,127,191,.03);
-      overflow: hidden;
-    }
-
-    .tip summary{
-      list-style: none;
-      cursor: pointer;
-      padding: 10px 12px;
-      font-weight: 950;
-      color: var(--myss_blue_dark);
-    }
-
-    .tip summary::-webkit-details-marker{ display: none; }
-
-    .details__content{ padding: 10px 12px 12px; }
-    .details__content h4{ margin: 12px 0 6px; color: var(--myss_blue_dark); font-size: .98rem; }
-    .details__content ol, .details__content ul{ margin: 0 0 10px; padding-left: 18px; line-height: 1.5; }
-
-    .aid-list{ display: grid; gap: 10px; margin-top: 10px; }
-    .aid-item{ border: 1px solid rgba(15,23,42,.08); border-radius: 12px; padding: 10px; background: #fff; }
-    .aid-item strong{ display: block; color: var(--myss_blue_dark); margin-bottom: 4px; }
-
-    .tip__linkrow{ margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
-    .tip__linkpill{
-      display: inline-block;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(15,23,42,.12);
-      background: #fff;
-      color: var(--myss_blue_dark);
-      font-weight: 900;
-      text-decoration: none;
-    }
-
-    .tip__linkpill:focus-visible{
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-    }
-
-    .tip[hidden]{ display:none !important; }
-
-    .bodymap{ max-width: 560px; margin: 10px auto 0; }
-    .bodymap__btn{ display:block; width:100%; padding:0; border:0; background:transparent; cursor:pointer; }
-    .bodymap__img{ width:100%; height:auto; display:block; border-radius:18px; border: 1px solid rgba(15,23,42,.08); }
-    .adapt__smallhint{ margin: 8px 0 0; color: var(--muted); font-size: .95rem; text-align: center; }
-
-    @media (min-width: 720px){
-      .adapt__grid{ grid-template-columns: 1fr 1fr; }
-      .adapt__option--neutral{ grid-column: 1 / -1; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior:auto; }
-    }
-
-    .myss-steps{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
-    .myss-step{display:inline-block;padding:10px 12px;border-radius:999px;border:1px solid rgba(15,23,42,.12);text-decoration:none;font-weight:900;color:var(--myss_blue_dark);background:#fff}
-    .myss-step.is-active{background:rgba(47,127,191,.08);border-color:rgba(47,127,191,.45)}
-    .myss-quick{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
-    .myss-quick a{display:inline-block;padding:12px 14px;border-radius:14px;border:1px solid rgba(15,23,42,.12);text-decoration:none;font-weight:950;color:var(--myss_blue_dark);background:#fff}
-    .myss-quick a.primary{background:rgba(47,127,191,.08);border-color:rgba(47,127,191,.45)}
-
-    .moretips{ margin-top: 10px; }
-    #moreTipsWrap{ margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(15,23,42,.08); }
-
-    details.choice{ border:1px solid rgba(15,23,42,.12); border-radius:14px; padding:12px; background:var(--card,#fff); }
-    details.choice summary{ cursor:pointer; font-weight:700; }
-    details.choice[open]{ box-shadow: var(--shadow, 0 10px 25px rgba(2,6,23,.08)); }
-    details.choice .aid{ margin-top:12px; padding-top:12px; border-top:1px solid rgba(15,23,42,.12); }
-    details.choice video{ width:100%; border-radius:14px; display:block; }
-
-    #tipsWrap[hidden]{ display:none !important; }
-
-    /* UU bar */
-    .skip-link{
-      position: absolute;
-      left: .75rem;
-      top: .5rem;
-      padding: .6rem .8rem;
-      background: var(--card);
-      border: 2px solid currentColor;
-      border-radius: .75rem;
-      transform: translateY(-200%);
-      z-index: 9999;
-    }
-    .skip-link:focus{ transform: translateY(0); outline: none; box-shadow: 0 0 0 4px var(--focus); }
-
-    .uu-bar{
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: var(--card);
-      border-bottom: 1px solid rgba(2,6,23,.10);
-    }
-    .uu-bar__inner{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: .6rem .9rem;
-      display:flex;
-      gap:.8rem;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .uu-bar__brand{ font-weight:800; text-decoration:none; color:inherit; padding:.35rem .5rem; border-radius:.6rem; }
-    .uu-bar__nav{ display:flex; gap:.25rem; flex-wrap:wrap; margin-right:auto; }
-    .uu-bar__link{ text-decoration:none; color:inherit; padding:.35rem .6rem; border-radius:.6rem; }
-    .uu-bar__tools{ display:flex; gap:.4rem; align-items:center; flex-wrap:wrap; }
-    .uu-btn{
-      appearance:none;
-      border:1px solid rgba(2,6,23,.18);
-      background:transparent;
-      color:inherit;
-      border-radius:.75rem;
-      padding:.45rem .65rem;
-      font:inherit;
-      line-height:1;
-      cursor:pointer;
-    }
-    .uu-btn[aria-pressed="true"]{ border-color: rgba(2,6,23,.35); }
-    .uu-zoom .uu-btn:first-child{ font-size:.95em; }
-    .uu-zoom .uu-btn:last-child{ font-size:1.1em; }
-
-    .contrast-high .uu-btn{ border-width:2px; }
-    .motion-reduced *{ scroll-behavior:auto !important; transition:none !important; animation:none !important; }
-
-.warn{
-  display:flex;
-  gap:.6rem;
-  align-items:flex-start;
-  padding:.75rem .85rem;
-  border-radius:14px;
-  border:1px solid rgba(var(--yellow_rgb), .45);
-  background: rgba(var(--yellow_rgb), .10);
-}
-
-.warn__icon{
-  margin-top:.15rem;
-  color: rgb(var(--yellow_rgb));
-  flex:0 0 auto;
-}
-
-.warn__text{
-  color: var(--text);
-}
-
-.sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border:0;
-}
+  /* Utility */
+  .hidden{ display:none !important; }
 </style>
-</head>
 
-<body>
+<div class="wrap">
+  <header class="hero" id="valg">
+    <p class="kicker">Grunnveiledning</p>
+    <h1 class="h1">Tilpasninger ved behov</h1>
+    <p class="lead">Velg det som passer deg. Du går videre til én tydelig seksjon, med enkel “tilbake til valg”.</p>
 
-  <a class="skip-link" href="#main">Hopp til innhold</a>
+    <div class="tile-grid" role="navigation" aria-label="Velg område">
+      <button class="tile" type="button" data-target="#seksjon-fot" aria-controls="seksjon-fot">
+        <span class="badge" aria-hidden="true">
+          <!-- Foot icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 14c1.5 2 4.5 3 8 3 2.5 0 4-1 4-3 0-2.5-2.5-3-5-3H9c-1.5 0-2 .5-2 1.5V14z"></path>
+            <path d="M7 14v3c0 2 1.5 3 4 3h4"></path>
+          </svg>
+        </span>
+        <span>
+          <p class="tile-title">Fot</p>
+          <p class="tile-sub">Fotplassering, hæl som løfter seg, vridning, trykkfordeling.</p>
+        </span>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </button>
 
-  <header class="uu-bar" role="banner" aria-label="Tilgjengelighetsverktøy">
-    <div class="uu-bar__inner">
-      <a class="uu-bar__brand" href="/" aria-label="Gå til forsiden">My Strongest Side</a>
+      <button class="tile" type="button" data-target="#seksjon-asymmetri" aria-controls="seksjon-asymmetri">
+        <span class="badge" aria-hidden="true">
+          <!-- Balance icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v18"></path>
+            <path d="M7 7h10"></path>
+            <path d="M6 7l-3 6h6l-3-6z"></path>
+            <path d="M18 7l-3 6h6l-3-6z"></path>
+          </svg>
+        </span>
+        <span>
+          <p class="tile-title">Asymmetri</p>
+          <p class="tile-sub">Når én side jobber mindre, eller du blir skjev i setet.</p>
+        </span>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </button>
 
-      <nav class="uu-bar__nav" aria-label="Snarveier">
-        <a href="#adaptPanel" class="uu-bar__link">Velg tilpasning</a>
-        <a href="#tipsWrap" class="uu-bar__link">Tips</a>
-        <a href="/veiledere/beinpress-grep.html" class="uu-bar__link">For veiledere</a>
-      </nav>
+      <button class="tile" type="button" data-target="#seksjon-grep" aria-controls="seksjon-grep">
+        <span class="badge" aria-hidden="true">
+          <!-- Hand icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 22v-7"></path>
+            <path d="M11 22v-9"></path>
+            <path d="M15 22v-8"></path>
+            <path d="M19 22v-10"></path>
+            <path d="M5 15c0-2 2-3 4-3h10c2 0 4 1 4 3v1c0 3-2 6-5 6H10c-3 0-5-3-5-6v-1z"></path>
+          </svg>
+        </span>
+        <span>
+          <p class="tile-title">Grep</p>
+          <p class="tile-sub">Lik rekkevidde, unngå at sterk hånd drar deg skjevt.</p>
+        </span>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </button>
 
-      <div class="uu-bar__tools" aria-label="Visning">
-        <button type="button" class="uu-btn" data-theme-toggle aria-pressed="false">Bakgrunn</button>
-
-        <div class="uu-zoom" role="group" aria-label="Tekststørrelse">
-          <button type="button" class="uu-btn" data-font-dec aria-label="Mindre tekst">A</button>
-          <button type="button" class="uu-btn" data-font-inc aria-label="Større tekst">A</button>
-        </div>
-
-        <button type="button" class="uu-btn" data-contrast-toggle aria-pressed="false">Kontrast</button>
-        <button type="button" class="uu-btn" data-motion-toggle aria-pressed="false">Rolig</button>
-      </div>
+      <button class="tile" type="button" data-target="#seksjon-innut" aria-controls="seksjon-innut">
+        <span class="badge" aria-hidden="true">
+          <!-- Arrow in/out icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 17l-5-5 5-5"></path>
+            <path d="M5 12h14"></path>
+            <path d="M14 7l5 5-5 5"></path>
+          </svg>
+        </span>
+        <span>
+          <p class="tile-title">Inn og ut av apparat</p>
+          <p class="tile-sub">Trygg startposisjon, stabil rygg, enkel rutine.</p>
+        </span>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </button>
     </div>
   </header>
 
-  <main class="wrap" id="main" tabindex="-1">
-    <section class="card">
-      <h1>Tilpasninger ved behov: beinpress</h1>
-      <p class="ingress">
-        Her får du rask, apparatnær tilpasning for beinpress. Målet er en konkret oppskrift som fungerer i et vanlig treningssenter, også når dagsformen varierer.
-      </p>
+  <!-- SEKSJON: FOT -->
+  <section class="section hidden" id="seksjon-fot" aria-labelledby="fot-tittel">
+    <div class="topbar">
+      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+      <div class="crumb">Tilpasninger ved behov · Fot</div>
+    </div>
+    <div class="section-body">
+      <h2 class="h2" id="fot-tittel">Fot</h2>
+      <p class="desc">Hold det enkelt: stabil fotkontakt først. Så justerer du dybde og belastning.</p>
 
-      <nav class="myss-steps" aria-label="Steg">
-        <a class="myss-step" href="/grunnveiledning/beinpress.html">Steg 1: kom i gang</a>
-        <a class="myss-step is-active" href="/grunnveiledning/beinpress-tilpasninger.html">Steg 2: tilpasninger</a>
-        <a class="myss-step" href="/veiledere/beinpress-grep.html">For veiledere</a>
-      </nav>
-
-      <div class="myss-quick" aria-label="Snarveier">
-        <a class="primary" href="#adaptPanel">Velg tilpasning</a>
-        <a href="/grunnveiledning/beinpress.html">Tilbake til video</a>
+      <div class="do-first" role="note" aria-label="Gjør dette først">
+        <strong>Gjør dette først</strong>
+        <ul>
+          <li>Plasser føttene skulderbredt og prøv å ha kontakt med hele foten.</li>
+          <li>Stopp litt tidligere hvis hælen løfter seg eller foten vrir seg.</li>
+          <li>Reduser belastning og test på nytt med rolig tempo.</li>
+        </ul>
       </div>
 
-      <section class="adapt" aria-labelledby="adaptTitle">
-        <div id="adaptPanel" class="adapt__panel">
-          <h2 id="adaptTitle">Tilpasset veiledning</h2>
-          <p class="adapt__lead">
-            Velg det som passer best. Valget brukes bare til å vise relevant veiledning nå, og det lagres ikke som helseopplysninger.
-          </p>
-
-          <div class="adapt__controls" role="group" aria-label="Filterkontroller">
-            <button id="adaptShowAll" class="adapt__chip" type="button">Vis alle tips</button>
-            <button id="adaptReset" class="adapt__chip adapt__chip--ghost" type="button">Nullstill valg</button>
-          </div>
-
-          <p id="adaptStatus" class="adapt__status" aria-live="polite">Vis alle tips</p>
-          <p id="adaptToast" class="adapt__toast" hidden role="status" aria-live="polite"></p>
-
-          <section id="step1" class="adapt__group" aria-label="Sidevalg">
-            <h3 class="adapt__h3" id="sideTitle">Hvilken side påvirkes mest</h3>
-
-            <div id="sideChoices" class="adapt__grid" role="group" aria-labelledby="sideTitle">
-              <button class="adapt__option" type="button" data-side="right" aria-pressed="false">
-                <span class="adapt__t">Mest på høyre side</span>
-                <span class="adapt__d">Vi viser tips for høyre side</span>
-              </button>
-
-              <button class="adapt__option" type="button" data-side="left" aria-pressed="false">
-                <span class="adapt__t">Mest på venstre side</span>
-                <span class="adapt__d">Vi viser tips for venstre side</span>
-              </button>
-
-              <button class="adapt__option adapt__option--neutral" type="button" data-side="general" aria-pressed="false">
-                <span class="adapt__t">Usikker</span>
-                <span class="adapt__d">Vis generell tilrettelegging</span>
-              </button>
-            </div>
-
-            <div id="sideSelected" class="side-selected" hidden aria-live="polite">
-              <p id="sideSelectedText" class="side-selected__text"></p>
-
-              <div class="side-selected__figure">
-                <img id="sideSelectedImg" src="/assets/img/unilateral.jpg" alt="Unilateral figur" loading="lazy" />
-              </div>
-
-              <button id="changeSide" class="side-selected__change" type="button">Endre valg</button>
-            </div>
-          </section>
-
-          <section id="step2" class="adapt__group" hidden aria-label="Kroppsområde">
-            <h3 class="adapt__h3">Hva er mest utfordrende</h3>
-
-            <div class="bodymap" aria-label="Trykk på området i figuren for å få relevante tips">
-              <button id="bodymapBtn" class="bodymap__btn" type="button" aria-label="Velg område i figuren">
-                <img id="bodymapImg" class="bodymap__img" src="/assets/img/Beinpress_figur.jpg" alt="Figur for valg av område" loading="lazy" />
-              </button>
-              <p class="adapt__smallhint">Trykk på et område i figuren. Du blir sendt til riktig tips.</p>
-            </div>
-          </section>
-
-          <div id="areaChoices" class="adapt__grid" role="group" aria-label="Velg område med knapper" style="margin-top:12px;">
-            <button class="adapt__option" type="button" data-area="foot" aria-pressed="false">
-              <span class="adapt__t">Fot</span>
-              <span class="adapt__d">Støtte og fotplassering</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="knee" aria-pressed="false">
-              <span class="adapt__t">Kne</span>
-              <span class="adapt__d">Retning og dybde</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="hip" aria-pressed="false">
-              <span class="adapt__t">Hofte og sete</span>
-              <span class="adapt__d">Posisjon og stabilitet</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="grip" aria-pressed="false">
-              <span class="adapt__t">Grep</span>
-              <span class="adapt__d">Stødig overkropp</span>
-            </button>
-            <button class="adapt__option" type="button" data-area="head" aria-pressed="false">
-              <span class="adapt__t">Fokus</span>
-              <span class="adapt__d">Enkle steg og kontroll</span>
-            </button>
-          </div>
-          <p class="adapt__smallhint">Du kan bruke figuren eller knappene.</p>
+      <div class="subgrid">
+        <div class="subtile">
+          <h3>Hæl løfter seg</h3>
+          <p>Gå litt mindre dypt. Bruk 3 til 5 minutter på å varme opp og mobilisere ankel før du prøver igjen.</p>
         </div>
+        <div class="subtile">
+          <h3>Vridning eller “tråkker over”</h3>
+          <p>Stopp der du mister stabil fot. Tren i den løftebanen der du holder jevnt trykk og rolig ankel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <p id="choiceBadge" class="choice-badge" hidden role="status" aria-live="polite"></p>
+  <!-- SEKSJON: ASYMMETRI -->
+  <section class="section hidden" id="seksjon-asymmetri" aria-labelledby="asym-tittel">
+    <div class="topbar">
+      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+      <div class="crumb">Tilpasninger ved behov · Asymmetri</div>
+    </div>
+    <div class="section-body">
+      <h2 class="h2" id="asym-tittel">Asymmetri</h2>
+      <p class="desc">Målet er en rolig overkropp og jevn kraft. Juster før du øker belastning.</p>
 
-        <section id="tipsWrap" hidden>
-          <section id="tipsContainer" class="adapt__tips" aria-live="polite">
+      <div class="do-first" role="note" aria-label="Gjør dette først">
+        <strong>Gjør dette først</strong>
+        <ul>
+          <li>Reduser vekt og senk tempoet.</li>
+          <li>Finn lik seteposisjon og lik fotavstand.</li>
+          <li>Legg inn en kort pause i bunn om du mister kontroll.</li>
+        </ul>
+      </div>
 
-            <article class="tip" data-side="general" data-area="general">
-              <h3>Trygg og enkel start</h3>
-              <ul>
-                <li>Start med lett belastning og kort bevegelse.</li>
-                <li>Hold rolig tempo og stopp før det blir utrygt.</li>
-              </ul>
-            </article>
+      <div class="subgrid">
+        <div class="subtile">
+          <h3>Én side tar over</h3>
+          <p>Kjør roligere tempo og færre repetisjoner. Stopp mens du fortsatt er stabil.</p>
+        </div>
+        <div class="subtile">
+          <h3>Bekkenet sklir eller du blir skjev</h3>
+          <p>Start på nytt med lavere vekt. Fokuser på ryggkontakt og likt trykk gjennom begge føtter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <article class="tip" data-side="general" data-area="general">
-              <h3>Trygghet ved CP</h3>
-              <ul>
-                <li>Stopp tidlig hvis spastisiteten tar over, eller hvis teknikken begynner å glippe.</li>
-                <li>Ta en planlagt pause, pust rolig i 30 til 60 sekunder, og juster sete eller fot før du fortsetter.</li>
-                <li>Reduser belastning hvis du blir fort sliten eller mister jevnt trykk.</li>
-                <li>Be om hjelp hvis du ikke kommer trygt inn og ut av apparatet, eller hvis du ikke får en stabil startposisjon.</li>
-              </ul>
-            </article>
+  <!-- SEKSJON: GREP -->
+  <section class="section hidden" id="seksjon-grep" aria-labelledby="grep-tittel">
+    <div class="topbar">
+      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+      <div class="crumb">Tilpasninger ved behov · Grep</div>
+    </div>
+    <div class="section-body">
+      <h2 class="h2" id="grep-tittel">Grep</h2>
+      <p class="desc">Et stabilt grep gjør at du sitter rolig og får mer igjen av beinpressen.</p>
 
-            <article class="tip" data-side="right" data-area="general">
-              <h3>Når høyre side jobber mindre</h3>
-              <ul>
-                <li>Reduser belastning og jobb med kontrollert tempo.</li>
-                <li>Plasser foten likt og bruk pause i bunn.</li>
-              </ul>
-            </article>
+      <div class="do-first" role="note" aria-label="Gjør dette først">
+        <strong>Gjør dette først</strong>
+        <ul>
+          <li>Hold så symmetrisk du kan med begge hender.</li>
+          <li>Unngå at sterk hånd drar deg skjevt.</li>
+          <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
+        </ul>
+      </div>
 
-            <article class="tip" data-side="left" data-area="general">
-              <h3>Når venstre side jobber mindre</h3>
-              <ul>
-                <li>Samme prinsipp: lavere belastning, mer kontroll.</li>
-                <li>Hold knær i samme retning gjennom hele presset.</li>
-              </ul>
-            </article>
+      <div class="subgrid">
+        <div class="subtile">
+          <h3>Ulik rekkevidde</h3>
+          <p>Flytt grep litt nærmere på den siden som ikke rekker like langt, så overkroppen holder seg rolig.</p>
+        </div>
+        <div class="subtile">
+          <h3>Håndkontroll</h3>
+          <p>Bruk hjelpemiddel for å holde samme grep gjennom settet, heller enn å kompensere med kroppen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            <article id="tip-foot" class="tip" data-side="general" data-area="foot">
-              <h3>Ved utfordringer i fot</h3>
-              <ul>
-                <li>Flytt fotplassering litt opp eller ned for bedre støtte.</li>
-                <li>Sikre jevnt trykk gjennom hele foten.</li>
-              </ul>
-            </article>
+  <!-- SEKSJON: INN OG UT -->
+  <section class="section hidden" id="seksjon-innut" aria-labelledby="innut-tittel">
+    <div class="topbar">
+      <button class="backbtn" type="button" data-back="#valg" aria-label="Tilbake til valg">Tilbake</button>
+      <div class="crumb">Tilpasninger ved behov · Inn og ut av apparat</div>
+    </div>
+    <div class="section-body">
+      <h2 class="h2" id="innut-tittel">Inn og ut av apparat</h2>
+      <p class="desc">Trygg startposisjon først, så bevegelse. Det gjør hele settet bedre.</p>
 
-            <details class="choice tip" id="tip-ankelmobilitet" data-side="general" data-area="foot">
-              <summary>Hæl løfter seg i bunnposisjon</summary>
-              <p class="warn" role="note">
-                <span class="warn__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
-                    <path d="M12 3 1 21h22L12 3z" fill="currentColor"></path>
-                    <path d="M12 9v5" stroke="#fff" stroke-width="2" stroke-linecap="round"></path>
-                    <circle cx="12" cy="17" r="1.2" fill="#fff"></circle>
-                  </svg>
-                </span>
-                <span class="warn__text"><span class="sr-only">Advarsel: </span>Stopp dybden hvis hælen løfter seg eller foten vrir. Tren i den banen du klarer med stabil fot.</span>
-              </p>
+      <div class="do-first" role="note" aria-label="Gjør dette først">
+        <strong>Gjør dette først</strong>
+        <ul>
+          <li>Juster sete så du har stabil ryggkontakt.</li>
+          <li>Test én repetisjon med lav vekt før du starter settet.</li>
+          <li>Be om hjelp hvis du ikke kommer trygt inn eller ut.</li>
+        </ul>
+      </div>
 
-              <div class="inner">
-                <p class="muted">
-                  Dette skjer ofte når ankelen er stiv eller leggen og akilles er stram.
-                  Du mister jevnt trykk og blir fort ustø.
-                </p>
+      <div class="subgrid">
+        <div class="subtile">
+          <h3>Stabil startposisjon</h3>
+          <p>Ta et rolig pust, finn grep og fotkontakt, og start først når du kjenner at du sitter likt.</p>
+        </div>
+        <div class="subtile">
+          <h3>Utrygg utgang</h3>
+          <p>Avslutt settet litt før du blir sliten i kontrollen, så du har overskudd til å komme deg ut trygt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
-                <h4>Prøv dette nå</h4>
-                <ul class="tips">
-                  <li>Flytt foten litt høyere på plata.</li>
-                  <li>Gå litt mindre dypt, stopp før hælen begynner å løfte seg.</li>
-                  <li>Bruk rolig tempo og hold jevnt trykk gjennom hele foten.</li>
-                  <li>Stopp og juster hvis du får smerte i akilles eller foran i ankelen.</li>
-                </ul>
-
-                <div class="media">
-                  <video controls playsinline preload="metadata">
-                    <source src="/media/beinpress/ankel-akilles-haelforhoyer.mp4" type="video/mp4">
-                  </video>
-                  <p class="muted" style="margin-top:10px">
-                    I filmen ser du stiv ankel i stående, hæl som løfter seg i beinpress, og løsning med hælforhøyer og litt mindre dybde.
-                  </p>
-                </div>
-
-                <div class="aid">
-                  <h3>Hjelpemiddel 04: Hælforhøyer</h3>
-                  <p class="muted">
-                    Reduserer kravet til ankelbøy og kan gjøre det lettere å holde hælen nede og sitte stabilt.
-                  </p>
-                  <ul class="tips">
-                    <li>Start med liten forhøying.</li>
-                    <li>Hold rolig tempo og stopp før teknikken glipper.</li>
-                    <li>Hvis det kjennes utrygt, be om hjelp til å finne riktig oppsett.</li>
-                  </ul>
-                </div>
-
-                <details class="mini">
-                  <summary>Mer info om hvorfor dette skjer</summary>
-                  <div class="inner">
-                    <ul>
-                      <li>Stram legg og akilles kan gjøre det vanskelig å få kneet frem uten at hælen løfter seg.</li>
-                      <li>Noen har også økt spenning i leggen, som gjør at foten trekkes mot spissfot.</li>
-                    </ul>
-                  </div>
-                </details>
-              </div>
-            </details>
-
-            <article id="tip-knee" class="tip" data-side="general" data-area="knee">
-              <h3>Ved utfordringer i kne</h3>
-              <ul>
-                <li>La knær følge samme retning som tær gjennom presset.</li>
-                <li>Reduser dybden hvis det gir bedre kontroll.</li>
-              </ul>
-            </article>
-
-            <article id="tip-hip" class="tip" data-side="general" data-area="hip">
-              <h3>Ved utfordringer i hofte og sete</h3>
-              <ul>
-                <li>Juster sete slik at rygg og sete har stabil kontakt.</li>
-                <li>Bruk rolig tempo og jevn kraft uten raske stopp.</li>
-              </ul>
-            </article>
-
-            <article id="tip-head" class="tip" data-side="general" data-area="head">
-              <h3>Fokus og kontroll når det blir mye å holde styr på</h3>
-              <ul>
-                <li>Bruk få, faste steg: sete, fot, pust, press.</li>
-                <li>Ta pause mellom repetisjonene og senk tempo.</li>
-                <li>Bruk en kort huskeregel på skjermen.</li>
-              </ul>
-            </article>
-
-            <article id="tip-grip" class="tip" data-side="general" data-area="grip">
-              <h3>Grep når håndkontroll er utfordrende</h3>
-
-              <p>
-                Et godt grep hjelper deg å sitte stødig i beinpressen. Hvis den ene siden er mer påvirket, eller armen på den siden ikke rekker like langt, kan den sterke hånden lett dra deg litt skjevt. Prøv å holde så likt som mulig med begge hender, slik at overkroppen er rolig og begge bein får jobbe mest mulig likt.
-              </p>
-
-              <ul>
-                <li>Prioriter stabil posisjon før belastning.</li>
-                <li>Hold så symmetrisk som mulig med begge hender.</li>
-                <li>Vurder stropp, antiskli eller tykkere grep ved behov.</li>
-              </ul>
-
-              <details>
-                <summary>Vis mer forklaring</summary>
-                <div class="details__content">
-                  <p>
-                    Hvis du har en side som er svakere eller stivere, kan det være vanskeligere å nå håndtaket godt på den siden. Da blir det lett slik at den sterke hånden får mest tak og drar mer i håndtaket.
-                  </p>
-                  <p>
-                    Da kan overkroppen vri seg, bekkenet komme litt ut av midtstilling, og det sterke beinet ta mer av vekten. Når du finner et grep som kjennes mest mulig likt på begge sider, blir det lettere å sitte rett i setet, bruke begge bein mer jevnt og oppleve øvelsen som mer forutsigbar og rolig.
-                  </p>
-                </div>
-              </details>
-
-              <details>
-                <summary>Hjelpemidler til grep</summary>
-                <div class="details__content">
-                  <h4>1 Hjelpemidler du kan låne i resepsjonen</h4>
-                  <p>
-                    På dette treningssenteret finnes det noen enkle hjelpemidler som kan gjøre det lettere å holde håndtaket, slik at du sitter mer stabilt og får en roligere gjennomføring.
-                  </p>
-
-                  <h4>Slik bruker du dem</h4>
-                  <ol>
-                    <li>Se i oversikten under hvilket hjelpemiddel som kan passe for deg.</li>
-                    <li>Gå til resepsjonen og si nummeret på hjelpemiddelet.</li>
-                    <li>Du låner hjelpemiddelet til økten og leverer det tilbake i resepsjonen etterpå.</li>
-                  </ol>
-
-                  <h4>Eksempel på oversikt du kan fylle ut selv</h4>
-                  <div class="aid-list">
-                    <div class="aid-item">
-                      <strong>Nummer 01</strong>
-                      <div>Navn: Grepstropp til håndtak</div>
-                      <div class="muted">Brukes når: Det er vanskelig å holde godt med den ene hånden, eller grepet slipper lett.</div>
-                    </div>
-
-                    <div class="aid-item">
-                      <strong>Nummer 02</strong>
-                      <div>Navn: Antiskli greppute</div>
-                      <div class="muted">Brukes når: Hånden glir på håndtaket, eller du trenger mer friksjon for å holde rolig.</div>
-                    </div>
-
-                    <div class="aid-item">
-                      <strong>Nummer 03</strong>
-                      <div>Navn: Myk grepstøtte til håndtak</div>
-                      <div class="muted">Brukes når: Du har vondt i hånd eller håndledd, eller trenger et tykkere og mer behagelig grep.</div>
-                    </div>
-                  </div>
-
-                  <p class="muted">
-                    Sikkerhet: Bruk hjelpemidler slik at du fortsatt kan slippe raskt. Stopp hvis du får smerter, nummenhet, hudirritasjon eller økt ubehag, og be om hjelp ved behov.
-                  </p>
-                </div>
-              </details>
-
-              <div class="tip__linkrow">
-                <a class="tip__linkpill" href="/veiledere/beinpress-grep.html">For veiledere</a>
-              </div>
-            </article>
-
-          </section>
-
-          <section class="moretips" aria-label="Flere tips">
-            <button id="toggleMoreTips" class="adapt__chip adapt__chip--ghost" type="button" hidden>Flere tips</button>
-            <div id="moreTipsWrap" hidden>
-              <div id="moreTipsContainer" class="adapt__tips"></div>
-            </div>
-          </section>
-        </section>
-      </section>
-    </section>
-  </main>
-
-  <script data-myss-adapt>
+<script>
   (function(){
-    const status = document.getElementById('adaptStatus');
-    const toast  = document.getElementById('adaptToast');
+    const tiles = Array.from(document.querySelectorAll('.tile[data-target]'));
+    const sections = Array.from(document.querySelectorAll('.section'));
+    const backBtns = Array.from(document.querySelectorAll('.backbtn[data-back]'));
 
-    const sideChoices   = document.getElementById('sideChoices');
-    const sideSelected  = document.getElementById('sideSelected');
-    const sideSelectedText = document.getElementById('sideSelectedText');
-    const changeSide    = document.getElementById('changeSide');
+    function showSection(targetSel){
+      const target = document.querySelector(targetSel);
+      if(!target) return;
 
-    const step2         = document.getElementById('step2');
-    const showAllBtn    = document.getElementById('adaptShowAll');
-    const resetBtn      = document.getElementById('adaptReset');
+      sections.forEach(s => s.classList.add('hidden'));
+      target.classList.remove('hidden');
 
-    const tipsWrap      = document.getElementById('tipsWrap');
-    const tipsContainer = document.getElementById('tipsContainer');
+      // Scroll to section top in a “premium” way
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    const areaChoices   = document.getElementById('areaChoices');
-    const bodymapBtn    = document.getElementById('bodymapBtn');
-    const bodymapImg    = document.getElementById('bodymapImg');
-
-    const toggleMoreTips = document.getElementById('toggleMoreTips');
-    const moreTipsWrap   = document.getElementById('moreTipsWrap');
-    const moreTipsContainer = document.getElementById('moreTipsContainer');
-
-    const badge = document.getElementById('choiceBadge');
-
-    if(!sideChoices || !tipsWrap || !tipsContainer || !areaChoices){
-      return;
+      // Update hash without jump
+      history.replaceState(null, '', targetSel);
     }
 
-    let selectedSide = null;
-    let selectedArea = null;
-
-    const sideButtons = Array.from(sideChoices.querySelectorAll('button[data-side]'));
-    const areaButtons = Array.from(areaChoices.querySelectorAll('button[data-area]'));
-
-    const tips = Array.from(document.querySelectorAll('#tipsWrap .tip'));
-    const originalOrder = tips.slice();
-
-    const points = [
-      { key:'head', label:'Fokus', target:'#tip-head' },
-      { key:'grip', label:'Grep',  target:'#tip-grip' },
-      { key:'hip',  label:'Hofte og sete', target:'#tip-hip'  },
-      { key:'knee', label:'Kne',   target:'#tip-knee' },
-      { key:'foot', label:'Fot',   target:'#tip-foot' }
-    ];
-
-    function sideLabel(v){
-      if(v === 'right') return 'høyre side';
-      if(v === 'left') return 'venstre side';
-      return 'usikker';
+    function backTo(sel){
+      const el = document.querySelector(sel);
+      sections.forEach(s => s.classList.add('hidden'));
+      if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', sel);
     }
 
-    function setStatus(text){
-      if(status) status.textContent = text;
-    }
-
-    let toastTimer = null;
-    function showToast(msg){
-      if(!toast) return;
-      toast.textContent = msg;
-      toast.hidden = false;
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => { toast.hidden = true; }, 2200);
-    }
-
-    let badgeTimer = null;
-    function showBadge(text){
-      if(!badge) return;
-      badge.textContent = text;
-      badge.hidden = false;
-      badge.classList.remove('is-show');
-      void badge.offsetWidth;
-      badge.classList.add('is-show');
-      clearTimeout(badgeTimer);
-      badgeTimer = setTimeout(() => { badge.hidden = true; }, 3400);
-    }
-
-    function setPressed(list, attr, value){
-      list.forEach(btn => {
-        const on = btn.getAttribute(attr) === value;
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-    }
-
-    function setAreaPressed(){
-      areaButtons.forEach(btn => {
-        const on = selectedArea && btn.getAttribute('data-area') === selectedArea;
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-    }
-
-    function restoreOrder(){
-      originalOrder.forEach(el => tipsContainer.appendChild(el));
-    }
-
-    function applyFilter(){
-      tips.forEach(t => {
-        const tSide = t.getAttribute('data-side') || 'general';
-        const tArea = t.getAttribute('data-area') || 'general';
-
-        const sideOk = !selectedSide || tSide === selectedSide || tSide === 'general';
-        const areaOk = !selectedArea || tArea === selectedArea || tArea === 'general';
-
-        t.hidden = !(sideOk && areaOk);
-      });
-    }
-
-    function updatePrimaryAndMore(){
-      if(!toggleMoreTips || !moreTipsWrap || !moreTipsContainer) return;
-
-      const visible = tips.filter(t => !t.hidden);
-
-      moreTipsContainer.innerHTML = '';
-      moreTipsWrap.hidden = true;
-
-      if(visible.length <= 1){
-        toggleMoreTips.hidden = true;
-        return;
-      }
-
-      toggleMoreTips.hidden = false;
-      toggleMoreTips.textContent = 'Flere tips (' + (visible.length - 1) + ')';
-
-      visible.slice(1).forEach(t => moreTipsContainer.appendChild(t));
-    }
-
-    function ensureTipsVisible(){
-      tipsWrap.hidden = false;
-    }
-
-    function selectSide(v){
-      selectedSide = v;
-      selectedArea = null;
-
-      if(showAllBtn) showAllBtn.hidden = false;
-
-      setPressed(sideButtons, 'data-side', v);
-      setAreaPressed();
-
-      sideChoices.hidden = true;
-
-      if(sideSelected){
-        sideSelected.hidden = false;
-        if(sideSelectedText) sideSelectedText.textContent = 'Du har valgt: ' + sideLabel(v);
-      }
-
-      if(step2) step2.hidden = false;
-
-      restoreOrder();
-      applyFilter();
-      ensureTipsVisible();
-      setStatus('Valgt: ' + sideLabel(v) + '. Velg område');
-      updatePrimaryAndMore();
-      showBadge('Du har valgt ' + sideLabel(v));
-
-      if(step2) step2.scrollIntoView({ behavior:'smooth', block:'start' });
-    }
-
-    function selectArea(key){
-      if(!selectedSide){
-        showToast('Velg side først');
-        return;
-      }
-      selectedArea = key;
-      setAreaPressed();
-
-      restoreOrder();
-      applyFilter();
-      ensureTipsVisible();
-
-      const label = points.find(p => p.key === key)?.label || key;
-      setStatus('Valgt: ' + sideLabel(selectedSide) + '. Område: ' + label);
-      updatePrimaryAndMore();
-      showBadge('Område: ' + label);
-
-      const anchor = document.getElementById('tip-' + key) || document.querySelector('.tip[data-area="' + key + '"]');
-      if(anchor) anchor.scrollIntoView({ behavior:'smooth', block:'start' });
-    }
-
-    function resetAll(){
-      selectedSide = null;
-      selectedArea = null;
-
-      if(showAllBtn) showAllBtn.hidden = true;
-
-      sideButtons.forEach(btn => btn.setAttribute('aria-pressed','false'));
-      areaButtons.forEach(btn => btn.setAttribute('aria-pressed','false'));
-
-      if(sideSelected) sideSelected.hidden = true;
-      sideChoices.hidden = false;
-
-      if(step2) step2.hidden = true;
-
-      tipsWrap.hidden = true;
-      tips.forEach(t => t.hidden = false);
-
-      if(toggleMoreTips) toggleMoreTips.hidden = true;
-      if(moreTipsWrap) moreTipsWrap.hidden = true;
-      if(moreTipsContainer) moreTipsContainer.innerHTML = '';
-
-      restoreOrder();
-      setStatus('Vis alle tips');
-    }
-
-    sideChoices.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-side]');
-      if(!btn) return;
-      selectSide(btn.getAttribute('data-side'));
+    tiles.forEach(btn => {
+      btn.addEventListener('click', () => showSection(btn.getAttribute('data-target')));
     });
 
-    areaChoices.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-area]');
-      if(!btn) return;
-      selectArea(btn.getAttribute('data-area'));
+    backBtns.forEach(btn => {
+      btn.addEventListener('click', () => backTo(btn.getAttribute('data-back')));
     });
 
-    if(changeSide) changeSide.addEventListener('click', resetAll);
-    if(resetBtn) resetBtn.addEventListener('click', resetAll);
-
-    if(showAllBtn){
-      showAllBtn.hidden = true;
-      showAllBtn.addEventListener('click', () => {
-        ensureTipsVisible();
-        selectedArea = null;
-        setAreaPressed();
-        restoreOrder();
-        applyFilter();
-        setStatus(selectedSide ? ('Valgt: ' + sideLabel(selectedSide) + '. Velg område') : 'Vis alle tips');
-        updatePrimaryAndMore();
-      });
+    // If page opens with a hash to a section, show it
+    if(location.hash){
+      const target = document.querySelector(location.hash);
+      if(target && target.classList.contains('section')){
+        showSection(location.hash);
+      }
     }
-
-    if(toggleMoreTips && moreTipsWrap){
-      toggleMoreTips.addEventListener('click', () => {
-        moreTipsWrap.hidden = !moreTipsWrap.hidden;
-        if(!moreTipsWrap.hidden) moreTipsWrap.scrollIntoView({ behavior:'smooth', block:'start' });
-      });
-    }
-
-    if(bodymapBtn && bodymapImg){
-      bodymapBtn.addEventListener('click', (e) => {
-        if(!selectedSide){
-          showToast('Velg side først');
-          return;
-        }
-        const rect = bodymapImg.getBoundingClientRect();
-        const ny = (e.clientY - rect.top) / rect.height;
-
-        let key = 'hip';
-        if(ny < 0.25) key = 'head';
-        else if(ny < 0.55) key = 'grip';
-        else if(ny < 0.72) key = 'hip';
-        else if(ny < 0.86) key = 'knee';
-        else key = 'foot';
-
-        selectArea(key);
-      });
-    }
-
-    resetAll();
   })();
-  </script>
-
-  <script data-myss-uu>
-  (function(){
-    const root = document.documentElement;
-
-    function get(key, fallback){
-      try { return localStorage.getItem(key) || fallback; } catch(e){ return fallback; }
-    }
-    function set(key, value){
-      try { localStorage.setItem(key, value); } catch(e){}
-    }
-
-    const state = {
-      theme: get("uu_theme","light"),
-      contrast: get("uu_contrast","normal"),
-      motion: get("uu_motion","normal"),
-      font: Number(get("uu_font","1"))
-    };
-
-    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
-
-    function applyThemeVars(){
-      if(state.theme === "dark"){
-        root.style.setProperty("--bg", "#0b1220");
-        root.style.setProperty("--card", "#0f1b2e");
-        root.style.setProperty("--text", "#f1f5f9");
-        root.style.setProperty("--muted", "#cbd5e1");
-        root.style.setProperty("--focus", "rgba(255,214,10,.35)");
-        root.style.colorScheme = "dark";
-      } else {
-        root.style.setProperty("--bg", "#f6f9fc");
-        root.style.setProperty("--card", "#ffffff");
-        root.style.setProperty("--text", "#0f172a");
-        root.style.setProperty("--muted", "#475569");
-        root.style.setProperty("--focus", "rgba(47,127,191,.35)");
-        root.style.colorScheme = "light";
-      }
-
-      root.classList.toggle("contrast-high", state.contrast === "high");
-      root.classList.toggle("motion-reduced", state.motion === "reduced");
-
-      root.style.fontSize = `calc(16px * ${state.font})`;
-    }
-
-    function updatePressed(){
-      const themeBtn = document.querySelector("[data-theme-toggle]");
-      const contrastBtn = document.querySelector("[data-contrast-toggle]");
-      const motionBtn = document.querySelector("[data-motion-toggle]");
-      if(themeBtn) themeBtn.setAttribute("aria-pressed", String(state.theme === "dark"));
-      if(contrastBtn) contrastBtn.setAttribute("aria-pressed", String(state.contrast === "high"));
-      if(motionBtn) motionBtn.setAttribute("aria-pressed", String(state.motion === "reduced"));
-    }
-
-    function apply(){
-      applyThemeVars();
-      updatePressed();
-    }
-
-    document.addEventListener("click", (e) => {
-      const el = (e.target && e.target.closest)
-        ? e.target.closest("[data-theme-toggle],[data-contrast-toggle],[data-motion-toggle],[data-font-inc],[data-font-dec]")
-        : null;
-
-      if(!el) return;
-
-      if(el.hasAttribute("data-theme-toggle")){
-        state.theme = (state.theme === "dark") ? "light" : "dark";
-        set("uu_theme", state.theme);
-        apply();
-        return;
-      }
-
-      if(el.hasAttribute("data-contrast-toggle")){
-        state.contrast = (state.contrast === "high") ? "normal" : "high";
-        set("uu_contrast", state.contrast);
-        apply();
-        return;
-      }
-
-      if(el.hasAttribute("data-motion-toggle")){
-        state.motion = (state.motion === "reduced") ? "normal" : "reduced";
-        set("uu_motion", state.motion);
-        apply();
-        return;
-      }
-
-      if(el.hasAttribute("data-font-inc")){
-        state.font = clamp(state.font + 0.05, 0.95, 1.25);
-        set("uu_font", String(state.font));
-        apply();
-        return;
-      }
-
-      if(el.hasAttribute("data-font-dec")){
-        state.font = clamp(state.font - 0.05, 0.95, 1.25);
-        set("uu_font", String(state.font));
-        apply();
-        return;
-      }
-    });
-
-    apply();
-  })();
-  </script>
-
-</body>
-</html>
+</script>
