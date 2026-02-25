@@ -127,11 +127,6 @@
     display:grid;
     place-items:center;
   }
-  .badge svg{
-    width: 20px;
-    height: 20px;
-    stroke: var(--myss_blue);
-  }
   .tile-title{
     font-weight: 700;
     margin: 0;
@@ -304,12 +299,6 @@
     flex: 0 0 48px;
   }
 
-  .badge svg,
-  .badge img{
-    width: 28px;
-    height: 28px;
-    display:block;
-  }
 
   .tile-title{
     font-size: 16px;
@@ -335,6 +324,50 @@
   .chev svg{
     width: 18px;
     height: 18px;
+  }
+}
+
+
+/* Ikonregler som alltid gjelder */
+.badge{
+  display:grid;
+  place-items:center;
+}
+
+.badge svg{
+  width: 30px;
+  height: 30px;
+  stroke: var(--myss_blue);
+  stroke-width: 2.6;
+}
+
+.badge img{
+  width: 34px;
+  height: 34px;
+  display:block;
+}
+
+/* Mobil: større badge og større ikoner */
+@media (max-width: 640px){
+  .badge{
+    width: 60px;
+    height: 60px;
+    flex: 0 0 60px;
+    border-radius: 16px;
+    background: rgba(47,127,191,0.14);
+    border: 1px solid rgba(47,127,191,0.28);
+    box-shadow: 0 8px 18px rgba(2,6,23,.10);
+  }
+
+  .badge svg{
+    width: 36px;
+    height: 36px;
+    stroke-width: 2.8;
+  }
+
+  .badge img{
+    width: 40px;
+    height: 40px;
   }
 }
 
