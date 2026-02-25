@@ -2,6 +2,25 @@
 <!-- Passer inn i /grunnveiledning/beinpress-tilpasninger.html (ingen eksterne avhengigheter) -->
 
 <style>
+    .badge-icon{
+    width:22px;
+    height:22px;
+    display:block;
+  }
+
+  .with-icon{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+
+  .inline-icon{
+    width:20px;
+    height:20px;
+    flex:0 0 20px;
+    display:block;
+  }
+
   :root{
     --myss_blue_dark:#0c2d48;
     --myss_blue:#2f7fbf;
@@ -266,11 +285,7 @@
     <div class="tile-grid" role="navigation" aria-label="Velg område">
       <button class="tile" type="button" data-target="#seksjon-fot" aria-controls="seksjon-fot">
         <span class="badge" aria-hidden="true">
-          <!-- Foot icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M7 14c1.5 2 4.5 3 8 3 2.5 0 4-1 4-3 0-2.5-2.5-3-5-3H9c-1.5 0-2 .5-2 1.5V14z"></path>
-            <path d="M7 14v3c0 2 1.5 3 4 3h4"></path>
-          </svg>
+          <img src="/assets/img/fotikon.png" alt="" class="badge-icon">
         </span>
         <span>
           <p class="tile-title">Fot</p>
@@ -369,7 +384,10 @@
 
       <div class="subgrid">
         <div class="subtile">
-          <h3>Hæl løfter seg</h3>
+          <h3 class="with-icon">
+            <img src="/assets/img/hælikon.png" alt="" class="inline-icon">
+            Hæl løfter seg
+          </h3>
           <p>Gå litt mindre dypt. Bruk 3 til 5 minutter på å varme opp og mobilisere ankel før du prøver igjen.</p>
         </div>
         <div class="subtile">
