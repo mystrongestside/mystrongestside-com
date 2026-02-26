@@ -363,7 +363,82 @@
       .tile{ transition: none; }
       .tile:hover{ transform: none; }
     }
-  </style>
+  
+
+/* MYSS_STD_BADGE_START */
+/* Standard for mobil: større ikon, roligere badge, trygg margin, premium uttrykk */
+:root{
+  --pad: clamp(14px, 3.5vw, 18px);
+  --gap: clamp(10px, 3vw, 14px);
+
+  --badge: clamp(52px, 14vw, 64px);
+  --icon:  clamp(30px, 8vw, 40px);
+
+  --radius: 20px;
+}
+
+/* Kort */
+details.choice{
+  border-radius: var(--radius);
+  overflow: clip;
+}
+
+/* Summary klikkeflate */
+details.choice > summary{
+  display:flex;
+  align-items:center;
+  gap: var(--gap);
+  padding: var(--pad);
+  padding-left: calc(var(--pad) + 2px);
+  cursor:pointer;
+  list-style:none;
+  -webkit-tap-highlight-color: transparent;
+}
+details.choice > summary::-webkit-details-marker{ display:none; }
+
+/* Fokus */
+details.choice > summary:focus-visible{
+  outline: 4px solid rgba(47,127,191,.35);
+  outline-offset: 3px;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+/* Badge container: støtter både ny og gammel klasse */
+.choice__badge,
+.badge-icon{
+  width: var(--badge) !important;
+  height: var(--badge) !important;
+  flex: 0 0 var(--badge);
+  border-radius: 16px;
+  background: rgba(47,127,191,0.06);
+  border: 1px solid rgba(47,127,191,0.18);
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  transform: translateY(1px);
+}
+
+/* Selve ikonet: støtter både ny og gammel klasse */
+.choice__icon,
+.inline-icon{
+  width: var(--icon) !important;
+  height: var(--icon) !important;
+  display:block;
+}
+
+/* Hvis du bruker wrapperen .with-icon i summary, gjør den konsekvent */
+.with-icon{
+  display:flex;
+  align-items:center;
+  gap: var(--gap);
+}
+
+/* Litt mer luft på små skjermer */
+@media (max-width: 420px){
+  details.choice > summary{ padding: 16px; }
+}
+/* MYSS_STD_BADGE_END */
+</style>
 </head>
 
 <body>
