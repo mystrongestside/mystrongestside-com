@@ -370,6 +370,67 @@
     }
   
 
+    .adapt__card{
+      display:block;
+      border-radius: var(--radius_sm);
+      border: 1px solid rgba(15,23,42,0.08);
+      background: rgba(255,255,255,1);
+      padding: 12px;
+      text-decoration:none;
+      color:inherit;
+    }
+    .adapt__card .adapt__t{
+      font-weight:700;
+      color: var(--myss_blue_dark);
+      font-size:15px;
+    }
+    .adapt__card .adapt__d{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .tip-card{
+      background: var(--card);
+      border: 1px solid rgba(15, 23, 42, .12);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 10px 25px rgba(2, 6, 23, 0.06);
+    }
+
+    .tip-head{
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .tip-head h3{
+      margin: 0;
+      font-size: clamp(1.25rem, 5vw, 1.6rem);
+      line-height: 1.15;
+      color: var(--myss_blue_dark);
+      font-weight: 800;
+    }
+
+    .tip-card p{
+      margin: .75rem 0 0;
+      font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .tip-steps{
+      margin: .75rem 0 0 1.2rem;
+      padding: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      line-height: 1.4;
+    }
+
+    .tip-steps li{ margin: .4rem 0; }
+
 </style>
 </head>
 
@@ -488,7 +549,39 @@
             <h3>Vridning eller tråkker over</h3>
             <p>Stopp der du mister stabil fot. Tren i den løftebanen der du holder jevnt trykk og rolig ankel.</p>
           </div>
+
+        <a class="adapt__card" href="#hael-lofter-seg" data-open="hael-lofter-seg">
+          <span class="with-icon">
+            <img class="badge-icon" src="/assets/icons/heel.svg" alt="" aria-hidden="true">
+            <span class="adapt__t">Hæl løfter seg</span>
+          </span>
+          <span class="adapt__d">Få veiledning når hælen mister kontakt</span>
+        </a>
+
         </div>
+
+        <details class="choice" id="hael-lofter-seg">
+          <summary>Hæl løfter seg</summary>
+          <div class="inner">
+
+            <div class="tip-card">
+              <div class="tip-head">
+                <img class="inline-icon" src="/assets/icons/heel.svg" alt="" aria-hidden="true">
+                <h3>Hæl løfter seg</h3>
+              </div>
+
+              <p>Gå litt mindre dypt. Bruk 3 til 5 minutter på å varme opp og mobilisere ankel før du prøver igjen.</p>
+
+              <ol class="tip-steps">
+                <li>Finn en dybde der hele foten kan holde kontakt og du har kontroll.</li>
+                <li>Mobiliser ankel kort, og test samme dybde på nytt.</li>
+                <li>Hvis hælen fortsatt løfter seg, reduser dybden litt og bygg styrke der du har stabil fotkontakt.</li>
+              </ol>
+            </div>
+
+          </div>
+        </details>
+
       </div>
     </section>
 
@@ -605,6 +698,20 @@
         history.replaceState(null, '', targetSel);
       }
 
+
+      function openDetailsFromHash(){
+        const id = decodeURIComponent((location.hash || '').slice(1));
+        if(!id) return;
+
+        const el = document.getElementById(id);
+        if(el && el.tagName && el.tagName.toLowerCase() === 'details'){
+          el.open = true;
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const s = el.querySelector('summary');
+          if(s) s.focus({ preventScroll: true });
+        }
+      }
+
       function backTo(sel){
         if(hero) hero.classList.remove('hidden');
         sections.forEach(s => s.classList.add('hidden'));
@@ -622,6 +729,20 @@
       backBtns.forEach(btn => {
         btn.addEventListener('click', () => backTo(btn.getAttribute('data-back')));
       });
+
+
+      document.addEventListener('click', function(e){
+        const a = e.target.closest('a[data-open]');
+        if(!a) return;
+        const id = a.getAttribute('data-open');
+        const el = document.getElementById(id);
+        if(el && el.tagName && el.tagName.toLowerCase() === 'details'){
+          el.open = true;
+        }
+      });
+
+      window.addEventListener('hashchange', openDetailsFromHash);
+      openDetailsFromHash();
 
       if(location.hash){
         const target = document.querySelector(location.hash);
