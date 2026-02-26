@@ -304,7 +304,110 @@
       .tile{ transition: none; }
       .tile:hover{ transform: none; }
     }
-  </style>
+  
+
+/* Video og innhold inni seksjoner */
+.video_shell{
+  position: relative;
+  background: #0b1220;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: var(--border_soft);
+  box-shadow: var(--shadow_soft);
+}
+
+.section video.media-video{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#0b1220;
+  max-height: 62vh;
+  object-fit: cover;
+}
+
+@media (max-width: 640px){
+  .section video.media-video{
+    max-height: 52vh;
+  }
+}
+
+/* Innholdstitler og lister som matcher stilen din */
+.h3{
+  margin: 14px 0 8px;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  color: var(--myss_blue_dark);
+}
+
+.steps{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+  line-height: 1.45;
+  font-size: 15px;
+}
+
+.steps li{ margin: 6px 0; }
+
+.hr{
+  height: 1px;
+  background: rgba(15, 23, 42, 0.08);
+  margin: 14px 0;
+}
+
+/* Utvidbar bolk i samme uttrykk */
+details.myss-more{
+  margin-top: 12px;
+  border-radius: var(--radius_sm);
+  border: 1px solid rgba(47,127,191,0.18);
+  background: rgba(47,127,191,0.06);
+  overflow: hidden;
+}
+
+details.myss-more > summary{
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 12px;
+  font-weight: 700;
+  color: var(--myss_blue_dark);
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  user-select: none;
+}
+
+details.myss-more > summary::-webkit-details-marker{ display:none; }
+
+.myss-chev{
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  opacity: 0.9;
+  transform: rotate(0deg);
+  transition: transform 160ms ease;
+}
+
+details[open] .myss-chev{
+  transform: rotate(180deg);
+}
+
+.myss-more__content{
+  padding: 0 12px 12px;
+  color: var(--text);
+  line-height: 1.45;
+  font-size: 15px;
+}
+
+.sources{
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+</style>
 </head>
 
 <body>
@@ -474,59 +577,57 @@
   <div class="section-body">
     <p class="kicker">Veiledning</p>
     <h2 class="h2" id="fot-haal-tittel">Hæl løfter seg</h2>
+    <p class="desc">Start med en enkel justering. Hvis hælen fortsatt løfter seg i bunn, gjør et raskt tiltak og test igjen.</p>
 
-    <div class="panel">
-      <div class="video-frame">
-        <video class="media-video" autoplay muted loop playsinline preload="metadata">
-          <source src="/assets/video/Hæl_uten_hjelpemiddel.mp4" type="video/mp4">
-          Nettleseren din støtter ikke video. Du kan åpne filmen her: /assets/video/Hæl_uten_hjelpemiddel.mp4
-        </video>
+    <div class="video_shell" aria-label="Video: hæl uten hjelpemiddel">
+      <video class="media-video" autoplay muted loop playsinline preload="metadata" controls>
+        <source src="/assets/video/Hæl_uten_hjelpemiddel.mp4" type="video/mp4">
+        Nettleseren din støtter ikke video. Du kan åpne filmen her: /assets/video/Hæl_uten_hjelpemiddel.mp4
+      </video>
+    </div>
+
+    <div class="hr" role="separator" aria-hidden="true"></div>
+
+    <h3 class="h3">Førstevalg</h3>
+    <ul class="steps">
+      <li>Sett føttene litt bredere og med hele foten i kontakt.</li>
+      <li>Gå rolig ned med lett belastning.</li>
+    </ul>
+
+    <h3 class="h3">Hvis hælen løfter seg i bunn</h3>
+    <ol class="steps">
+      <li>Stopp. Kravet til ankelbevegelse er for stort i denne dybden.</li>
+      <li>Mobiliser ankelen i 5 minutter.</li>
+      <li>Test én rolig repetisjon og se om hælkontakten blir bedre.</li>
+    </ol>
+
+    <div class="note">
+      <strong>Viktig:</strong> Dette er generell veiledning og erstatter ikke individuell vurdering.
+      Stopp ved smerte, utrygghet, ny skade eller tydelig økning i spastisitet, og rådfør deg med fysioterapeut eller annet helsepersonell.
+    </div>
+
+    <details class="myss-more">
+      <summary>
+        Hvorfor dette er relevant ved CP og kilder
+        <svg class="myss-chev" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 9.5L12 15l5.5-5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </summary>
+
+      <div class="myss-more__content">
+        <p>
+          Redusert dorsalfleksjon og equinus er vanlig ved CP og henger ofte sammen med plantarfleksordominans og økt tonus eller spastisitet i gastrocnemius og soleus (1).
+          Økt spastisitet i gastrosoleus kan henge sammen med utvikling av redusert passiv dorsalfleksjon over tid (2).
+          Studier på barn med spastisk CP viser at ankelmobilisering kan øke dorsalfleksjon og bedre funksjonsmål, derfor kan mobiliser og test igjen være et nyttig lavterskeltiltak i øyeblikket (3).
+        </p>
+
+        <ol class="sources">
+          <li>Zahran DAE, Bahr WM, Abd Elazim FH. Exercise training for equinus deformity in children with cerebral palsy. <em>Bull Fac Phys Ther</em>. 2022;27:37. doi:10.1186/s43161-022-00093-9.</li>
+          <li>Hägglund G, Wagner P. Spasticity of the gastrosoleus muscle is related to reduced passive dorsiflexion in children with cerebral palsy. <em>Acta Orthop</em>. 2011;82(6):744-748. doi:10.3109/17453674.2011.618917.</li>
+          <li>Youn PS, Cho KH, Park SJ. Ankle mobilization by manual therapy in children with bilateral spastic cerebral palsy. <em>Children (Basel)</em>. 2020;7(9):142. doi:10.3390/children7090142.</li>
+        </ol>
       </div>
-      <p class="hint">Se etter om hele foten har kontakt gjennom bevegelsen, spesielt i bunn.</p>
-    </div>
-
-    <div class="panel">
-      <p class="block-title">Førstevalg</p>
-      <ul class="list">
-        <li>Sett føttene litt bredere og med hele foten i kontakt.</li>
-        <li>Gå rolig ned med lett belastning.</li>
-      </ul>
-    </div>
-
-    <div class="panel">
-      <p class="block-title">Hvis hælen løfter seg i bunn</p>
-      <ul class="list">
-        <li>Stopp. Kravet til ankelbevegelse er for stort i denne dybden.</li>
-        <li>Mobiliser ankelen i 5 minutter.</li>
-        <li>Test én rolig repetisjon og se om hælkontakten blir bedre.</li>
-      </ul>
-    </div>
-
-    <div class="panel">
-      <div class="note">
-        <strong>Viktig:</strong> Dette er generell veiledning og erstatter ikke individuell vurdering.
-        Stopp ved smerte, utrygghet, ny skade eller tydelig økning i spastisitet, og rådfør deg med fysioterapeut eller annet helsepersonell.
-      </div>
-    </div>
-
-    <div class="panel">
-      <details class="expand">
-        <summary class="expand-summary">Hvorfor dette er relevant ved CP og kilder</summary>
-        <div class="expand-body">
-          <p class="desc">
-            Redusert dorsiflexjon og equinus er vanlig ved CP og henger ofte sammen med plantarfleksordominans og økt tonus eller spastisitet i gastrocnemius og soleus (1).
-            Økt spastisitet i gastrosoleus kan henge sammen med utvikling av redusert passiv dorsiflexjon over tid (2).
-            Studier på barn med spastisk CP viser at ankelmobilisering kan øke dorsiflexjon og bedre funksjonsmål, derfor kan mobiliser og test igjen være et nyttig lavterskeltiltak i øyeblikket (3).
-          </p>
-
-          <ol class="refs">
-            <li>Zahran DAE, Bahr WM, Abd Elazim FH. Exercise training for equinus deformity in children with cerebral palsy. <em>Bull Fac Phys Ther</em>. 2022;27:37. doi:10.1186/s43161-022-00093-9.</li>
-            <li>Hägglund G, Wagner P. Spasticity of the gastrosoleus muscle is related to reduced passive dorsiflexion in children with cerebral palsy. <em>Acta Orthop</em>. 2011;82(6):744-748. doi:10.3109/17453674.2011.618917.</li>
-            <li>Youn PS, Cho KH, Park SJ. Ankle mobilization by manual therapy in children with bilateral spastic cerebral palsy. <em>Children (Basel)</em>. 2020;7(9):142. doi:10.3390/children7090142.</li>
-          </ol>
-        </div>
-      </details>
-    </div>
+    </details>
   </div>
 </section>
 
