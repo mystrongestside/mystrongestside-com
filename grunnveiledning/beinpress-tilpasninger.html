@@ -421,6 +421,42 @@ details[open] .myss-chev{
 .steps li{
   margin: 6px 0;
 }
+   /* Større bilde kun for hjelpemiddel-fliser */
+.tile.aid-tile{
+  align-items: center;
+}
+
+.tile.aid-tile .badge{
+  width: 84px;
+  height: 84px;
+  flex: 0 0 84px;
+  border-radius: 18px;
+  background: rgba(47,127,191,0.10);
+  border: 1px solid rgba(47,127,191,0.18);
+}
+
+.tile.aid-tile .badge img,
+.tile.aid-tile .badge img.badge-icon{
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+/* Mobil: enda større, siden dette er “hva skal jeg hente” */
+@media (max-width: 640px){
+  .tile.aid-tile .badge{
+    width: 96px;
+    height: 96px;
+    flex: 0 0 96px;
+    border-radius: 20px;
+  }
+
+  .tile.aid-tile .badge img,
+  .tile.aid-tile .badge img.badge-icon{
+    width: 84px;
+    height: 84px;
+  }
+}
 
 </style>
 </head>
@@ -699,19 +735,17 @@ details[open] .myss-chev{
 
     <div class="hr"></div>
 
-    <p class="h3">Hjelpemiddel i resepsjonen</p>
-
-    <div class="tile-grid" role="group" aria-label="Hjelpemiddel 04">
-      <div class="tile" role="note" aria-label="Hjelpemiddel 04, hentes i resepsjonen">
-        <span class="badge" aria-hidden="true">
-          <img src="/assets/img/hjelpemiddel-04.png" alt="" class="badge-icon">
-        </span>
-        <span>
-          <p class="tile-title">Hjelpemiddel 04</p>
-          <p class="tile-sub">Hentes i resepsjonen. Finnes i tre varianter.</p>
-        </span>
-      </div>
-    </div>
+   <div class="tile-grid" role="group" aria-label="Hjelpemiddel 04">
+  <div class="tile aid-tile" role="note" aria-label="Hjelpemiddel 04, hentes i resepsjonen">
+    <span class="badge" aria-hidden="true">
+      <img src="/assets/img/hjelpemiddel-04.png" alt="" class="badge-icon">
+    </span>
+    <span>
+      <p class="tile-title">Hjelpemiddel 04</p>
+      <p class="tile-sub">Hentes i resepsjonen. Finnes i tre varianter.</p>
+    </span>
+  </div>
+</div>
 
     <div class="note">
       <strong>Prinsipp:</strong> Én endring om gangen, og så retest med én rolig repetisjon.
