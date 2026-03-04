@@ -326,20 +326,62 @@
       font-weight: 650;
     }
 
-    /* myss: subtle tilpasninger link */
+    /* myss: tilpasninger som rolig knapp */
     .myss-subtle-link{
       margin:10px 0 0;
       text-align:center;
     }
-    .myss-link{
-      color: var(--muted);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      font-weight: 600;
-    }
-    .myss-link:hover{
+    .myss-link-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 750;
+      background: rgba(47,127,191,0.10);
       color: var(--myss_blue_dark);
+      border: 1px solid rgba(47,127,191,0.20);
     }
+    .myss-link-btn:hover{
+      background: rgba(47,127,191,0.14);
+      border-color: rgba(47,127,191,0.26);
+    }
+    .myss-link-btn:focus{
+      outline: 3px solid rgba(47,127,191,0.25);
+      outline-offset: 2px;
+    }
+
+    /* myss: info bokser for forklaring og overføringsverdi */
+    .info_grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    @media (min-width: 720px){
+      .info_grid{ grid-template-columns: 1fr 1fr; }
+    }
+    .info_card{
+      background: rgba(15, 23, 42, 0.02);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 16px;
+      padding: 12px 12px;
+    }
+    .info_title{
+      margin: 0 0 6px;
+      font-weight: 750;
+      color: var(--myss_blue_dark);
+      font-size: 0.98rem;
+    }
+    .info_text{
+      margin: 0;
+      color: var(--text);
+      line-height: 1.4;
+      font-size: 0.98rem;
+    }
+    .info_text strong{ color: var(--myss_blue_dark); }
 
     .myss-more{ margin-top: 14px; }
     .myss-more > summary{ cursor: pointer; font-weight: 700; }
@@ -380,21 +422,17 @@
           Ingen trykk nødvendig for å få hjelp første gang.
         </p>
 
-        <!-- myss: tilpasninger-lenke -->
         <p class="myss-subtle-link">
-          <a href="/grunnveiledning/beinpress-tilpasninger.html" class="myss-link">
+          <a href="/grunnveiledning/beinpress-tilpasninger.html" class="myss-link-btn">
             Tilpasninger ved behov
           </a>
         </p>
 
-        <div id="muted_badge" class="badge" style="display:none" aria-live="polite">
-          
-        </div>
+        <div id="muted_badge" class="badge" style="display:none" aria-live="polite"></div>
 
         <div class="hr" role="separator" aria-hidden="true"></div>
 
         <p class="guide_title">Beinpress: grunnveiledning</p>
-
 
         <div class="progress_box" role="note" aria-label="Viktig treningsinformasjon">
           <p class="progress_title">Kort treningsguide</p>
@@ -407,18 +445,22 @@
           </ul>
         </div>
 
-        <p class="micro">
-          Øvelsen trener hovedsakelig lårmuskulatur og setemuskulatur. Overkroppen er støttet, men hold stabil ryggkontakt gjennom hele bevegelsen.
-        </p>
+        <div class="info_grid" aria-label="Kort forklaring og overføringsverdi">
+          <div class="info_card">
+            <p class="info_title">Hva trener du</p>
+            <p class="info_text">
+              Mest <strong>lår</strong> og <strong>sete</strong>. Hold <strong>korsryggen i kontakt</strong> med ryggplaten gjennom hele bevegelsen.
+            </p>
+          </div>
 
-        <section aria-label="Overføringsverdi i hverdagen">
-          <p class="guide_title">Overføringsverdi i hverdagen</p>
-          <p class="micro">
-            Beinpress har ofte god overføringsverdi til å reise seg fra stol og gå i trapper. Å vedlikeholde styrke i bein og hofter kan støtte tryggere hverdagsbevegelser over tid.
-          </p>
-        </section>
+          <div class="info_card">
+            <p class="info_title">Overføringsverdi i hverdagen</p>
+            <p class="info_text">
+              Kan støtte styrke til å <strong>reise deg fra stol</strong> og <strong>gå i trapper</strong>. Sterke bein og hofter kan gi mer stabilitet over tid.
+            </p>
+          </div>
+        </div>
 
-        <!-- myss: les-mer-start -->
         <details class="myss-more">
           <summary>Vil du vite mer?</summary>
           <div class="myss-more__content">
@@ -440,10 +482,6 @@
             </ul>
 
             <figure class="figure" aria-label="Illustrasjon av aktive muskler i sittende beinpress">
-              <!-- Legg illustrasjonen her:
-                   1) Lag en mappe /assets/img/ om du ikke har den
-                   2) Legg inn bildet med navnet beinpress-muskler.png
-                   3) Bildet kan være den du nettopp lagde -->
               <img src="/assets/img/beinpress-muskler.png" alt="Illustrasjon som viser aktive muskler i sittende beinpress, med primære og sekundære muskelgrupper markert." loading="lazy" />
               <figcaption>
                 Illustrasjonen viser typisk muskelbruk i sittende beinpress. Variasjoner i fotplassering og dybde kan endre vektleggingen noe.
@@ -482,7 +520,6 @@
             </ul>
           </div>
         </details>
-        <!-- myss: les-mer-slutt -->
 
       </div>
     </section>
@@ -567,6 +604,7 @@
       tryAutoplayWithLowSound();
     })();
   </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var v = document.querySelector('video');
