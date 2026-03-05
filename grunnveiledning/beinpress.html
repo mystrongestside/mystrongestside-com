@@ -388,6 +388,34 @@
     .myss-more__content{ margin-top: 12px; }
 
     .myss-fallback[hidden]{ display: none; }
+  
+    .site_footer{
+      max-width: 860px;
+      margin: 12px auto 26px;
+      padding: 0 14px;
+    }
+    .site_footer__text{
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .vid_mark{
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      padding: 6px 8px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.82);
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(3px);
+    }
+
   </style>
 </head>
 
@@ -411,6 +439,7 @@
           <source src="/assets/video/MY_BEINPRESS.mp4" type="video/mp4" />
           Nettleseren din støtter ikke videoavspilling.
         </video>
+        <div class="vid_mark" aria-hidden="true">© 2026 MyStrongestSide AS</div>
       </div>
 
       <div class="content">
@@ -521,6 +550,11 @@
       </div>
     </section>
   </main>
+
+  <footer class="site_footer" aria-label="Opphavsrett">
+    <p class="site_footer__text">Opphavsrett © 2026 MyStrongestSide AS. Alle rettigheter reservert.</p>
+  </footer>
+
 
   <section id="video_fallback" class="myss-fallback" hidden>
     <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-label="Start video">
