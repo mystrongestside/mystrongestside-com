@@ -231,7 +231,97 @@
     /* Kritisk for å hindre overflow i flisene */
     .tile > span:nth-of-type(2){ min-width: 0; }
 
-    /* Mobil: lesbarhet og store trykkflater */
+    /* Sidevalg før utfordring */
+.sidepick{
+  margin: 10px 0 14px;
+  padding: 12px;
+  border-radius: var(--radius_sm);
+  border: 1px solid rgba(15,23,42,0.10);
+  background: rgba(15,23,42,0.02);
+}
+
+.sidepick .sidepick__title{
+  margin: 0 0 6px;
+  font-weight: 800;
+  color: var(--myss_blue_dark);
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.sidepick .sidepick__lead{
+  margin: 0 0 10px;
+  color: var(--muted);
+  line-height: 1.45;
+  font-size: 14px;
+}
+
+.sidegrid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 0;
+}
+
+@media (min-width: 720px){
+  .sidegrid{ grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.sidebtn{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+  width: 100%;
+  text-align:left;
+  padding: 12px 12px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow_soft);
+  cursor:pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  color: inherit;
+  touch-action: manipulation;
+}
+
+.sidebtn:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow_hover);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+.sidebtn:active{ transform: translateY(0px); }
+
+.sidebtn:focus-visible{
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.sidebtn[aria-pressed="true"]{
+  border-color: rgba(47,127,191,0.40);
+  box-shadow: 0 0 0 3px rgba(47,127,191,0.18), var(--shadow_soft);
+}
+
+.sidebtn .sidebtn__t{
+  font-weight: 800;
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.sidebtn .sidebtn__d{
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.sidepick__status{
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Mobil: lesbarhet og store trykkflater */
     @media (max-width: 640px){
       body{ font-size: 18px; }
       .wrap{
@@ -634,6 +724,39 @@ details[open] .myss-chev{
         <h2 class="h2" id="fot-tittel">Fot</h2>
         <p class="desc">Velg utfordringen som passer best. Du får en egen veiledning per valg.</p>
 
+<div class="sidepick" aria-label="Sidevalg før du velger utfordring">
+  <p class="sidepick__title">Hvilken side påvirkes mest</p>
+  <p class="sidepick__lead">
+    Valget brukes kun til å vise mer relevant veiledning nå, og lagres ikke som helseopplysninger.
+  </p>
+
+  <div class="sidegrid" role="group" aria-label="Velg side">
+    <button class="sidebtn" type="button" data-side="right" aria-pressed="false">
+      <span>
+        <p class="sidebtn__t">Mest på høyre side</p>
+        <p class="sidebtn__d">Vi viser tips for høyre side</p>
+      </span>
+    </button>
+
+    <button class="sidebtn" type="button" data-side="left" aria-pressed="false">
+      <span>
+        <p class="sidebtn__t">Mest på venstre side</p>
+        <p class="sidebtn__d">Vi viser tips for venstre side</p>
+      </span>
+    </button>
+
+    <button class="sidebtn" type="button" data-side="general" aria-pressed="false">
+      <span>
+        <p class="sidebtn__t">Usikker</p>
+        <p class="sidebtn__d">Vis generell tilrettelegging</p>
+      </span>
+    </button>
+  </div>
+
+  <p id="sideStatus" class="sidepick__status" aria-live="polite">Valgt: Usikker</p>
+</div>
+
+
         <div class="tile-grid" role="navigation" aria-label="Velg utfordring for fot">
           <button class="tile" type="button" data-target="#fot-haal" aria-controls="fot-haal">
             <span class="badge" aria-hidden="true">
@@ -928,6 +1051,44 @@ details[open] .myss-chev{
   </div>
 
   <script>
+  (function(){
+    const buttons = Array.from(document.querySelectorAll('[data-side]'));
+    const status = document.getElementById('sideStatus');
+    if(!buttons.length || !status) return;
+
+    function labelFor(v){
+      if(v === 'right') return 'Mest på høyre side';
+      if(v === 'left') return 'Mest på venstre side';
+      return 'Usikker';
+    }
+
+    function apply(v){
+      buttons.forEach(b => {
+        b.setAttribute('aria-pressed', b.getAttribute('data-side') === v ? 'true' : 'false');
+      });
+      status.textContent = 'Valgt: ' + labelFor(v);
+      try{ sessionStorage.setItem('myss_side', v); }catch(e){}
+      window.myss_side = v;
+    }
+
+    let initial = 'general';
+    try{
+      const saved = sessionStorage.getItem('myss_side');
+      if(saved === 'right' || saved === 'left' || saved === 'general') initial = saved;
+    }catch(e){}
+
+    apply(initial);
+
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-side]');
+      if(!btn) return;
+      const v = btn.getAttribute('data-side');
+      if(v === 'right' || v === 'left' || v === 'general') apply(v);
+    });
+  })();
+</script>
+
+<script>
     (function(){
       const sections = Array.from(document.querySelectorAll('.section'));
       const backBtn = document.getElementById('globalBack');
