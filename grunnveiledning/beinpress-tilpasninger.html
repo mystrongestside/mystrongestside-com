@@ -504,6 +504,31 @@ details[open] .myss-chev{
   -webkit-touch-callout: none;
 }
 
+.fs-btn{
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  z-index:3;
+  appearance:none;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fs-btn:active{ transform: scale(0.98); }
+
+.video_shell:focus-within .fs-btn{
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
 </style>
 </head>
 
@@ -677,10 +702,12 @@ details[open] .myss-chev{
     <h2 class="h2" id="fot-haal-tittel">Hæl løfter seg</h2>
 
     <div class="video_shell">
-      <video class="media-video" autoplay muted loop playsinline preload="metadata">
+      <video class="media-video" autoplay muted loop playsinline preload="metadata" controls webkit-playsinline controlslist="nodownload noplaybackrate" disablepictureinpicture>
         <source src="/assets/video/Hæl_uten_hjelpemiddel.mp4" type="video/mp4">
         Nettleseren din støtter ikke video. Du kan åpne filmen her: /assets/video/Hæl_uten_hjelpemiddel.mp4
       </video>
+    
+      <button class="fs-btn" type="button" data-fs>Fullskjerm</button>
     </div>
     <p class="hint">Se etter om hele foten har kontakt gjennom bevegelsen, spesielt i bunn.</p>
 
@@ -754,10 +781,12 @@ details[open] .myss-chev{
     <h2 class="h2" id="fot-haal-kile-tittel">Kile under hæl</h2>
 
     <div class="video_shell">
-      <video class="media-video" autoplay muted loop playsinline preload="metadata">
+      <video class="media-video" autoplay muted loop playsinline preload="metadata" controls webkit-playsinline controlslist="nodownload noplaybackrate" disablepictureinpicture>
         <source src="/assets/video/kile_hael.mp4" type="video/mp4">
         Nettleseren din støtter ikke video. Du kan åpne filmen her: /assets/video/kile_hael.mp4
       </video>
+    
+      <button class="fs-btn" type="button" data-fs>Fullskjerm</button>
     </div>
 
     <div class="subtile">
@@ -824,10 +853,12 @@ details[open] .myss-chev{
     <h2 class="h2" id="behovsprovde-tittel">Behovsprøvd hjelpemiddel</h2>
 
     <div class="video_shell">
-      <video class="media-video" autoplay muted loop playsinline preload="metadata">
+      <video class="media-video" autoplay muted loop playsinline preload="metadata" controls webkit-playsinline controlslist="nodownload noplaybackrate" disablepictureinpicture>
         <source src="/assets/video/behov.mp4" type="video/mp4">
         Nettleseren din støtter ikke video. Du kan åpne filmen her: 
       </video>
+    
+      <button class="fs-btn" type="button" data-fs>Fullskjerm</button>
     </div>
 
     <p class="desc">
@@ -974,6 +1005,33 @@ Innholdet kan ikke kopieres eller brukes kommersielt uten skriftlig tillatelse.
       root.addEventListener('dragstart', (e) => e.preventDefault());
     })();
   </script>
+
+<script>
+  (function(){
+    function openFullscreen(video){
+      if(!video) return;
+      if(video.requestFullscreen) return video.requestFullscreen();
+      if(video.webkitEnterFullscreen) return video.webkitEnterFullscreen();
+      video.setAttribute('controls', 'controls');
+      try{ video.play && video.play(); }catch(e){}
+    }
+
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-fs]');
+      if(!btn) return;
+
+      const shell = btn.closest('.video_shell');
+      const video = shell ? shell.querySelector('video') : null;
+
+      if(video){
+        try{ video.muted = false; }catch(e){}
+        try{ video.play && video.play(); }catch(e){}
+      }
+
+      openFullscreen(video);
+    });
+  })();
+</script>
 
 </body>
 </html>
