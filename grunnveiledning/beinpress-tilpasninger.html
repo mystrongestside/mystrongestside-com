@@ -497,6 +497,13 @@ details[open] .myss-chev{
   }
 }
 
+
+.no-copy, .no-copy *{
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
 </style>
 </head>
 
@@ -508,6 +515,7 @@ details[open] .myss-chev{
       <div class="crumb" id="globalCrumb">Tilpasninger ved behov</div>
     </div>
 
+    <div class="no-copy" style="-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;">
     <!-- NIVÅ 1: VALG -->
     <section class="section" id="valg" data-crumb="Tilpasninger ved behov" data-parent="" aria-labelledby="valg-tittel">
       <div class="section-body">
@@ -885,6 +893,7 @@ details[open] .myss-chev{
       </div>
     </section>
 
+    </div>
   </div>
 
   <script>
@@ -953,5 +962,18 @@ details[open] .myss-chev{
 © 2026 MyStrongestSide AS. All rights reserved.
 Innholdet kan ikke kopieres eller brukes kommersielt uten skriftlig tillatelse.
 </footer>
+
+  <script>
+    (function(){
+      const root = document.querySelector('.no-copy');
+      if(!root) return;
+
+      root.addEventListener('copy', (e) => e.preventDefault());
+      root.addEventListener('cut', (e) => e.preventDefault());
+      root.addEventListener('contextmenu', (e) => e.preventDefault());
+      root.addEventListener('dragstart', (e) => e.preventDefault());
+    })();
+  </script>
+
 </body>
 </html>
