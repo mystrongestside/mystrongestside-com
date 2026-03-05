@@ -416,6 +416,12 @@
       backdrop-filter: blur(3px);
     }
 
+    .no-copy, .no-copy *{
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+
   </style>
 </head>
 
@@ -443,18 +449,11 @@
       </div>
 
       <div class="content">
+        <div class="no-copy">
         <p class="note">
           💡 Denne videoen gir deg en enkel grunnstilling i beinpress.
         </p>
 
-
-        <p class="myss-subtle-link">
-          <a href="/grunnveiledning/beinpress-tilpasninger.html" class="myss-link-btn">
-            Tilpasninger ved behov
-          </a>
-        </p>
-
-     
 
         <div class="hr" role="separator" aria-hidden="true"></div>
 
@@ -546,6 +545,13 @@
             </ul>
           </div>
         </details>
+        </div>
+
+        <p class="myss-subtle-link">
+          <a href="/grunnveiledning/beinpress-tilpasninger.html" class="myss-link-btn">
+            Tilpasninger ved behov
+          </a>
+        </p>
 
       </div>
     </section>
@@ -658,6 +664,18 @@
 
       v.addEventListener('play', hide);
     });
+  </script>
+
+  <script>
+    (function(){
+      const root = document.querySelector('.no-copy');
+      if(!root) return;
+
+      root.addEventListener('copy', (e) => e.preventDefault());
+      root.addEventListener('cut', (e) => e.preventDefault());
+      root.addEventListener('contextmenu', (e) => e.preventDefault());
+      root.addEventListener('dragstart', (e) => e.preventDefault());
+    })();
   </script>
 </body>
 </html>
