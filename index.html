@@ -1,1 +1,110 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Treningstilbud | MyStrongestSide</title>
+    <link rel="icon" href="/favicon.png?v=1001" type="image/png" />
 
+    <!-- Cookiebot (beholdt) -->
+    <script
+      id="Cookiebot"
+      src="https://consent.cookiebot.com/uc.js"
+      data-cbid="00000000-0000-0000-0000-000000000000"
+      data-blockingmode="auto"
+      defer
+    ></script>
+
+    <!-- Google tag (beholdt) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Redirect fra www til non-www (beholdt) -->
+    <script>
+      if (window.location.hostname.startsWith('www.')) {
+        window.location.replace(
+          `${window.location.protocol}//${window.location.hostname.replace(/^www\./, '')}${window.location.pathname}${window.location.search}${window.location.hash}`,
+        );
+      }
+    </script>
+
+    <!-- Generell CSS først -->
+    <link rel="stylesheet" href="/styles.css?v=1001" />
+    <link rel="stylesheet" href="/assets/consent.css?v=1001" />
+    <!-- Side-spesifikk CSS etterpå -->
+    <link rel="stylesheet" href="/assets/treningstilbud.css?v=1001" />
+  </head>
+  <body>
+    <!-- SIDE: treningstilbud / versjon 1001 -->
+    <header class="hero">
+      <img src="/bilder/hero-large.jpg?v=1001" alt="Hero-bilde for treningstilbud" />
+      <img src="/bilder/bilde01.jpg?v=1001" alt="Treningstilbud bilde 1" />
+      <img src="/bilder/bilde02.jpg?v=1001" alt="Treningstilbud bilde 2" />
+    </header>
+
+    <main data-page-version="1001">
+      <section class="offer-meta">
+        <p class="date-info">Oppdatert dato kommer her.</p>
+        <p data-role="price-line">Prislinje oppdateres automatisk.</p>
+      </section>
+
+      <section class="icons-row" aria-label="Informasjonsikoner">
+        <img src="/icons/calendar.svg?v=1001" alt="Kalender" />
+        <img src="/icons/clock.svg?v=1001" alt="Klokke" />
+      </section>
+    </main>
+
+    <footer>
+      <img src="/bilder/myss-logo-footer.png?v=1001" alt="MyStrongestSide logo" />
+      <nav aria-label="Sosiale medier">
+        <a href="https://facebook.com" rel="noopener noreferrer">
+          <img src="/icons/facebook.png?v=1001" alt="Facebook" />
+        </a>
+        <a href="https://instagram.com" rel="noopener noreferrer">
+          <img src="/icons/instagram.png?v=1001" alt="Instagram" />
+        </a>
+      </nav>
+      <p>&copy; <span id="year"></span> MyStrongestSide</p>
+    </footer>
+
+    <script src="/menu.js?v=1001" defer></script>
+    <script src="/components/footer-links.js?v=1001" defer></script>
+    <script src="/assets/consent.js?v=1001" defer></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const now = new Date();
+
+        // Overskriver kun elementer med .date-info (bevisst dynamisk datovisning).
+        const dateInfoEls = document.querySelectorAll('.date-info');
+        if (dateInfoEls.length) {
+          const formattedDate = now.toLocaleDateString('no-NO');
+          dateInfoEls.forEach((el) => {
+            el.textContent = `Sist oppdatert: ${formattedDate}`;
+          });
+        }
+
+        // Overskriver kun element(er) med [data-role="price-line"] (bevisst dynamisk prislinje).
+        const priceLineEls = document.querySelectorAll('[data-role="price-line"]');
+        if (priceLineEls.length) {
+          priceLineEls.forEach((el) => {
+            el.textContent = 'Pris fra kr 999 per måned';
+          });
+        }
+
+        // Overskriver kun #year (bevisst dynamisk årstall i footer).
+        const yearEl = document.getElementById('year');
+        if (yearEl) {
+          yearEl.textContent = String(now.getFullYear());
+        }
+      });
+    </script>
+  </body>
+</html>
