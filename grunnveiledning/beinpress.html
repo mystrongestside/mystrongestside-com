@@ -2,576 +2,595 @@
 <html lang="no">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
-
-  <title>Beinpress: kom i gang</title>
+  <title>Beinpress: kom i gang | MY STRONGEST SIDE®</title>
 
   <style>
-    :root{
-      --myss_blue_dark:#0c2d48;
-      --myss_blue:#2f7fbf;
-      --myss_orange:#f28c28;
-      --bg:#f6f9fc;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --shadow: 0 10px 25px rgba(2, 6, 23, 0.08);
+    :root {
+      --myss-blue-dark: #0c2d48;
+      --myss-blue: #1f6eaa;
+      --myss-blue-soft: #e9f3fb;
+      --myss-orange: #f28c28;
+      --bg: #f3f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8fbfe;
+      --text: #111827;
+      --muted: #334155;
+      --border: #d6e2ef;
+      --focus: #ffb454;
+      --shadow: 0 10px 30px rgba(12, 45, 72, 0.12);
       --radius: 18px;
+      --space-1: 0.5rem;
+      --space-2: 0.75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(1200px 500px at 20% -10%, rgba(47,127,191,0.18), transparent 55%),
-        radial-gradient(900px 450px at 90% 0%, rgba(242,140,40,0.14), transparent 55%),
-        var(--bg);
-      color:var(--text);
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
     }
 
-    .wrap{
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 18px 14px 28px;
-    }
-
-    .top{
-      padding: 10px 6px 14px;
-    }
-
-    h1{
-      margin: 10px 0 6px;
-      font-size: clamp(1.35rem, 4.2vw, 2rem);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--myss_blue_dark);
-    }
-
-    .sub{
+    body {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
+      font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 500px at 5% -10%, rgba(31, 110, 170, 0.14), transparent 58%),
+        radial-gradient(900px 450px at 95% 0%, rgba(242, 140, 40, 0.10), transparent 58%),
+        var(--bg);
     }
 
-    .card{
-      background: var(--card);
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: #fff;
+      color: var(--myss-blue-dark);
+      border: 2px solid var(--myss-blue-dark);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      z-index: 999;
+      font-weight: 700;
+    }
+
+    .skip-link:focus-visible {
+      left: 1rem;
+      top: 1rem;
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: var(--space-4) var(--space-3) var(--space-5);
+    }
+
+    .top {
+      margin-bottom: var(--space-3);
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--myss-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0.3rem 0 0.6rem;
+      color: var(--myss-blue-dark);
+      font-size: clamp(1.6rem, 4.2vw, 2.35rem);
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+    }
+
+    .sub {
+      margin: 0;
+      font-size: 1.02rem;
+      color: var(--muted);
+      max-width: 65ch;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: hidden;
-      border: 1px solid rgba(15, 23, 42, 0.06);
+      overflow: clip;
     }
 
-    .video_shell{
+    .video-shell {
       position: relative;
       background: #0b1220;
     }
 
-    video{
-      display:block;
-      width:100%;
-      height:auto;
-      max-height: 70vh;
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 72vh;
       background: #0b1220;
     }
 
-    .content{
-      padding: 14px 16px 18px;
-    }
-
-    .note{
-      margin: 0;
-      font-size: 1.03rem;
-      line-height: 1.45;
-      color: var(--text);
-    }
-
-    .note strong{
-      color: var(--myss_blue_dark);
-    }
-
-    .hint{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(242,140,40,0.12);
-      color: #7a3e00;
-      border: 1px solid rgba(242,140,40,0.22);
+    .video-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-1);
+      padding: 0.55rem 0.9rem;
+      background: #0f1b2a;
+      color: #dbeafe;
+      border-top: 1px solid rgba(219, 234, 254, 0.25);
       font-size: 0.92rem;
-      margin-top: 10px;
     }
 
-    .hr{
-      height:1px;
-      background: rgba(15, 23, 42, 0.08);
-      margin: 14px 0;
+    .video-status {
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 700;
+      color: #fde68a;
     }
 
-    .guide_title{
-      margin: 0 0 8px;
-      font-size: 1.05rem;
-      color: var(--myss_blue_dark);
+    .content {
+      padding: var(--space-4);
+    }
+
+    .section {
+      margin-top: var(--space-4);
+      padding-top: var(--space-3);
+      border-top: 1px solid #e5edf5;
+    }
+
+    .section:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.15rem, 2.4vw, 1.35rem);
+      color: var(--myss-blue-dark);
+      line-height: 1.3;
       letter-spacing: -0.01em;
     }
 
-    .steps{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--text);
-      line-height: 1.45;
+    h3 {
+      margin: 1rem 0 0.5rem;
+      color: var(--myss-blue-dark);
       font-size: 1.02rem;
     }
 
-    .steps li{ margin: 6px 0; }
-
-    .micro{
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.4;
+    p, li {
+      font-size: 1rem;
+      color: var(--text);
     }
 
-    details{
-      margin-top: 12px;
+    .lead {
+      margin: 0;
+      font-size: 1.06rem;
+      line-height: 1.5;
+      color: var(--text);
+      max-width: 64ch;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: var(--space-2);
+      border-radius: 999px;
+      border: 1px solid #f8d6b5;
+      background: #fff5eb;
+      color: #7a3e00;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .quicklinks {
+      margin-top: var(--space-3);
+      padding: var(--space-2);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .quicklinks ul {
+      margin: 0.35rem 0 0;
+      padding-left: 1.1rem;
+    }
+
+    .quicklinks a,
+    .section a {
+      color: var(--myss-blue-dark);
+      font-weight: 700;
+      text-underline-offset: 0.12em;
+    }
+
+    .quicklinks a:hover,
+    .section a:hover {
+      color: #0b2234;
+    }
+
+    .guide-list,
+    .sources,
+    .detail-list {
+      margin: 0.75rem 0 0;
+      padding-left: 1.25rem;
+    }
+
+    .guide-list li,
+    .detail-list li {
+      margin-bottom: 0.45rem;
+    }
+
+    .progress-box {
+      margin-top: var(--space-2);
+      padding: 0.95rem 1rem;
       border-radius: 14px;
-      border: 1px solid rgba(47,127,191,0.18);
-      background: rgba(47,127,191,0.06);
+      border: 1px solid #b9d6ec;
+      background: var(--myss-blue-soft);
+    }
+
+    .info-grid {
+      display: grid;
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 760px) {
+      .info-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .info-card {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #fbfdff;
+      padding: 0.95rem;
+    }
+
+    details {
+      margin-top: var(--space-2);
+      border-radius: 14px;
+      border: 1px solid #b9d6ec;
+      background: #f2f8fd;
       overflow: hidden;
     }
 
-    summary{
-      list-style: none;
+    summary {
       cursor: pointer;
-      padding: 12px 12px;
-      font-weight: 700;
-      color: var(--myss_blue_dark);
-      display:flex;
-      align-items:center;
+      list-style: none;
+      padding: 0.9rem 1rem;
+      font-weight: 800;
+      color: var(--myss-blue-dark);
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      user-select: none;
+      gap: 0.75rem;
     }
 
-    summary::-webkit-details-marker{ display:none; }
+    summary::-webkit-details-marker { display: none; }
 
-    .chev{
-      width: 20px;
-      height: 20px;
-      flex: 0 0 20px;
-      opacity: 0.9;
+    .chev {
+      width: 1.1rem;
+      height: 1.1rem;
       transform: rotate(0deg);
-      transition: transform 160ms ease;
+      transition: transform 180ms ease;
+      flex-shrink: 0;
     }
 
-    details[open] .chev{
-      transform: rotate(180deg);
+    details[open] .chev { transform: rotate(180deg); }
+
+    .details-content {
+      padding: 0 1rem 1rem;
     }
 
-    .details_body{
-      padding: 0 12px 12px;
-      color: var(--text);
-      line-height: 1.45;
-      font-size: 1.02rem;
-    }
-
-    .details_body p{
-      margin: 10px 0 0;
-    }
-
-    .details_body ul{
-      margin: 10px 0 0;
-      padding-left: 18px;
-    }
-
-    .progress_box{
-      margin-top: 14px;
-      padding: 12px 14px;
+    .figure {
+      margin: 1rem 0 0;
       border-radius: 14px;
-      background: rgba(47,127,191,0.08);
-      border: 1px solid rgba(47,127,191,0.22);
-    }
-
-    .progress_title{
-      margin: 0 0 6px;
-      font-weight: 700;
-      color: var(--myss_blue_dark);
-      font-size: 1rem;
-    }
-
-    .progress_list{
-      margin: 0;
-      padding-left: 18px;
-      font-size: 0.98rem;
-      line-height: 1.4;
-      color: var(--text);
-    }
-
-    .progress_list li{
-      margin: 4px 0;
-    }
-
-    .figure{
-      margin: 12px 0 0;
+      border: 1px solid var(--border);
       background: #fff;
-      border-radius: 16px;
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      overflow:hidden;
+      overflow: hidden;
     }
 
-    .figure img{
-      display:block;
-      width:100%;
-      height:auto;
+    .figure img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
-    .figure figcaption{
-      padding: 10px 12px;
+    .figure figcaption {
+      margin: 0;
+      background: #f8fbff;
+      padding: 0.75rem 0.9rem;
       color: var(--muted);
       font-size: 0.92rem;
-      line-height: 1.35;
-      background: rgba(15, 23, 42, 0.02);
     }
 
-    .sources{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.4;
+    .action-row {
+      margin-top: var(--space-4);
     }
 
-    .gate{
+    .btn,
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 100ms ease, box-shadow 100ms ease, background-color 120ms ease;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .btn:hover,
+    .link-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active,
+    .link-btn:active {
+      transform: translateY(0);
+    }
+
+    .link-btn {
+      padding: 0.7rem 1.05rem;
+      border: 1px solid #7fb3da;
+      background: #e9f4fc;
+      color: var(--myss-blue-dark);
+    }
+
+    .link-btn strong { font-weight: 900; }
+
+    .gate {
       position: fixed;
       inset: 0;
-      background: rgba(2, 6, 23, 0.72);
+      z-index: 50;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 18px;
-      z-index: 50;
+      background: rgba(2, 6, 23, 0.74);
+      padding: var(--space-3);
     }
 
-    .gate_card{
+    .gate-card {
       width: min(560px, 100%);
-      background: var(--card);
-      border-radius: 20px;
+      border-radius: 18px;
+      border: 1px solid #c2d9eb;
+      background: #fff;
+      padding: 1rem;
       box-shadow: var(--shadow);
-      padding: 16px 16px 14px;
-      border: 1px solid rgba(15, 23, 42, 0.10);
     }
 
-    .gate_title{
-      margin: 0 0 6px;
-      font-size: 1.1rem;
-      color: var(--myss_blue_dark);
-      letter-spacing: -0.01em;
+    .gate-title {
+      margin: 0;
+      font-size: 1.15rem;
+      color: var(--myss-blue-dark);
     }
 
-    .gate_text{
-      margin: 0 0 12px;
+    .gate-text {
+      margin: 0.5rem 0 0.9rem;
       color: var(--muted);
-      line-height: 1.4;
-      font-size: 0.98rem;
     }
 
-    .btnrow{
-      display:flex;
-      gap: 10px;
+    .btnrow {
+      display: flex;
       flex-wrap: wrap;
+      gap: 0.6rem;
     }
 
-    .btn{
-      appearance: none;
-      border: 0;
-      border-radius: 999px;
-      padding: 11px 14px;
-      font-weight: 650;
-      cursor: pointer;
-      font-size: 1rem;
-      line-height: 1;
+    .btn {
+      border: 1px solid transparent;
+      padding: 0.68rem 1rem;
     }
 
-    .btn_primary{
-      background: var(--myss_blue);
+    .btn-primary {
+      background: var(--myss-blue);
       color: #fff;
     }
 
-    .btn_secondary{
-      background: rgba(47,127,191,0.10);
-      color: var(--myss_blue_dark);
-      border: 1px solid rgba(47,127,191,0.20);
+    .btn-secondary {
+      background: #eef6fc;
+      color: var(--myss-blue-dark);
+      border-color: #98c4e1;
     }
 
-    /* myss: quote block */
-    .myss-quote-block{ margin-top:12px; }
-    .value_quote{
-      background: rgba(47,127,191,.08);
-      border-radius: 16px;
-      padding: 14px 14px;
-    }
-    .value_quote__text{
-      margin:0;
-      color: var(--myss_blue_dark);
-      line-height: 1.5;
-      font-weight: 650;
-    }
-
-    /* myss: tilpasninger som rolig knapp */
-    .myss-subtle-link{
-      margin:10px 0 0;
-      text-align:center;
-    }
-    .myss-link-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 750;
-      background: rgba(47,127,191,0.10);
-      color: var(--myss_blue_dark);
-      border: 1px solid rgba(47,127,191,0.20);
-    }
-    .myss-link-btn:hover{
-      background: rgba(47,127,191,0.14);
-      border-color: rgba(47,127,191,0.26);
-    }
-    .myss-link-btn:focus{
-      outline: 3px solid rgba(47,127,191,0.25);
+    :focus-visible {
+      outline: 3px solid var(--focus);
       outline-offset: 2px;
     }
 
-    /* myss: info bokser for forklaring og overføringsverdi */
-    .info_grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 12px;
+    .site-footer {
+      max-width: 920px;
+      margin: 0 auto 1.4rem;
+      padding: 0 var(--space-3);
     }
-    @media (min-width: 720px){
-      .info_grid{ grid-template-columns: 1fr 1fr; }
-    }
-    .info_card{
-      background: rgba(15, 23, 42, 0.02);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      border-radius: 16px;
-      padding: 12px 12px;
-    }
-    .info_title{
-      margin: 0 0 6px;
-      font-weight: 750;
-      color: var(--myss_blue_dark);
-      font-size: 0.98rem;
-    }
-    .info_text{
-      margin: 0;
-      color: var(--text);
-      line-height: 1.4;
-      font-size: 0.98rem;
-    }
-    .info_text strong{ color: var(--myss_blue_dark); }
 
-    .myss-more{ margin-top: 14px; }
-    .myss-more > summary{ cursor: pointer; font-weight: 700; }
-    .myss-more__content{ margin-top: 12px; }
-
-    .myss-fallback[hidden]{ display: none; }
-  
-    .site_footer{
-      max-width: 860px;
-      margin: 12px auto 26px;
-      padding: 0 14px;
-    }
-    .site_footer__text{
+    .site-footer__text {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.35;
       text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
     }
 
-    .vid_mark{
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-      padding: 6px 8px;
-      border-radius: 10px;
-      font-size: 0.82rem;
-      line-height: 1;
-      color: rgba(255,255,255,0.82);
-      background: rgba(0,0,0,0.28);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(3px);
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
-
-    .no-copy, .no-copy *{
-      -webkit-user-select: none;
-      user-select: none;
-      -webkit-touch-callout: none;
-    }
-
   </style>
 </head>
-
 <body>
-  <main class="wrap">
+  <a class="skip-link" href="#main-content">Hopp til hovedinnhold</a>
+
+  <main class="wrap" id="main-content">
     <header class="top">
+      <p class="eyebrow">Grunnveiledning · MY STRONGEST SIDE®</p>
       <h1>Beinpress: kom i gang</h1>
-      <p class="sub">Kort grunnveiledning som starter automatisk.</p>
+      <p class="sub">Trygg og enkel innføring i beinpress med tydelige valg, rolig progresjon og forutsigbar struktur.</p>
+
+      <nav class="quicklinks" aria-label="Hurtiglenker">
+        <strong>Hurtiglenker</strong>
+        <ul>
+          <li><a href="#treningsguide">Kort treningsguide</a></li>
+          <li><a href="#forklaring">Faglig forklaring</a></li>
+          <li><a href="#tilpasninger">Tilpasninger ved behov</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <section class="card" aria-label="Beinpress grunnveiledning">
-      <div class="video_shell">
+    <article class="card" aria-labelledby="video-title">
+      <section class="video-shell" aria-label="Video med grunnveiledning">
+        <h2 id="video-title" class="visually-hidden" style="position:absolute;left:-9999px;">Video: grunnveiledning i beinpress</h2>
         <video
           id="introVideo"
           playsinline
-          preload="auto"
-          autoplay
+          preload="metadata"
           controls
-          aria-label="Grunnveiledning i beinpress"
+          aria-describedby="video-help video-status"
         >
           <source src="/assets/video/MY_BEINPRESS.mp4" type="video/mp4" />
           Nettleseren din støtter ikke videoavspilling.
         </video>
-        <div class="vid_mark" aria-hidden="true">© 2026 MyStrongestSide AS</div>
-      </div>
+        <div class="video-meta">
+          <span id="video-help">Tips: Start rolig og hold korsryggen i kontakt med ryggplaten gjennom hele løftet.</span>
+          <span id="video-status" class="video-status" role="status" aria-live="polite">🔇 Spiller uten lyd</span>
+        </div>
+      </section>
 
       <div class="content">
-        <div class="no-copy">
-        <p class="note">
-          💡 Denne videoen gir deg en enkel grunnstilling i beinpress.
-        </p>
+        <section class="section" aria-labelledby="startpunkt">
+          <h2 id="startpunkt">Startpunkt</h2>
+          <p class="lead">Denne videoen gir deg en enkel grunnstilling i beinpress. Hold tempoet kontrollert og prioriter trygg teknikk før økning i belastning.</p>
+          <p class="badge" role="note" aria-label="Sikkerhetstips">💡 Stopp settet hvis teknikken glipper eller du får uvanlig smerte.</p>
+        </section>
 
-
-        <div class="hr" role="separator" aria-hidden="true"></div>
-
-        <p class="guide_title">Beinpress: grunnveiledning</p>
-
-        <div class="progress_box" role="note" aria-label="Viktig treningsinformasjon">
-          <p class="progress_title">Kort treningsguide</p>
-          <ul class="progress_list">
-            <li><strong>Oppvarming</strong> 1 til 2 lette sett før arbeidssettene.</li>
-            <li><strong>Antall sett</strong> 3 sett er et godt utgangspunkt i beinpress.</li>
-            <li><strong>Repetisjoner</strong> 6 til 12 kontrollerte repetisjoner per sett.</li>
-            <li><strong>Når kan du øke vekt</strong> Når du klarer 12 repetisjoner i alle 3 sett med god kontroll.</li>
-            <li><strong>Hvordan øke</strong> Øk litt i vekt og start igjen rundt 6 til 8 repetisjoner.</li>
-          </ul>
-        </div>
-
-        <div class="info_grid" aria-label="Kort forklaring og overføringsverdi">
-          <div class="info_card">
-            <p class="info_title">Hva trener du</p>
-            <p class="info_text">
-              Mest <strong>lår</strong> og <strong>sete</strong>. Hold <strong>korsryggen i kontakt</strong> med ryggplaten gjennom hele bevegelsen.
-            </p>
-          </div>
-
-          <div class="info_card">
-            <p class="info_title">Overføringsverdi i hverdagen</p>
-            <p class="info_text">
-              Kan støtte styrke til å <strong>reise deg fra stol</strong> og <strong>gå i trapper</strong>. Sterke bein og hofter kan gi mer stabilitet over tid.
-            </p>
-          </div>
-        </div>
-
-        <details class="myss-more">
-          <summary>Vil du vite mer?</summary>
-          <div class="myss-more__content">
-            <h2>Fotplassering</h2>
-            <ul>
-              <li>Høyere fotplassering gir ofte relativt mer belastning på setemuskulatur.</li>
-              <li>Lavere fotplassering gir ofte mer arbeid for fremside lår.</li>
-              <li>Hold hele foten i kontakt med platen og jobb med jevnt trykk, uten at helen løfter seg.</li>
-            </ul>
-
-            <h2>Bevegelsesutslag</h2>
-            <p>Større bevegelsesutslag kan gi god muskelaktivering, men prioriter alltid kontroll og at korsryggen har stabil kontakt med ryggplaten.</p>
-
-            <h2>Aktive muskler</h2>
-            <ul>
-              <li>Primært Quadriceps femoris, gluteus maximus.</li>
-              <li>Støtte Hamstrings, adduktorer, gastrocnemius og soleus.</li>
-              <li>Lav indirekte belastning Ryggstrekkerne, fordi overkroppen er støttet.</li>
-            </ul>
-
-            <figure class="figure" aria-label="Illustrasjon av aktive muskler i sittende beinpress">
-              <img src="/assets/img/beinpress-muskler.png" alt="Illustrasjon som viser aktive muskler i sittende beinpress, med primære og sekundære muskelgrupper markert." loading="lazy" />
-              <figcaption>
-                Illustrasjonen viser typisk muskelbruk i sittende beinpress. Variasjoner i fotplassering og dybde kan endre vektleggingen noe.
-              </figcaption>
-            </figure>
-
-            <h2>Kilder</h2>
-            <ul>
-              <li>American College of Sports Medicine. (2009). Progression models in resistance training for healthy adults. Medicine &amp; Science in Sports &amp; Exercise.</li>
-              <li>Schoenfeld, B. J., Ogborn, D., &amp; Krieger, J. W. (2017). Dose response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta analysis. Journal of Sports Sciences.</li>
-              <li>Schoenfeld, B. J. et al. (2021). Resistance training range of motion and skeletal muscle hypertrophy: A systematic review and meta analysis. Scandinavian Journal of Medicine &amp; Science in Sports.</li>
-            </ul>
-            <p>Kildene over er generell styrketreningslitteratur som støtter prinsippene for progresjon, treningsvolum og bevegelsesutslag.</p>
-
-            <h2>Sko og klær</h2>
-
-            <h3>Sko</h3>
-            <ul>
-              <li>Flate og stabile sko med lite demping gir ofte best stabilitet og kraftoverføring.</li>
-              <li>Unngå myke løpesko hvis foten blir urolig eller du mister jevnt trykk i platen.</li>
-              <li>Bruk gjerne innersåler du allerede har for mer forutsigbar fotstilling.</li>
-              <li>Et lite hælløft kan hjelpe noen med å holde helen i kontakt, men det er ikke nødvendig.</li>
-            </ul>
-
-            <h3>Klær</h3>
-            <ul>
-              <li>Velg klær som gir god bevegelsesfrihet i hofte og knær.</li>
-              <li>Unngå plagg som strammer i hofteleddsbøy og gjør det vanskelig å holde stabil ryggkontakt.</li>
-              <li>Hvis du sklir i setet, kan det hjelpe med mer friksjon i stoffet og å tørke av sete og ryggstøtte.</li>
-            </ul>
-
-            <h2>Valgfritt</h2>
-            <ul>
-              <li>Belte kan gi bedre kroppskontroll for noen, men er ikke et krav.</li>
-              <li>Knevarmere kan gi mer komfort hvis knærne føles stive eller kalde.</li>
+        <section id="treningsguide" class="section" aria-labelledby="treningsguide-title">
+          <h2 id="treningsguide-title">Kort treningsguide</h2>
+          <div class="progress-box" role="note" aria-label="Viktig treningsinformasjon">
+            <ul class="guide-list">
+              <li><strong>Oppvarming:</strong> 1–2 lette sett før arbeidssettene.</li>
+              <li><strong>Arbeidssett:</strong> Start med 3 sett som et godt utgangspunkt.</li>
+              <li><strong>Repetisjoner:</strong> 6–12 kontrollerte repetisjoner per sett.</li>
+              <li><strong>Progresjon:</strong> Når du klarer 12 repetisjoner i alle 3 sett med god kontroll, øk vekten litt.</li>
+              <li><strong>Ny vekt:</strong> Etter økning, start igjen rundt 6–8 repetisjoner og bygg opp.</li>
             </ul>
           </div>
-        </details>
-        </div>
+        </section>
 
-        <p class="myss-subtle-link">
-          <a href="/grunnveiledning/beinpress-tilpasninger.html" class="myss-link-btn">
-            Tilpasninger ved behov
-          </a>
-        </p>
+        <section id="forklaring" class="section" aria-labelledby="forklaring-title">
+          <h2 id="forklaring-title">Faglig forklaring</h2>
+          <div class="info-grid" aria-label="Hva du trener og overføringsverdi i hverdagen">
+            <article class="info-card">
+              <h3>Hva trener du?</h3>
+              <p>Mest <strong>lår og sete</strong>. Hold <strong>korsryggen i kontakt</strong> med ryggplaten gjennom hele bevegelsen.</p>
+            </article>
 
+            <article class="info-card">
+              <h3>Overføringsverdi i hverdagen</h3>
+              <p>Kan støtte styrke til å <strong>reise deg fra stol</strong> og <strong>gå i trapper</strong>, og gi mer stabilitet over tid.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="mer-kunnskap">
+          <h2 id="mer-kunnskap">Mer kunnskap</h2>
+          <details>
+            <summary>
+              Vis utdypende veiledning
+              <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </summary>
+
+            <div class="details-content">
+              <h3>Fotplassering</h3>
+              <ul class="detail-list">
+                <li>Høyere fotplassering gir ofte relativt mer belastning på setemuskulatur.</li>
+                <li>Lavere fotplassering gir ofte mer arbeid for fremside lår.</li>
+                <li>Hold hele foten i kontakt med platen med jevnt trykk, uten at helen løfter seg.</li>
+              </ul>
+
+              <h3>Bevegelsesutslag</h3>
+              <p>Større bevegelsesutslag kan gi god muskelaktivering, men prioriter alltid kontroll og stabil ryggkontakt.</p>
+
+              <h3>Aktive muskler</h3>
+              <ul class="detail-list">
+                <li><strong>Primært:</strong> Quadriceps femoris og gluteus maximus.</li>
+                <li><strong>Støtte:</strong> Hamstrings, adduktorer, gastrocnemius og soleus.</li>
+                <li><strong>Indirekte:</strong> Ryggstrekkerne, fordi overkroppen er støttet.</li>
+              </ul>
+
+              <figure class="figure" aria-label="Illustrasjon av aktive muskler i sittende beinpress">
+                <img src="/assets/img/beinpress-muskler.png" alt="Illustrasjon av primære og sekundære muskelgrupper i sittende beinpress" loading="lazy" />
+                <figcaption>Illustrasjonen viser typisk muskelbruk i sittende beinpress. Fotplassering og dybde kan endre vektleggingen.</figcaption>
+              </figure>
+
+              <h3>Kilder</h3>
+              <ul class="sources">
+                <li>American College of Sports Medicine (2009). Progression models in resistance training for healthy adults.</li>
+                <li>Schoenfeld, Ogborn &amp; Krieger (2017). Dose-response relationship between weekly resistance training volume and muscle mass.</li>
+                <li>Schoenfeld et al. (2021). Resistance training range of motion and skeletal muscle hypertrophy.</li>
+              </ul>
+              <p>Kildene over støtter prinsipper for progresjon, treningsvolum og bevegelsesutslag i styrketrening.</p>
+
+              <h3>Sko og klær</h3>
+              <ul class="detail-list">
+                <li>Velg flate og stabile sko for bedre kraftoverføring.</li>
+                <li>Unngå myke løpesko hvis foten blir urolig mot platen.</li>
+                <li>Klær bør gi fri bevegelse i hofte og knær uten å skli i setet.</li>
+              </ul>
+
+              <h3>Valgfritt utstyr</h3>
+              <ul class="detail-list">
+                <li>Belte kan gi bedre kroppskontroll for noen, men er ikke et krav.</li>
+                <li>Knevarmere kan gi mer komfort hvis knærne oppleves stive eller kalde.</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <section id="tilpasninger" class="section action-row" aria-labelledby="tilpasninger-title">
+          <h2 id="tilpasninger-title">Tilpasninger ved behov</h2>
+          <p>Trenger du alternativer for smerter, bevegelighet eller utstyr? Se egne tilpasninger for beinpress.</p>
+          <a href="/grunnveiledning/beinpress-tilpasninger.html" class="link-btn" aria-describedby="tilpasning-hjelp"><strong>Åpne tilpasninger</strong></a>
+          <p id="tilpasning-hjelp" class="sub">Lenken åpner en side med konkrete tilpasninger for teknikk, fotplassering og belastning.</p>
+        </section>
       </div>
-    </section>
+    </article>
   </main>
 
-  <footer class="site_footer" aria-label="Opphavsrett">
-    <p class="site_footer__text">Opphavsrett © 2026 MyStrongestSide AS. Alle rettigheter reservert.</p>
+  <footer class="site-footer" aria-label="Opphavsrett">
+    <p class="site-footer__text">Opphavsrett © 2026 MyStrongestSide AS. Alle rettigheter reservert.</p>
   </footer>
 
-
-  <section id="video_fallback" class="myss-fallback" hidden>
-    <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-label="Start video">
-      <div class="gate_card">
-        <p class="gate_title">Start video</p>
-        <p class="gate_text">
-          Noen telefoner blokkerer autoavspilling med lyd. Trykk for å starte med lyd, eller spill av uten lyd.
-        </p>
+  <section id="video_fallback" hidden>
+    <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-text">
+      <div class="gate-card">
+        <h2 id="gate-title" class="gate-title">Start video</h2>
+        <p id="gate-text" class="gate-text">Noen telefoner blokkerer autoavspilling med lyd. Velg avspilling med eller uten lyd.</p>
         <div class="btnrow">
-          <button id="btn_play_sound" class="btn btn_primary" type="button">Spill av med lyd</button>
-          <button id="btn_play_muted" class="btn btn_secondary" type="button">Spill av uten lyd</button>
+          <button id="btn_play_sound" class="btn btn-primary" type="button">Spill av med lyd</button>
+          <button id="btn_play_muted" class="btn btn-secondary" type="button">Spill av uten lyd</button>
         </div>
       </div>
     </div>
@@ -579,102 +598,87 @@
 
   <script>
     (function () {
-      const v = document.getElementById("introVideo");
-      const gate = document.getElementById("autoplay_gate");
-      const btnSound = document.getElementById("btn_play_sound");
-      const btnMuted = document.getElementById("btn_play_muted");
-      const mutedBadge = document.getElementById("muted_badge");
+      const video = document.getElementById('introVideo');
+      const gate = document.getElementById('autoplay_gate');
+      const fallback = document.getElementById('video_fallback');
+      const btnSound = document.getElementById('btn_play_sound');
+      const btnMuted = document.getElementById('btn_play_muted');
+      const status = document.getElementById('video-status');
 
-      function showGate() { gate.style.display = "flex"; }
-      function hideGate() { gate.style.display = "none"; }
+      if (!video || !gate || !fallback || !btnSound || !btnMuted || !status) return;
 
-      async function tryAutoplayWithLowSound() {
+      function showGate() {
+        fallback.hidden = false;
+        gate.style.display = 'flex';
+        btnSound.focus();
+      }
+
+      function hideGate() {
+        gate.style.display = 'none';
+        fallback.hidden = true;
+      }
+
+      function updateStatus(isMuted) {
+        status.style.display = isMuted ? 'inline-flex' : 'none';
+      }
+
+      async function playWithSound() {
+        video.muted = false;
+        video.volume = 0.2;
+        await video.play();
+        updateStatus(false);
+      }
+
+      async function playMuted() {
+        video.muted = true;
+        video.volume = 0;
+        await video.play();
+        updateStatus(true);
+      }
+
+      async function attemptAutoplay() {
         try {
-          v.muted = false;
-          v.volume = 0.20;
-          await v.play();
-          mutedBadge.style.display = "none";
-        } catch (e) {
+          await playWithSound();
+        } catch (_) {
           try {
-            v.muted = true;
-            v.volume = 0.0;
-            await v.play();
-            mutedBadge.style.display = "inline-flex";
-          } catch (e2) {
+            await playMuted();
+          } catch (_) {
             showGate();
           }
         }
       }
 
-      btnSound.addEventListener("click", async function () {
+      btnSound.addEventListener('click', async function () {
         hideGate();
         try {
-          v.muted = false;
-          v.volume = 0.20;
-          await v.play();
-          mutedBadge.style.display = "none";
-        } catch (e) {
-          v.muted = false;
-          v.controls = true;
+          await playWithSound();
+        } catch (_) {
           showGate();
         }
       });
 
-      btnMuted.addEventListener("click", async function () {
+      btnMuted.addEventListener('click', async function () {
         hideGate();
-        v.muted = true;
-        v.volume = 0.0;
         try {
-          await v.play();
-          mutedBadge.style.display = "inline-flex";
-        } catch (e) {
+          await playMuted();
+        } catch (_) {
           showGate();
         }
       });
 
-      document.addEventListener("visibilitychange", function () {
-        if (document.visibilityState === "visible" && v.paused) {
-          tryAutoplayWithLowSound();
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && gate.style.display === 'flex') {
+          hideGate();
         }
       });
 
-      tryAutoplayWithLowSound();
-    })();
-  </script>
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible' && video.paused) {
+          attemptAutoplay();
+        }
+      });
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var v = document.querySelector('video');
-      var fb = document.getElementById('video_fallback');
-      if (!v || !fb) return;
-
-      function show() { fb.hidden = false; }
-      function hide() { fb.hidden = true; }
-
-      var p;
-      try { p = v.play(); } catch (e) {}
-
-      if (p && typeof p.then === 'function') {
-        p.then(hide).catch(show);
-      } else {
-        setTimeout(function () {
-          if (v.paused || v.currentTime < 0.1) show();
-        }, 1200);
-      }
-
-      v.addEventListener('play', hide);
-    });
-  </script>
-
-  <script>
-    (function(){
-      const root = document.querySelector('.no-copy');
-      if(!root) return;
-
-      root.addEventListener('copy', (e) => e.preventDefault());
-      root.addEventListener('cut', (e) => e.preventDefault());
-      root.addEventListener('contextmenu', (e) => e.preventDefault());
-      root.addEventListener('dragstart', (e) => e.preventDefault());
+      attemptAutoplay();
     })();
   </script>
 </body>
