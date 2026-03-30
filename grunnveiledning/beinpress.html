@@ -8,19 +8,22 @@
 
   <style>
     :root {
-      --myss-blue-dark: #0c2d48;
-      --myss-blue: #1f6eaa;
-      --myss-blue-soft: #e9f3fb;
-      --myss-orange: #f28c28;
-      --bg: #f3f7fb;
+      --myss-blue-dark: #123B63;
+      --myss-blue: #245b8f;
+      --myss-blue-soft: #edf3f8;
+      --myss-orange: #d8b98f;
+      --bg: #f6f3ee;
       --surface: #ffffff;
-      --surface-soft: #f8fbfe;
-      --text: #111827;
-      --muted: #334155;
-      --border: #d6e2ef;
-      --focus: #ffb454;
-      --shadow: 0 10px 30px rgba(12, 45, 72, 0.12);
-      --radius: 18px;
+      --surface-soft: #eef4f3;
+      --text: #1e2a3a;
+      --muted: #3e4b5b;
+      --border: #c8d7e6;
+      --border-soft: #bdd3ce;
+      --warm-surface: #f3e6d6;
+      --warm-border: #d8b98f;
+      --focus: #123b63;
+      --shadow: 0 10px 26px rgba(18, 59, 99, 0.11);
+      --radius: 16px;
       --space-1: 0.5rem;
       --space-2: 0.75rem;
       --space-3: 1rem;
@@ -40,8 +43,8 @@
       line-height: 1.6;
       color: var(--text);
       background:
-        radial-gradient(1200px 500px at 5% -10%, rgba(31, 110, 170, 0.14), transparent 58%),
-        radial-gradient(900px 450px at 95% 0%, rgba(242, 140, 40, 0.10), transparent 58%),
+        radial-gradient(1200px 500px at 5% -10%, rgba(18, 59, 99, 0.11), transparent 58%),
+        radial-gradient(900px 450px at 95% 0%, rgba(216, 185, 143, 0.16), transparent 58%),
         var(--bg);
     }
 
@@ -128,9 +131,9 @@
       justify-content: space-between;
       gap: var(--space-1);
       padding: 0.55rem 0.9rem;
-      background: #0f1b2a;
-      color: #dbeafe;
-      border-top: 1px solid rgba(219, 234, 254, 0.25);
+      background: #152639;
+      color: #e7eef5;
+      border-top: 1px solid rgba(231, 238, 245, 0.25);
       font-size: 0.92rem;
     }
 
@@ -139,7 +142,7 @@
       align-items: center;
       gap: 0.35rem;
       font-weight: 700;
-      color: #fde68a;
+      color: #f3e6d6;
     }
 
     .content {
@@ -149,7 +152,7 @@
     .section {
       margin-top: var(--space-4);
       padding-top: var(--space-3);
-      border-top: 1px solid #e5edf5;
+      border-top: 1px solid var(--border);
     }
 
     .section:first-child {
@@ -191,9 +194,9 @@
       gap: 0.45rem;
       margin-top: var(--space-2);
       border-radius: 999px;
-      border: 1px solid #f8d6b5;
-      background: #fff5eb;
-      color: #7a3e00;
+      border: 1px solid var(--warm-border);
+      background: var(--warm-surface);
+      color: #5f4122;
       padding: 0.45rem 0.7rem;
       font-size: 0.9rem;
       font-weight: 600;
@@ -204,7 +207,7 @@
       padding: var(--space-2);
       background: var(--surface-soft);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
     }
 
     .quicklinks ul {
@@ -221,7 +224,7 @@
 
     .quicklinks a:hover,
     .section a:hover {
-      color: #0b2234;
+      color: #0f2f4f;
     }
 
     .guide-list,
@@ -240,8 +243,8 @@
       margin-top: var(--space-2);
       padding: 0.95rem 1rem;
       border-radius: 14px;
-      border: 1px solid #b9d6ec;
-      background: var(--myss-blue-soft);
+      border: 1px solid var(--border-soft);
+      background: var(--surface-soft);
     }
 
     .info-grid {
@@ -258,15 +261,15 @@
     .info-card {
       border-radius: 14px;
       border: 1px solid var(--border);
-      background: #fbfdff;
+      background: #f8fbfb;
       padding: 0.95rem;
     }
 
     details {
       margin-top: var(--space-2);
       border-radius: 14px;
-      border: 1px solid #b9d6ec;
-      background: #f2f8fd;
+      border: 1px solid var(--border-soft);
+      background: var(--surface-soft);
       overflow: hidden;
     }
 
@@ -314,7 +317,7 @@
 
     .figure figcaption {
       margin: 0;
-      background: #f8fbff;
+      background: #f8fbfb;
       padding: 0.75rem 0.9rem;
       color: var(--muted);
       font-size: 0.92rem;
@@ -351,8 +354,8 @@
 
     .link-btn {
       padding: 0.7rem 1.05rem;
-      border: 1px solid #7fb3da;
-      background: #e9f4fc;
+      border: 1px solid var(--border);
+      background: var(--myss-blue-soft);
       color: var(--myss-blue-dark);
     }
 
@@ -372,7 +375,7 @@
     .gate-card {
       width: min(560px, 100%);
       border-radius: 18px;
-      border: 1px solid #c2d9eb;
+      border: 1px solid var(--border);
       background: #fff;
       padding: 1rem;
       box-shadow: var(--shadow);
@@ -406,9 +409,9 @@
     }
 
     .btn-secondary {
-      background: #eef6fc;
+      background: var(--surface-soft);
       color: var(--myss-blue-dark);
-      border-color: #98c4e1;
+      border-color: var(--border-soft);
     }
 
     :focus-visible {
