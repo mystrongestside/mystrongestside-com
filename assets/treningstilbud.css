@@ -1,0 +1,40 @@
+.hero {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.offer-meta {
+  margin: 1.5rem 0;
+}
+
+.offer-meta .date-info,
+.offer-meta [data-role='price-line'] {
+  margin: 0.25rem 0;
+}
+
+.icons-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.icons-row img {
+  width: 24px;
+  height: 24px;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+footer img {
+  max-width: 180px;
+  height: auto;
+}
