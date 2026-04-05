@@ -1372,8 +1372,226 @@
       <div class="section-body">
         <p class="kicker">Tilpasninger ved behov</p>
         <h2 class="h2" id="asym-tittel">Asymmetri</h2>
-        <p class="desc">Denne kan du gjøre to-nivå på samme måte som Fot, hvis du vil.</p>
-        <div class="note">Hvis du vil: lag tile-grid her med valg som Én side tar over og Bekken sklir.</div>
+        <p class="desc">Sideforskjeller i styrke, bevegelighet og kontroll kan gjøre at belastningen blir ulik mellom høyre og venstre side i sittende beinpress. Dette kan vise seg ved at én side tar over mer av arbeidet, eller at bekkenet glir ut av midtstilling i setet. Begge deler kan gjøre det vanskeligere å bruke begge bein jevnt gjennom hele bevegelsen.</p>
+        <p class="desc">Velg det som passer best for deg.</p>
+
+        <div class="tile-grid" role="navigation" aria-label="Velg asymmetriutfordring">
+          <button class="tile" type="button" data-target="#asym-en-side" aria-controls="asym-en-side">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 4v16"></path>
+                <path d="M17 7v13"></path>
+                <path d="M7 10h10"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Én side tar over</p>
+              <p class="tile-sub">Du kjenner at ett bein gjør mer av jobben enn det andre.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#asym-bekken" aria-controls="asym-bekken">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14c3-2 5-2 8 0"></path>
+                <path d="M12 14c3-2 5-2 8 0"></path>
+                <path d="M4 14v4"></path>
+                <path d="M20 14v4"></path>
+                <path d="M12 6v8"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Bekken sklir</p>
+              <p class="tile-sub">Du merker at du sitter skjevt eller glir mot én side i setet.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="asym-en-side" data-crumb="Tilpasninger ved behov · Asymmetri · Én side tar over" data-parent="#asymmetri" aria-labelledby="asym-en-side-tittel">
+      <div class="section-body">
+        <p class="kicker">Veiledning</p>
+        <h2 class="h2" id="asym-en-side-tittel">Én side tar over</h2>
+        <p class="desc">Når én side tar over, får den andre siden mindre belastning og mindre trening. Dette er vanlig når den ene siden har mindre styrke, mindre bevegelighet eller mindre kontroll i bevegelsen. Målet er å hjelpe begge bein til å bidra mest mulig i presset.</p>
+
+        <h3 class="h3">Prøv dette først</h3>
+        <ul class="checklist">
+          <li>Senk vekten litt.</li>
+          <li>Sjekk at begge føtter står likt på platen.</li>
+          <li>Press rolig og jevnt med begge bein.</li>
+          <li>Stopp litt tidligere hvis én side tar over i bunnen.</li>
+        </ul>
+
+        <h3 class="h3">Har du prøvd dette først?</h3>
+        <div class="tile-grid" role="navigation" aria-label="Relaterte områder ved sideforskjell">
+          <button class="tile" type="button" data-target="#fot" aria-controls="fot">
+            <span class="badge-box" aria-hidden="true">
+              <img src="/assets/img/fotikon.png" alt="" class="badge-icon">
+            </span>
+            <span>
+              <p class="tile-title">Fot</p>
+              <p class="tile-sub">Sjekk fotplassering og trykkfordeling før du øker belastning.</p>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#grep" aria-controls="grep">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 22v-7"></path>
+                <path d="M11 22v-9"></path>
+                <path d="M15 22v-8"></path>
+                <path d="M19 22v-10"></path>
+                <path d="M5 15c0-2 2-3 4-3h10c2 0 4 1 4 3v1c0 3-2 6-5 6H10c-3 0-5-3-5-6v-1z"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Grep</p>
+              <p class="tile-sub">Juster håndtak slik at én arm ikke drar kroppen skjevt.</p>
+            </span>
+          </button>
+
+          <!-- TODO: Koble denne videre til egen kne-seksjon når #kne er på plass i navigasjonen. -->
+          <div class="tile" role="note" aria-label="Kne-seksjon kommer senere">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 4v16"></path>
+                <path d="M17 4v16"></path>
+                <path d="M7 12h10"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Kne</p>
+              <p class="tile-sub">Kommer: egen seksjon for knekontroll og knebane.</p>
+            </span>
+          </div>
+        </div>
+
+        <h3 class="h3">Si til deg selv</h3>
+        <ul class="checklist">
+          <li>Begge bein skal være med.</li>
+          <li>Jevnt trykk på begge sider.</li>
+          <li>Rolig ned, rolig opp.</li>
+        </ul>
+
+        <h3 class="h3">Hvis dette fortsatt skjer</h3>
+        <ul class="checklist">
+          <li>Etter beinpress kan du legge inn en enkel ensidig øvelse for den siden som bidrar minst.</li>
+          <li>Hold belastningen rolig og jobb med kontroll.</li>
+          <li>3 sett med 8 til 12 repetisjoner.</li>
+        </ul>
+
+        <h3 class="h3">Stopp signal</h3>
+        <ul class="checklist">
+          <li>Stopp settet hvis sideforskjellen øker tydelig.</li>
+          <li>Stopp hvis du mister kontroll i kne eller fot.</li>
+          <li>Stopp hvis bevegelsen kjennes utrygg.</li>
+        </ul>
+
+        <details class="myss-more">
+          <summary>
+            Hvorfor dette kan hjelpe
+            <svg class="myss-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </summary>
+          <div class="myss-more__content">
+            <p>Når du senker vekten litt og gjør bevegelsen roligere, blir det lettere å holde begge sider med i samme tempo. Jevn fotplassering og kontrollert dybde gir ofte bedre arbeidsforhold for siden som vanligvis faller av, slik at du får mer lik trening på begge bein.</p>
+          </div>
+        </details>
+
+        <p class="note">Tips til veiledningsvideo: vis først et sett der én side tar over, og deretter samme sett med lavere vekt, lik fotplassering og roligere tempo.</p>
+      </div>
+    </section>
+
+    <section class="section hidden" id="asym-bekken" data-crumb="Tilpasninger ved behov · Asymmetri · Bekken sklir" data-parent="#asymmetri" aria-labelledby="asym-bekken-tittel">
+      <div class="section-body">
+        <p class="kicker">Veiledning</p>
+        <h2 class="h2" id="asym-bekken-tittel">Bekken sklir</h2>
+        <p class="desc">Hvis bekkenet sklir mot én side, blir det vanskeligere å sitte stabilt og bruke begge bein likt. Da får ofte den ene siden bedre arbeidsforhold, mens den andre siden må kompensere mer.</p>
+
+        <h3 class="h3">Prøv dette først</h3>
+        <ul class="checklist">
+          <li>Sett deg helt inn i setet før du starter.</li>
+          <li>Kjenn etter at begge seteballer har kontakt med setet.</li>
+          <li>Hold ryggen rolig mot ryggstøtten.</li>
+          <li>Juster grepet hvis du drar deg skjevt i håndtakene.</li>
+          <li>Bruk hoftebelte eller liten støttepute hvis det gjør deg mer stabil.</li>
+        </ul>
+
+        <h3 class="h3">Har du prøvd dette først?</h3>
+        <div class="tile-grid" role="navigation" aria-label="Relaterte områder ved bekken som sklir">
+          <button class="tile" type="button" data-target="#fot" aria-controls="fot">
+            <span class="badge-box" aria-hidden="true">
+              <img src="/assets/img/fotikon.png" alt="" class="badge-icon">
+            </span>
+            <span>
+              <p class="tile-title">Fot</p>
+              <p class="tile-sub">Jevn fotkontakt kan gjøre det lettere å sitte stabilt i setet.</p>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#grep" aria-controls="grep">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 22v-7"></path>
+                <path d="M11 22v-9"></path>
+                <path d="M15 22v-8"></path>
+                <path d="M19 22v-10"></path>
+                <path d="M5 15c0-2 2-3 4-3h10c2 0 4 1 4 3v1c0 3-2 6-5 6H10c-3 0-5-3-5-6v-1z"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Grep</p>
+              <p class="tile-sub">Lik håndplassering reduserer risiko for at du drar deg ut av midtstilling.</p>
+            </span>
+          </button>
+        </div>
+
+        <h3 class="h3">Si til deg selv</h3>
+        <ul class="checklist">
+          <li>Sitt midt i setet hele settet.</li>
+          <li>Hold begge seteballer i kontakt med setet.</li>
+          <li>Press jevnt med begge bein.</li>
+        </ul>
+
+        <h3 class="h3">Hvis dette fortsatt skjer</h3>
+        <ul class="checklist">
+          <li>Reduser bevegelsesutslaget litt til du klarer å holde midtstilling hele repetisjonen.</li>
+          <li>Hold vekten lav en periode og bygg opp igjen når stabiliteten er jevn.</li>
+          <li>Filmer du en repetisjon fra front, er det ofte lettere å se om du glir mot én side.</li>
+        </ul>
+
+        <h3 class="h3">Stopp signal</h3>
+        <ul class="checklist">
+          <li>Stopp hvis du sklir mer ut av midtstilling.</li>
+          <li>Stopp hvis du mister stabilitet i setet.</li>
+          <li>Stopp hvis én side kompenserer tydelig mer enn den andre.</li>
+        </ul>
+
+        <details class="myss-more">
+          <summary>
+            Hvorfor dette kan hjelpe
+            <svg class="myss-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </summary>
+          <div class="myss-more__content">
+            <p>God kontakt mellom sete, ryggstøtte og håndtak gjør kroppen mer stabil før presset starter. Når bekkenet holder seg i midtstilling, får begge bein mer like arbeidsforhold. Da blir det lettere å styre trykket jevnt gjennom hele bevegelsen.</p>
+          </div>
+        </details>
+
+        <p class="note">Tips til veiledningsvideo: vis tydelig oppsett i setet før første repetisjon, med fokus på setekontakt, grep og rolig tempo i hele presset.</p>
       </div>
     </section>
 
@@ -1558,7 +1776,7 @@
           if(s.id === 'tilpasninger-start') return;
         });
 
-        const navSections = document.querySelectorAll('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #grep, #innut');
+        const navSections = document.querySelectorAll('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #grep, #innut');
         navSections.forEach(s => s.classList.add('hidden'));
         sectionEl.classList.remove('hidden');
 
@@ -1586,7 +1804,7 @@
 
       if(backBtn){
         backBtn.addEventListener('click', () => {
-          const current = document.querySelector('#valg:not(.hidden), #fot:not(.hidden), #fot-haal:not(.hidden), #fot-haal-kile:not(.hidden), #behovsprovde-hjelpemiddel:not(.hidden), #fot-vridning:not(.hidden), #fot-trykk:not(.hidden), #asymmetri:not(.hidden), #grep:not(.hidden), #innut:not(.hidden)');
+          const current = document.querySelector('#valg:not(.hidden), #fot:not(.hidden), #fot-haal:not(.hidden), #fot-haal-kile:not(.hidden), #behovsprovde-hjelpemiddel:not(.hidden), #fot-vridning:not(.hidden), #fot-trykk:not(.hidden), #asymmetri:not(.hidden), #asym-en-side:not(.hidden), #asym-bekken:not(.hidden), #grep:not(.hidden), #innut:not(.hidden)');
           if(!current) return goTo('#valg');
 
           const parentSel = current.dataset ? current.dataset.parent : '';
@@ -1595,7 +1813,7 @@
         });
       }
 
-      const allNavSections = document.querySelectorAll('#fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #grep, #innut');
+      const allNavSections = document.querySelectorAll('#fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #grep, #innut');
       allNavSections.forEach(s => s.classList.add('hidden'));
       document.getElementById('valg').classList.remove('hidden');
       setCrumb(document.getElementById('valg'));
@@ -1603,7 +1821,7 @@
 
       if(location.hash){
         const byHash = document.querySelector(location.hash);
-        if(byHash && byHash.matches('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #grep, #innut')){
+        if(byHash && byHash.matches('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #grep, #innut')){
           showSection(byHash);
         }
       }
