@@ -625,6 +625,99 @@ details[open] .myss-chev{
   outline-offset: 2px;
 }
 
+.quick-summary{
+  margin: 0 0 14px;
+  padding: 12px;
+  border-radius: var(--radius_sm);
+  border: 1px solid var(--border_soft);
+  background: var(--surface_alt);
+}
+
+.quick-summary p{
+  margin: 0;
+  color: var(--text);
+  line-height: 1.45;
+  font-size: 15px;
+}
+
+.action-card{
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: var(--radius_sm);
+  border: 1px solid var(--border_soft);
+  background: var(--card);
+}
+
+.action-card--primary{
+  border-color: var(--border_accent);
+  background: var(--surface_soft);
+}
+
+.action-card--aid{
+  border-color: var(--warm_border);
+  background: var(--warm_surface);
+}
+
+.action-card--stop{
+  border-color: #d8b2b2;
+  background: #f9eeee;
+}
+
+.action-label{
+  display: inline-block;
+  margin: 0 0 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(18,59,99,.08);
+  color: var(--myss_blue_dark);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+}
+
+.action-card--aid .action-label{
+  background: rgba(131,93,40,.14);
+  color: #5a3d14;
+}
+
+.action-card--stop .action-label{
+  background: rgba(145,34,34,.12);
+  color: #8f2020;
+}
+
+.action-title{
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: var(--myss_blue_dark);
+}
+
+.action-text{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.aid-chip-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.aid-chip{
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(18,59,99,.08);
+  color: var(--myss_blue_dark);
+  border: 1px solid rgba(18,59,99,.16);
+  font-size: 12px;
+  font-weight: 700;
+}
+
 </style>
 </head>
 
@@ -642,7 +735,7 @@ details[open] .myss-chev{
       <div class="section-body">
         <p class="kicker">Grunnveiledning</p>
         <h2 class="h2" id="valg-tittel">Tilpasninger ved behov</h2>
-        <p class="desc">Velg område. Deretter velger du utfordring, og så får du en egen veiledning.</p>
+        <p class="desc">Velg område og følg stegene. Du får først hva du skal prøve, deretter eventuelt hjelpemiddel.</p>
 
         <div class="tile-grid" role="navigation" aria-label="Velg område">
           <button class="tile" type="button" data-target="#fot" aria-controls="fot">
@@ -728,7 +821,7 @@ details[open] .myss-chev{
       <div class="section-body">
         <p class="kicker">Tilpasninger ved behov</p>
         <h2 class="h2" id="fot-tittel">Fot</h2>
-        <p class="desc">Velg utfordringen som passer best. Du får en egen veiledning per valg.</p>
+        <p class="desc">Velg utfordringen som passer best. Hver side viser tydelig hva du prøver først, når du skal hente hjelpemiddel og når du skal stoppe.</p>
 
 <div class="sidepick" aria-label="Sidevalg før du velger utfordring">
   <p class="sidepick__title">Hvilken side påvirkes mest</p>
@@ -829,36 +922,46 @@ details[open] .myss-chev{
   <div class="section-body">
     <p class="kicker">Veiledning</p>
     <h2 class="h2" id="fot-haal-tittel">Hæl løfter seg</h2>
+    <div class="quick-summary">
+      <p>Når hælen løfter seg i bunn, blir presset ofte mindre stabilt. Start med enkleste justering før du går videre til hjelpemiddel.</p>
+    </div>
+
+    <article class="action-card action-card--primary" aria-labelledby="fot-haal-prov-forst">
+      <p class="action-label">Prøv dette først</p>
+      <h3 class="action-title" id="fot-haal-prov-forst">Juster fot og tempo før noe annet</h3>
+      <div class="action-text">
+        <ol class="steps">
+          <li>Sett føttene litt bredere med hele foten i kontakt med fotplaten.</li>
+          <li>Gå rolig ned med lett belastning.</li>
+          <li>Test én rolig repetisjon og se om hælen holder kontakt i bunn.</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="action-card action-card--aid" aria-labelledby="fot-haal-aid">
+      <p class="action-label">Aktuelt hjelpemiddel</p>
+      <h3 class="action-title" id="fot-haal-aid">Kile under hæl kan være neste steg</h3>
+      <p class="action-text">Hvis hælen fortsatt løfter seg: hent hjelpemiddel 04 i resepsjonen og test med rolig tempo.</p>
+      <div class="aid-chip-row" aria-label="Informasjon om hjelpemiddel">
+        <span class="aid-chip">Hentes i resepsjonen</span>
+        <span class="aid-chip">Behovsprøvd hjelpemiddel</span>
+      </div>
+    </article>
 
     <div class="video_shell">
       <video class="media-video" autoplay muted loop playsinline preload="metadata" controls webkit-playsinline controlslist="nodownload noplaybackrate" disablepictureinpicture>
         <source src="/assets/video/Hæl_uten_hjelpemiddel.mp4" type="video/mp4">
         Nettleseren din støtter ikke video. Du kan åpne filmen her: /assets/video/Hæl_uten_hjelpemiddel.mp4
       </video>
-    
       <button class="fs-btn" type="button" data-fs>Fullskjerm</button>
     </div>
-    <p class="hint">Se etter om hele foten har kontakt gjennom bevegelsen, spesielt i bunn.</p>
+    <p class="hint">Video: se etter om hele foten har kontakt gjennom bevegelsen, spesielt i bunn.</p>
 
-    <div class="hr"></div>
-
-    <p class="h3">Førstevalg</p>
-    <ol class="steps">
-      <li>Sett føttene litt bredere med hele foten i kontakt med fotplaten.</li>
-      <li>Gå rolig ned med lett belastning.</li>
-    </ol>
-
-    <p class="h3">Hvis hælen løfter seg i bunn</p>
-    <ol class="steps">
-      <li>Stopp. Kravet til dorsalfleksjon i ankelleddet er for stort i denne dybden.</li>
-      <li>Mobiliser ankelen i 5 minutter som forberedelse til ny repetisjon.</li>
-      <li>Test én rolig repetisjon og vurder om hælkontakten blir bedre.</li>
-    </ol>
-
-    <div class="note">
-      <strong>Viktig:</strong> Dette er generell veiledning og erstatter ikke individuell vurdering.
-      Stopp ved smerte, utrygghet, ny skade eller tydelig økning i spastisitet, og rådfør deg med fysioterapeut eller annet helsepersonell.
-    </div>
+    <article class="action-card action-card--stop" aria-labelledby="fot-haal-stopp">
+      <p class="action-label">Stopp her hvis dette skjer</p>
+      <h3 class="action-title" id="fot-haal-stopp">Avbryt settet ved tydelig faresignal</h3>
+      <p class="action-text">Stopp ved smerte, utrygghet, ny skade eller tydelig økning i spastisitet. Gå tilbake til mindre dybde og vurder oppfølging med fysioterapeut.</p>
+    </article>
 
     <details class="myss-more">
       <summary>
@@ -878,27 +981,25 @@ details[open] .myss-chev{
         </ol>
       </div>
     </details>
+    <div class="hr"></div>
+    <p class="h3">Gå videre til veiledning for hjelpemiddel</p>
+    <div class="tile-grid" role="navigation" aria-label="Velg hjelpemiddel">
+      <button class="tile" type="button" data-target="#fot-haal-kile" aria-controls="fot-haal-kile">
+        <span class="badge" aria-hidden="true">
+          <img src="/assets/img/kile.png" alt="" class="badge-icon">
+        </span>
+        <span>
+          <p class="tile-title">Hent kile under hæl (hjelpemiddel 04)</p>
+          <p class="tile-sub">Åpne egen side med trinnvis bruk og videre vurdering av behovsprøvd hjelpemiddel.</p>
+        </span>
+        <span class="chev" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
   </div>
- <div class="hr"></div>
-
-<p class="h3">Hjelpemiddel på treningssenteret</p>
-
-<div class="tile-grid" role="navigation" aria-label="Velg hjelpemiddel">
-  <button class="tile" type="button" data-target="#fot-haal-kile" aria-controls="fot-haal-kile">
-    <span class="badge" aria-hidden="true">
-      <img src="/assets/img/kile.png" alt="" class="badge-icon">
-    </span>
-    <span>
-      <p class="tile-title">Kile under hæl</p>
-      <p class="tile-sub">Reduserer kravet til dorsalfleksjon og kan gi bedre hælkontakt.</p>
-    </span>
-    <span class="chev" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 18l6-6-6-6"></path>
-      </svg>
-    </span>
-  </button>
-</div>
 </section>
    <section class="section hidden" id="fot-haal-kile"
   data-crumb="Tilpasninger ved behov · Fot · Hæl løfter seg · Kile"
@@ -946,8 +1047,11 @@ details[open] .myss-chev{
       <img src="/assets/img/hjelpemiddel-04.png" alt="" class="badge-icon">
     </span>
     <span>
-      <p class="tile-title">Hjelpemiddel 04</p>
-      <p class="tile-sub">Hentes i resepsjonen. Finnes i tre varianter.</p>
+      <p class="tile-title">Hent hjelpemiddel 04 i resepsjonen</p>
+      <p class="tile-sub">Bruk som kile under hæl. Finnes i tre varianter.</p>
+      <span class="aid-chip-row" aria-label="Type hjelpemiddel">
+        <span class="aid-chip">Hentes i resepsjonen</span>
+      </span>
     </span>
   </div>
 </div> 
@@ -956,8 +1060,11 @@ details[open] .myss-chev{
       <img src="/assets/img/behovsprovde.png" alt="" class="badge-icon">
     </span>
     <span>
-      <p class="tile-title">Behovsprøvde hjelpemiddel</p>
-      <p class="tile-sub">Se eksempler på individuelt tilpassede hjelpemiddel.</p>
+      <p class="tile-title">Vurder behovsprøvd hjelpemiddel</p>
+      <p class="tile-sub">Åpne siden for å se når individuelt tilpasset løsning kan være aktuelt.</p>
+      <span class="aid-chip-row" aria-label="Kategori hjelpemiddel">
+        <span class="aid-chip">Behovsprøvd hjelpemiddel</span>
+      </span>
     </span>
     <span class="chev" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1012,32 +1119,43 @@ details[open] .myss-chev{
   <div class="section-body">
     <p class="kicker">Veiledning</p>
     <h2 class="h2" id="fot-vridning-tittel">Vridning eller tråkker over</h2>
-    <p class="desc">
-      Vridning i foten kan handle om mer enn vanlig ustabilitet eller teknikk. For noen kan det henge sammen med ufrivillige bevegelser, økt tonus eller spastisitet i presset.
-    </p>
-
-    <h3 class="h3">Prøv dette</h3>
-    <ul class="checklist">
-      <li>Reduser vekten litt og bruk roligere tempo.</li>
-      <li>Juster fotplasseringen slik at hele foten får kontakt med platen.</li>
-      <li>Stopp litt tidligere i bunn hvis foten blir urolig.</li>
-      <li>Prøv ankelstøtte kombinert med hælkile for en enklere og mer stabil fotstilling (vises i klipp).</li>
-    </ul>
-
-    <h3 class="h3">Enkel støtte</h3>
-    <p>
-      Enkel ankelstøtte kjøpes vanligvis selv. I noen tilfeller kan individuelt tilpasset ortose være aktuelt etter faglig vurdering.
-    </p>
-
-    <div class="note">
-      <strong>Stopp signal:</strong> Stopp settet hvis vridningen øker, foten tråkker over, hælen mister kontakt eller du får smerte i fot, ankel eller kne.
+    <div class="quick-summary">
+      <p>Hvis foten vrir seg eller tråkker over, trenger du først stabilitet og kontroll. Gjør én justering om gangen og test rolig før du øker belastning.</p>
     </div>
 
-    <p>
-      <strong>Test først:</strong> Prøv én rolig repetisjon etter hver justering. Fortsett bare når foten kjennes trygg og stabil.
-    </p>
+    <article class="action-card action-card--primary" aria-labelledby="fot-vridning-prov">
+      <p class="action-label">Prøv dette først</p>
+      <h3 class="action-title" id="fot-vridning-prov">Stabiliser uten hjelpemiddel først</h3>
+      <div class="action-text">
+        <ol class="steps">
+          <li>Reduser vekten litt og bruk roligere tempo.</li>
+          <li>Juster fotplasseringen slik at hele foten får kontakt med platen.</li>
+          <li>Stopp litt tidligere i bunn hvis foten blir urolig.</li>
+        </ol>
+      </div>
+    </article>
 
-    <p class="desc">Veiledningsvideo for denne tilpasningen kommer.</p>
+    <article class="action-card action-card--aid" aria-labelledby="fot-vridning-stotte">
+      <p class="action-label">Mulig støtte</p>
+      <h3 class="action-title" id="fot-vridning-stotte">Ankelstøtte + hælkile ved behov</h3>
+      <p class="action-text">Hvis foten fortsatt vrir seg: bruk enkel ankelstøtte (kjøpes selv) og kombiner med hælkile for mer stabil fotstilling. Individuelt tilpasset ortose kan vurderes ved vedvarende behov.</p>
+      <div class="aid-chip-row" aria-label="Type støtte">
+        <span class="aid-chip">Kjøpes selv</span>
+        <span class="aid-chip">Behovsprøvd hjelpemiddel</span>
+      </div>
+    </article>
+
+    <article class="action-card action-card--stop" aria-labelledby="fot-vridning-stopp">
+      <p class="action-label">Stopp her hvis dette skjer</p>
+      <h3 class="action-title" id="fot-vridning-stopp">Avbryt ved økende vridning eller smerte</h3>
+      <p class="action-text">Stopp settet hvis vridningen øker, foten tråkker over, hælen mister kontakt eller du får smerte i fot, ankel eller kne.</p>
+    </article>
+
+    <article class="action-card" aria-labelledby="fot-vridning-video">
+      <p class="action-label">Video</p>
+      <h3 class="action-title" id="fot-vridning-video">Veiledningsvideo kommer</h3>
+      <p class="action-text">Veiledning for denne delen kommer. Inntil videre: bruk stegene over og test én rolig repetisjon etter hver justering.</p>
+    </article>
   </div>
 </section>
 
@@ -1046,8 +1164,8 @@ details[open] .myss-chev{
       <div class="section-body">
         <p class="kicker">Veiledning</p>
         <h2 class="h2" id="fot-trykk-tittel">Trykkfordeling</h2>
-        <p class="desc">Tom seksjon. Legg inn veiledningen her.</p>
-        <div class="note">Tips: hold det i ett hovedgrep. Én endring om gangen, så retest.</div>
+        <p class="desc">Veiledning for denne delen kommer.</p>
+        <div class="note">Denne delen er under utvikling. Bruk hovedprinsippet: én endring om gangen, og test én rolig repetisjon før du går videre.</div>
       </div>
     </section>
 
@@ -1056,8 +1174,8 @@ details[open] .myss-chev{
       <div class="section-body">
         <p class="kicker">Tilpasninger ved behov</p>
         <h2 class="h2" id="asym-tittel">Asymmetri</h2>
-        <p class="desc">Denne kan du gjøre to-nivå på samme måte som Fot, hvis du vil.</p>
-        <div class="note">Hvis du vil: lag tile-grid her med valg som Én side tar over og Bekken sklir.</div>
+        <p class="desc">Veiledning for denne delen kommer.</p>
+        <div class="note">Denne delen er under utvikling.</div>
       </div>
     </section>
 
@@ -1065,7 +1183,7 @@ details[open] .myss-chev{
       <div class="section-body">
         <p class="kicker">Tilpasninger ved behov</p>
         <h2 class="h2" id="grep-tittel">Grep</h2>
-        <p class="desc">Denne kan du gjøre to-nivå på samme måte som Fot, hvis du vil.</p>
+        <p class="desc">Veiledning for denne delen kommer.</p>
       </div>
     </section>
 
@@ -1073,7 +1191,7 @@ details[open] .myss-chev{
       <div class="section-body">
         <p class="kicker">Tilpasninger ved behov</p>
         <h2 class="h2" id="innut-tittel">Inn og ut av apparat</h2>
-        <p class="desc">Denne kan du gjøre to-nivå på samme måte som Fot, hvis du vil.</p>
+        <p class="desc">Veiledning for denne delen kommer.</p>
       </div>
     </section>
 
