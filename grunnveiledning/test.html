@@ -1,1 +1,1652 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Beinpress: grunnveiledning | MY STRONGEST SIDE®</title>
 
+  <style>
+    :root{
+      --myss-blue-dark:#123B63;
+      --myss-blue:#245b8f;
+      --bg:#f6f3ee;
+      --card:#ffffff;
+      --text:#1E2A3A;
+      --muted:#435366;
+      --surface-soft:#EEF4F3;
+      --surface-alt:#EDF3F8;
+      --border-soft:#C8D7E6;
+      --border-accent:#BDD3CE;
+      --warm-surface:#F3E6D6;
+      --warm-border:#D8B98F;
+      --focus:#123B63;
+
+      --radius:18px;
+      --radius-sm:14px;
+      --maxw:920px;
+
+      --shadow-soft:0 8px 22px rgba(18,59,99,0.10);
+      --shadow-hover:0 12px 28px rgba(18,59,99,0.14);
+      --tile-border:1px solid var(--border-soft);
+
+      --space-1:0.5rem;
+      --space-2:0.75rem;
+      --space-3:1rem;
+      --space-4:1.5rem;
+      --space-5:2rem;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    html, body{ width:100%; overflow-x:hidden; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 500px at 5% -10%, rgba(18,59,99,0.11), transparent 58%),
+        radial-gradient(900px 450px at 95% 0%, rgba(216,185,143,0.16), transparent 58%),
+        var(--bg);
+      -webkit-text-size-adjust:100%;
+      text-size-adjust:100%;
+      line-height:1.6;
+    }
+
+    button{ font:inherit; }
+    button, a{ -webkit-tap-highlight-color:transparent; }
+    .hidden{ display:none !important; }
+
+    .skip-link{
+      position:absolute;
+      left:-9999px;
+      top:0;
+      background:#fff;
+      color:var(--myss-blue-dark);
+      border:2px solid var(--myss-blue-dark);
+      border-radius:8px;
+      padding:0.65rem 0.85rem;
+      z-index:999;
+      font-weight:700;
+    }
+    .skip-link:focus-visible{
+      left:1rem;
+      top:1rem;
+      outline:3px solid var(--focus);
+      outline-offset:2px;
+    }
+
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding-top:0;
+      padding-bottom:56px;
+      padding-left:max(14px, env(safe-area-inset-left));
+      padding-right:max(14px, env(safe-area-inset-right));
+    }
+
+    .top{
+      margin-bottom:var(--space-3);
+      padding-top:var(--space-4);
+    }
+
+    .eyebrow{
+      margin:0;
+      color:var(--myss-blue);
+      text-transform:uppercase;
+      letter-spacing:0.06em;
+      font-size:0.84rem;
+      font-weight:800;
+    }
+
+    h1{
+      margin:0.3rem 0 0.6rem;
+      color:var(--myss-blue-dark);
+      font-size:clamp(1.6rem, 4.2vw, 2.35rem);
+      line-height:1.18;
+      letter-spacing:-0.01em;
+      text-wrap:balance;
+    }
+
+    .sub{
+      margin:0;
+      font-size:1.02rem;
+      color:var(--muted);
+      max-width:65ch;
+    }
+
+    .kicker{ color:var(--muted); font-size:14px; margin:0 0 6px; }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border-soft);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+
+    .quicklinks{
+      margin-top:var(--space-3);
+      padding:var(--space-2);
+      background:var(--surface-soft);
+      border:1px solid var(--border-soft);
+      border-radius:14px;
+    }
+
+    .quicklinks ul{
+      margin:0.35rem 0 0;
+      padding-left:1.1rem;
+    }
+
+    .quicklinks a,
+    .section a{
+      color:var(--myss-blue-dark);
+      font-weight:700;
+      text-underline-offset:0.12em;
+    }
+
+    .quicklinks a:hover,
+    .section a:hover{
+      color:#0f2f4f;
+    }
+
+    .video-shell,
+    .video_shell{
+      position:relative;
+      background:#0b1220;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--border-soft);
+      box-shadow:var(--shadow-soft);
+    }
+
+    video,
+    .section video.media-video{
+      display:block;
+      width:100%;
+      height:auto;
+      background:#0b1220;
+      max-height:72vh;
+      object-fit:cover;
+    }
+
+    .video-meta{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:var(--space-1);
+      padding:0.55rem 0.9rem;
+      background:#152639;
+      color:#e7eef5;
+      border-top:1px solid rgba(231,238,245,0.25);
+      font-size:0.92rem;
+    }
+
+    .video-status{
+      display:none;
+      align-items:center;
+      gap:0.35rem;
+      font-weight:700;
+      color:#f3e6d6;
+    }
+
+    .content{ padding:var(--space-4); }
+
+    .section{
+      margin-top:14px;
+      background:var(--card);
+      border:var(--tile-border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      scroll-margin-top:86px;
+    }
+
+    .content > .section{
+      margin-top:var(--space-4);
+      padding-top:0;
+      border-top:0;
+      box-shadow:none;
+      border:none;
+      background:transparent;
+      border-radius:0;
+    }
+
+    .section:first-child{
+      margin-top:0;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:5;
+      background:rgba(246,243,238,0.88);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border-soft);
+      padding-top:10px;
+      padding-bottom:10px;
+      padding-left:max(12px, env(safe-area-inset-left));
+      padding-right:max(12px, env(safe-area-inset-right));
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      margin-bottom:var(--space-4);
+    }
+
+    .backbtn{
+      appearance:none;
+      border:1px solid var(--border-soft);
+      background:var(--surface-alt);
+      color:var(--myss-blue-dark);
+      border-radius:999px;
+      padding:8px 10px;
+      font-weight:600;
+      cursor:pointer;
+      transition:background 160ms ease, border-color 160ms ease;
+      touch-action:manipulation;
+      flex:0 0 auto;
+    }
+
+    .backbtn:hover{
+      background:var(--surface-soft);
+      border-color:var(--border-accent);
+    }
+
+    .crumb{
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      flex:1 1 auto;
+      min-width:0;
+    }
+
+    .section-body{ padding:14px 14px 16px; }
+
+    .h2,
+    h2{
+      margin:2px 0 6px;
+      font-size:clamp(1.15rem, 2.4vw, 1.35rem);
+      letter-spacing:-0.02em;
+      color:var(--myss-blue-dark);
+      line-height:1.3;
+    }
+
+    .h3,
+    h3{
+      margin:14px 0 8px;
+      font-size:1.02rem;
+      letter-spacing:-0.01em;
+      color:var(--myss-blue-dark);
+    }
+
+    .desc,
+    .lead{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:15px;
+      max-width:70ch;
+    }
+
+    p, li{ font-size:1rem; color:var(--text); }
+
+    .badge-note,
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:0.45rem;
+      margin-top:var(--space-2);
+      border-radius:999px;
+      border:1px solid var(--warm-border);
+      background:var(--warm-surface);
+      color:#5f4122;
+      padding:0.45rem 0.7rem;
+      font-size:0.9rem;
+      font-weight:600;
+    }
+
+    .note{
+      border-radius:var(--radius-sm);
+      border:1px solid var(--border-soft);
+      background:var(--surface-alt);
+      padding:12px;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .progress-box{
+      margin-top:var(--space-2);
+      padding:0.95rem 1rem;
+      border-radius:14px;
+      border:1px solid var(--border-accent);
+      background:var(--surface-soft);
+    }
+
+    .info-grid{
+      display:grid;
+      gap:var(--space-2);
+      margin-top:var(--space-2);
+      grid-template-columns:1fr;
+    }
+
+    .info-card{
+      border-radius:14px;
+      border:1px solid var(--border-soft);
+      background:#f8fbfb;
+      padding:0.95rem;
+    }
+
+    .guide-list,
+    .sources,
+    .detail-list,
+    .steps,
+    .checklist{
+      margin:0.75rem 0 0;
+      padding-left:1.25rem;
+    }
+
+    .guide-list li,
+    .detail-list li,
+    .steps li,
+    .checklist li{
+      margin-bottom:0.45rem;
+    }
+
+    .hr{
+      height:1px;
+      background:var(--border-soft);
+      margin:14px 0;
+    }
+
+    details,
+    details.myss-more{
+      margin-top:12px;
+      border-radius:var(--radius-sm);
+      border:1px solid var(--border-accent);
+      background:var(--surface-soft);
+      overflow:hidden;
+    }
+
+    summary,
+    details.myss-more > summary{
+      list-style:none;
+      cursor:pointer;
+      padding:12px 12px;
+      font-weight:700;
+      color:var(--myss-blue-dark);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      user-select:none;
+    }
+
+    summary::-webkit-details-marker,
+    details.myss-more > summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .chev,
+    .myss-chev{
+      width:20px;
+      height:20px;
+      flex:0 0 20px;
+      opacity:0.9;
+      transform:rotate(0deg);
+      transition:transform 160ms ease;
+    }
+
+    details[open] .chev,
+    details[open] .myss-chev{
+      transform:rotate(180deg);
+    }
+
+    .details-content,
+    .myss-more__content{
+      padding:0 12px 12px;
+      color:var(--text);
+      line-height:1.45;
+      font-size:15px;
+    }
+
+    .figure{
+      margin:1rem 0 0;
+      border-radius:14px;
+      border:1px solid var(--border-soft);
+      background:#fff;
+      overflow:hidden;
+    }
+
+    .figure img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    .figure figcaption{
+      margin:0;
+      background:#f8fbfb;
+      padding:0.75rem 0.9rem;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    .action-row{ margin-top:var(--space-4); }
+
+    .btn,
+    .link-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:1rem;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform 100ms ease, box-shadow 100ms ease, background-color 120ms ease;
+      min-height:44px;
+      min-width:44px;
+    }
+
+    .link-btn{
+      padding:0.7rem 1.05rem;
+      border:1px solid var(--border-soft);
+      background:var(--surface-alt);
+      color:var(--myss-blue-dark);
+    }
+
+    .link-btn:hover{ transform:translateY(-1px); }
+    .link-btn:active{ transform:translateY(0); }
+
+    .gate{
+      position:fixed;
+      inset:0;
+      z-index:50;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(2,6,23,0.74);
+      padding:var(--space-3);
+    }
+
+    .gate-card{
+      width:min(560px, 100%);
+      border-radius:18px;
+      border:1px solid var(--border-soft);
+      background:#fff;
+      padding:1rem;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .gate-title{
+      margin:0;
+      font-size:1.15rem;
+      color:var(--myss-blue-dark);
+    }
+
+    .gate-text{
+      margin:0.5rem 0 0.9rem;
+      color:var(--muted);
+    }
+
+    .btnrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.6rem;
+    }
+
+    .btn{
+      border:1px solid transparent;
+      padding:0.68rem 1rem;
+    }
+
+    .btn-primary{
+      background:var(--myss-blue);
+      color:#fff;
+    }
+
+    .btn-secondary{
+      background:var(--surface-soft);
+      color:var(--myss-blue-dark);
+      border-color:var(--border-accent);
+    }
+
+    .tile-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .tile{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      width:100%;
+      text-align:left;
+      padding:14px 14px;
+      border-radius:var(--radius);
+      background:var(--card);
+      border:var(--tile-border);
+      box-shadow:var(--shadow-soft);
+      cursor:pointer;
+      transition:transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      color:inherit;
+      touch-action:manipulation;
+    }
+
+    .tile:hover{
+      transform:translateY(-1px);
+      box-shadow:var(--shadow-hover);
+      border-color:#acc2d6;
+    }
+
+    .tile:active{ transform:translateY(0px); }
+    .tile > span:nth-of-type(2){ min-width:0; }
+
+    .badge-box{
+      flex:0 0 auto;
+      width:40px;
+      height:40px;
+      border-radius:14px;
+      background:var(--surface-soft);
+      border:1px solid var(--border-accent);
+      display:grid;
+      place-items:center;
+    }
+
+    .badge-icon{ width:32px; height:32px; display:block; max-width:100%; }
+
+    .badge-box svg{
+      width:30px;
+      height:30px;
+      stroke:var(--myss-blue);
+      stroke-width:2.6;
+    }
+
+    .badge-box img{
+      width:34px;
+      height:34px;
+      display:block;
+    }
+
+    .tile-title{
+      font-weight:700;
+      margin:0;
+      font-size:16px;
+      letter-spacing:-0.01em;
+    }
+
+    .tile-sub{
+      margin:3px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .chev-right{
+      margin-left:auto;
+      margin-top:2px;
+      color:rgba(30,42,58,0.4);
+      flex:0 0 auto;
+    }
+
+    .chev-right svg{
+      width:18px;
+      height:18px;
+      stroke:rgba(30,42,58,0.45);
+    }
+
+    .sidepick{
+      margin:10px 0 14px;
+      padding:12px;
+      border-radius:var(--radius-sm);
+      border:1px solid var(--border-soft);
+      background:var(--surface-alt);
+    }
+
+    .sidepick__title{
+      margin:0 0 6px;
+      font-weight:800;
+      color:var(--myss-blue-dark);
+      font-size:16px;
+      letter-spacing:-0.01em;
+    }
+
+    .sidepick__lead{
+      margin:0 0 10px;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:14px;
+    }
+
+    .sidegrid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin:0;
+    }
+
+    .sidebtn{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      width:100%;
+      text-align:left;
+      padding:12px 12px;
+      border-radius:16px;
+      background:var(--card);
+      border:1px solid var(--border-soft);
+      box-shadow:var(--shadow-soft);
+      cursor:pointer;
+      transition:transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      color:inherit;
+      touch-action:manipulation;
+    }
+
+    .sidebtn:hover{
+      transform:translateY(-1px);
+      box-shadow:var(--shadow-hover);
+      border-color:#acc2d6;
+    }
+
+    .sidebtn[aria-pressed="true"]{
+      border-color:var(--myss-blue);
+      box-shadow:0 0 0 3px rgba(189,211,206,0.55), var(--shadow-soft);
+    }
+
+    .sidebtn__t{
+      font-weight:800;
+      margin:0;
+      font-size:15px;
+      letter-spacing:-0.01em;
+    }
+
+    .sidebtn__d{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.35;
+    }
+
+    .sidepick__status{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .tile.aid-tile{ align-items:center; }
+    .tile.aid-tile .badge-box{
+      width:160px;
+      height:160px;
+      flex:0 0 160px;
+      border-radius:24px;
+    }
+    .tile.aid-tile .badge-box img,
+    .tile.aid-tile .badge-box img.badge-icon{
+      width:140px;
+      height:140px;
+      object-fit:contain;
+    }
+
+    .hint{
+      margin:.6rem 0 0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .with-icon{ display:flex; align-items:center; gap:.5rem; }
+    .inline-icon{ width:28px; height:28px; flex:0 0 28px; display:block; }
+
+    .why{
+      font-size:15px;
+      line-height:1.45;
+      color:var(--muted);
+      margin:6px 0 10px;
+    }
+
+    .no-copy, .no-copy *{
+      -webkit-user-select:none;
+      user-select:none;
+      -webkit-touch-callout:none;
+    }
+
+    .fs-btn{
+      position:absolute;
+      right:10px;
+      bottom:10px;
+      z-index:3;
+      appearance:none;
+      border:1px solid rgba(255,255,255,0.35);
+      background:rgba(0,0,0,0.45);
+      color:#fff;
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:700;
+      font-size:14px;
+      line-height:1;
+      cursor:pointer;
+    }
+
+    .site-footer{
+      max-width:920px;
+      margin:0 auto 1.4rem;
+      padding:0 var(--space-3);
+    }
+
+    .site-footer__text{
+      margin:0;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    :focus-visible{
+      outline:3px solid var(--focus);
+      outline-offset:2px;
+    }
+
+    @media (min-width:720px){
+      .tile-grid{ grid-template-columns:1fr 1fr; gap:14px; }
+      .sidegrid{ grid-template-columns:1fr 1fr 1fr; }
+      .info-grid{ grid-template-columns:1fr 1fr; }
+    }
+
+    @media (max-width:640px){
+      body{ font-size:18px; }
+      .wrap{
+        padding-bottom:40px;
+        padding-left:max(12px, env(safe-area-inset-left));
+        padding-right:max(12px, env(safe-area-inset-right));
+      }
+      video,
+      .section video.media-video{
+        max-height:52vh;
+      }
+      .tile{
+        align-items:center;
+        gap:14px;
+        padding:16px 16px;
+      }
+      .badge-box{
+        width:72px;
+        height:72px;
+        flex:0 0 72px;
+        border-radius:18px;
+      }
+      .badge-box img,
+      .badge-box img.badge-icon{
+        width:48px;
+        height:48px;
+      }
+      .badge-box svg{
+        width:46px;
+        height:46px;
+      }
+      .tile-title{ font-size:19px; line-height:1.15; }
+      .tile-sub{ font-size:16px; line-height:1.3; margin-top:6px; }
+      .section-body{ padding:16px 16px 18px; }
+      .desc, .lead{ font-size:16px; max-width:none; }
+      .tile.aid-tile{ align-items:flex-start; }
+      .tile.aid-tile .badge-box{
+        width:176px;
+        height:176px;
+        flex:0 0 176px;
+        border-radius:26px;
+      }
+      .tile.aid-tile .badge-box img,
+      .tile.aid-tile .badge-box img.badge-icon{
+        width:156px;
+        height:156px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      *, *::before, *::after{
+        animation-duration:0.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:0.01ms !important;
+      }
+      .tile:hover,
+      .sidebtn:hover,
+      .link-btn:hover{ transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Hopp til hovedinnhold</a>
+
+  <main class="wrap no-copy" id="main-content">
+    <header class="top">
+      <p class="eyebrow">Grunnveiledning · MY STRONGEST SIDE®</p>
+      <h1>Beinpress: grunnveiledning</h1>
+      <p class="sub">Trygg og enkel innføring i beinpress, med rolig progresjon og forutsigbar struktur.</p>
+
+      <nav class="quicklinks" aria-label="Hurtiglenker">
+        <strong>Hurtiglenker</strong>
+        <ul>
+          <li><a href="#treningsguide">Kort treningsguide</a></li>
+          <li><a href="#forklaring">Faglig forklaring</a></li>
+          <li><a href="#tilpasninger-start">Tilpasninger ved behov</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <article class="card" aria-labelledby="video-title">
+      <section class="video-shell" aria-label="Video med grunnveiledning">
+        <h2 id="video-title" class="hidden">Video: grunnveiledning i beinpress</h2>
+        <video id="introVideo" playsinline preload="metadata" controls aria-describedby="video-help video-status">
+          <source src="/assets/video/MY_BEINPRESS.mp4" type="video/mp4" />
+          Nettleseren din støtter ikke videoavspilling.
+        </video>
+        <div class="video-meta">
+          <span id="video-help">Tips: Start rolig og hold korsryggen stabilt mot ryggplaten gjennom hele bevegelsen.</span>
+          <span id="video-status" class="video-status" role="status" aria-live="polite">🔇 Spiller uten lyd</span>
+        </div>
+      </section>
+
+      <div class="content">
+        <section class="section" aria-labelledby="startpunkt">
+          <div class="section-body">
+            <h2 id="startpunkt">Startpunkt</h2>
+            <p class="lead">Denne videoen viser en enkel grunninnstilling for beinpress. Hold tempoet kontrollert og prioriter trygg teknikk før du øker belastningen.</p>
+            <p class="badge-note" role="note" aria-label="Sikkerhetstips">💡 Avslutt settet hvis teknikken glipper eller du kjenner uvanlig smerte.</p>
+            <h3>Viktig teknikk</h3>
+            <p>Hold korsryggen stabilt mot ryggplaten gjennom hele bevegelsen.</p>
+          </div>
+        </section>
+
+        <section id="treningsguide" class="section" aria-labelledby="treningsguide-title">
+          <div class="section-body">
+            <h2 id="treningsguide-title">Kort treningsguide</h2>
+            <div class="progress-box" role="note" aria-label="Viktig treningsinformasjon">
+              <ul class="guide-list">
+                <li><strong>Oppvarming:</strong> 1–2 lette sett før arbeidssettene.</li>
+                <li><strong>Arbeidssett:</strong> Start med 3 sett som et godt utgangspunkt.</li>
+                <li><strong>Repetisjoner:</strong> 6–12 kontrollerte repetisjoner per sett.</li>
+                <li><strong>Progresjon:</strong> Når du klarer 12 repetisjoner i alle 3 sett med god kontroll, øk vekten litt.</li>
+                <li><strong>Ny belastning:</strong> Etter vektøkning starter du gjerne rundt 6–8 repetisjoner og bygger deg opp igjen.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="forklaring" class="section" aria-labelledby="forklaring-title">
+          <div class="section-body">
+            <h2 id="forklaring-title">Faglig forklaring</h2>
+            <div class="info-grid" aria-label="Hva du trener og overføringsverdi i hverdagen">
+              <article class="info-card">
+                <h3>Hva trener du?</h3>
+                <p>Beinpress trener først og fremst <strong>fremside lår</strong> og <strong>setemuskulatur</strong>.</p>
+              </article>
+
+              <article class="info-card">
+                <h3>Overføringsverdi i hverdagen</h3>
+                <p>Øvelsen kan bidra til bedre styrke når du skal <strong>reise deg fra stol</strong>, <strong>gå i trapper</strong> og stå mer stabilt over tid.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="mer-kunnskap">
+          <div class="section-body">
+            <h2 id="mer-kunnskap">Mer kunnskap</h2>
+            <details>
+              <summary>
+                Vis utdypende veiledning
+                <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+
+              <div class="details-content">
+                <h3>Fotplassering</h3>
+                <ul class="detail-list">
+                  <li>Høyere fotplassering gir ofte relativt mer belastning på setemuskulaturen.</li>
+                  <li>Lavere fotplassering gir ofte mer arbeid for fremside lår.</li>
+                  <li>Hold hele foten i kontakt med platen med jevnt trykk, uten at hælen løfter seg.</li>
+                </ul>
+
+                <h3>Bevegelsesutslag</h3>
+                <p>Et større bevegelsesutslag kan gi god muskelaktivering, men kontroll og stabil kontakt med ryggplaten skal alltid prioriteres.</p>
+
+                <h3>Aktive muskler</h3>
+                <ul class="detail-list">
+                  <li><strong>Primært:</strong> Quadriceps femoris og gluteus maximus.</li>
+                  <li><strong>Støtte:</strong> Hamstrings, adduktorer, gastrocnemius og soleus.</li>
+                  <li><strong>Indirekte:</strong> Ryggstrekkerne, fordi overkroppen er støttet.</li>
+                </ul>
+
+                <figure class="figure" aria-label="Illustrasjon av aktive muskler i sittende beinpress">
+                  <img src="/assets/img/beinpress-muskler.png" alt="Illustrasjon av primære og sekundære muskelgrupper i sittende beinpress" loading="lazy" />
+                  <figcaption>Illustrasjonen viser typisk muskelbruk i sittende beinpress. Fotplassering og dybde kan påvirke hvilke muskler som belastes mest.</figcaption>
+                </figure>
+
+                <h3>Kilder</h3>
+                <ul class="sources">
+                  <li>American College of Sports Medicine (2009). Progression models in resistance training for healthy adults.</li>
+                  <li>Schoenfeld, Ogborn &amp; Krieger (2017). Dose-response relationship between weekly resistance training volume and muscle mass.</li>
+                  <li>Schoenfeld et al. (2021). Resistance training range of motion and skeletal muscle hypertrophy.</li>
+                </ul>
+                <p>Kildene over støtter sentrale prinsipper for progresjon, treningsvolum og bevegelsesutslag i styrketrening.</p>
+
+                <h3>Sko og klær</h3>
+                <ul class="detail-list">
+                  <li>Velg flate og stabile sko for bedre kraftoverføring.</li>
+                  <li>Unngå myke løpesko hvis foten blir urolig mot platen.</li>
+                  <li>Velg klær som gir fri bevegelse i hofter og knær, og som sitter stabilt i setet.</li>
+                </ul>
+
+                <h3>Valgfritt utstyr</h3>
+                <ul class="detail-list">
+                  <li>Belte kan gi bedre kroppskontroll for noen, men er ikke nødvendig.</li>
+                  <li>Knevarmere kan gi økt komfort dersom knærne oppleves stive eller kalde.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section id="tilpasninger-start" class="section action-row" aria-labelledby="tilpasninger-title">
+          <div class="section-body">
+            <h2 id="tilpasninger-title">Tilpasninger ved behov</h2>
+            <p>Trenger du alternativer på grunn av smerter, bevegelighet eller utstyr? Se egne tilpasninger for beinpress.</p>
+            <a href="#valg" class="link-btn" aria-describedby="tilpasning-hjelp"><strong>Åpne tilpasninger</strong></a>
+            <p id="tilpasning-hjelp" class="sub">Under finner du konkrete forslag til tilpasninger av teknikk, fotplassering og bevegelsesutslag.</p>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <div class="topbar" id="globalTopbar">
+      <button class="backbtn hidden" id="globalBack" type="button" aria-label="Tilbake">Tilbake</button>
+      <div class="crumb" id="globalCrumb">Tilpasninger ved behov</div>
+    </div>
+
+    <section class="section" id="valg" data-crumb="Tilpasninger ved behov" data-parent="" aria-labelledby="valg-tittel">
+      <div class="section-body">
+        <p class="kicker">Grunnveiledning</p>
+        <h2 class="h2" id="valg-tittel">Tilpasninger ved behov</h2>
+        <p class="desc">Velg område. Deretter velger du utfordring, og så får du en egen veiledning.</p>
+
+        <div class="tile-grid" role="navigation" aria-label="Velg område">
+          <button class="tile" type="button" data-target="#fot" aria-controls="fot">
+            <span class="badge-box" aria-hidden="true">
+              <img src="/assets/img/fotikon.png" alt="" class="badge-icon">
+            </span>
+            <span>
+              <p class="tile-title">Fot</p>
+              <p class="tile-sub">Fotplassering, hæl som løfter seg, vridning, trykkfordeling.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#asymmetri" aria-controls="asymmetri">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18"></path>
+                <path d="M7 7h10"></path>
+                <path d="M6 7l-3 6h6l-3-6z"></path>
+                <path d="M18 7l-3 6h6l-3-6z"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Asymmetri</p>
+              <p class="tile-sub">Når én side jobber mindre, eller du blir skjev i setet.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#grep" aria-controls="grep">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 22v-7"></path>
+                <path d="M11 22v-9"></path>
+                <path d="M15 22v-8"></path>
+                <path d="M19 22v-10"></path>
+                <path d="M5 15c0-2 2-3 4-3h10c2 0 4 1 4 3v1c0 3-2 6-5 6H10c-3 0-5-3-5-6v-1z"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Grep</p>
+              <p class="tile-sub">Lik rekkevidde, unngå at sterk hånd drar deg skjevt.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#innut" aria-controls="innut">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 17l-5-5 5-5"></path>
+                <path d="M5 12h14"></path>
+                <path d="M14 7l5 5-5 5"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Inn og ut av apparat</p>
+              <p class="tile-sub">Trygg startposisjon, stabil rygg, enkel rutine.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="fot" data-crumb="Tilpasninger ved behov · Fot" data-parent="#valg" aria-labelledby="fot-tittel">
+      <div class="section-body">
+        <p class="kicker">Tilpasninger ved behov</p>
+        <h2 class="h2" id="fot-tittel">Fot</h2>
+        <p class="desc">Velg utfordringen som passer best. Du får en egen veiledning per valg.</p>
+
+        <div class="sidepick" aria-label="Sidevalg før du velger utfordring">
+          <p class="sidepick__title">Hvilken side påvirkes mest</p>
+          <p class="sidepick__lead">Valget brukes kun til å vise mer relevant veiledning nå, og lagres ikke som helseopplysninger.</p>
+
+          <div class="sidegrid" role="group" aria-label="Velg side">
+            <button class="sidebtn" type="button" data-side="right" aria-pressed="false">
+              <span>
+                <p class="sidebtn__t">Mest på høyre side</p>
+                <p class="sidebtn__d">Vi viser tips for høyre side</p>
+              </span>
+            </button>
+
+            <button class="sidebtn" type="button" data-side="left" aria-pressed="false">
+              <span>
+                <p class="sidebtn__t">Mest på venstre side</p>
+                <p class="sidebtn__d">Vi viser tips for venstre side</p>
+              </span>
+            </button>
+
+            <button class="sidebtn" type="button" data-side="general" aria-pressed="false">
+              <span>
+                <p class="sidebtn__t">Usikker</p>
+                <p class="sidebtn__d">Vis generell tilrettelegging</p>
+              </span>
+            </button>
+          </div>
+
+          <p id="sideStatus" class="sidepick__status" aria-live="polite">Valgt: Usikker</p>
+        </div>
+
+        <div class="tile-grid" role="navigation" aria-label="Velg utfordring for fot">
+          <button class="tile" type="button" data-target="#fot-haal" aria-controls="fot-haal">
+            <span class="badge-box" aria-hidden="true">
+              <img src="/assets/img/hælikon.png" alt="" class="badge-icon">
+            </span>
+            <span>
+              <p class="tile-title">Hæl løfter seg</p>
+              <p class="tile-sub">Når hælen mister kontakt, eller du havner i spissfot.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#fot-vridning" aria-controls="fot-vridning">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12c3-6 13-6 16 0"></path>
+                <path d="M4 12c3 6 13 6 16 0"></path>
+                <path d="M12 8v8"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Vridning eller tråkker over</p>
+              <p class="tile-sub">Når foten tipper, vrir seg, eller du mister stabilt trykk.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+
+          <button class="tile" type="button" data-target="#fot-trykk" aria-controls="fot-trykk">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 20h10"></path>
+                <path d="M8 16c1-3 7-3 8 0"></path>
+                <path d="M9 12c1-2 5-2 6 0"></path>
+                <path d="M10 8c1-1 3-1 4 0"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Trykkfordeling</p>
+              <p class="tile-sub">Når du kjenner trykk mest på utside, innside eller forfot.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="fot-haal" data-crumb="Tilpasninger ved behov · Fot · Hæl løfter seg" data-parent="#fot" aria-labelledby="fot-haal-tittel">
+      <div class="section-body">
+        <p class="kicker">Veiledning</p>
+        <h2 class="h2" id="fot-haal-tittel">Hæl løfter seg</h2>
+
+        <div class="video_shell">
+          <video class="media-video" autoplay muted loop playsinline preload="metadata" controls webkit-playsinline controlslist="nodownload noplaybackrate" disablepictureinpicture>
+            <source src="/assets/video/Hæl_uten_hjelpemiddel.mp4" type="video/mp4">
+            Nettleseren din støtter ikke video. Du kan åpne filmen her: /assets/video/Hæl_uten_hjelpemiddel.mp4
+          </video>
+          <button class="fs-btn" type="button" data-fs>Fullskjerm</button>
+        </div>
+
+        <p class="hint">Se etter om hele foten har kontakt gjennom bevegelsen, spesielt i bunn.</p>
+
+        <div class="hr"></div>
+
+        <p class="h3">Førstevalg</p>
+        <ol class="steps">
+          <li>Sett føttene litt bredere med hele foten i kontakt med fotplaten.</li>
+          <li>Gå rolig ned med lett belastning.</li>
+        </ol>
+
+        <p class="h3">Hvis hælen løfter seg i bunn</p>
+        <ol class="steps">
+          <li>Stopp. Kravet til dorsalfleksjon i ankelleddet er for stort i denne dybden.</li>
+          <li>Mobiliser ankelen i 5 minutter som forberedelse til ny repetisjon.</li>
+          <li>Test én rolig repetisjon og vurder om hælkontakten blir bedre.</li>
+        </ol>
+
+        <div class="note">
+          <strong>Viktig:</strong> Dette er generell veiledning og erstatter ikke individuell vurdering.
+          Stopp ved smerte, utrygghet, ny skade eller tydelig økning i spastisitet, og rådfør deg med fysioterapeut eller annet helsepersonell.
+        </div>
+
+        <details class="myss-more">
+          <summary>
+            Hvorfor dette er relevant ved CP og kilder
+            <svg class="myss-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </summary>
+          <div class="myss-more__content">
+            <p class="desc">
+              Redusert dorsalfleksjon og spissfotstilling er vanlig ved CP. Økt spastisitet i gastrosoleus er assosiert med redusert passiv dorsalfleksjon i ankelleddet over tid. I treningssituasjon kan enkel ankelmobilitet brukes som oppvarming før øvelsen. Test deretter én rolig repetisjon for å se om hælkontakten blir bedre innenfor tilgjengelig leddutslag.
+            </p>
+            <ol class="sources">
+              <li>Zahran DAE, Bahr WM, Abd Elazim FH. Exercise training for equinus deformity in children with cerebral palsy. <em>Bull Fac Phys Ther</em>. 2022;27:37.</li>
+              <li>Hägglund G, Wagner P. Spasticity of the gastrosoleus muscle is related to reduced passive dorsiflexion in children with cerebral palsy. <em>Acta Orthop</em>. 2011;82(6):744-748.</li>
+              <li>Youn PS, Cho KH, Park SJ. Ankle mobilization by manual therapy in children with bilateral spastic cerebral palsy. <em>Children</em>. 2020;7(9):142.</li>
+            </ol>
+          </div>
+        </details>
+
+        <div class="hr"></div>
+
+        <p class="h3">Hjelpemiddel på treningssenteret</p>
+
+        <div class="tile-grid" role="navigation" aria-label="Velg hjelpemiddel">
+          <button class="tile" type="button" data-target="#fot-haal-kile" aria-controls="fot-haal-kile">
+            <span class="badge-box" aria-hidden="true">
+              <img src="/assets/img/kile.png" alt="" class="badge-icon">
+            </span>
+            <span>
+              <p class="tile-title">Kile under hæl</p>
+              <p class="tile-sub">Reduserer kravet til dorsalfleksjon og kan gi bedre hælkontakt.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="fot-haal-kile" data-crumb="Tilpasninger ved behov · Fot · Hæl løfter seg · Kile" data-parent="#fot-haal" aria-labelledby="fot-haal-kile-tittel">
+      <div class="section-body">
+        <p class="kicker">Veiledning</p>
+        <h2 class="h2" id="fot-haal-kile-tittel">Kile under hæl</h2>
+
+        <div class="video_shell">
+          <video class="media-video" autoplay muted loop playsinline preload="metadata" controls webkit-playsinline controlslist="nodownload noplaybackrate" disablepictureinpicture>
+            <source src="/assets/video/kile_hael.mp4" type="video/mp4">
+            Nettleseren din støtter ikke video. Du kan åpne filmen her: /assets/video/kile_hael.mp4
+          </video>
+          <button class="fs-btn" type="button" data-fs>Fullskjerm</button>
+        </div>
+
+        <div>
+          <h3 class="with-icon">
+            <img src="/assets/img/hælikon.png" alt="" class="inline-icon">
+            Hæl løfter seg
+          </h3>
+
+          <p class="why">
+            En hælkile reduserer kravet til dorsalfleksjon i ankelen. Det kan gjøre det lettere å holde hælen i kontakt,
+            få jevn kraft gjennom foten og jobbe med bedre kontroll.
+          </p>
+
+          <ol class="steps">
+            <li>Plasser kilen under hælen og la resten av foten ligge stabilt mot platen.</li>
+            <li>Start med lav belastning og rolig tempo.</li>
+            <li>Velg en dybde der du beholder jevn fotkontakt og føler deg trygg.</li>
+            <li>Tempo: ned 1 2 3, hold 1, opp 1 2.</li>
+            <li>Stopp ved smerte, utrygghet eller tydelig økning i spastisitet, og gå tilbake til mindre dybde.</li>
+          </ol>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="tile-grid" role="group" aria-label="Hjelpemiddel 04">
+          <div class="tile aid-tile" role="note" aria-label="Hjelpemiddel 04, hentes i resepsjonen">
+            <span class="badge-box" aria-hidden="true">
+              <img src="/assets/img/hjelpemiddel-04.png" alt="" class="badge-icon">
+            </span>
+            <span>
+              <p class="tile-title">Hjelpemiddel 04</p>
+              <p class="tile-sub">Hentes i resepsjonen. Finnes i tre varianter.</p>
+            </span>
+          </div>
+        </div>
+
+        <div class="tile-grid">
+          <button class="tile" type="button" data-target="#behovsprovde-hjelpemiddel" aria-controls="behovsprovde-hjelpemiddel">
+            <span class="badge-box" aria-hidden="true">
+              <img src="/assets/img/behovsprovde.png" alt="" class="badge-icon">
+            </span>
+            <span>
+              <p class="tile-title">Behovsprøvde hjelpemiddel</p>
+              <p class="tile-sub">Se eksempler på individuelt tilpassede hjelpemiddel.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <div class="note">
+          <strong>Prinsipp:</strong> Én endring om gangen, og så retest med én rolig repetisjon.
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="behovsprovde-hjelpemiddel" data-crumb="Tilpasninger ved behov · Fot · Hæl løfter seg · Behovsprøvd hjelpemiddel" data-parent="#fot-haal-kile" aria-labelledby="behovsprovde-tittel">
+      <div class="section-body">
+        <p class="kicker">Informasjon</p>
+        <h2 class="h2" id="behovsprovde-tittel">Behovsprøvd hjelpemiddel</h2>
+
+        <div class="video_shell">
+          <video class="media-video" autoplay muted loop playsinline preload="metadata" controls webkit-playsinline controlslist="nodownload noplaybackrate" disablepictureinpicture>
+            <source src="/assets/video/behov.mp4" type="video/mp4">
+            Nettleseren din støtter ikke video.
+          </video>
+          <button class="fs-btn" type="button" data-fs>Fullskjerm</button>
+        </div>
+
+        <p class="desc">
+          Dette er ikke hjelpemidler du kan låne på treningssenteret. Her viser vi eksempler på hjelpemidler som kan være aktuelle for noen, basert på individuelle behov.
+        </p>
+
+        <p class="desc">
+          Slike hjelpemidler vurderes vanligvis av ortopediteknisk verksted i samarbeid med relevant helsepersonell, ofte som del av en tverrfaglig vurdering.
+        </p>
+
+        <p class="desc">
+          For mer informasjon og oversikt, se <a href="https://www.nav.no/ortopediskesko">ortopediske verksteder</a>.
+        </p>
+
+        <div class="note">
+          <strong>Merk:</strong> Informasjonen på Nav kan endre seg. Bruk lenken over for oppdatert oversikt og forklaringer.
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="fot-vridning" data-crumb="Tilpasninger ved behov · Fot · Vridning" data-parent="#fot" aria-labelledby="fot-vridning-tittel">
+      <div class="section-body">
+        <p class="kicker">Veiledning</p>
+        <h2 class="h2" id="fot-vridning-tittel">Vridning eller tråkker over</h2>
+        <p class="desc">
+          Vridning i foten kan handle om mer enn vanlig ustabilitet eller teknikk. For noen kan det henge sammen med ufrivillige bevegelser, økt tonus eller spastisitet i presset.
+        </p>
+
+        <h3 class="h3">Prøv dette</h3>
+        <ul class="checklist">
+          <li>Reduser vekten litt og bruk roligere tempo.</li>
+          <li>Juster fotplasseringen slik at hele foten får kontakt med platen.</li>
+          <li>Stopp litt tidligere i bunn hvis foten blir urolig.</li>
+          <li>Prøv ankelstøtte kombinert med hælkile for en enklere og mer stabil fotstilling.</li>
+        </ul>
+
+        <h3 class="h3">Enkel støtte</h3>
+        <p>
+          Enkel ankelstøtte kjøpes vanligvis selv. I noen tilfeller kan individuelt tilpasset ortose være aktuelt etter faglig vurdering.
+        </p>
+
+        <div class="note">
+          <strong>Stopp signal:</strong> Stopp settet hvis vridningen øker, foten tråkker over, hælen mister kontakt eller du får smerte i fot, ankel eller kne.
+        </div>
+
+        <p><strong>Test først:</strong> Prøv én rolig repetisjon etter hver justering. Fortsett bare når foten kjennes trygg og stabil.</p>
+
+        <p class="desc">Veiledningsvideo for denne tilpasningen kommer.</p>
+      </div>
+    </section>
+
+    <section class="section hidden" id="fot-trykk" data-crumb="Tilpasninger ved behov · Fot · Trykkfordeling" data-parent="#fot" aria-labelledby="fot-trykk-tittel">
+      <div class="section-body">
+        <p class="kicker">Veiledning</p>
+        <h2 class="h2" id="fot-trykk-tittel">Trykkfordeling</h2>
+        <p class="desc">Tom seksjon. Legg inn veiledningen her.</p>
+        <div class="note">Tips: hold det i ett hovedgrep. Én endring om gangen, så retest.</div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="asymmetri" data-crumb="Tilpasninger ved behov · Asymmetri" data-parent="#valg" aria-labelledby="asym-tittel">
+      <div class="section-body">
+        <p class="kicker">Tilpasninger ved behov</p>
+        <h2 class="h2" id="asym-tittel">Asymmetri</h2>
+        <p class="desc">Denne kan du gjøre to-nivå på samme måte som Fot, hvis du vil.</p>
+        <div class="note">Hvis du vil: lag tile-grid her med valg som Én side tar over og Bekken sklir.</div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="grep" data-crumb="Tilpasninger ved behov · Grep" data-parent="#valg" aria-labelledby="grep-tittel">
+      <div class="section-body">
+        <p class="kicker">Tilpasninger ved behov</p>
+        <h2 class="h2" id="grep-tittel">Grep</h2>
+        <p class="desc">Denne kan du gjøre to-nivå på samme måte som Fot, hvis du vil.</p>
+      </div>
+    </section>
+
+    <section class="section hidden" id="innut" data-crumb="Tilpasninger ved behov · Inn og ut av apparat" data-parent="#valg" aria-labelledby="innut-tittel">
+      <div class="section-body">
+        <p class="kicker">Tilpasninger ved behov</p>
+        <h2 class="h2" id="innut-tittel">Inn og ut av apparat</h2>
+        <p class="desc">Denne kan du gjøre to-nivå på samme måte som Fot, hvis du vil.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Opphavsrett">
+    <p class="site-footer__text">Opphavsrett © 2026 MyStrongestSide AS. Alle rettigheter reservert.</p>
+  </footer>
+
+  <section id="video_fallback" hidden>
+    <div id="autoplay_gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-text">
+      <div class="gate-card">
+        <h2 id="gate-title" class="gate-title">Start video</h2>
+        <p id="gate-text" class="gate-text">Noen telefoner blokkerer autoavspilling med lyd. Velg avspilling med eller uten lyd.</p>
+        <div class="btnrow">
+          <button id="btn_play_sound" class="btn btn-primary" type="button">Spill av med lyd</button>
+          <button id="btn_play_muted" class="btn btn-secondary" type="button">Spill av uten lyd</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const video = document.getElementById('introVideo');
+      const gate = document.getElementById('autoplay_gate');
+      const fallback = document.getElementById('video_fallback');
+      const btnSound = document.getElementById('btn_play_sound');
+      const btnMuted = document.getElementById('btn_play_muted');
+      const status = document.getElementById('video-status');
+
+      if (!video || !gate || !fallback || !btnSound || !btnMuted || !status) return;
+
+      function showGate() {
+        fallback.hidden = false;
+        gate.style.display = 'flex';
+        btnSound.focus();
+      }
+
+      function hideGate() {
+        gate.style.display = 'none';
+        fallback.hidden = true;
+      }
+
+      function updateStatus(isMuted) {
+        status.style.display = isMuted ? 'inline-flex' : 'none';
+      }
+
+      async function playWithSound() {
+        video.muted = false;
+        video.volume = 0.2;
+        await video.play();
+        updateStatus(false);
+      }
+
+      async function playMuted() {
+        video.muted = true;
+        video.volume = 0;
+        await video.play();
+        updateStatus(true);
+      }
+
+      async function attemptAutoplay() {
+        try {
+          await playWithSound();
+        } catch (_) {
+          try {
+            await playMuted();
+          } catch (_) {
+            showGate();
+          }
+        }
+      }
+
+      btnSound.addEventListener('click', async function () {
+        hideGate();
+        try {
+          await playWithSound();
+        } catch (_) {
+          showGate();
+        }
+      });
+
+      btnMuted.addEventListener('click', async function () {
+        hideGate();
+        try {
+          await playMuted();
+        } catch (_) {
+          showGate();
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && gate.style.display === 'flex') {
+          hideGate();
+        }
+      });
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible' && video.paused) {
+          attemptAutoplay();
+        }
+      });
+
+      attemptAutoplay();
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const buttons = Array.from(document.querySelectorAll('[data-side]'));
+      const status = document.getElementById('sideStatus');
+      if(!buttons.length || !status) return;
+
+      function labelFor(v){
+        if(v === 'right') return 'Mest på høyre side';
+        if(v === 'left') return 'Mest på venstre side';
+        return 'Usikker';
+      }
+
+      function apply(v){
+        buttons.forEach(b => {
+          b.setAttribute('aria-pressed', b.getAttribute('data-side') === v ? 'true' : 'false');
+        });
+        status.textContent = 'Valgt: ' + labelFor(v);
+        try{ sessionStorage.setItem('myss_side', v); }catch(e){}
+        window.myss_side = v;
+      }
+
+      let initial = 'general';
+      try{
+        const saved = sessionStorage.getItem('myss_side');
+        if(saved === 'right' || saved === 'left' || saved === 'general') initial = saved;
+      }catch(e){}
+
+      apply(initial);
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-side]');
+        if(!btn) return;
+        const v = btn.getAttribute('data-side');
+        if(v === 'right' || v === 'left' || v === 'general') apply(v);
+      });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const sections = Array.from(document.querySelectorAll('main .section[id][data-crumb]'));
+      const backBtn = document.getElementById('globalBack');
+      const crumbEl = document.getElementById('globalCrumb');
+
+      function getSection(sel){
+        if(!sel) return null;
+        return document.querySelector(sel);
+      }
+
+      function setCrumb(sectionEl){
+        const txt = sectionEl && sectionEl.dataset && sectionEl.dataset.crumb ? sectionEl.dataset.crumb : 'Tilpasninger ved behov';
+        crumbEl.textContent = txt;
+      }
+
+      function showSection(sectionEl){
+        if(!sectionEl) return;
+        sections.forEach(s => {
+          if(s.id === 'valg') return;
+          if(s.id === 'tilpasninger-start') return;
+        });
+
+        const navSections = document.querySelectorAll('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #grep, #innut');
+        navSections.forEach(s => s.classList.add('hidden'));
+        sectionEl.classList.remove('hidden');
+
+        setCrumb(sectionEl);
+
+        const parentSel = sectionEl.dataset ? sectionEl.dataset.parent : '';
+        const hasParent = !!(parentSel && parentSel.trim().length > 0);
+        backBtn.classList.toggle('hidden', !hasParent);
+
+        sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + sectionEl.id);
+      }
+
+      function goTo(sel){
+        const el = getSection(sel);
+        if(el) showSection(el);
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-target]');
+        if(!btn) return;
+        const target = btn.getAttribute('data-target');
+        goTo(target);
+      });
+
+      if(backBtn){
+        backBtn.addEventListener('click', () => {
+          const current = document.querySelector('#valg:not(.hidden), #fot:not(.hidden), #fot-haal:not(.hidden), #fot-haal-kile:not(.hidden), #behovsprovde-hjelpemiddel:not(.hidden), #fot-vridning:not(.hidden), #fot-trykk:not(.hidden), #asymmetri:not(.hidden), #grep:not(.hidden), #innut:not(.hidden)');
+          if(!current) return goTo('#valg');
+
+          const parentSel = current.dataset ? current.dataset.parent : '';
+          if(parentSel && parentSel.trim().length > 0) goTo(parentSel);
+          else goTo('#valg');
+        });
+      }
+
+      const allNavSections = document.querySelectorAll('#fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #grep, #innut');
+      allNavSections.forEach(s => s.classList.add('hidden'));
+      document.getElementById('valg').classList.remove('hidden');
+      setCrumb(document.getElementById('valg'));
+      backBtn.classList.add('hidden');
+
+      if(location.hash){
+        const byHash = document.querySelector(location.hash);
+        if(byHash && byHash.matches('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #grep, #innut')){
+          showSection(byHash);
+        }
+      }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const root = document.querySelector('.no-copy');
+      if(!root) return;
+
+      root.addEventListener('copy', (e) => e.preventDefault());
+      root.addEventListener('cut', (e) => e.preventDefault());
+      root.addEventListener('contextmenu', (e) => e.preventDefault());
+      root.addEventListener('dragstart', (e) => e.preventDefault());
+    })();
+  </script>
+
+  <script>
+    (function(){
+      function openFullscreen(video){
+        if(!video) return;
+        if(video.requestFullscreen) return video.requestFullscreen();
+        if(video.webkitEnterFullscreen) return video.webkitEnterFullscreen();
+        video.setAttribute('controls', 'controls');
+        try{ video.play && video.play(); }catch(e){}
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-fs]');
+        if(!btn) return;
+
+        const shell = btn.closest('.video_shell, .video-shell');
+        const video = shell ? shell.querySelector('video') : null;
+
+        if(video){
+          try{ video.muted = false; }catch(e){}
+          try{ video.play && video.play(); }catch(e){}
+        }
+
+        openFullscreen(video);
+      });
+    })();
+  </script>
+</body>
+</html>
