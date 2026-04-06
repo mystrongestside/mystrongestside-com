@@ -1718,7 +1718,40 @@
         <p class="desc">Veiledning for kne kommer.</p>
         <p class="note">Denne delen er under utvikling.</p>
       </div>
-   <section class="section hidden" id="grep-hjelpemidler" data-crumb="Tilpasninger ved behov · Grep · Hjelpemidler" data-parent="#grep" aria-labelledby="grep-hjelpemidler-tittel">
+    </section>
+
+    <section class="section hidden" id="grep" data-crumb="Tilpasninger ved behov · Grep" data-parent="#valg" aria-labelledby="grep-tittel">
+      <div class="section-body">
+        <p class="kicker">Tilpasninger ved behov</p>
+        <h2 class="h2" id="grep-tittel">Grep</h2>
+        <p class="desc">Velg det som passer best for deg.</p>
+
+        <div class="tile-grid" role="navigation" aria-label="Velg utfordring for grep">
+          <button class="tile" type="button" data-target="#grep-hjelpemidler" aria-controls="grep-hjelpemidler">
+            <span class="badge-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 22v-7"></path>
+                <path d="M11 22v-9"></path>
+                <path d="M15 22v-8"></path>
+                <path d="M19 22v-10"></path>
+                <path d="M5 15c0-2 2-3 4-3h10c2 0 4 1 4 3v1c0 3-2 6-5 6H10c-3 0-5-3-5-6v-1z"></path>
+              </svg>
+            </span>
+            <span>
+              <p class="tile-title">Hjelpemidler for grep</p>
+              <p class="tile-sub">Når du trenger mer støtte, bedre kontakt eller mindre belastning i hånd og håndledd.</p>
+            </span>
+            <span class="chev-right" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="grep-hjelpemidler" data-crumb="Tilpasninger ved behov · Grep · Hjelpemidler" data-parent="#grep" aria-labelledby="grep-hjelpemidler-tittel">
   <div class="section-body">
     <p class="kicker">Veiledning</p>
     <h2 class="h2" id="grep-hjelpemidler-tittel">Hjelpemidler for grep ved sittende beinpress</h2>
@@ -1998,7 +2031,7 @@
           if(s.id === 'tilpasninger-start') return;
         });
 
-        const navSections = document.querySelectorAll('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #kne, #grep, #innut');
+        const navSections = document.querySelectorAll('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #kne, #grep, #innut, #grep-hjelpemidler');
         navSections.forEach(s => s.classList.add('hidden'));
         sectionEl.classList.remove('hidden');
 
@@ -2026,7 +2059,7 @@
 
       if(backBtn){
         backBtn.addEventListener('click', () => {
-          const current = document.querySelector('#valg:not(.hidden), #fot:not(.hidden), #fot-haal:not(.hidden), #fot-haal-kile:not(.hidden), #behovsprovde-hjelpemiddel:not(.hidden), #fot-vridning:not(.hidden), #fot-trykk:not(.hidden), #asymmetri:not(.hidden), #asym-en-side:not(.hidden), #asym-bekken:not(.hidden), #kne:not(.hidden), #grep:not(.hidden), #innut:not(.hidden)');
+          const current = document.querySelector('#valg:not(.hidden), #fot:not(.hidden), #fot-haal:not(.hidden), #fot-haal-kile:not(.hidden), #behovsprovde-hjelpemiddel:not(.hidden), #fot-vridning:not(.hidden), #fot-trykk:not(.hidden), #asymmetri:not(.hidden), #asym-en-side:not(.hidden), #asym-bekken:not(.hidden), #kne:not(.hidden), #grep:not(.hidden), #innut:not(.hidden), #grep-hjelpemidler:not(.hidden)');
           if(!current) return goTo('#valg');
 
           const parentSel = current.dataset ? current.dataset.parent : '';
@@ -2035,7 +2068,7 @@
         });
       }
 
-      const allNavSections = document.querySelectorAll('#fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #kne, #grep, #innut');
+      const allNavSections = document.querySelectorAll('#fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #kne, #grep, #innut, #grep-hjelpemidler');
       allNavSections.forEach(s => s.classList.add('hidden'));
       document.getElementById('valg').classList.remove('hidden');
       setCrumb(document.getElementById('valg'));
@@ -2043,7 +2076,7 @@
 
       if(location.hash){
         const byHash = document.querySelector(location.hash);
-        if(byHash && byHash.matches('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #kne, #grep, #innut')){
+        if(byHash && byHash.matches('#valg, #fot, #fot-haal, #fot-haal-kile, #behovsprovde-hjelpemiddel, #fot-vridning, #fot-trykk, #asymmetri, #asym-en-side, #asym-bekken, #kne, #grep, #innut, #grep-hjelpemidler')){
           showSection(byHash);
         }
       }
