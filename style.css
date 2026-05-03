@@ -355,14 +355,9 @@ h3 {
 
 .filter-panel {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  overflow-x: auto;
   padding: 0 0 16px;
-  scrollbar-width: none;
-}
-
-.filter-panel::-webkit-scrollbar {
-  display: none;
 }
 
 .chip {
