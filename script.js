@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  const TOKEN_TTL_MS = 30 * 1000;
+  const TOKEN_TTL_MS = 30 * 60 * 1000;
   const TOKEN_STORAGE_KEY = "taepp_og_tren_beinpress_token";
   const TOKEN_EXPIRES_KEY = "taepp_og_tren_beinpress_token_expires";
   const NFC_PLATE_ID = "beinpress";
